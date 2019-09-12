@@ -5,15 +5,12 @@ using namespace std;
 
 int main()
 {
-    while (true)
-    {
-        int a, b;
+    long long a, b;
 
-        cin >> a >> b;
+    cin >> a >> b;
 
-        Integer ai = a;
-        Integer bi = b;
+    Integer ai = a;
+//    Integer bi = b;
 
-        cout << ai - bi << ' ' << a - b << endl;
-    }
+    cout << ai / b << ' ' << a / b << endl;
 }

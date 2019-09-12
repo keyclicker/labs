@@ -23,13 +23,13 @@ public:
 	Integer(long long val);
 	Integer(const std::string &val);
 
-	operator std::string();
-	operator int();
+	operator std::string() const;
+	operator int() const;
 
-	Integer operator+(const Integer &val);
-	Integer operator-(const Integer &val);
-	Integer operator*(const Integer &val);
-	Integer operator/(const Integer &val);
+	Integer operator+(const Integer &val) const;
+	Integer operator-(const Integer &val) const;
+	Integer operator*(const Integer &val) const;
+	Integer operator/(long long val) const;
 
     friend std::istream & operator>>(std::istream &in, Integer &val);
     friend std::ostream & operator<<(std::ostream &out, Integer val);
