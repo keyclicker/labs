@@ -31,6 +31,12 @@ public:
 	Integer operator*(const Integer &val) const;
 	Integer operator/(long long val) const;
 
+	bool operator>(const Integer &val) const;
+    bool operator<(const Integer &val) const;
+    bool operator>=(const Integer &val) const;
+    bool operator<=(const Integer &val) const;
+    bool operator==(const Integer &val) const;
+
     friend std::istream & operator>>(std::istream &in, Integer &val);
     friend std::ostream & operator<<(std::ostream &out, Integer val);
 };

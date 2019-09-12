@@ -14,6 +14,7 @@ Integer& Integer::operator=(const Integer &val)
 
 Integer::Integer(long long val)
 {
+    this->num.clear();
 	while (val)
 	{
 		this->num.push_back(val % 10);
@@ -131,6 +132,68 @@ Integer Integer::operator/(const long long val) const
 
     return res;
 }
+
+bool Integer::operator>(const Integer &val) const
+{
+    if (this->num.size() != val.num.size())
+        return this->num.size() > val.num.size();
+    else
+        for (int i = this->num.size(); i >= 0; i--)
+            if (this->num[i] != val.num[i])
+                return this->num[i] > val.num[i];
+
+    return false;
+}
+
+bool Integer::operator<(const Integer &val) const
+{
+    if (this->num.size() != val.num.size())
+        return this->num.size() < val.num.size();
+    else
+        for (int i = this->num.size(); i >= 0; i--)
+            if (this->num[i] != val.num[i])
+                return this->num[i] < val.num[i];
+
+    return false;
+}
+
+bool Integer::operator>=(const Integer &val) const
+{
+    if (this->num.size() != val.num.size())
+        return this->num.size() > val.num.size();
+    else
+        for (int i = this->num.size(); i >= 0; i--)
+            if (this->num[i] != val.num[i])
+                return this->num[i] > val.num[i];
+
+    return true;
+}
+
+bool Integer::operator<=(const Integer &val) const
+{
+    if (this->num.size() != val.num.size())
+        return this->num.size() < val.num.size();
+    else
+        for (int i = this->num.size(); i >= 0; i--)
+            if (this->num[i] != val.num[i])
+                return this->num[i] < val.num[i];
+
+    return true;
+}
+
+bool Integer::operator==(const Integer &val) const
+{
+    if (this->num.size() != val.num.size())
+        return false;
+    else
+        for (int i = this->num.size(); i >= 0; --i)
+            if (this->num[i] != val.num[i])
+                return false;
+
+    return true;
+}
+
+
 
 Integer::operator int() const
 {

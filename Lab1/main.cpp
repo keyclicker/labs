@@ -5,12 +5,22 @@ using namespace std;
 
 int main()
 {
-    long long a, b;
+    Integer ai;
+    Integer bi;
 
-    cin >> a >> b;
+    for (;;)
+    {
+        long long a, b;
 
-    Integer ai = a;
-//    Integer bi = b;
+        cin >> a >> b;
 
-    cout << ai / b << ' ' << a / b << endl;
+        ai = Integer(a);
+        bi = Integer(b);
+
+        cout << "> : " << (ai > bi) << endl;
+        cout << "< : " << (ai < bi) << endl;
+        cout << ">= : " << (ai >= bi) << endl;
+        cout << "<= : " << (ai <= bi) << endl;
+        cout << "== : " << (ai == bi) << endl;
+    }
 }
