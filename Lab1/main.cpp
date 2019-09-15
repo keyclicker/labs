@@ -1,26 +1,25 @@
 #include <iostream>
+#include <cmath>
+#include <algorithm>
+
 using namespace std;
 
 #include "integer.hpp"
 
 int main()
 {
-    Integer ai;
-    Integer bi;
+  Integer ai;
+  Integer bi;
 
-    for (;;)
-    {
-        long long a, b;
+  for (;;)
+  {
+    long long a, b;
 
-        cin >> a >> b;
+    cin >> a >> b;
 
-        ai = Integer(a);
-        bi = Integer(b);
+    ai = Integer(a);
+    bi = Integer(b);
 
-        cout << "> : " << (ai > bi) << endl;
-        cout << "< : " << (ai < bi) << endl;
-        cout << ">= : " << (ai >= bi) << endl;
-        cout << "<= : " << (ai <= bi) << endl;
-        cout << "== : " << (ai == bi) << endl;
-    }
+    cout << int(ai) << endl;
+  }
 }
