@@ -28,7 +28,7 @@ Integer::Integer(const std::string &val)
   if (val.front() == '-')
     this->negetive = true;
   else
-    this->num.push_back(val.front());
+    this->num.push_back(val.front() - '0');
 
   for (size_t i = 1; i < val.size(); i++)
   {

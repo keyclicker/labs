@@ -8,4 +8,4 @@ include_directories(.)
 add_executable(Lab1
         integer.cpp
         integer.hpp
-        main.cpp)
+        test.cpp)
