@@ -2,8 +2,6 @@
 #include "Particle.hpp"
 #include <list>
 
-constexpr float defaultRadius = 0.5;
-
 class Space
 {
 private:
@@ -16,7 +14,7 @@ public:
   Space &operator=(const Space &val) = delete;
 
   void pushParticle(const Particle &val);
-  void genSpace(const unsigned int count);
+  void genSpace(const unsigned int count, const float radius);
 
   void iter(float time = 0.1);
 

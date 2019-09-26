@@ -28,8 +28,8 @@ void drawCircle(const float xv, const float yv, const float radius)
 
   for (int i = 0; i < pofig; ++i)
   {
-    float x = radius * (xv + sin(2.0 * pi * i / pofig)) / float(w);
-    float y = radius * (yv + cos(2.0 * pi * i / pofig)) / float(h);
+    float x = 2.0*(xv + radius * sin(2.0 * pi * i / pofig))/w;
+    float y = 2.0*(yv + radius * cos(2.0 * pi * i / pofig))/h;
     glVertex2f(x, y);
   }
 
@@ -41,7 +41,7 @@ void drawCircle(const float xv, const float yv, const float radius)
 
 void update()
 {
-  space.iter(0.01);
+  space.iter(0.001);
   glutPostRedisplay();
 }
 
@@ -52,7 +52,7 @@ void display()
 
   for (auto &a : space.getPars())
   {
-    drawCircle(a.position.x * 10.0, a.position.y * 10.0, 20);
+    drawCircle(a.pos.x, a.pos.y, a.radius);
   }
 
   glutSwapBuffers(); // Required to copy color buffer onto the screen.
@@ -61,8 +61,10 @@ void display()
 
 int main(int argc, char **argv)
 {
-  space.genSpace(1000);
+  space.genSpace(500, 5);
 
+ // space.pushParticle(Particle(100, Vector(0,0), Vector(100, 0)));
+ // space.pushParticle(Particle(200, Vector(1000,0), Vector(-100, 0)));
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE);    // Use single color buffer and no depth buffer.
