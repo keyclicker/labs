@@ -8,6 +8,8 @@ private:
   float w = 2, h = 2;
   std::list<Particle> particles;
 
+  void colisionDetection();
+
 public:
   Space() = default;
   Space(const Space &val) = delete;

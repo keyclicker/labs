@@ -2,28 +2,15 @@
 #include "Particle.hpp"
 #include <cstdlib>
 
-void Space::pushParticle(const Particle &val)
+void Space::colisionDetection()
 {
-  particles.push_back(val);
-}
-
-void Space::iter(const float time)
-{
-  for (auto &a : particles)
-  {
-    float dx = 2 * (float) rand() / RAND_MAX - 1;
-    float dy = 2 * (float) rand() / RAND_MAX - 1;
-    a.applyForce(Vector(dx, dy), time*1000000);
-    a.iter(time);
-  }
-
   for (auto &a : particles)
   {
     for (auto &b : particles)
     {
       if (dist(a, b) <= a.radius + b.radius && &a != &b)
       {
-        Vector pv = Vector(b.pos-a.pos); //projection vector
+        Vector pv = Vector(b.pos - a.pos); //projection vector
         float scl = a.vel.x * pv.x + a.vel.y * pv.y;
         float prj = scl / pv.len();
 
@@ -32,6 +19,36 @@ void Space::iter(const float time)
       }
     }
   }
+
+  for (auto &a : particles)
+  {
+    if (a.pos.x - a.radius < -960)
+      a.vel.x = -a.vel.x;
+    if (a.pos.x + a.radius > 960)
+      a.vel.x = -a.vel.x;
+    if (a.pos.y - a.radius < -540)
+      a.vel.y = -a.vel.y;
+    if (a.pos.y + a.radius > 540)
+      a.vel.y = -a.vel.y;
+  }
+
+}
+
+void Space::iter(const float time)
+{
+  for (auto &a : particles)
+  {
+    float dx = 2 * (float) rand() / RAND_MAX - 1;
+    float dy = 2 * (float) rand() / RAND_MAX - 1;
+    a.applyForce(Vector(dx, dy), time*10000000);
+    a.iter(time);
+  }
+  colisionDetection();
+}
+
+void Space::pushParticle(const Particle &val)
+{
+  particles.push_back(val);
 }
 
 void Space::genSpace(const unsigned int count, const float radius)

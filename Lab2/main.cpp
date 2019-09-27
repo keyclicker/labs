@@ -15,14 +15,13 @@ constexpr float pi = M_PI;
 constexpr int w = 1920;
 constexpr int h = 1080;
 
-
 Space space;
 
 
 //all values in pixels
 void drawCircle(const float xv, const float yv, const float radius)
 {
-  constexpr int pofig = 10;
+  constexpr int pofig = 100;
 
   glBegin(GL_POLYGON);
 
@@ -41,7 +40,7 @@ void drawCircle(const float xv, const float yv, const float radius)
 
 void update()
 {
-  space.iter(0.001);
+  space.iter(0.0002);
   glutPostRedisplay();
 }
 
@@ -50,10 +49,13 @@ void display()
   glClearColor(0, 0, 0, 1);  // (In fact, this is the default.)
   glClear(GL_COLOR_BUFFER_BIT);
 
+  double e = 0;
   for (auto &a : space.getPars())
   {
     drawCircle(a.pos.x, a.pos.y, a.radius);
+    e += a.vel.len() * a.vel.len();
   }
+  std::cout << e << std::endl;
 
   glutSwapBuffers(); // Required to copy color buffer onto the screen.
 }
@@ -61,7 +63,7 @@ void display()
 
 int main(int argc, char **argv)
 {
-  space.genSpace(500, 5);
+  space.genSpace(500, 10);
 
  // space.pushParticle(Particle(100, Vector(0,0), Vector(100, 0)));
  // space.pushParticle(Particle(200, Vector(1000,0), Vector(-100, 0)));
