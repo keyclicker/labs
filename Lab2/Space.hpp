@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Particle.hpp"
-#include <list>
+#include <vector>
 
 class Space
 {
 private:
-  float w = 2, h = 2;
-  std::list<Particle> particles;
+  double w = 2, h = 2;
+  std::vector<Particle> particles;
 
   void colisionDetection();
 
@@ -17,10 +17,10 @@ public:
   Space &operator=(const Space &val) = delete;
 
   void pushParticle(const Particle &val);
-  void genSpace(const unsigned int count, const float radius);
+  void genSpace(const unsigned int count, const double radius);
 
-  void iter(float time = 0.1);
+  void iter(double time = 0.1);
 
-  const std::list<Particle> &getPars();
+  const std::vector<Particle> &getPars();
 
 };

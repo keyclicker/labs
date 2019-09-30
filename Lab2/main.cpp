@@ -3,18 +3,20 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 #include "Space.hpp"
 #include "Particle.hpp"
 #include "config.hpp"
 
 using namespace std;
+using namespace std::chrono;
 
 Space space;
 
 
 //all values in pixels
-void drawCircle(const float xv, const float yv, const float radius)
+void drawCircle(const double xv, const double yv, const double radius)
 {
   constexpr int detail = 10;
 
@@ -22,8 +24,8 @@ void drawCircle(const float xv, const float yv, const float radius)
 
   for (int i = 0; i < detail; ++i)
   {
-    float x = 2.0*(xv + radius * sin(2.0 * pi * i / detail))/w;
-    float y = 2.0*(yv + radius * cos(2.0 * pi * i / detail))/h;
+    double x = 2.0*(xv + radius * sin(2.0 * pi * i / detail))/w;
+    double y = 2.0*(yv + radius * cos(2.0 * pi * i / detail))/h;
     glVertex2f(x, y);
   }
 
@@ -33,15 +35,24 @@ void drawCircle(const float xv, const float yv, const float radius)
   glEnd();
 }
 
+static high_resolution_clock::time_point
+oldT, newT = high_resolution_clock::now();
+
 void update()
 {
-  space.iter(0.0006);
+  oldT = newT;
+  newT = high_resolution_clock::now();
+
+  duration<double> time_span = duration_cast<duration<double>>(newT - oldT);
+  space.iter(time_span.count());
+  cout << 1.0/time_span.count() << endl;
+
   glutPostRedisplay();
 }
 
 void display()
 {
-  glClearColor(0, 0, 0, 1);  // (In fact, this is the default.)
+  glClearColor(0, 0, 0, 1);
   glClear(GL_COLOR_BUFFER_BIT);
 
   double e = 0;
@@ -50,21 +61,22 @@ void display()
     drawCircle(a.pos.x, a.pos.y, a.radius);
     e += a.vel.len() * a.vel.len();
   }
-  std::cout << e << std::endl;
+  //std::cout << e << std::endl;
 
-  glutSwapBuffers(); // Required to copy color buffer onto the screen.
+  glutSwapBuffers();
 }
 
 
 int main(int argc, char **argv)
 {
-  //space.genSpace(400, 3);
+  space.genSpace(400, 3);
 
-  space.pushParticle(Particle(100, Vector(0,0), Vector(0, 0)));
-  space.pushParticle(Particle(100, Vector(500,0), Vector(-1000, 0)));
+  //space.pushParticle(Particle(100, Vector(0,0), Vector(0, 0)));
+  //space.pushParticle(Particle(100, Vector(1000,0), Vector(-1000, 0)));
 
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE);
+  glutSetOption(GLUT_MULTISAMPLE, 8);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
   glutInitWindowSize(w, h);
   glutInitWindowPosition(100, 100);
   glutCreateWindow("Particle move");

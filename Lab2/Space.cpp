@@ -15,18 +15,28 @@ randDir(-1.0, 1.0);
 
 void Space::colisionDetection()
 {
-  for (auto &a : particles)
+  for (auto a = particles.begin(); a != particles.end(); ++a)
   {
-    for (auto &b : particles)
+    for (auto b = a; b != particles.end(); ++b)
     {
-      if (dist(a, b) <= a.radius + b.radius && &a != &b)
+      if (dist(*a, *b) <= a->radius + b->radius && a != b)
       {
-        Vector pv = Vector(b.pos - a.pos); //projection vector
-        float scl = a.vel.x * pv.x + a.vel.y * pv.y;
-        float prj = scl / pv.len();
+        Vector pv = Vector(b->pos - a->pos); //projection vector
 
-        Vector vec = 2 * prj * pv / pv.len();
-        a.vel = a.vel - vec;
+        double adt = a->vel.x * pv.x + a->vel.y * pv.y; //Dot product
+        double ascl = adt / pv.len(); //scalar projection
+
+        double bdt = b->vel.x * pv.x + b->vel.y * pv.y; //Dot product
+        double bscl = bdt / pv.len(); //scalar projection
+
+        Vector aprj = ascl * pv / pv.len(); //vector projection
+        Vector bprj = -bscl * pv / pv.len(); //vector projection
+
+        //Momentum conservation vector
+        Vector mcVec = (ascl - bscl)  * pv / pv.len() / 2.0;
+
+        a->vel = a->vel - mcVec;
+        b->vel = b->vel + mcVec;
       }
     }
   }
@@ -45,28 +55,30 @@ void Space::colisionDetection()
 */
 }
 
-void Space::iter(const float time)
+void Space::iter(const double time)
 {
   for (auto &a : particles)
   {
-    float dx = randDir(rng);
-    float dy = randDir(rng);
-    //a.applyForce(Vector(dx, dy), time*1000000);
-    a.iter(time);
+    double dx = cEntropy * randDir(rng);
+    double dy = cEntropy * randDir(rng);
+    a.applyForce(Vector(dx, dy), time * cSpeed);
+    a.iter(time * cSpeed);
   }
   colisionDetection();
 }
 
 void Space::pushParticle(const Particle &val)
 {
-  particles.push_back(val);
+  particles.emplace_back(val);
 }
 
-void Space::genSpace(const unsigned int count, const float radius)
+void Space::genSpace(const unsigned int count, const double radius)
 {
+  particles.reserve(count);
+
   for (int i = 0; i < count; ++i)
   {
-    float x, y;
+    double x, y;
 
     bool k = true;
     while (k)
@@ -84,13 +96,13 @@ void Space::genSpace(const unsigned int count, const float radius)
       }
     }
 
-    float xv = 2000.0 * randDir(rng);
-    float yv = 2000.0 * randDir(rng);
+    double xv = 100.0 * randDir(rng);
+    double yv = 100.0 * randDir(rng);
     particles.emplace_back(radius, Vector(x, y), Vector(xv, yv));
   }
 }
 
-const std::list<Particle> &Space::getPars()
+const std::vector<Particle> &Space::getPars()
 {
   return particles;
 }
