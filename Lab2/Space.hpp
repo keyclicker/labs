@@ -9,7 +9,7 @@ private:
   double w = 2, h = 2;
   std::vector<Particle> particles;
 
-  void colisionDetection();
+  void collisionDetection();
 
 public:
   Space() = default;

@@ -6,8 +6,8 @@
 #include <chrono>
 
 #include "Space.hpp"
-#include "Particle.hpp"
 #include "config.hpp"
+#include "demos.hpp"
 
 using namespace std;
 using namespace std::chrono;
@@ -66,16 +66,16 @@ void display()
   glutSwapBuffers();
 }
 
-
 int main(int argc, char **argv)
 {
-  space.genSpace(400, 3);
+  //space.genSpace(400, 3);
 
-  //space.pushParticle(Particle(100, Vector(0,0), Vector(0, 0)));
+  //space.pushParticle(Particle(100, Vector(0,0), Vector(1000, 0)));
   //space.pushParticle(Particle(100, Vector(1000,0), Vector(-1000, 0)));
+  billiard(space);
 
   glutInit(&argc, argv);
-  glutSetOption(GLUT_MULTISAMPLE, 8);
+  glutSetOption(GLUT_MULTISAMPLE, 4);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
   glutInitWindowSize(w, h);
   glutInitWindowPosition(100, 100);

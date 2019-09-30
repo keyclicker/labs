@@ -3,7 +3,7 @@ project(Lab2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Lab2 main.cpp Particle.hpp Space.cpp Space.hpp Vector.hpp config.hpp)
+add_executable(Lab2 main.cpp Particle.hpp Space.cpp Space.hpp Vector.hpp config.hpp demos.hpp)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)

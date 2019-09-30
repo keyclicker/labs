@@ -13,7 +13,7 @@ randH(-h/4,h/4);
 std::uniform_real_distribution
 randDir(-1.0, 1.0);
 
-void Space::colisionDetection()
+void Space::collisionDetection()
 {
   for (auto a = particles.begin(); a != particles.end(); ++a)
   {
@@ -29,18 +29,26 @@ void Space::colisionDetection()
         double bdt = b->vel.x * pv.x + b->vel.y * pv.y; //Dot product
         double bscl = bdt / pv.len(); //scalar projection
 
-        Vector aprj = ascl * pv / pv.len(); //vector projection
-        Vector bprj = -bscl * pv / pv.len(); //vector projection
+        Vector baseVec = pv / pv.len(); // a to b vector with length = 1
+
+        Vector aprj = ascl * baseVec; //vector projection
+        Vector bprj = -bscl * baseVec; //vector projection
 
         //Momentum conservation vector
-        Vector mcVec = (ascl - bscl)  * pv / pv.len() / 2.0;
+        Vector mcVec = (ascl - bscl)  * baseVec;
 
         a->vel = a->vel - mcVec;
         b->vel = b->vel + mcVec;
+
+        //collision antiglitch
+        double d = ((a->radius + b->radius) - dist(*a, *b)) / 2.0;
+
+        a->pos = a->pos - d * baseVec;
+        b->pos = b->pos + d * baseVec;
       }
     }
   }
-/*
+
   for (auto &a : particles)
   {
     if (a.pos.x - a.radius < -::w/2.0)
@@ -52,7 +60,6 @@ void Space::colisionDetection()
     if (a.pos.y + a.radius > ::h/2.0)
       a.vel.y = -a.vel.y;
   }
-*/
 }
 
 void Space::iter(const double time)
@@ -61,10 +68,12 @@ void Space::iter(const double time)
   {
     double dx = cEntropy * randDir(rng);
     double dy = cEntropy * randDir(rng);
+
+    a.vel = a.vel * cResistance;
     a.applyForce(Vector(dx, dy), time * cSpeed);
     a.iter(time * cSpeed);
   }
-  colisionDetection();
+  collisionDetection();
 }
 
 void Space::pushParticle(const Particle &val)
