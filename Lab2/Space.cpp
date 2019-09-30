@@ -7,8 +7,8 @@ std::random_device rd;
 std::mt19937 rng(rd());
 
 std::uniform_int_distribution
-randW(-w/4,w/4),
-randH(-h/4,h/4);
+randW(-w/16,w/16),
+randH(-h/16,h/16);
 
 std::uniform_real_distribution
 randDir(-1.0, 1.0);
@@ -89,21 +89,8 @@ void Space::genSpace(const unsigned int count, const double radius)
   {
     double x, y;
 
-    bool k = true;
-    while (k)
-    {
-      x = randW(rng);
-      y = randH(rng);
-
-      k = false;
-      for (auto &a : particles)
-      {
-        if (dist(a.pos, Vector(x, y)) <= 2.0 * radius)
-        {
-          k = true;
-        }
-      }
-    }
+    x = randW(rng);
+    y = randH(rng);
 
     double xv = 100.0 * randDir(rng);
     double yv = 100.0 * randDir(rng);

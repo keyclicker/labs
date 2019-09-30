@@ -58,6 +58,8 @@ void display()
   double e = 0;
   for (auto &a : space.getPars())
   {
+    double k = 100.0 / a.vel.len();
+    glColor3f(1.0/k, 0, k);
     drawCircle(a.pos.x, a.pos.y, a.radius);
     e += a.vel.len() * a.vel.len();
   }
@@ -68,11 +70,11 @@ void display()
 
 int main(int argc, char **argv)
 {
-  //space.genSpace(400, 3);
+  space.genSpace(400, 3);
 
   //space.pushParticle(Particle(100, Vector(0,0), Vector(1000, 0)));
   //space.pushParticle(Particle(100, Vector(1000,0), Vector(-1000, 0)));
-  billiard(space);
+  //billiard(space);
 
   glutInit(&argc, argv);
   glutSetOption(GLUT_MULTISAMPLE, 4);
