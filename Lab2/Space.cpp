@@ -1,6 +1,17 @@
 #include "Space.hpp"
 #include "Particle.hpp"
-#include <cstdlib>
+#include "config.hpp"
+#include <random>
+
+std::random_device rd;
+std::mt19937 rng(rd());
+
+std::uniform_int_distribution
+randW(-w/4,w/4),
+randH(-h/4,h/4);
+
+std::uniform_real_distribution
+randDir(-1.0, 1.0);
 
 void Space::colisionDetection()
 {
@@ -19,28 +30,28 @@ void Space::colisionDetection()
       }
     }
   }
-
+/*
   for (auto &a : particles)
   {
-    if (a.pos.x - a.radius < -960)
+    if (a.pos.x - a.radius < -::w/2.0)
       a.vel.x = -a.vel.x;
-    if (a.pos.x + a.radius > 960)
+    if (a.pos.x + a.radius > ::w/2.0)
       a.vel.x = -a.vel.x;
-    if (a.pos.y - a.radius < -540)
+    if (a.pos.y - a.radius < -::h/2.0)
       a.vel.y = -a.vel.y;
-    if (a.pos.y + a.radius > 540)
+    if (a.pos.y + a.radius > ::h/2.0)
       a.vel.y = -a.vel.y;
   }
-
+*/
 }
 
 void Space::iter(const float time)
 {
   for (auto &a : particles)
   {
-    float dx = 2 * (float) rand() / RAND_MAX - 1;
-    float dy = 2 * (float) rand() / RAND_MAX - 1;
-    a.applyForce(Vector(dx, dy), time*10000000);
+    float dx = randDir(rng);
+    float dy = randDir(rng);
+    //a.applyForce(Vector(dx, dy), time*1000000);
     a.iter(time);
   }
   colisionDetection();
@@ -60,8 +71,8 @@ void Space::genSpace(const unsigned int count, const float radius)
     bool k = true;
     while (k)
     {
-      x = rand() % 960 - 480; //needs C++11 modification
-      y = rand() % 540 - 270;
+      x = randW(rng);
+      y = randH(rng);
 
       k = false;
       for (auto &a : particles)
@@ -73,8 +84,8 @@ void Space::genSpace(const unsigned int count, const float radius)
       }
     }
 
-    float xv = rand() % 960 - 480; //needs C++11 modification
-    float yv = rand() % 540 - 270;
+    float xv = 2000.0 * randDir(rng);
+    float yv = 2000.0 * randDir(rng);
     particles.emplace_back(radius, Vector(x, y), Vector(xv, yv));
   }
 }

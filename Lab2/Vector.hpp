@@ -7,8 +7,8 @@ public:
   float x, y;
 
   Vector() = default;
-  Vector(const Vector &val) = default;
-  Vector &operator=(const Vector &val) = default;
+  //Vector(const Vector &val) = default;
+  //Vector &operator=(const Vector &val) = default;
 
   Vector(float x, float y) : x(x), y(y) {}
 
@@ -29,19 +29,19 @@ public:
     return Vector(x / val.x, y / val.y);
   }
 
-  friend Vector operator*(float a, Vector b)
+  friend Vector operator*(const float a, const Vector &b)
   {
     return Vector(a * b.x, a * b.y);
   }
-  friend Vector operator*(Vector a, float b)
+  friend Vector operator*(const Vector &a, const float b)
   {
     return Vector(a.x * b, a.y * b);
   }
-  friend Vector operator/(float a, Vector b)
+  friend Vector operator/(const float a, const Vector &b)
   {
     return Vector(a / b.x, a / b.y);
   }
-  friend Vector operator/(Vector a, float b)
+  friend Vector operator/(const Vector &a, const float b)
   {
     return Vector(a.x / b, a.y / b);
   }

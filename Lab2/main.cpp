@@ -1,19 +1,14 @@
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 #include <cmath>
-#include <cstdlib>
 #include <vector>
 #include <iostream>
 
 #include "Space.hpp"
 #include "Particle.hpp"
+#include "config.hpp"
 
 using namespace std;
-
-constexpr float pi = M_PI;
-
-constexpr int w = 1920;
-constexpr int h = 1080;
 
 Space space;
 
@@ -21,14 +16,14 @@ Space space;
 //all values in pixels
 void drawCircle(const float xv, const float yv, const float radius)
 {
-  constexpr int pofig = 100;
+  constexpr int detail = 10;
 
   glBegin(GL_POLYGON);
 
-  for (int i = 0; i < pofig; ++i)
+  for (int i = 0; i < detail; ++i)
   {
-    float x = 2.0*(xv + radius * sin(2.0 * pi * i / pofig))/w;
-    float y = 2.0*(yv + radius * cos(2.0 * pi * i / pofig))/h;
+    float x = 2.0*(xv + radius * sin(2.0 * pi * i / detail))/w;
+    float y = 2.0*(yv + radius * cos(2.0 * pi * i / detail))/h;
     glVertex2f(x, y);
   }
 
@@ -40,7 +35,7 @@ void drawCircle(const float xv, const float yv, const float radius)
 
 void update()
 {
-  space.iter(0.0002);
+  space.iter(0.0006);
   glutPostRedisplay();
 }
 
@@ -63,22 +58,20 @@ void display()
 
 int main(int argc, char **argv)
 {
-  space.genSpace(500, 10);
+  //space.genSpace(400, 3);
 
- // space.pushParticle(Particle(100, Vector(0,0), Vector(100, 0)));
- // space.pushParticle(Particle(200, Vector(1000,0), Vector(-100, 0)));
+  space.pushParticle(Particle(100, Vector(0,0), Vector(0, 0)));
+  space.pushParticle(Particle(100, Vector(500,0), Vector(-1000, 0)));
 
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE);    // Use single color buffer and no depth buffer.
-  glutInitWindowSize(1920, 1080);         // Size of display area, in pixels.
-  glutInitWindowPosition(100, 100);     // Location of window in screen coordinates.
-  glutCreateWindow("Particle move");// Parameter is window title.
-//  glutFullScreen();
-  glutDisplayFunc(display);            // Called when the window needs to be redrawn.
+  glutInitDisplayMode(GLUT_DOUBLE);
+  glutInitWindowSize(w, h);
+  glutInitWindowPosition(100, 100);
+  glutCreateWindow("Particle move");
+  //glutFullScreen();
+  glutDisplayFunc(display);
   glutIdleFunc(update);
 
-  glutMainLoop(); // Run the event loop!  This function does not return.
-  // Program ends when user closes the window.
+  glutMainLoop();
   return 0;
-
 }
