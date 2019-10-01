@@ -12,6 +12,9 @@
 using namespace std;
 using namespace std::chrono;
 
+float cx = 0, cy = 0; //camera x, y
+float cz = 1; //camera zoom
+
 Space space;
 
 //all values in pixels
@@ -62,17 +65,47 @@ void display()
     else
       glColor3f(k, k, k);
 
-    drawCircle(a.pos.x, a.pos.y, a.radius);
+    drawCircle(a.pos.x + cx, a.pos.y + cy, a.radius);
     e += a.vel.len() * a.vel.len();
   }
 
   glutSwapBuffers();
 }
 
+void SpecialKeyHandler(int key, int x, int y)
+{
+  if (key == GLUT_KEY_RIGHT)
+  {
+    cx -= moveSpeed;
+  }
+  if (key == GLUT_KEY_LEFT)
+  {
+    cx += moveSpeed;
+  }
+  if (key == GLUT_KEY_UP)
+  {
+    cy -= moveSpeed;
+  }
+  if (key == GLUT_KEY_DOWN)
+  {
+    cy += moveSpeed;
+  }
+}
+
+void NormalKeyHandler(unsigned char key, int x, int y)
+{
+  if (key == 'z')
+    cz *= zoomSpeed;
+  else if (key == 'x')
+    cz /= zoomSpeed;
+
+  cout << "x";
+}
+
 int main(int argc, char **argv)
 {
-  genSpace(space, 400, 3);
-// billiard(space);
+//  genSpace(space, 400, 3);
+billiard(space);
 
   //space.push(100, 0, 0, 0, 0);
   //space.push(100, 500, 0, -1000, 0);
@@ -87,7 +120,8 @@ int main(int argc, char **argv)
   //glutFullScreen();
   glutDisplayFunc(display);
   glutIdleFunc(update);
-
+  glutSpecialFunc(SpecialKeyHandler);
+  glutKeyboardFunc(NormalKeyHandler);
   glutMainLoop();
   return 0;
 }
