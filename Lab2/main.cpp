@@ -70,7 +70,7 @@ void display()
 
 int main(int argc, char **argv)
 {
-  space.genSpace(400, 3);
+  genSpace(space, 400, 3);
 
   //space.pushParticle(Particle(100, Vector(0,0), Vector(1000, 0)));
   //space.pushParticle(Particle(100, Vector(1000,0), Vector(-1000, 0)));

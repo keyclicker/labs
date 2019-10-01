@@ -13,18 +13,18 @@ public:
   //Particle(const Particle &val) = default;
   //Particle &operator=(const Particle & val) = default;
 
-  Particle(const double radius, const Vector &pos, const Vector &vel = Vector()):
+  Particle(double radius, const Vector &pos, const Vector &vel = Vector()):
     radius(radius), pos(pos), vel(vel) {}
 
   void move(const Vector &d)
   {
     pos = pos + d;
   }
-  void applyForce(const Vector &force, const double time)
+  void applyForce(const Vector &force, double time)
   {
     vel = vel + force * time;
   }
-  void iter(const double time)
+  void iter(double time)
   {
     pos = pos + vel * time;
   }

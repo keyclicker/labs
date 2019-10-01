@@ -6,12 +6,7 @@
 std::random_device rd;
 std::mt19937 rng(rd());
 
-std::uniform_int_distribution
-randW(-w/16,w/16),
-randH(-h/16,h/16);
-
-std::uniform_real_distribution
-randDir(-1.0, 1.0);
+extern std::uniform_real_distribution randDir;
 
 void Space::collisionDetection()
 {
@@ -76,26 +71,19 @@ void Space::iter(const double time)
   collisionDetection();
 }
 
-void Space::pushParticle(const Particle &val)
+void Space::push(const Particle &val)
 {
   particles.emplace_back(val);
 }
 
-void Space::genSpace(const unsigned int count, const double radius)
+void Space::push(size_t r, double px, double py, double vx, double vy)
 {
-  particles.reserve(count);
+  particles.emplace_back(Particle(r, Vector(px, py), Vector(vx, vy)));
+}
 
-  for (int i = 0; i < count; ++i)
-  {
-    double x, y;
-
-    x = randW(rng);
-    y = randH(rng);
-
-    double xv = 100.0 * randDir(rng);
-    double yv = 100.0 * randDir(rng);
-    particles.emplace_back(radius, Vector(x, y), Vector(xv, yv));
-  }
+void Space::reserve(size_t val)
+{
+  particles.reserve(val);
 }
 
 const std::vector<Particle> &Space::getPars()

@@ -16,8 +16,11 @@ public:
   Space(const Space &val) = delete;
   Space &operator=(const Space &val) = delete;
 
-  void pushParticle(const Particle &val);
-  void genSpace(const unsigned int count, const double radius);
+  void push(const Particle &val);
+  void push(size_t r, double px, double py, double vx = 0.0, double vy = 0.0);
+  void reserve(size_t val);
+
+  void genSpace(unsigned int count, double radius);
 
   void iter(double time = 0.1);
 

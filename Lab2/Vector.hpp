@@ -29,19 +29,19 @@ public:
     return Vector(x / val.x, y / val.y);
   }
 
-  friend Vector operator*(const double a, const Vector &b)
+  friend Vector operator*(double a, const Vector &b)
   {
     return Vector(a * b.x, a * b.y);
   }
-  friend Vector operator*(const Vector &a, const double b)
+  friend Vector operator*(const Vector &a, double b)
   {
     return Vector(a.x * b, a.y * b);
   }
-  friend Vector operator/(const double a, const Vector &b)
+  friend Vector operator/(double a, const Vector &b)
   {
     return Vector(a / b.x, a / b.y);
   }
-  friend Vector operator/(const Vector &a, const double b)
+  friend Vector operator/(const Vector &a, double b)
   {
     return Vector(a.x / b, a.y / b);
   }
