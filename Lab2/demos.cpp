@@ -12,6 +12,10 @@ std::uniform_int_distribution
 
 void billiard(Space &space)
 {
+  space.setEntropy(0);
+  space.setResistance(0.998);
+  space.setSpeed(0.5);
+
   space.reserve(16);
 
   space.push(10, 0, 0);
@@ -34,11 +38,15 @@ void billiard(Space &space)
   space.push(10, 72, 20);
   space.push(10, 72, 40);
 
-  space.push(10, -500, 0, 1000, 0);
+  space.push(10, -w/2.0, 0, 1000, 0);
 }
 
 void genSpace(Space &space, unsigned int count, double radius)
 {
+  space.setEntropy(5000);
+  space.setResistance(0.97);
+  space.setSpeed(0.5);
+
   space.reserve(count);
 
   for (int i = 0; i < count; ++i)

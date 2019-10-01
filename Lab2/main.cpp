@@ -14,11 +14,10 @@ using namespace std::chrono;
 
 Space space;
 
-
 //all values in pixels
 void drawCircle(const double xv, const double yv, const double radius)
 {
-  constexpr int detail = 10;
+  constexpr int detail = 100;
 
   glBegin(GL_POLYGON);
 
@@ -71,10 +70,11 @@ void display()
 int main(int argc, char **argv)
 {
   genSpace(space, 400, 3);
+// billiard(space);
 
-  //space.pushParticle(Particle(100, Vector(0,0), Vector(1000, 0)));
-  //space.pushParticle(Particle(100, Vector(1000,0), Vector(-1000, 0)));
-  //billiard(space);
+  //space.push(100, 0, 0, 0, 0);
+  //space.push(100, 500, 0, -1000, 0);
+
 
   glutInit(&argc, argv);
   glutSetOption(GLUT_MULTISAMPLE, 4);

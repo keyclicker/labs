@@ -7,6 +7,17 @@ class Space
 {
 private:
   double w = 2, h = 2;
+  double entropy = 5000;
+public:
+  void setEntropy(double entropy);
+
+  void setSpeed(double speed);
+
+  void setResistance(double resistance);
+
+private:
+  double speed = 0.5;
+  double resistance = 0.998;
   std::vector<Particle> particles;
 
   void collisionDetection();

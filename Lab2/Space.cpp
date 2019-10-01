@@ -61,12 +61,12 @@ void Space::iter(const double time)
 {
   for (auto &a : particles)
   {
-    double dx = cEntropy * randDir(rng);
-    double dy = cEntropy * randDir(rng);
+    double dx = entropy * randDir(rng);
+    double dy = entropy * randDir(rng);
 
-    a.vel = a.vel * cResistance;
-    a.applyForce(Vector(dx, dy), time * cSpeed);
-    a.iter(time * cSpeed);
+    a.vel = a.vel * resistance;
+    a.applyForce(Vector(dx, dy), time * speed);
+    a.iter(time * speed);
   }
   collisionDetection();
 }
@@ -89,4 +89,19 @@ void Space::reserve(size_t val)
 const std::vector<Particle> &Space::getPars()
 {
   return particles;
+}
+
+void Space::setEntropy(double entropy)
+{
+  this->entropy = entropy;
+}
+
+void Space::setSpeed(double speed)
+{
+  this->speed = speed;
+}
+
+void Space::setResistance(double resistance)
+{
+  this->resistance = resistance;
 }
