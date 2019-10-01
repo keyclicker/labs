@@ -24,7 +24,7 @@ public:
   {
     vel = vel + force * time;
   }
-  void iter(double time)
+  void step(double time)
   {
     pos = pos + vel * time;
   }

@@ -17,7 +17,7 @@ Space space;
 //all values in pixels
 void drawCircle(const double xv, const double yv, const double radius)
 {
-  constexpr int detail = 100;
+  constexpr int detail = 15;
 
   glBegin(GL_POLYGON);
 
@@ -27,9 +27,6 @@ void drawCircle(const double xv, const double yv, const double radius)
     double y = 2.0*(yv + radius * cos(2.0 * pi * i / detail))/h;
     glVertex2f(x, y);
   }
-
-  // glColor3f( 1, 0, 0 ); // red
-  //  glVertex2f( -0.8, -0.8 );
 
   glEnd();
 }
@@ -43,8 +40,7 @@ void update()
   newT = high_resolution_clock::now();
 
   duration<double> time_span = duration_cast<duration<double>>(newT - oldT);
-  space.iter(time_span.count());
-  cout << 1.0/time_span.count() << endl;
+  space.step(time_span.count());
 
   glutPostRedisplay();
 }
@@ -52,17 +48,23 @@ void update()
 void display()
 {
   glClearColor(0, 0, 0, 1);
-  glClear(GL_COLOR_BUFFER_BIT);
+
+  if (doRedraw)
+    glClear(GL_COLOR_BUFFER_BIT);
 
   double e = 0;
   for (auto &a : space.getPars())
   {
     double k = 100.0 / a.vel.len();
-    glColor3f(1.0/k, 0, k);
+
+    if(isColored)
+      glColor3f(1.0/k, 0, k);
+    else
+      glColor3f(k, k, k);
+
     drawCircle(a.pos.x, a.pos.y, a.radius);
     e += a.vel.len() * a.vel.len();
   }
-  //std::cout << e << std::endl;
 
   glutSwapBuffers();
 }

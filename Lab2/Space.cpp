@@ -44,20 +44,23 @@ void Space::collisionDetection()
     }
   }
 
-  for (auto &a : particles)
+  if (sideCollision)
   {
-    if (a.pos.x - a.radius < -::w/2.0)
-      a.vel.x = -a.vel.x;
-    if (a.pos.x + a.radius > ::w/2.0)
-      a.vel.x = -a.vel.x;
-    if (a.pos.y - a.radius < -::h/2.0)
-      a.vel.y = -a.vel.y;
-    if (a.pos.y + a.radius > ::h/2.0)
-      a.vel.y = -a.vel.y;
+    for (auto &a : particles)
+    {
+      if (a.pos.x - a.radius < -::w / 2.0)
+        a.vel.x = -a.vel.x;
+      if (a.pos.x + a.radius > ::w / 2.0)
+        a.vel.x = -a.vel.x;
+      if (a.pos.y - a.radius < -::h / 2.0)
+        a.vel.y = -a.vel.y;
+      if (a.pos.y + a.radius > ::h / 2.0)
+        a.vel.y = -a.vel.y;
+    }
   }
 }
 
-void Space::iter(const double time)
+void Space::step(const double time)
 {
   for (auto &a : particles)
   {
@@ -66,7 +69,7 @@ void Space::iter(const double time)
 
     a.vel = a.vel * resistance;
     a.applyForce(Vector(dx, dy), time * speed);
-    a.iter(time * speed);
+    a.step(time * speed);
   }
   collisionDetection();
 }
