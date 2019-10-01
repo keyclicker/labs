@@ -7,8 +7,6 @@ public:
   double x, y;
 
   Vector() = default;
-  //Vector(const Vector &val) = default;
-  //Vector &operator=(const Vector &val) = default;
 
   Vector(double x, double y) : x(x), y(y) {}
 

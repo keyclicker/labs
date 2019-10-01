@@ -10,8 +10,6 @@ public:
   Vector vel;
 
   Particle() = default;
-  //Particle(const Particle &val) = default;
-  //Particle &operator=(const Particle & val) = default;
 
   Particle(double radius, const Vector &pos, const Vector &vel = Vector()):
     radius(radius), pos(pos), vel(vel) {}

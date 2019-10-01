@@ -1,7 +1,6 @@
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 #include <cmath>
-#include <vector>
 #include <iostream>
 #include <chrono>
 
@@ -65,7 +64,7 @@ void display()
     else
       glColor3f(k, k, k);
 
-    drawCircle(a.pos.x + cx, a.pos.y + cy, a.radius);
+    drawCircle((a.pos.x + cx) * cz, (a.pos.y + cy) * cz, a.radius * cz);
     e += a.vel.len() * a.vel.len();
   }
 
@@ -90,26 +89,21 @@ void SpecialKeyHandler(int key, int x, int y)
   {
     cy += moveSpeed;
   }
-}
-
-void NormalKeyHandler(unsigned char key, int x, int y)
-{
-  if (key == 'z')
+  if (key == GLUT_KEY_CTRL_L)
+  {
     cz *= zoomSpeed;
-  else if (key == 'x')
+  }
+  if (key == GLUT_KEY_ALT_L)
+  {
     cz /= zoomSpeed;
-
-  cout << "x";
+  }
 }
 
 int main(int argc, char **argv)
 {
-//  genSpace(space, 400, 3);
-billiard(space);
-
-  //space.push(100, 0, 0, 0, 0);
-  //space.push(100, 500, 0, -1000, 0);
-
+  genSpace(space, 400, 3);
+//  billiard(space);
+//  lonelyParticle(space);
 
   glutInit(&argc, argv);
   glutSetOption(GLUT_MULTISAMPLE, 4);
@@ -117,11 +111,9 @@ billiard(space);
   glutInitWindowSize(w, h);
   glutInitWindowPosition(100, 100);
   glutCreateWindow("Particle move");
-  //glutFullScreen();
   glutDisplayFunc(display);
   glutIdleFunc(update);
   glutSpecialFunc(SpecialKeyHandler);
-  glutKeyboardFunc(NormalKeyHandler);
   glutMainLoop();
   return 0;
 }

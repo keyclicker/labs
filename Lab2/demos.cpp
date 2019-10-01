@@ -41,6 +41,11 @@ void billiard(Space &space)
   space.push(10, -w/2.0, 0, 1000, 0);
 }
 
+void lonelyParticle(Space &space)
+{
+  space.push(5, 0, 0, 0, 0);
+}
+
 void genSpace(Space &space, unsigned int count, double radius)
 {
   space.setEntropy(5000);
