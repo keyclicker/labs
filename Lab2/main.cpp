@@ -62,7 +62,7 @@ void display()
     if(isColored)
       glColor3f(1.0/k, 0, k);
     else
-      glColor3f(k, k, k);
+      glColor3f(0, k*0.80, k*0.20);
 
     drawCircle((a.pos.x + cx) * cz, (a.pos.y + cy) * cz, a.radius * cz);
     e += a.vel.len() * a.vel.len();
@@ -101,9 +101,9 @@ void SpecialKeyHandler(int key, int x, int y)
 
 int main(int argc, char **argv)
 {
-  genSpace(space, 400, 3);
+  genSpace(space, 400, 5);
 //  billiard(space);
-//  lonelyParticle(space);
+  //lonelyParticle(space);
 
   glutInit(&argc, argv);
   glutSetOption(GLUT_MULTISAMPLE, 4);

@@ -49,7 +49,7 @@ void lonelyParticle(Space &space)
 void genSpace(Space &space, unsigned int count, double radius)
 {
   space.setEntropy(5000);
-  space.setResistance(0.97);
+  space.setResistance(0.98);
   space.setSpeed(0.5);
 
   space.reserve(count);
@@ -59,8 +59,8 @@ void genSpace(Space &space, unsigned int count, double radius)
     double px = randW(rng);
     double py = randH(rng);
 
-    double vx = 100.0 * randDir(rng);
-    double vy = 100.0 * randDir(rng);
+    double vx = 1000.0 * randDir(rng);
+    double vy = 1000.0 * randDir(rng);
 
     space.push(radius, px, py, vx, vy);
   }
