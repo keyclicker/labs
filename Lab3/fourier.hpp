@@ -2,41 +2,42 @@
 #include <cmath>
 
 using namespace std;
+using Function = std::function<double(double)>;
 
-//bad fourier
-double fourier(const std::function<double(double)> &f, double x,  int n)
+double integral(double start, double end, const Function &f)
 {
   //integral detailization
   static constexpr int id = 10;
 
-  static auto a = [f] (int i)
+  double res = 0;
+  double step = (end-start) / id;
+
+  for (double x = start; x < end; x += step)
   {
-    double res = 0;
-    for (int j = 0; j < id - 1; j++)
-    {
-      double x1 = (double) j/id * M_PI;
-      double x2 = (double) (j+1)/id * M_PI;
-      res += (x2-x1)*(f(x2) * cos(i*x2) - f(x1) * cos(i*x1));
-    }
-    return 1.0/M_PI * res;
+    res += (step)*(f(x)+f(x+step))/2.0;
+  }
+  return res;
+}
+
+//bad fourier
+double fourier(const Function &f, double x,  int n)
+{
+  static auto a = [f] (int n)
+  {
+    auto af = [f, n] (int x) {return f(x)*cos(n*x);};
+    return integral(-M_PI, M_PI, af) / M_PI;
   };
 
-  static auto b = [f] (int i)
+  static auto b = [f] (int n)
   {
-    double res = 0;
-    for (int j = 0; j < id - 1; j++)
-    {
-      double x1 = (double) j/id * M_PI;
-      double x2 = (double) (j+1)/id * M_PI;
-      res += (x2-x1)*(f(x2) * sin(i*x2) - f(x1) * sin(i*x1));
-    }
-    return 1.0/M_PI * res;
+    auto bf = [f, n] (int x) {return f(x)*sin(n*x);};
+    return integral(-M_PI, M_PI, bf) / M_PI;
   };
 
   double res = a(0) / 2.0;
 
-  for (int i = 0; i < n; i++)
+  for (int i = 1; i < n; i++)
   {
-    res += a(n)*cos(n*x) + b(n)*sin(n*x);
+    res += a(i)*cos(i*x) + b(i)*sin(i*x);
   }
 }
