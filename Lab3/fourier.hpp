@@ -20,7 +20,7 @@ double integral(double start, double end, const Function &f, int id)
 }
 
 //template <const Function &f>
-double fourier(const Function &f, double x,  int n)
+double fourier(const Function &f, double x,  int n, double P = M_PI)
 {
   static vector<double> a, b;
   a.reserve(n);
@@ -30,23 +30,18 @@ double fourier(const Function &f, double x,  int n)
   {
     for (int i = a.size(); i < n; ++i)
     {
-      auto af = [f, i] (double x) {return f(x)*cos(i*x);};
-      auto bf = [f, i] (double x) {return f(x)*sin(i*x);};
-      a.emplace_back(integral(-M_PI, M_PI, af, 10*n) / M_PI);
-      b.emplace_back(integral(-M_PI, M_PI, bf, 10*n) / M_PI);
+      auto af = [f, i, P] (double x) {return f(x)*cos(M_PI*i*x/P);};
+      auto bf = [f, i, P] (double x) {return f(x)*sin(M_PI*i*x/P);};
+      a.emplace_back(integral(-P, P, af, 10*n) / P);
+      b.emplace_back(integral(-P, P, bf, 10*n) / P);
     }
   }
-
-//  for (auto i : a) cout << i << ' ';
-//  cout << endl;
-//  for (auto i : b) cout << i << ' ';
-//  cout << endl;
 
   double res = a[0] / 2.0;
 
   for (int i = 1; i < n; i++)
   {
-    res += a[i]*cos(i*x) + b[i]*sin(i*x);
+    res += a[i]*cos(M_PI*i*x/P) + b[i]*sin(M_PI*i*x/P);
   }
   return res;
 }
