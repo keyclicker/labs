@@ -1,11 +1,21 @@
 #include "GraphBuilder.hpp"
+#include "color.hpp"
 #include <cmath>
+#include <string>
 
 void GraphBuilder::run()
 {
-  sf::RenderWindow window(sf::VideoMode(w, h), "Grapgh Builder");
-  glEnable(GL_TEXTURE_2D);
+  sf::ContextSettings settings;
+  settings.antialiasingLevel = 8;
 
+  sf::RenderWindow window(sf::VideoMode(w, h), "Graph Builder", sf::Style::Default, settings);
+  window.setFramerateLimit(60);
+
+  glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+  sf::Clock clock;
   while (window.isOpen())
   {
     sf::Event event;
@@ -15,39 +25,48 @@ void GraphBuilder::run()
         window.close();
     }
 
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0.12, 0.12, 0.12, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (auto f : functions)
-      draw(f);
+    for (int i = 0; i < functions.size(); ++i)
+    {
+      auto c = hsv2rgb(360 * (float )i / functions.size(), 1, 1);
+      glColor3f(c.r, c.g, c.b);
+      draw(functions[i]);
+    }
 
     window.display();
 
+    auto time = clock.restart().asSeconds();
+
+    static unsigned long long k = 0;
+    if (!(k++ % 100))
+      window.setTitle(sf::String(std::to_string(1.0/time)));
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     {
-      zoom *= cZoomSpeed;
+      zoom *= cZoomSpeed * (1+time);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
     {
-      zoom /= cZoomSpeed;
+      zoom /= cZoomSpeed * (1+time);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-      dy -= cMoveSpeed;
+      dy -= cMoveSpeed * time;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-      dy += cMoveSpeed;
+      dy += cMoveSpeed * time;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-      dx += cMoveSpeed;
+      dx += cMoveSpeed * time;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-      dx -= cMoveSpeed;
+      dx -= cMoveSpeed * time;
     }
-
   }
 }
 
@@ -56,7 +75,17 @@ void GraphBuilder::draw(const Function &f)
   //aspect ratio
   auto ar = (double) w / h;
 
-  glColor3f(0.5, 0.5, 0.5);
+  glLineWidth(3.0);
+  glBegin(GL_LINE_STRIP);
+
+  for (double x = -1; x < 1; x += 2.0 / w)
+  {
+    glVertex2d(x, f((x - dx) / zoom * ar) * zoom + dy);
+  }
+  glEnd();
+
+  glColor4f(1, 1, 1, 0.5);
+  glLineWidth(1.0);
   glBegin(GL_LINES);
 
   glVertex2d(-1, dy);
@@ -67,15 +96,6 @@ void GraphBuilder::draw(const Function &f)
 
   glEnd();
 
-  glColor3f(0, 1, 0.2);
-  glBegin(GL_LINE_STRIP);
-
-  for (double x = -1; x < 1; x += 2.0 / w)
-  {
-    glVertex2d(x, f((x-dx)/zoom*ar)*zoom + dy);
-  }
-
-  glEnd();
 }
 
 void GraphBuilder::addFunc(const Function &f)

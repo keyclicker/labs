@@ -10,8 +10,8 @@ class GraphBuilder
 private:
   using Function = std::function<double(double)>;
 
-  static constexpr double cMoveSpeed = 0.01;
-  static constexpr double cZoomSpeed = 1.005;
+  static constexpr double cMoveSpeed = 1;
+  static constexpr double cZoomSpeed = 1.0005;
 
   size_t w, h;
   double dx = 0, dy = 0;

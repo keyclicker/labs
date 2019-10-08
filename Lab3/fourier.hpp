@@ -1,14 +1,14 @@
 #include <functional>
 #include <cmath>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 using Function = std::function<double(double)>;
 
-double integral(double start, double end, const Function &f)
+//id - integral detailization
+double integral(double start, double end, const Function &f, int id)
 {
-  //integral detailization
-  static constexpr int id = 10;
-
   double res = 0;
   double step = (end-start) / id;
 
@@ -19,25 +19,34 @@ double integral(double start, double end, const Function &f)
   return res;
 }
 
-//bad fourier
+//template <const Function &f>
 double fourier(const Function &f, double x,  int n)
 {
-  static auto a = [f] (int n)
-  {
-    auto af = [f, n] (int x) {return f(x)*cos(n*x);};
-    return integral(-M_PI, M_PI, af) / M_PI;
-  };
+  static vector<double> a, b;
+  a.reserve(n);
+  b.reserve(n);
 
-  static auto b = [f] (int n)
+  if (a.size() < n) //&& b.size() < n
   {
-    auto bf = [f, n] (int x) {return f(x)*sin(n*x);};
-    return integral(-M_PI, M_PI, bf) / M_PI;
-  };
+    for (int i = a.size(); i < n; ++i)
+    {
+      auto af = [f, i] (double x) {return f(x)*cos(i*x);};
+      auto bf = [f, i] (double x) {return f(x)*sin(i*x);};
+      a.emplace_back(integral(-M_PI, M_PI, af, 10*n) / M_PI);
+      b.emplace_back(integral(-M_PI, M_PI, bf, 10*n) / M_PI);
+    }
+  }
 
-  double res = a(0) / 2.0;
+//  for (auto i : a) cout << i << ' ';
+//  cout << endl;
+//  for (auto i : b) cout << i << ' ';
+//  cout << endl;
+
+  double res = a[0] / 2.0;
 
   for (int i = 1; i < n; i++)
   {
-    res += a(i)*cos(i*x) + b(i)*sin(i*x);
+    res += a[i]*cos(i*x) + b[i]*sin(i*x);
   }
+  return res;
 }
