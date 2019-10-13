@@ -4,61 +4,68 @@
 #include <stack>
 #include <queue>
 #include <set>
-using namespace std;
 
-float polish(const string &expr)
+float reverse_polish(const std::string &expr)
 {
-  stringstream stream;
+  std::stringstream stream;
   stream << expr;
 
-  stack<char> opStack;
-  queue<float> nums;
+  std::stack<char> opStack;
 
   while (!stream.eof())
   {
-    string token;
+    std::string token;
     stream >> token;
 
-    if (token == "+" || token == "-" || token == "*" || token == "/")
-      opStack.push(token[0]);
-    else
-      nums.push(stof(token));
-  }
-
-  while (!opStack.empty())
-  {
-    auto op = opStack.top();
-    opStack.pop();
-
-    auto a = nums.front(); nums.pop();
-    auto b = nums.front(); nums.pop();
-
-    switch (op)
+    if (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')
     {
-      case '+':
-        nums.push(a + b);
-        break;
-      case '-':
-        nums.push(a - b);
-        break;
-      case '*':
-        nums.push(a * b);
-        break;
-      case '/':
-        nums.push(a / b);
-        break;
+      if (opStack.size() >= 2)
+      {
+        auto b = opStack.top();
+        opStack.pop();
+        auto a = opStack.top();
+        opStack.pop();
+
+        switch (token[0])
+        {
+          case '+':
+            opStack.push(a + b);
+            break;
+          case '-':
+            opStack.push(a - b);
+            break;
+          case '*':
+            opStack.push(a * b);
+            break;
+          case '/':
+            opStack.push(a / b);
+            break;
+        }
+      }
+      else throw std::logic_error("Wrong operands count");
+    }
+    else
+    {
+      try
+      {
+        opStack.push(stof(token));
+      }
+      catch (...)
+      {
+        throw std::logic_error("Wrong operand or operator: '" + token +"'");
+      }
     }
   }
 
-  return nums.front();
+  return opStack.top();
 }
 
 
 
 int main()
 {
-  string expr;
-  getline(cin, expr);
+  std::string expr;
+  getline(std::cin, expr);
 
-  cout << polish(expr);
+  std::cout << reverse_polish(expr);
 }
