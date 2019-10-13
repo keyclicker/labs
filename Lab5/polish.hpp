@@ -7,4 +7,4 @@
 
 using namespace std;
 
-float reverse_polish(const string &expr);
+double reverse_polish(const string &expr);

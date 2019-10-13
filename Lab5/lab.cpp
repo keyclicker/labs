@@ -1,6 +1,10 @@
 #include "lab.hpp"
-#include "vars.hpp"
 #include "polish.hpp"
+
+#include <map>
+
+map<string, double> vars;
+map<string, int> lables;
 
 void interactive_mode()
 {
@@ -9,14 +13,15 @@ void interactive_mode()
 
 void script_mode(string file_path)
 {
-
+  ifstream fin(file_path);
+  lab_start(fin, cout);
 }
 
 void lab_start(istream &in, ostream &out)
 {
   string smnt; //statement
 
-  while (smnt != "exit")
+  while (!in.eof() && smnt != "exit")
   {
     in >> smnt;
 
@@ -30,10 +35,10 @@ void lab_start(istream &in, ostream &out)
     else if (smnt[0] == '$')
     {
       smnt.erase(smnt.begin());
-      auto var = alloc_var(smnt);
+      auto var = get_var(smnt);
 
       char eq;
-      cin >> eq;
+      in >> eq;
 
       if (eq != '=') throw logic_error("Wrong statement");
 
@@ -42,5 +47,22 @@ void lab_start(istream &in, ostream &out)
 
       *var = reverse_polish(expr);
     }
+    else if (smnt.back() == ':')
+    {
+      smnt.erase(--smnt.end());
+      lables.insert(make_pair(smnt, in.tellg()));
+    }
+    else if (smnt == "goto")
+    {
+      string name;
+      in >> name;
+      in.seekg(lables[name], ios_base::beg);
+    }
+
   }
+}
+
+double* get_var(string name)
+{
+  return &vars[name];
 }

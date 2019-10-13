@@ -1,12 +1,12 @@
 #include "polish.hpp"
-#include "vars.hpp"
+#include "lab.hpp"
 
-float reverse_polish(const string &expr)
+double reverse_polish(const string &expr)
 {
   stringstream stream;
   stream << expr;
 
-  stack<char> opStack;
+  stack<double> opStack;
 
   while (!stream.eof())
   {

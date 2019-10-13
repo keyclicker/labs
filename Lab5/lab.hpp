@@ -12,3 +12,5 @@ void lab_start(istream &in, ostream &out);
 
 //void statement_processor(string smnt);
 
+double* alloc_var(string name);
+double* get_var(string name);
