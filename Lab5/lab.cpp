@@ -2,6 +2,7 @@
 #include "polish.hpp"
 
 #include <map>
+#include <sstream>
 
 map<string, double> vars;
 map<string, int> lables;
@@ -21,6 +22,20 @@ void lab_start(istream &in, ostream &out)
 {
   string smnt; //statement
 
+  //lables marking
+  while (!in.eof())
+  {
+    in >> smnt;
+    if (smnt.back() == ':')
+    {
+      smnt.erase(--smnt.end());
+      lables.insert(make_pair(smnt, in.tellg()));
+    }
+  }
+
+  in.clear();
+  in.seekg(0, ios_base::beg);
+
   while (!in.eof() && smnt != "exit")
   {
     in >> smnt;
@@ -30,7 +45,7 @@ void lab_start(istream &in, ostream &out)
       string expr;
       getline(in, expr);
 
-      cout << reverse_polish(expr) << endl;
+      out << reverse_polish(expr) << endl;
     }
     else if (smnt[0] == '$')
     {
@@ -47,18 +62,35 @@ void lab_start(istream &in, ostream &out)
 
       *var = reverse_polish(expr);
     }
-    else if (smnt.back() == ':')
-    {
-      smnt.erase(--smnt.end());
-      lables.insert(make_pair(smnt, in.tellg()));
-    }
     else if (smnt == "goto")
     {
       string name;
       in >> name;
+      in.clear();
       in.seekg(lables[name], ios_base::beg);
     }
+    else if (smnt == "if")
+    {
+      string ifsnt;
+      getline(in, ifsnt);
 
+      ifsnt.erase(ifsnt.begin());
+      ifsnt.erase(ifsnt.begin());
+      ifsnt.erase(--ifsnt.end());
+
+
+      if (!reverse_polish(ifsnt))
+      {
+        auto back = in.tellg();
+
+        string endsearch;
+        while (endsearch != "endif")
+          in >> endsearch;
+
+        in.clear();
+        in.seekg(back, ios_base::beg);
+      }
+    }
   }
 }
 

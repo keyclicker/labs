@@ -13,7 +13,11 @@ double reverse_polish(const string &expr)
     string token;
     stream >> token;
 
-    if (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')
+    if (token[0] == '+' || token[0] == '-' ||                         // Yeah,
+        token[0] == '*' || token[0] == '/' ||                         // Kinda
+        token[0] == '&' || token[0] == '|' ||                         // Bad
+        token[0] == '>' || token[0] == '<' || token[0] == '=' ||      // Design
+        token == ">=" || token == "<=")                               // KBD (c)
     {
       if (opStack.size() >= 2)
       {
@@ -22,21 +26,41 @@ double reverse_polish(const string &expr)
         auto a = opStack.top();
         opStack.pop();
 
-        switch (token[0])
-        {
-          case '+':
-            opStack.push(a + b);
-            break;
-          case '-':
-            opStack.push(a - b);
-            break;
-          case '*':
-            opStack.push(a * b);
-            break;
-          case '/':
-            opStack.push(a / b);
-            break;
-        }
+        if (token == ">=")
+          opStack.push(a >= b);
+        else if (token == "<=")
+          opStack.push(a + b);
+        else
+          switch (token[0])
+          {
+            case '+':
+              opStack.push(a + b);
+              break;
+            case '-':
+              opStack.push(a - b);
+              break;
+            case '*':
+              opStack.push(a * b);
+              break;
+            case '/':
+              opStack.push(a / b);
+              break;
+            case '&':
+              opStack.push(a && b);
+              break;
+            case '|':
+              opStack.push(a || b);
+              break;
+            case '>':
+              opStack.push(a > b);
+              break;
+            case '<':
+              opStack.push(a < b);
+              break;
+            case '=':
+              opStack.push(a == b);
+              break;
+          }
       }
       else throw logic_error("Wrong operands count");
     }
@@ -53,7 +77,7 @@ double reverse_polish(const string &expr)
       }
       catch (...)
       {
-        throw logic_error("Wrong operand or operator: '" + token +"'");
+        throw logic_error("Wrong operand or operator: '" + token + "'");
       }
     }
   }
