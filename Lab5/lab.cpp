@@ -45,7 +45,7 @@ void lab_start(istream &in, ostream &out)
       string expr;
       getline(in, expr);
 
-      out << reverse_polish(expr) << endl;
+      out << calculate(expr) << endl;
     }
     else if (smnt[0] == '$')
     {
@@ -60,7 +60,7 @@ void lab_start(istream &in, ostream &out)
       string expr;
       getline(in, expr);
 
-      *var = reverse_polish(expr);
+      *var = calculate(expr);
     }
     else if (smnt == "goto")
     {
@@ -78,7 +78,7 @@ void lab_start(istream &in, ostream &out)
       ifsnt.erase(ifsnt.begin());
       ifsnt.erase(--ifsnt.end());
 
-      if (!reverse_polish(ifsnt))
+      if (!calculate(ifsnt))
       {
         string endsearch;
         while (endsearch != "endif")

@@ -7,7 +7,12 @@
 
 using namespace std;
 
-double reverse_polish(const string &expr);
+double reverse_polish(string expr);
 string to_polish(string expr);
 
 bool is_operator(const char val);
+
+inline double calculate(const string &expr)
+{
+  return reverse_polish(to_polish(expr));
+}

@@ -1,9 +1,25 @@
 #include "polish.hpp"
 #include "lab.hpp"
+#include <stack>
+#include <map>
 
-double reverse_polish(const string &expr)
+//priority map
+map<char, int> pmap = {
+        {'*', 4}, {'/', 4},
+        {'+', 3}, {'-', 3},
+        {'>', 2}, {'<', 2}, {'=', 2},
+        {'(', 1}, {')', 1},
+};
+
+
+double reverse_polish(string expr)
 {
   stringstream stream;
+
+  // fucking stl, for some reason reads '' when the last character
+  // in string stream is ' ', so I need to clean it up
+  while (expr.back()==' ') expr.pop_back();
+
   stream << expr;
 
   stack<double> opStack;
@@ -83,28 +99,76 @@ double reverse_polish(const string &expr)
 
 string to_polish(string expr)
 {
- // auto i = expr.begin();
- // while (i < expr.end() );
-
-
-
-  for (auto i = expr.begin(); i < expr.end(); ++i)
+  for (auto i = 0; i < expr.size(); ++i)
   {
-    if (is_operator(*i))
+    if (is_operator(expr[i]))
     {
-      expr.insert(i, ' ');
+      expr.insert(expr.begin()+i, ' ');
 
       i += 2;
-      if (*i == '=') ++i;
+      if (expr[i] == '=') ++i;
 
-      //if (i == expr.end()) break; //end() updating, so i can't set it to the loop head
-
-        expr.insert(i, ' ');
+        expr.insert(expr.begin()+i, ' ');
     }
-    ++i;
   }
 
-  return expr;
+  stringstream pol;
+  stack<string> stk;
+
+  stringstream ss;
+  ss << expr;
+
+  string token;
+  while (!ss.eof())
+  {
+    ss >> token;
+
+    if (token[0] == '(')
+    {
+      stk.push(token);
+    }
+    else if (token[0] == ')')
+    {
+      while (stk.top()[0] != '(')
+      {
+        pol << stk.top() << ' ';
+        stk.pop();
+
+        if (stk.empty())
+          throw logic_error("Wrong brackets count");  ////////////////////
+      }
+      stk.pop();
+    }
+    else if (token[0] == '(')
+    {
+      stk.push(token);
+    }
+    else if (is_operator(token[0]))
+    {
+      if (!stk.empty())
+      {
+        if (pmap[stk.top()[0]] >= pmap[token[0]])
+        {
+          pol << stk.top() << ' ';
+          stk.pop();
+        }
+      }
+
+      stk.push(token);
+    }
+    else
+    {
+      pol << token << ' ';
+    }
+  }
+
+  while (!stk.empty())
+  {
+    pol << stk.top() << ' ';
+    stk.pop();
+  }
+
+  return pol.str();
 }
 
 bool is_operator(const char val)

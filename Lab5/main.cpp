@@ -3,11 +3,6 @@
 
 int main(int argc, char **argv)
 {
-  string str;
-  cin >> str;
-  cout << to_polish(str);
-
-
   if (argc == 1)
   {
     interactive_mode();
