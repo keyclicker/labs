@@ -78,17 +78,11 @@ void lab_start(istream &in, ostream &out)
       ifsnt.erase(ifsnt.begin());
       ifsnt.erase(--ifsnt.end());
 
-
       if (!reverse_polish(ifsnt))
       {
-        auto back = in.tellg();
-
         string endsearch;
         while (endsearch != "endif")
           in >> endsearch;
-
-        in.clear();
-        in.seekg(back, ios_base::beg);
       }
     }
   }

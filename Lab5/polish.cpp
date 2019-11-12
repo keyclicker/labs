@@ -13,11 +13,7 @@ double reverse_polish(const string &expr)
     string token;
     stream >> token;
 
-    if (token[0] == '+' || token[0] == '-' ||                         // Yeah,
-        token[0] == '*' || token[0] == '/' ||                         // Kinda
-        token[0] == '&' || token[0] == '|' ||                         // Bad
-        token[0] == '>' || token[0] == '<' || token[0] == '=' ||      // Design
-        token == ">=" || token == "<=")                               // KBD (c)
+    if (is_operator(token[0]) || token == ">=" || token == "<=")
     {
       if (opStack.size() >= 2)
       {
@@ -29,7 +25,7 @@ double reverse_polish(const string &expr)
         if (token == ">=")
           opStack.push(a >= b);
         else if (token == "<=")
-          opStack.push(a + b);
+          opStack.push(a <= b);
         else
           switch (token[0])
           {
@@ -83,4 +79,41 @@ double reverse_polish(const string &expr)
   }
 
   return opStack.top();
+}
+
+string to_polish(string expr)
+{
+ // auto i = expr.begin();
+ // while (i < expr.end() );
+
+
+
+  for (auto i = expr.begin(); i < expr.end(); ++i)
+  {
+    if (is_operator(*i))
+    {
+      expr.insert(i, ' ');
+
+      i += 2;
+      if (*i == '=') ++i;
+
+      //if (i == expr.end()) break; //end() updating, so i can't set it to the loop head
+
+        expr.insert(i, ' ');
+    }
+    ++i;
+  }
+
+  return expr;
+}
+
+bool is_operator(const char val)
+{
+  return (
+    val == '+' || val == '-' ||
+    val == '*' || val == '/' ||
+    val == '&' || val == '|' ||
+    val == '>' || val == '<' || val == '=' ||
+    val == ')' || val == '('
+  );
 }
