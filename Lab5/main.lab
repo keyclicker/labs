@@ -1,0 +1,64 @@
+$foo = 0.2
+$span = 2.5
+endl
+
+prints "foo = "
+print $foo
+endl
+
+prints "span = "
+print $span
+endl
+
+prints "foo + span = "
+print $foo + $span
+endl
+
+prints "-foo + span = "
+print -$foo + $span
+endl
+
+prints "-foo * span = "
+print -$foo * $span
+endl endl
+
+prints "foo < span = "
+print $foo < $span
+endl
+
+prints "foo > span = "
+print $foo > $span
+endl
+
+prints "foo <= span = "
+print $foo <= $span
+endl
+
+prints "foo >= span = "
+print $foo >= $span
+endl
+
+prints "foo = span = "
+print $foo = $span
+endl
+
+prints "foo & span = "
+print $foo & $span
+endl
+
+prints "foo | span = "
+print $foo | $span
+endl endl
+
+prints "this is loop: "
+
+$i = 3
+
+lp:
+    print $i
+    prints " "
+
+    $i = $i + 1
+if ($i <= 5)
+    goto lp
+endif

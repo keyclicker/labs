@@ -45,12 +45,28 @@ void lab_start(istream &in, ostream &out)
       string expr;
       getline(in, expr);
 
-      out << calculate(expr) << endl;
+      out << calculate(expr);
+    }
+    else if (smnt == "prints")
+    {
+      string expr;
+      getline(in, expr);
+
+      auto i1 = find(expr.begin(), expr.end(), '"');
+      auto i2 = find(++i1, expr.end(), '"');
+
+      for (auto i = i1; i != i2; ++i)
+      {
+        cout << *i;
+      }
+    }
+    else if (smnt == "endl")
+    {
+      cout << endl;
     }
     else if (smnt[0] == '$')
     {
-      smnt.erase(smnt.begin());
-      auto var = get_var(smnt);
+      auto &var = *get_var(smnt);
 
       char eq;
       in >> eq;
@@ -60,7 +76,7 @@ void lab_start(istream &in, ostream &out)
       string expr;
       getline(in, expr);
 
-      *var = calculate(expr);
+      var = calculate(expr);
     }
     else if (smnt == "goto")
     {

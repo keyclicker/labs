@@ -29,7 +29,7 @@ double reverse_polish(string expr)
     string token;
     stream >> token;
 
-    if (is_operator(token[0]) || token == ">=" || token == "<=")
+    if ((is_operator(token[0]) && token.size() == 1) || token == ">=" || token == "<=")
     {
       if (opStack.size() >= 2)
       {
@@ -78,7 +78,6 @@ double reverse_polish(string expr)
     }
     else if (token[0] == '$')
     {
-      token.erase(token.begin());
       opStack.push(*get_var(token));
     }
     else
@@ -143,6 +142,21 @@ string to_polish(string expr)
     {
       stk.push(token);
     }
+    else if (token[0] == '-' && (!stk.empty() ? stk.top()[0] == '(' : pol.str() == ""))
+    {
+      string str;
+      ss >> str;
+
+      if (str[0] == '$')
+      {
+        pol << -(*get_var(str)) << ' ';
+      }
+      else
+      {
+        double tmp = stof(str);
+        pol << -tmp << ' ';
+      }
+    }
     else if (is_operator(token[0]))
     {
       if (!stk.empty())
@@ -171,7 +185,7 @@ string to_polish(string expr)
   return pol.str();
 }
 
-bool is_operator(const char val)
+bool is_operator(char val)
 {
   return (
     val == '+' || val == '-' ||

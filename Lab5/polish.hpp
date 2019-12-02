@@ -10,7 +10,7 @@ using namespace std;
 double reverse_polish(string expr);
 string to_polish(string expr);
 
-bool is_operator(const char val);
+bool is_operator(char val);
 
 inline double calculate(const string &expr)
 {
