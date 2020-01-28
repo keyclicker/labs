@@ -16,8 +16,9 @@ int main()
   for (auto &a : arr)
     cin >> a;
 
-
+  bool k = false;
   bitset<64> bit;
+
   for (Long i = 0; i < pow(2, n); i++)
   {
     bit = i;
@@ -26,13 +27,23 @@ int main()
     {
       a += (bit[j] ? 1 : -1) * arr[j];
     }
-    if (!a) break;
+    if (!a)
+    {
+      k = true;
+      break;
+    }
   }
 
-  for (int j = 0; j < n; j++)
+  if (k)
   {
-    cout << (bit[j] ? ' ' : '-') << arr[j] << ' ';
+    for (int j = 0; j < n; j++)
+    {
+      cout << (bit[j] ? "" : "-") << arr[j] << ' ';
+    }
+    cout << endl;
   }
-  cout << endl;
-
+  else
+  {
+    cout << "NIT";
+  }
 }

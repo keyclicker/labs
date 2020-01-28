@@ -20,10 +20,14 @@ bool isPalindrom(string::const_iterator beg, string::const_iterator end)
 
 string getPalindrom(const string &str)
 {
-  for (int i = str.size() - 1; i > 0; i--)
-  {
+  auto i = str.size();
 
+  for (; i >= 0; --i)
+  {
+    if (isPalindrom(str.begin(), str.begin() + i)) break;
   }
+
+  cout << str + str.substr(i, str.size());
 }
 
 int main()
