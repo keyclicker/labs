@@ -5,7 +5,7 @@ using Byte = char;
 class Time
 {
 public:
-  Byte sec, min, hour;
-  Byte day, month;
+  int hour, min, sec;
+  int day, month;
   int year;
 };

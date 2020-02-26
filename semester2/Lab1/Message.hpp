@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include <fstream>
 #include "Time.hpp"
 
@@ -18,32 +19,11 @@ class Message
   double spamProbability;
 
 public:
-  void saveToTextFile(std::ofstream &out)
-  {
-    out << senderLogin << ' ' << receiverLogin << std::endl;
-    out << time.sec << ' ' << time.min << ' ' <<
-          time.hour << ' ' << time.day << ' ' <<
-          time.month << ' ' << time.month;
+  void loadFromTextFile(std::ifstream &in);
+  void saveToTextFile(std::ofstream &out) const;
 
-    out << spamProbability << std::endl;
-    out << text << std::endl;
-  }
+  void loadFromBinFile(std::ifstream &in);
+  void saveToBinFile(std::ofstream &out) const;
 
-  void loadFromTextFile(std::ifstream &in)
-  {
-    in >> senderLogin >> receiverLogin;
-    in >> time.sec >> time.min >>
-        time.hour >> time.day >>
-        time.month >> time.month;
-
-    in >> spamProbability;
-    std::getline(in, text);
-  }
-
-  void saveToBinFile(std::ofstream &out)
-  {
-
-  }
-
-
+  void print() const;
 };
