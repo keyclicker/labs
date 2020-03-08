@@ -26,4 +26,6 @@ public:
   void saveToBinFile(std::ofstream &out) const;
 
   void print() const;
+
+  static Message Generate();
 };

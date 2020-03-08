@@ -1,3 +1,7 @@
+#include <vector>
+#include <string>
+#include <random>
+#include <ctime>
 #include "Message.hpp"
 
 void Message::saveToTextFile(std::ofstream &out) const {
@@ -72,4 +76,54 @@ void Message::print() const {
   std::cout << spamProbability << std::endl;
   std::cout << text << std::endl;
   std::cout << std::endl;
+}
+std::mt19937 gen(std::time(0));
+auto rand(int r1, int r2) {
+
+  std::uniform_int_distribution<int> r(r1, r2);
+  return r(gen);
+};
+
+Message Message:: Generate() {
+  std::mt19937 gen(std::random_device{}());
+
+
+
+  static const std::vector<std::string> Names = {
+    "Linder1337", "Ivanov42", "Zhereb228", "TheVepesh", "AdzhOBEY"
+  };
+
+  static const std::vector<std::string> Words = {
+      "lorem", "ipsum", "dolor", "sit", "amet", "consectetur",
+      "adipiscing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt",
+      "ut", "labore", "et", "dolore", "magna", "aliqua", "ut", "enim", "ad",
+      "minim", "veniam", "quis", "nostrud", "exercitation", "ullamco",
+      "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", "consequat",
+      "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in",
+      "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
+      "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non",
+      "proident", "sunt", "in", "culpa", "qui", "officia", "deserunt", "mollit",
+      "anim", "id", "est", "laborum"
+  };
+
+
+  Message msg;
+  msg.senderLogin = Names[rand(0, 4)];
+  msg.receiverLogin = Names[rand(0, 4)];
+
+  msg.time.year = rand(1977, 2020);
+  msg.time.month = rand(1, 12);
+  msg.time.day = rand(1, 30);
+  msg.time.hour = rand(0, 23);
+  msg.time.min = rand(0, 59);
+  msg.time.sec = rand(0, 59);
+
+  std::uniform_real_distribution<double> realRand(0, 1);
+  msg.spamProbability = realRand(gen);
+
+  for (int i = 0; i < rand(1, 25); ++i) {
+    msg.text.append(Words[rand(0, Words.size()-1)] + " ");
+  }
+
+  return msg;
 }

@@ -21,6 +21,8 @@ public:
 
   void print() const;
   size_t size() const;
+
+  static Database Generate(size_t size);
 };
 
 template<typename T>
@@ -84,5 +86,14 @@ template<typename T>
 void Database<T>::loadFromBinFile(const std::string &path) {
   dataList.clear();
   addFromBinFile(path);
+}
+
+template<typename T>
+Database<T> Database<T>::Generate(size_t size) {
+  Database<T> db;
+  for (size_t i = 0; i < size; ++i) {
+    db.dataList.push_back(T::Generate());
+  }
+  return db;
 }
 
