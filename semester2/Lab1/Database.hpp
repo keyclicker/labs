@@ -19,6 +19,9 @@ public:
   void loadFromBinFile(const std::string &path);
   void saveToBinFile(const std::string &path) const;
 
+  void push(const T &val);
+  std::list<T> &getData();
+
   void print() const;
   size_t size() const;
 
@@ -95,5 +98,10 @@ Database<T> Database<T>::Generate(size_t size) {
     db.dataList.push_back(T::Generate());
   }
   return db;
+}
+
+template<typename T>
+void Database<T>::push(const T &val) {
+  dataList.push_back(val);
 }
 

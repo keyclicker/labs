@@ -3,22 +3,15 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "Time.hpp"
 
-class Message
-{
-  enum class NewsType
-  {
+class Message {
+public:
+  enum class Type {
     news, question, answer, invite, commentOnEvent, commentOnMessage
   };
 
-  std::string senderLogin;
-  std::string receiverLogin;
-  std::string text;
-  Time time;
-  double spamProbability;
-
-public:
   void loadFromTextFile(std::ifstream &in);
   void saveToTextFile(std::ofstream &out) const;
 
@@ -28,4 +21,15 @@ public:
   void print() const;
 
   static Message Generate();
+
+private:
+  std::string senderLogin;
+  std::string receiverLogin;
+  std::string text;
+  Time time;
+  double spamProbability;
+  Type type;
+
+  std::string typetos(Type val) const;
+  Type stotype(const std::string &val) const;
 };
