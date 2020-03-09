@@ -13,7 +13,6 @@ void Message::saveToTextFile(std::ofstream &out) const {
   out << spamProbability << std::endl;
   out << typetos(type) << std::endl;
   out << text << std::endl;
-  out << std::endl;
 }
 
 void Message::loadFromTextFile(std::ifstream &in) {
@@ -29,7 +28,6 @@ void Message::loadFromTextFile(std::ifstream &in) {
   type = stotype(strType);
 
   in.get();
-
   std::getline(in, text);
 }
 

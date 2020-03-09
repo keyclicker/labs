@@ -36,8 +36,10 @@ size_t Database<T>::size() const {
 template<typename T>
 void Database<T>::saveToTextFile(const std::string &path) const {
   std::ofstream out(path, std::ios::out);
-  for (auto &a : dataList)
+  for (auto &a : dataList) {
     a.saveToTextFile(out);
+    out << std::endl;
+  }
 }
 
 template<typename T>
@@ -46,7 +48,8 @@ void Database<T>::addFromTextFile(const std::string &path) {
   while (!in.eof()) {
     T tmp;
     tmp.loadFromTextFile(in);
-    dataList.push_back(tmp);
+    dataList.emplace_back(tmp);
+    in.get(), in.get();
   }
 }
 
@@ -69,7 +72,7 @@ void Database<T>::addFromBinFile(const std::string &path) {
   for (size_t i = 0; i < size; ++i) {
     T tmp;
     tmp.loadFromBinFile(in);
-    dataList.push_back(tmp);
+    dataList.emplace_back(tmp);
   }
 }
 
