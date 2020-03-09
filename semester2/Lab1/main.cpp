@@ -4,14 +4,9 @@
 using namespace std;
 
 int main() {
-  Database<Message> db = Database<Message>::Generate(2);
+  cout << (Time{05, 05, 05, 22, 05, 2000} > Time{05, 05, 05, 22, 05, 200});
 
-  db.saveToBinFile("hundred.bin");
-  db.saveToTextFile("hundred.txt");
+  Database<Message> db = Database<Message>::Generate(10000);
 
-  db.loadFromBinFile("hundred.bin");
-  db.print();
-
-  db.loadFromTextFile("hundred.txt");
-  db.print();
+  db.sentAfter(Time{05, 05, 05, 22, 05, 2000}).print();
 }

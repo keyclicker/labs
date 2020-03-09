@@ -3,13 +3,9 @@
 #include <list>
 #include <string>
 #include <fstream>
-#include "Message.hpp"
 
-template<typename T = Message>
-class Database {
-private:
-  std::list<T> dataList; //todo Message to T
-
+template<typename T>
+class BaseDatabase {
 public:
   void addFromTextFile(const std::string &path);
   void loadFromTextFile(const std::string &path);
@@ -21,20 +17,41 @@ public:
 
   void push(const T &val);
   std::list<T> &getData();
+  const std::list<T> &getData() const;
 
   void print() const;
   size_t size() const;
 
-  static Database Generate(size_t size);
+private:
+  std::list<T> dataList;
 };
 
 template<typename T>
-size_t Database<T>::size() const {
+class Database : BaseDatabase<T> {};
+
+
+template<typename T>
+void BaseDatabase<T>::push(const T &val) {
+  dataList.push_back(val);
+}
+
+template<typename T>
+std::list<T> &BaseDatabase<T>::getData() {
+  return dataList;
+}
+
+template<typename T>
+const std::list<T> &BaseDatabase<T>::getData() const {
+  return dataList;
+}
+
+template<typename T>
+size_t BaseDatabase<T>::size() const {
   return dataList.size();
 }
 
 template<typename T>
-void Database<T>::saveToTextFile(const std::string &path) const {
+void BaseDatabase<T>::saveToTextFile(const std::string &path) const {
   std::ofstream out(path, std::ios::out);
   for (auto &a : dataList) {
     a.saveToTextFile(out);
@@ -43,7 +60,7 @@ void Database<T>::saveToTextFile(const std::string &path) const {
 }
 
 template<typename T>
-void Database<T>::addFromTextFile(const std::string &path) {
+void BaseDatabase<T>::addFromTextFile(const std::string &path) {
   std::ifstream in(path, std::ios::in);
   while (!in.eof()) {
     T tmp;
@@ -54,7 +71,7 @@ void Database<T>::addFromTextFile(const std::string &path) {
 }
 
 template<typename T>
-void Database<T>::saveToBinFile(const std::string &path) const {
+void BaseDatabase<T>::saveToBinFile(const std::string &path) const {
   std::ofstream out(path, std::ios::out | std::ios::binary);
 
   size_t size = dataList.size();
@@ -64,7 +81,7 @@ void Database<T>::saveToBinFile(const std::string &path) const {
 }
 
 template<typename T>
-void Database<T>::addFromBinFile(const std::string &path) {
+void BaseDatabase<T>::addFromBinFile(const std::string &path) {
   std::ifstream in(path, std::ios::in | std::ios::binary);
 
   size_t size;
@@ -77,34 +94,21 @@ void Database<T>::addFromBinFile(const std::string &path) {
 }
 
 template<typename T>
-void Database<T>::print() const {
+void BaseDatabase<T>::print() const {
   for (auto &a : dataList)
     a.print();
 }
 
 template<typename T>
-void Database<T>::loadFromTextFile(const std::string &path) {
+void BaseDatabase<T>::loadFromTextFile(const std::string &path) {
   dataList.clear();
   addFromTextFile(path);
 }
 
 template<typename T>
-void Database<T>::loadFromBinFile(const std::string &path) {
+void BaseDatabase<T>::loadFromBinFile(const std::string &path) {
   dataList.clear();
   addFromBinFile(path);
 }
 
-template<typename T>
-Database<T> Database<T>::Generate(size_t size) {
-  Database<T> db;
-  for (size_t i = 0; i < size; ++i) {
-    db.dataList.push_back(T::Generate());
-  }
-  return db;
-}
-
-template<typename T>
-void Database<T>::push(const T &val) {
-  dataList.push_back(val);
-}
 

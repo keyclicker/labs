@@ -80,17 +80,15 @@ void Message::print() const {
   std::cout << text << std::endl;
   std::cout << std::endl;
 }
+
 std::mt19937 gen(std::time(0));
 auto rand(int r1, int r2) {
-
   std::uniform_int_distribution<int> r(r1, r2);
   return r(gen);
 };
 
 Message Message:: Generate() {
   std::mt19937 gen(std::random_device{}());
-
-
 
   static const std::vector<std::string> Names = {
     "Linder1337", "Ivanov42", "Zhereb228", "TheVepesh", "AdzhOBEY"
@@ -106,7 +104,7 @@ Message Message:: Generate() {
       "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
       "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non",
       "proident", "sunt", "in", "culpa", "qui", "officia", "deserunt", "mollit",
-      "anim", "id", "est", "laborum", "dolboeb", "blad", "suka", "blya", "ueban"
+      "anim", "id", "est", "laborum"
   };
 
 
@@ -165,4 +163,87 @@ Message::Type Message::stotype(const std::string &val) const {
       return Type::commentOnMessage;
 
   throw std::logic_error("String cannot be converted to Message::Type");
+}
+
+Database<Message> Database<Message>::ofSender(const std::string &sender) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.senderLogin == sender)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::inSpamRange(double r1, double r2) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.spamProbability > r1 && a.spamProbability < r2)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::ofType(Message::Type type) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.type == type)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::contains(const std::string &text) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.text.find(text) != std::string::npos)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::sentAfter(const Time &time) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.time > time)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::sentBefore(const Time &time) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.time < time)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message> Database<Message>::Generate(size_t size) {
+  Database<Message> db;
+  for (size_t i = 0; i < size; ++i) {
+    db.push(Message::Generate());
+  }
+  return db;
+}
+
+Database<Message>
+Database<Message>::ofReceiver(const std::string &receiver) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.receiverLogin == receiver)
+      subdb.push(a);
+  }
+  return subdb;
+}
+
+Database<Message>
+Database<Message>::inTimeRange(const Time &t1, const Time &t2) const {
+  Database<Message> subdb;
+  for (auto &a : getData()) {
+    if (a.time > t1 && a.time < t2)
+      subdb.push(a);
+  }
+  return subdb;
+
 }
