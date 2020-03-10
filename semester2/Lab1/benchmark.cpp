@@ -41,8 +41,8 @@ MYBENCH(LoadFromBinFile);
 
 
 int main(int argc, char** argv) {
- // ::benchmark::Initialize(&argc, argv);
- // ::benchmark::RunSpecifiedBenchmarks();
+  ::benchmark::Initialize(&argc, argv);
+  ::benchmark::RunSpecifiedBenchmarks();
 
   ofstream out("benchmark.log", ios::app);
 

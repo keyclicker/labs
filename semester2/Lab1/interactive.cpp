@@ -208,10 +208,6 @@ void save() {
     help();
 }
 
-void demo() {
-
-}
-
 void ls() {
   string name;
   cin >> name;
@@ -313,3 +309,83 @@ void search() {
   }
 
 }
+
+void demo() {
+  static string devider = "--------------------------------------------\n";
+
+  cout << "Generating random database DB sized 2" << endl;
+  auto DB = Database<Message>::Generate(2);
+
+  cout << "Printing DB" << endl;
+  cout << devider;
+  DB.print();
+  cout << devider;
+
+  cout << "Saving DB as text file to demo.txt" << endl;
+  DB.saveToTextFile("demo.txt");
+
+  cout << "Saving DB as bin file to demo.bin" << endl;
+  DB.saveToBinFile("demo.bin");
+
+  cout << "Loading BIN from demo.bin" << endl;
+  Database<Message> BIN;
+  BIN.loadFromBinFile("demo.bin");
+
+  cout << "Loading TXT from demo.txt" << endl;
+  Database<Message> TXT;
+  TXT.loadFromTextFile("demo.txt");
+
+  cout << "Printing BIN:" << endl;
+  cout << devider;
+  BIN.print();
+  cout << devider;
+
+  cout << "Printing TXT:" << endl;
+  cout << devider;
+  TXT.print();
+  cout << devider;
+
+  cout << "\n//Search demos\n" << endl;
+
+  cout << "Generating random database F sized 20" << endl;;
+  auto F = Database<Message>::Generate(20);
+
+  cout << "Printing messages from F...\n" << endl;
+  
+  cout << "...containing \"lorem\":" << endl;
+  cout << devider;
+  F.contains("lorem").print();
+  cout << devider;
+
+  cout << "...sended by Ivanov42:" << endl;
+  cout << devider;
+  F.ofSender("Ivanov42").print();
+  cout << devider;
+
+  cout << "...recieved by Zhereb228:" << endl;
+  cout << devider;
+  F.ofReceiver("Zhereb228").print();
+  cout << devider;
+
+  cout << "...in spam range 0.4 - 0,5" << endl;
+  cout << devider;
+  F.inSpamRange(0.4, 0.5).print();
+  cout << devider;
+
+  cout << "...of type \"news\"" << endl;
+  cout << devider;
+  F.ofType(Message::Type::news).print();
+  cout << devider;
+
+  cout << "...sent before 22:00:00 22.05.1980" << endl;
+  cout << devider;
+  F.sentBefore(Time{22,00,00,22,05,1985}).print();
+  cout << devider;
+
+  cout << "...sent after 22:00:00 22.05.2005" << endl;
+  cout << devider;
+  F.sentAfter(Time{22,00,00,22,05,2005}).print();
+  cout << devider;
+}
+
+

@@ -20,17 +20,35 @@ public:
     return !operator>(val) && !operator==(val);
   }
   bool operator>(const Time &val) const {
-    if (year > val.year)
+    if (year > val.year) {
       return true;
-    else if (year == val.year && month > val.year)
-      return true;
-    else if (day > val.day)
-      return true;
-    else if (hour > val.hour)
-      return true;
-    else if (min > val.min)
-      return true;
-    return sec <= val.sec;
+    }
+    else if ((year == val.year)) {
+      if (month > val.month) {
+        return true;
+      }
+      else if ((month == val.month)) {
+        if (day > val.day) {
+          return true;
+        }
+        else if ((day == val.day)) {
+          if (hour > val.hour) {
+            return true;
+          }
+          else if ((hour == val.hour)) {
+            if (min > val.min) {
+              return true;
+            }
+            else if ((min == val.min)) {
+              if (sec > val.sec) {
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
   }
   bool operator==(const Time &val) const {
     return (year == val.year && month == val.month &&
