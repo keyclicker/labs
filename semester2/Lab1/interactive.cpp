@@ -78,7 +78,7 @@ void help () {
   cout << "  " << setw(10) << left << "del" << "Delete message" << endl;
   cout << "\nOther:\n";
   cout << "  " << setw(10) << left << "help" << "Help list" << endl;
-  cout << "  " << setw(10) << left << "del" << "Run demo" << endl;
+  cout << "  " << setw(10) << left << "demo" << "Run demo" << endl;
   cout << "  " << setw(10) << left << "exit" << "Exit from program" << endl;
 
   cout << "\ntype \"-command_name- help\" to get command info\n\n";
