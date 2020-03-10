@@ -6,20 +6,19 @@
 
 void Message::saveToTextFile(std::ofstream &out) const {
   out << senderLogin << ' ' << receiverLogin << std::endl;
-  out << time.hour << ' ' << time.min << ' ' <<
-      time.sec << ' ' << time.day << ' ' <<
-      time.month << ' ' << time.year << std::endl;
+  out << int(time.hour) << ' ' << int(time.min) << ' ' <<
+      int(time.sec) << ' ' << int(time.day) << ' ' <<
+      int(time.month) << ' ' << time.year << std::endl;
 
-  out << spamProbability << std::endl;
+  std::cout << std::fixed;
+  out << std::setprecision(6) << spamProbability << std::endl;
   out << typetos(type) << std::endl;
   out << text << std::endl;
 }
 
 void Message::loadFromTextFile(std::ifstream &in) {
   in >> senderLogin >> receiverLogin;
-  in >> time.hour >> time.min >>
-     time.sec >> time.day >>
-     time.month >> time.year;
+  in >> time;
 
   in >> spamProbability;
 
@@ -71,11 +70,12 @@ void Message::loadFromBinFile(std::ifstream &in) {
 
 void Message::print() const {
   std::cout << senderLogin << " -> " << receiverLogin << std::endl;
-  std::cout << time.hour << ':' << time.min << ':' <<
-            time.sec << ' ' << time.day << '.' <<
-            time.month << '.' << time.year << std::endl;
+  std::cout << int(time.hour) << ':' << int(time.min) << ':' <<
+            int(time.sec) << ' ' << int(time.day) << '.' <<
+            int(time.month) << '.' << time.year << std::endl;
 
-  std::cout << "Spam: " << spamProbability << std::endl;
+  std::cout << std::fixed;
+  std::cout << "Spam: " << std::setprecision(6) <<spamProbability << std::endl;
   std::cout << "Type: "<< typetos(type) << std::endl;
   std::cout << text << std::endl;
   std::cout << std::endl;
@@ -131,7 +131,7 @@ Message Message:: Generate() {
   return msg;
 }
 
-std::string Message::typetos(Message::Type val) const {
+std::string Message::typetos(Message::Type val) {
   switch (val) {
     case Type::news:
       return "news";
@@ -150,7 +150,7 @@ std::string Message::typetos(Message::Type val) const {
   };
 }
 
-Message::Type Message::stotype(const std::string &val) const {
+Message::Type Message::stotype(const std::string &val) {
   if (val == "news")
       return Type::news;
   if (val == "question")

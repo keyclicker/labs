@@ -1,13 +1,14 @@
 #pragma once
+#include <ostream>
 
 using Byte = char;
 
 class Time
 {
 public:
-  int hour, min, sec;
-  int day, month;
-  int year;
+  uint8_t hour, min, sec;
+  uint8_t day, month;
+  int16_t year;
 
   bool operator<=(const Time &val) const {
     return !operator>(val);
@@ -38,5 +39,12 @@ public:
   }
   bool operator!=(const Time &val) const {
     return !operator==(val);
+  }
+
+  friend std::istream &operator>>(std::istream &in, Time &time) {
+    in >> *(int*)&time.hour >> *(int*)&time.min >>
+       *(int*)&time.sec >> *(int*)&time.day >>
+       *(int*)& time.month >> time.year;
+    return in;
   }
 };

@@ -27,15 +27,12 @@ public:
   std::string receiverLogin;
   std::string text;
   Time time;
-  double spamProbability;
+  float spamProbability;
   Type type;
 
-private:
-  std::string typetos(Type val) const;
-  Type stotype(const std::string &val) const;
+  static std::string typetos(Type val);
+  static Type stotype(const std::string &val);
 };
-
-using MS = Database<Message>;
 
 template<>
 class Database<Message> : public BaseDatabase<Message>{
