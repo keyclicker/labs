@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <fstream>
+#include <iostream>
 
 template<typename T>
 class BaseDatabase {
@@ -95,8 +96,10 @@ void BaseDatabase<T>::addFromBinFile(const std::string &path) {
 
 template<typename T>
 void BaseDatabase<T>::print() const {
-  for (auto &a : dataList)
-    a.print();
+  for (size_t i = 0; i < dataList.size(); ++i) {
+    std::cout << "ID: " << i << std::endl;
+    std::next(dataList.begin(), i)->print();
+  }
 }
 
 template<typename T>

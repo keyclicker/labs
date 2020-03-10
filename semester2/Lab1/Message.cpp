@@ -70,13 +70,13 @@ void Message::loadFromBinFile(std::ifstream &in) {
 }
 
 void Message::print() const {
-  std::cout << senderLogin << ' ' << receiverLogin << std::endl;
-  std::cout << time.hour << ' ' << time.min << ' ' <<
-            time.sec << ' ' << time.day << ' ' <<
-            time.month << ' ' << time.year << std::endl;
+  std::cout << senderLogin << " -> " << receiverLogin << std::endl;
+  std::cout << time.hour << ':' << time.min << ':' <<
+            time.sec << ' ' << time.day << '.' <<
+            time.month << '.' << time.year << std::endl;
 
-  std::cout << spamProbability << std::endl;
-  std::cout << typetos(type) << std::endl;
+  std::cout << "Spam: " << spamProbability << std::endl;
+  std::cout << "Type: "<< typetos(type) << std::endl;
   std::cout << text << std::endl;
   std::cout << std::endl;
 }
@@ -145,6 +145,8 @@ std::string Message::typetos(Message::Type val) const {
       return "commentOnEvent";
     case Type::commentOnMessage:
       return "commentOnMessage";
+    case Type::none:
+      return "none";
   };
 }
 
@@ -162,7 +164,7 @@ Message::Type Message::stotype(const std::string &val) const {
   if (val == "commentOnMessage")
       return Type::commentOnMessage;
 
-  throw std::logic_error("String cannot be converted to Message::Type");
+  return Type::none;
 }
 
 Database<Message> Database<Message>::ofSender(const std::string &sender) const {

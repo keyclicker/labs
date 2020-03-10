@@ -10,7 +10,7 @@
 class Message {
 public:
   enum class Type {
-    news, question, answer, invite, commentOnEvent, commentOnMessage
+    news, question, answer, invite, commentOnEvent, commentOnMessage, none
   };
 
   void loadFromTextFile(std::ifstream &in);
