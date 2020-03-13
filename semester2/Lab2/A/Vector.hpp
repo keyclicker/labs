@@ -8,12 +8,12 @@ private:
   T *ptr;
   size_t sz, cap;
 
-  static void copy(T *p1, T *p2, size_t size) {
+  static void copy(T *p1, T const *p2, size_t size) {
     for (int i = 0; i < size; ++i)
       p1[i] = p2[i];
   }
 
-  static void copy(T *p1, T *p2, size_t s1, size_t s2, size_t size) {
+  static void copy(T *p1, T const *p2, size_t s1, size_t s2, size_t size) {
     for (int i = 0; i < size; ++i)
       p1[s1 + i] = p2[s2 + i];
   }
@@ -40,6 +40,20 @@ public:
       ptr[i++] = a;
     }
   };
+
+  Vector(const Vector<T> &val) : sz(val.sz), cap(val.cap) {
+    ptr = new T[cap];
+    copy(ptr, val.ptr, sz);
+  }
+
+  Vector<T> operator=(const Vector<T> &val) {
+    delete[] ptr;
+    sz = val.sz;
+    cap = val.cap;
+    ptr = new T[cap];
+    copy(ptr, val.ptr, sz);
+    return *this;
+  }
 
   void reserve(size_t new_cap) {
     if (new_cap > cap) {
@@ -133,7 +147,7 @@ public:
     ++sz;
   }
 
-  void assign() override {
+  void assign() override { //todo assign
 
   }
 
@@ -141,6 +155,15 @@ public:
     delete[] ptr;
     sz = 0;
     cap = 0;
+  }
+
+  friend std::ostream& operator<<(std::ostream& out, const Vector &val) {
+    out << '{';
+    for (size_t i = 0; i < val.sz-1; ++i) {
+      out << val.ptr[i] << ", ";
+    }
+    out << val.ptr[val.sz-1] << "}";
+    return out;
   }
 
   virtual ~Vector() {
@@ -157,7 +180,6 @@ public:
   explicit iterator(size_t index, const Vector<T> *vec) : index(index), vec(vec) {};
 
   iterator(const iterator &val) = default;
-
 
   iterator &operator++() {
     ++index;

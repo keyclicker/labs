@@ -4,13 +4,17 @@
 using namespace std;
 
 int main() {
-  Array<int, 5> vc = {1, 2, 3, 4, 5};
+  Vector<int> vc1 = {1, 2, 3, 4, 5};
 
-  cout << vc.size() << endl;
+  auto vc2 = vc1;
 
-  vc.back() = 0;
+  Vector<int> vc3;
 
-  for (auto a : vc) {
-    cout << a << ' ';
-  }
+  vc3 = vc1;
+
+  cout << vc1.size() << ' ' << vc2.size() << endl;
+
+  cout << vc1 << endl;
+  cout << vc2 << endl;
+  cout << vc3 << endl;
 }

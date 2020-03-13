@@ -7,6 +7,11 @@ class Array : public StaticContainer<T> {
 private:
   T arr[sz];
 
+  static void copy(T *p1, T const *p2, size_t size) {
+    for (int i = 0; i < size; ++i)
+      p1[i] = p2[i];
+  }
+
 public:
   class iterator;
 
@@ -19,6 +24,15 @@ public:
       arr[i++] = a;
     }
   };
+
+  Array(const Array<T, sz> &val) {
+    copy(arr, val.arr, sz);
+  }
+
+  Array<T, sz> &operator=(const Array<T, sz> &val) {
+    copy(arr, val.arr, sz);
+    return *this;
+  }
 
   T &operator[](size_t index) override {
     return arr[index];
@@ -53,6 +67,15 @@ public:
 
   size_t size() const override {
     return sz;
+  }
+
+  friend std::ostream& operator<<(std::ostream& out, const Array<T, sz> &val) {
+    out << '{';
+    for (size_t i = 0; i < sz-1; ++i) {
+      out << val.arr[i] << ", ";
+    }
+    out << val.arr[sz-1] << "}";
+    return out;
   }
 };
 
