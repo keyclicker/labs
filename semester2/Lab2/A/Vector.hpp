@@ -31,14 +31,16 @@ public:
   class iterator;
 
   Vector() : ptr(new T[0]), sz(0), cap(0) {};
+
   explicit Vector(size_t cap) : sz(0), cap(cap) {
     ptr = new T[cap];
   }
 
   Vector(const std::initializer_list<T> &ls)
-  : sz(ls.size()), cap(ls.size()), ptr(new T[ls.size()]) {
+          : sz(ls.size()), cap(ls.size()), ptr(new T[ls.size()]) {
     int i = 0;
-    for (auto a : ls) {
+    for (auto a : ls)
+    {
       ptr[i++] = a;
     }
   };
@@ -58,7 +60,8 @@ public:
   }
 
   void reserve(size_t new_cap) {
-    if (new_cap > cap) {
+    if (new_cap > cap)
+    {
       cap = new_cap;
       realloc();
     }
@@ -66,13 +69,15 @@ public:
 
   void resize(size_t size) {
     sz = size;
-    if (size > cap) {
+    if (size > cap)
+    {
       realloc(ptr, cap, sz);
     }
   }
 
   void push_back(const T &val) override {
-    if (sz + 1 > cap) {
+    if (sz + 1 > cap)
+    {
       cap = (sz + 1) * 2;
       realloc();
     }
@@ -80,8 +85,9 @@ public:
     ++sz;
   }
 
-  void push_front(const T &val) override  { //todo optimization
-    if (sz + 1 > cap) {
+  void push_front(const T &val) override { //todo optimization
+    if (sz + 1 > cap)
+    {
       cap = (sz + 1) * 2;
     }
 
@@ -115,7 +121,7 @@ public:
   };
 
   T &back() override {
-    return ptr[sz-1];
+    return ptr[sz - 1];
   };
 
   const T &front() const override {
@@ -123,7 +129,7 @@ public:
   };
 
   const T &back() const override {
-    return ptr[sz-1];
+    return ptr[sz - 1];
   };
 
   size_t size() const override {
@@ -135,13 +141,14 @@ public:
   };
 
   void insert(size_t index, const T &val) override { //todo optimization
-    if (sz + 1 > cap) {
+    if (sz + 1 > cap)
+    {
       cap = (sz + 1) * 2;
     }
 
     auto tmp = ptr;
     ptr = new T[cap];
-    copy(ptr, tmp, index+1, index, sz-index);
+    copy(ptr, tmp, index + 1, index, sz - index);
     copy(ptr, tmp, 0, 0, index);
     delete[] tmp;
 
@@ -158,6 +165,10 @@ public:
     sz = 0;
     cap = 0;
     ptr = new T[0];
+  }
+
+  ~Vector() {
+    delete[] ptr;
   }
 
   friend std::ostream& operator<<(std::ostream& out, const Vector &val) {

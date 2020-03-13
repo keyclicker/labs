@@ -21,7 +21,12 @@ private:
   Node *begin_ = end_;
 
 public:
-  List() {}
+  List() = default;
+  List(std::initializer_list<T> list);
+  List(const List &ls);
+  List<T> &operator=(const List &ls);
+
+  ~List();
 
   class iterator;
 
@@ -45,11 +50,16 @@ public:
   iterator end() const;
 
   friend std::ostream& operator<<(std::ostream& out, const List &val) {
-    out << '{';
-    for (auto i = val.begin(); i != val.end() - 1; ++i) {
-      out << *i << ", ";
+    if (val.sz) {
+      out << '{';
+      for (auto i = val.begin(); i != val.end() - 1; ++i) {
+        out << *i << ", ";
+      }
+      out << val.back() << "}";
     }
-    out << val.back() << "}";
+    else {
+      out << "{}";
+    }
     return out;
   }
 };
@@ -197,6 +207,7 @@ void List<T>::insert(std::size_t index, const T &val) { //todo fix insert
   for (int i = 0; i < index; ++i) a = a->next;
   a->next = new List<T>::Node(val, a, a->next);
   a->next->next->prev = a->next;
+  ++sz;
 }
 
 template<typename T>
@@ -206,8 +217,39 @@ std::size_t List<T>::size() const {
 
 template<typename T>
 void List<T>::clear() {
+  sz = 0;
+  for (auto i = begin_; i != end_; i = i->next) {
+    delete i;
+  }
+  begin_ = end_;
+}
+
+template<typename T>
+List<T>::~List() {
   for (auto i = begin_; i != end_; i = i->next) {
     delete i;
   }
   delete end_;
+}
+
+template<typename T>
+List<T>::List(std::initializer_list<T> list) {
+  for (auto a : list) {
+    push_back(a);
+  }
+}
+
+template<typename T>
+List<T>::List(const List &ls) {
+  for (auto i = ls.begin_; i != ls.end_; i = i->next) {
+    push_back(i->value);
+  }
+}
+
+template<typename T>
+List<T> &List<T>::operator=(const List &ls) {
+  for (auto i = ls.begin_; i != ls.end_; i = i->next) {
+    push_back(i->value);
+  }
+  return *this;
 }
