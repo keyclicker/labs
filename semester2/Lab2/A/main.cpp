@@ -12,15 +12,11 @@ int main() {
   ls.push_back(3);
   ls.push_back(4);
 
-//  ls.push_front(1);
-//  ls.push_front(2);
-//  ls.push_front(3);
-//  ls.push_front(4);
+  ls.insert(1, 6);
 
-  auto a = ls.begin();;
-  cout << *((a+1)-1) << endl;
+  ls.clear();
 
-  for (auto a : ls) {
-    cout << a << ' ';
-  }
+  ls.insert(0, 9);
+
+  cout << ls;
 }

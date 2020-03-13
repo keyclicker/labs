@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Container.hpp"
 #include <initializer_list>
+#include <iostream>
 
 template <typename T>
 class Vector : public DynamicContainer<T> {
@@ -28,7 +30,7 @@ private:
 public:
   class iterator;
 
-  Vector() : sz(0), cap(0) {};
+  Vector() : ptr(new T[0]), sz(0), cap(0) {};
   explicit Vector(size_t cap) : sz(0), cap(cap) {
     ptr = new T[cap];
   }
@@ -46,7 +48,7 @@ public:
     copy(ptr, val.ptr, sz);
   }
 
-  Vector<T> operator=(const Vector<T> &val) {
+  Vector<T> &operator=(const Vector<T> &val) {
     delete[] ptr;
     sz = val.sz;
     cap = val.cap;
@@ -155,14 +157,20 @@ public:
     delete[] ptr;
     sz = 0;
     cap = 0;
+    ptr = new T[0];
   }
 
   friend std::ostream& operator<<(std::ostream& out, const Vector &val) {
-    out << '{';
-    for (size_t i = 0; i < val.sz-1; ++i) {
-      out << val.ptr[i] << ", ";
+    if (val.sz) {
+      out << '{';
+      for (size_t i = 0; i < val.sz-1; ++i) {
+        out << val.ptr[i] << ", ";
+      }
+      out << val.ptr[val.sz-1] << "}";
     }
-    out << val.ptr[val.sz-1] << "}";
+    else {
+      out << "{}";
+    }
     return out;
   }
 };

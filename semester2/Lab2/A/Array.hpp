@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Container.hpp"
 #include <initializer_list>
+#include <iostream>
 
 template <typename T, size_t sz>
 class Array : public StaticContainer<T> {

@@ -1,8 +1,8 @@
 #pragma once
 
-#pragma once
 #include "Container.hpp"
 #include <initializer_list>
+#include <iostream>
 
 template <typename T>
 class List : public DynamicContainer<T> {
@@ -27,22 +27,31 @@ public:
 
   T &front() override;
   T &back() override;
-  T &operator[](std::size_t index) override {}
+  T &operator[](std::size_t index) override;
 
-  const T &front() const override {}
-  const T &back() const override {}
-  const T &operator[](std::size_t index) const override {}
+  const T &front() const override;
+  const T &back() const override;
+  const T &operator[](std::size_t index) const override;
 
-  std::size_t size() const override {}
+  std::size_t size() const override;
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
-  void insert(std::size_t index, const T &val) override {}
+  void insert(std::size_t index, const T &val) override;
   void assign() override {}
-  void clear() override {}
+  void clear() override;
 
-  iterator begin();
-  iterator end();
+  iterator begin() const;
+  iterator end() const;
+
+  friend std::ostream& operator<<(std::ostream& out, const List &val) {
+    out << '{';
+    for (auto i = val.begin(); i != val.end() - 1; ++i) {
+      out << *i << ", ";
+    }
+    out << val.back() << "}";
+    return out;
+  }
 };
 
 template<typename T>
@@ -149,11 +158,56 @@ T &List<T>::back() {
 }
 
 template<typename T>
-typename List<T>::iterator List<T>::begin() {
+const T &List<T>::front() const {
+  return begin_->value;
+}
+
+template<typename T>
+const T &List<T>::back() const {
+  return end_->prev->value;
+}
+
+template<typename T>
+typename List<T>::iterator List<T>::begin() const {
   return iterator(begin_, this);
 }
 
 template<typename T>
-typename List<T>::iterator List<T>::end() {
+typename List<T>::iterator List<T>::end() const {
   return iterator(end_, this);
+}
+
+template<typename T>
+T &List<T>::operator[](std::size_t index) {
+  auto a = begin_;
+  for (int i = 0; i < index; ++i) a = a->next;
+  return a->value;
+}
+
+template<typename T>
+const T &List<T>::operator[](std::size_t index) const {
+  auto a = begin_;
+  for (int i = 0; i < index; ++i) a = a->next;
+  return a->value;
+}
+
+template<typename T>
+void List<T>::insert(std::size_t index, const T &val) { //todo fix insert
+  auto a = begin_;
+  for (int i = 0; i < index; ++i) a = a->next;
+  a->next = new List<T>::Node(val, a, a->next);
+  a->next->next->prev = a->next;
+}
+
+template<typename T>
+std::size_t List<T>::size() const {
+  return sz;
+}
+
+template<typename T>
+void List<T>::clear() {
+  for (auto i = begin_; i != end_; i = i->next) {
+    delete i;
+  }
+  delete end_;
 }

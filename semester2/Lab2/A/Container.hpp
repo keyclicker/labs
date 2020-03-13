@@ -1,7 +1,7 @@
 #pragma once
+#include <cstddef>
 
-#include <iostream>
-
+//TODO iterator insert
 
 template <typename T>
 class StaticContainer {
