@@ -1,20 +1,26 @@
 #include "Vector.hpp"
 #include "Array.hpp"
+#include "List.hpp"
 #include <iostream>
 using namespace std;
 
 int main() {
-  Vector<int> vc1 = {1, 2, 3, 4, 5};
+  List<int> ls;
 
-  auto vc2 = vc1;
+  ls.push_back(1);
+  ls.push_back(2);
+  ls.push_back(3);
+  ls.push_back(4);
 
-  Vector<int> vc3;
+//  ls.push_front(1);
+//  ls.push_front(2);
+//  ls.push_front(3);
+//  ls.push_front(4);
 
-  vc3 = vc1;
+  auto a = ls.begin();;
+  cout << *((a+1)-1) << endl;
 
-  cout << vc1.size() << ' ' << vc2.size() << endl;
-
-  cout << vc1 << endl;
-  cout << vc2 << endl;
-  cout << vc3 << endl;
+  for (auto a : ls) {
+    cout << a << ' ';
+  }
 }

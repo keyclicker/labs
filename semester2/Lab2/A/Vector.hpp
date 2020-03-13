@@ -5,8 +5,8 @@
 template <typename T>
 class Vector : public DynamicContainer<T> {
 private:
-  T *ptr;
   size_t sz, cap;
+  T *ptr;
 
   static void copy(T *p1, T const *p2, size_t size) {
     for (int i = 0; i < size; ++i)
@@ -164,10 +164,6 @@ public:
     }
     out << val.ptr[val.sz-1] << "}";
     return out;
-  }
-
-  virtual ~Vector() {
-    delete[] ptr;
   }
 };
 

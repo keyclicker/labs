@@ -3,4 +3,4 @@ project(A)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(A main.cpp Container.hpp Vector.hpp Array.hpp)
+add_executable(A main.cpp Container.hpp Vector.hpp Array.hpp List.hpp)
