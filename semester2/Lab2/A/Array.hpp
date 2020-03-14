@@ -3,6 +3,7 @@
 #include "Container.hpp"
 #include <initializer_list>
 #include <iostream>
+#include <stdexcept>
 
 template <typename T, size_t sz>
 class Array : public StaticContainer<T> {
@@ -24,10 +25,12 @@ public:
   T &front() override;
   T &back() override;
   T &operator[](size_t index) override;
+  T &at(size_t index) override;
 
   const T &front() const override;
   const T &back() const override;
   const T &operator[](size_t index) const  override;
+  const T &at(size_t index) const override;
 
   size_t size() const override;
 
@@ -46,7 +49,7 @@ public:
 
 template<typename T, size_t sz>
 class Array<T, sz>::iterator {
-  Array<T, sz> *vec; //todo check
+  Array<T, sz> *vec;
   size_t index;
 
 public:
@@ -75,7 +78,7 @@ public:
   const T *operator->() const {
     return vec->arr+index;
   }
-  T &operator*() { //todo fix
+  T &operator*() {
     return vec->arr[index];
   };
 
@@ -190,6 +193,20 @@ template<typename T, size_t sz>
 void Array<T, sz>::copy(T *p1, T const *p2, size_t size) {
   for (int i = 0; i < size; ++i)
     p1[i] = p2[i];
+}
+
+template<typename T, size_t sz>
+T &Array<T, sz>::at(size_t index) {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
+}
+
+template<typename T, size_t sz>
+const T &Array<T, sz>::at(size_t index) const {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
 }
 
 

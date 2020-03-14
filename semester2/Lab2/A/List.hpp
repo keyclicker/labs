@@ -3,6 +3,7 @@
 #include "Container.hpp"
 #include <initializer_list>
 #include <iostream>
+#include <stdexcept>
 
 template <typename T>
 class List : public DynamicContainer<T> {
@@ -33,10 +34,12 @@ public:
   T &front() override;
   T &back() override;
   T &operator[](size_t index) override;
+  T &at(size_t index) override;
 
   const T &front() const override;
   const T &back() const override;
   const T &operator[](size_t index) const override;
+  const T &at(size_t index) const override;
 
   size_t size() const override;
 
@@ -202,11 +205,16 @@ const T &List<T>::operator[](size_t index) const {
 }
 
 template<typename T>
-void List<T>::insert(size_t index, const T &val) { //todo fix insert
-  auto a = begin_;
-  for (int i = 0; i < index; ++i) a = a->next;
-  a->next = new List<T>::Node(val, a, a->next);
-  a->next->next->prev = a->next;
+void List<T>::insert(size_t index, const T &val) {
+  if (!index) {
+    begin_ = new Node(val, nullptr, begin_);
+  }
+  else {
+    auto a = begin_;
+    for (int i = 0; i < index-1; ++i) a = a->next;
+    a->next = new List<T>::Node(val, a, a->next);
+    a->next->next->prev = a->next;
+  }
   ++sz;
 }
 
@@ -252,4 +260,18 @@ List<T> &List<T>::operator=(const List &ls) {
     push_back(i->value);
   }
   return *this;
+}
+
+template<typename T>
+T &List<T>::at(size_t index) {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
+}
+
+template<typename T>
+const T &List<T>::at(size_t index) const {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
 }

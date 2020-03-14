@@ -3,6 +3,7 @@
 #include "Container.hpp"
 #include <initializer_list>
 #include <iostream>
+#include <stdexcept>
 
 template<typename T>
 class Vector : public DynamicContainer<T> {
@@ -31,10 +32,12 @@ public:
   T &front() override;
   T &back() override;
   T &operator[](size_t index) override;
+  T &at(size_t index) override;
 
   const T &front() const override;
   const T &back() const override;
   const T &operator[](size_t index) const override;
+  const T &at(size_t index) const override;
 
   size_t size() const override;
 
@@ -51,16 +54,14 @@ public:
   void reserve(size_t new_cap);
 
   friend std::ostream &operator<<(std::ostream &out, const Vector &val) {
-    if (val.sz)
-    {
+    if (val.sz) {
       out << '{';
-      for (size_t i = 0; i < val.sz - 1; ++i)
-      {
+      for (size_t i = 0; i < val.sz - 1; ++i) {
         out << val.ptr[i] << ", ";
       }
       out << val.ptr[val.sz - 1] << "}";
-    } else
-    {
+    }
+    else {
       out << "{}";
     }
     return out;
@@ -69,7 +70,7 @@ public:
 
 template<typename T>
 class Vector<T>::iterator {
-  const Vector<T> *vec; //todo check
+  const Vector<T> *vec;
   size_t index;
 public:
   iterator() : index(0) {};
@@ -170,8 +171,7 @@ Vector<T> &Vector<T>::operator=(const Vector<T> &val) {
 
 template<typename T>
 void Vector<T>::reserve(size_t new_cap) {
-  if (new_cap > cap)
-  {
+  if (new_cap > cap) {
     cap = new_cap;
     realloc();
   }
@@ -180,16 +180,14 @@ void Vector<T>::reserve(size_t new_cap) {
 template<typename T>
 void Vector<T>::resize(size_t size) {
   sz = size;
-  if (size > cap)
-  {
+  if (size > cap) {
     realloc(ptr, cap, sz);
   }
 }
 
 template<typename T>
 void Vector<T>::push_back(const T &val) {
-  if (sz + 1 > cap)
-  {
+  if (sz + 1 > cap) {
     cap = (sz + 1) * 2;
     realloc();
   }
@@ -199,8 +197,7 @@ void Vector<T>::push_back(const T &val) {
 
 template<typename T>
 void Vector<T>::push_front(const T &val) { //todo optimization
-  if (sz + 1 > cap)
-  {
+  if (sz + 1 > cap) {
     cap = (sz + 1) * 2;
   }
 
@@ -265,8 +262,7 @@ size_t Vector<T>::capacity() const {
 
 template<typename T>
 void Vector<T>::insert(size_t index, const T &val) { //todo optimization
-  if (sz + 1 > cap)
-  {
+  if (sz + 1 > cap) {
     cap = (sz + 1) * 2;
   }
 
@@ -298,8 +294,7 @@ template<typename T>
 Vector<T>::Vector(const std::initializer_list<T> &ls)
         : sz(ls.size()), cap(ls.size()), ptr(new T[ls.size()]) {
   int i = 0;
-  for (auto a : ls)
-  {
+  for (auto a : ls) {
     ptr[i++] = a;
   }
 }
@@ -327,6 +322,20 @@ template<typename T>
 void Vector<T>::copy(T *p1, T const *p2, size_t size) {
   for (int i = 0; i < size; ++i)
     p1[i] = p2[i];
+}
+
+template<typename T>
+T &Vector<T>::at(size_t index) {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
+}
+
+template<typename T>
+const T &Vector<T>::at(size_t index) const {
+  if (index >= sz) throw std::out_of_range ("index >= size, index = "
+    + std::to_string(index) + " size = " + std::to_string(sz));
+  return operator[](index);
 }
 
 

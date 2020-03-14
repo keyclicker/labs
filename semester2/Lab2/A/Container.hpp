@@ -12,10 +12,12 @@ public:
   virtual T &front() = 0;
   virtual T &back() = 0;
   virtual T &operator[](size_t index) = 0;
+  virtual T &at(size_t index) = 0;
 
   virtual const T &front() const = 0;
   virtual const T &back() const = 0;
   virtual const T &operator[](size_t index) const  = 0;
+  virtual const T &at(size_t index) const = 0;
 
   virtual size_t size() const = 0;
 };
