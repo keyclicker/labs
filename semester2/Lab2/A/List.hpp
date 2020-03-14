@@ -21,28 +21,28 @@ private:
   Node *begin_ = end_;
 
 public:
+  class iterator;
+  
   List() = default;
   List(std::initializer_list<T> list);
   List(const List &ls);
   List<T> &operator=(const List &ls);
 
-  ~List();
-
-  class iterator;
+  virtual ~List();
 
   T &front() override;
   T &back() override;
-  T &operator[](std::size_t index) override;
+  T &operator[](size_t index) override;
 
   const T &front() const override;
   const T &back() const override;
-  const T &operator[](std::size_t index) const override;
+  const T &operator[](size_t index) const override;
 
-  std::size_t size() const override;
+  size_t size() const override;
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
-  void insert(std::size_t index, const T &val) override;
+  void insert(size_t index, const T &val) override;
   void assign() override {}
   void clear() override;
 
@@ -188,21 +188,21 @@ typename List<T>::iterator List<T>::end() const {
 }
 
 template<typename T>
-T &List<T>::operator[](std::size_t index) {
+T &List<T>::operator[](size_t index) {
   auto a = begin_;
   for (int i = 0; i < index; ++i) a = a->next;
   return a->value;
 }
 
 template<typename T>
-const T &List<T>::operator[](std::size_t index) const {
+const T &List<T>::operator[](size_t index) const {
   auto a = begin_;
   for (int i = 0; i < index; ++i) a = a->next;
   return a->value;
 }
 
 template<typename T>
-void List<T>::insert(std::size_t index, const T &val) { //todo fix insert
+void List<T>::insert(size_t index, const T &val) { //todo fix insert
   auto a = begin_;
   for (int i = 0; i < index; ++i) a = a->next;
   a->next = new List<T>::Node(val, a, a->next);
@@ -211,7 +211,7 @@ void List<T>::insert(std::size_t index, const T &val) { //todo fix insert
 }
 
 template<typename T>
-std::size_t List<T>::size() const {
+size_t List<T>::size() const {
   return sz;
 }
 

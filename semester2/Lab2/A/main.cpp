@@ -6,6 +6,8 @@ using namespace std;
 
 int main() {
   List<int> ls = {1, 2, 3, 4};
+  Vector<int> ls1 = {1, 2, 3, 4};
+  Array<int, 4> ls2 = {1, 2, 3, 4};
 
   auto l = ls;
 

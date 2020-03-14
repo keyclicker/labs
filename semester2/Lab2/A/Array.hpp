@@ -9,10 +9,7 @@ class Array : public StaticContainer<T> {
 private:
   T arr[sz];
 
-  static void copy(T *p1, T const *p2, size_t size) {
-    for (int i = 0; i < size; ++i)
-      p1[i] = p2[i];
-  }
+  static void copy(T *p1, T const *p2, size_t size);
 
 public:
   class iterator;
@@ -20,56 +17,22 @@ public:
   Array() = default;
   virtual ~Array() = default;
 
-  Array(const std::initializer_list<T> &ls) {
-    int i = 0;
-    for (auto a : ls) {
-      arr[i++] = a;
-    }
-  };
+  Array(const std::initializer_list<T> &ls);
+  Array(const Array<T, sz> &val);
+  Array<T, sz> &operator=(const Array<T, sz> &val);
 
-  Array(const Array<T, sz> &val) {
-    copy(arr, val.arr, sz);
-  }
+  T &front() override;
+  T &back() override;
+  T &operator[](size_t index) override;
 
-  Array<T, sz> &operator=(const Array<T, sz> &val) {
-    copy(arr, val.arr, sz);
-    return *this;
-  }
+  const T &front() const override;
+  const T &back() const override;
+  const T &operator[](size_t index) const  override;
 
-  T &operator[](size_t index) override {
-    return arr[index];
-  };
+  size_t size() const override;
 
-  const T &operator[](size_t index) const override {
-    return arr[index];
-  };
-
-  iterator begin() {
-    return iterator(0, this);
-  }
-  iterator end() {
-    return iterator(sz, this);
-  }
-
-  T &front() override {
-    return arr[0];
-  };
-
-  T &back() override {
-    return arr[sz-1];
-  };
-
-  const T &front() const override {
-    return arr[0];
-  };
-
-  const T &back() const override {
-    return arr[sz-1];
-  };
-
-  size_t size() const override {
-    return sz;
-  }
+  iterator begin();
+  iterator end();
 
   friend std::ostream& operator<<(std::ostream& out, const Array<T, sz> &val) {
     out << '{';
@@ -158,6 +121,76 @@ public:
     return vec->arr[index];
   }
 };
+
+template<typename T, size_t sz>
+T &Array<T, sz>::operator[](size_t index) {
+return arr[index];
+};
+
+template<typename T, size_t sz>
+const T &Array<T, sz>::operator[](size_t index) const {
+return arr[index];
+};
+
+template<typename T, size_t sz>
+typename Array<T, sz>::iterator Array<T, sz>::begin() {
+  return iterator(0, this);
+}
+
+template<typename T, size_t sz>
+typename Array<T, sz>::iterator Array<T, sz>::end() {
+  return iterator(sz, this);
+}
+
+template<typename T, size_t sz>
+T &Array<T, sz>::front() {
+return arr[0];
+};
+
+template<typename T, size_t sz>
+T &Array<T, sz>::back() {
+return arr[sz-1];
+};
+
+template<typename T, size_t sz>
+const T &Array<T, sz>::front() const {
+return arr[0];
+};
+
+template<typename T, size_t sz>
+const T &Array<T, sz>::back() const {
+return arr[sz-1];
+};
+
+template<typename T, size_t sz>
+size_t Array<T, sz>::size() const {
+return sz;
+}
+
+template<typename T, size_t sz>
+Array<T, sz>::Array(const std::initializer_list<T> &ls) {
+  int i = 0;
+  for (auto a : ls) {
+    arr[i++] = a;
+  }
+}
+
+template<typename T, size_t sz>
+Array<T, sz> &Array<T, sz>::operator=(const Array<T, sz> &val) {
+  copy(arr, val.arr, sz);
+  return *this;
+}
+
+template<typename T, size_t sz>
+Array<T, sz>::Array(const Array<T, sz> &val) {
+  copy(arr, val.arr, sz);
+}
+
+template<typename T, size_t sz>
+void Array<T, sz>::copy(T *p1, T const *p2, size_t size) {
+  for (int i = 0; i < size; ++i)
+    p1[i] = p2[i];
+}
 
 
 
