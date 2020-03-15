@@ -18,14 +18,12 @@ private:
 public:
   class iterator;
 
-  Vector() : ptr(new T[0]), sz(0), cap(0) {};
-  explicit Vector(size_t cap) : sz(0), cap(cap) {
-    ptr = new T[cap];
-  }
-  Vector(const std::initializer_list<T> &ls);
-
   Vector(const Vector<T> &val);
   Vector<T> &operator=(const Vector<T> &val);
+
+  Vector() : ptr(new T[0]), sz(0), cap(0) {};
+  explicit Vector(size_t size, const T &value = T());
+  Vector(const std::initializer_list<T> &ls);
 
   virtual ~Vector();
 
@@ -40,11 +38,13 @@ public:
   const T &at(size_t index) const override;
 
   size_t size() const override;
+  void print() const override;
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
   void insert(size_t index, const T &val) override;
   void assign() override {}
+  void erase(size_t index) override;
   void clear() override;
 
   size_t capacity() const;
@@ -337,6 +337,28 @@ const T &Vector<T>::at(size_t index) const {
     + std::to_string(index) + " size = " + std::to_string(sz));
   return operator[](index);
 }
+
+template<typename T>
+Vector<T>::Vector(size_t size, const T &value) : sz(size), cap(size) {
+  ptr = new T[cap];
+  for (int i = 0; i < sz; ++i) {
+    ptr[i] = value;
+  }
+}
+
+template<typename T>
+void Vector<T>::print() const {
+  std::cout << *this << std::endl;
+}
+
+template<typename T>
+void Vector<T>::erase(size_t index) {
+  sz--;
+  for (int i = index; i < sz; ++i) {
+    ptr[i] = ptr[i+1];
+  }
+}
+
 
 
 

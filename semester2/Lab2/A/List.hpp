@@ -25,9 +25,11 @@ public:
   class iterator;
   
   List() = default;
-  List(std::initializer_list<T> list);
   List(const List &ls);
   List<T> &operator=(const List &ls);
+
+  List(std::initializer_list<T> list);
+  explicit List(size_t size, const T &value = T());
 
   virtual ~List();
 
@@ -42,11 +44,13 @@ public:
   const T &at(size_t index) const override;
 
   size_t size() const override;
+  void print() const override;
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
   void insert(size_t index, const T &val) override;
   void assign() override {}
+  void erase(size_t index) override;
   void clear() override;
 
   iterator begin() const;
@@ -274,4 +278,25 @@ const T &List<T>::at(size_t index) const {
   if (index >= sz) throw std::out_of_range ("index >= size, index = "
     + std::to_string(index) + " size = " + std::to_string(sz));
   return operator[](index);
+}
+
+template<typename T>
+List<T>::List(size_t size, const T &value) {
+  for (int i = 0; i < size; ++i) {
+    push_back(value);
+  }
+}
+
+template<typename T>
+void List<T>::print() const {
+  std::cout << *this << std::endl;
+}
+
+template<typename T>
+void List<T>::erase(size_t index) {
+  auto i = begin_;
+  for (int j = 0; j < index; ++j) i = i->next;
+  i->prev->next = i->next;
+  i->next->prev = i->prev;
+  delete i;
 }

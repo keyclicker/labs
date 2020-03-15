@@ -33,6 +33,7 @@ public:
   const T &at(size_t index) const override;
 
   size_t size() const override;
+  void print() const override;
 
   iterator begin();
   iterator end();
@@ -208,6 +209,12 @@ const T &Array<T, sz>::at(size_t index) const {
     + std::to_string(index) + " size = " + std::to_string(sz));
   return operator[](index);
 }
+
+template<typename T, size_t sz>
+void Array<T, sz>::print() const {
+  std::cout << *this << std::endl;
+}
+
 
 
 
