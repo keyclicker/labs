@@ -298,8 +298,13 @@ void List<T>::print() const {
 template<typename T>
 void List<T>::erase(size_t index) {
   auto i = begin_;
-  for (int j = 0; j < index; ++j) i = i->next;
-  i->prev->next = i->next;
+  if (index) {
+    for (int j = 0; j < index; ++j) i = i->next;
+    i->prev->next = i->next;
+  }
+  else {
+    begin_ = begin_->next;
+  }
   i->next->prev = i->prev;
   delete i;
 }
