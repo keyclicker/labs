@@ -72,12 +72,14 @@ public:
 };
 
 template<typename T>
-class List<T>::iterator {
-  const List<T> *ls;
+class List<T>::iterator :
+        public std::iterator<std::bidirectional_iterator_tag, T> {
+
   Node *node;
+
 public:
   iterator() : node(new Node()) {};
-  explicit iterator(Node *node, const List<T> *ls) : node(node), ls(ls) {};
+  explicit iterator(Node *node) : node(node) {};
 
   iterator(const iterator &val) = default;
 
@@ -91,23 +93,23 @@ public:
   }
   iterator operator++(int) {
     node = node->next;
-    return iterator(node->prev, ls);
+    return iterator(node->prev);
   }
   iterator operator--(int) {
     node = node->prev;
-    return iterator(node->next, ls);
+    return iterator(node->next);
   }
   T *operator->() const {
     return &node->value;
   }
-  T &operator*() const{
+  T &operator*() const {
     return node->value;
   };
 
-  friend bool operator==(const iterator& it1, const iterator& it2) {
+  friend bool operator==(const iterator &it1, const iterator &it2) {
     return it1.node == it2.node;
   }
-  friend bool operator!=(const iterator& it1, const iterator& it2) {
+  friend bool operator!=(const iterator &it1, const iterator &it2) {
     return it1.node != it2.node;
   }
 
@@ -122,6 +124,7 @@ public:
     }
     return *this;
   }
+
   iterator &operator-=(size_t val) {
     if (val > 0) {
       for (int i = 0; i < val; ++i)
@@ -186,12 +189,12 @@ const T &List<T>::back() const {
 
 template<typename T>
 typename List<T>::iterator List<T>::begin() const {
-  return iterator(begin_, this);
+  return iterator(begin_);
 }
 
 template<typename T>
 typename List<T>::iterator List<T>::end() const {
-  return iterator(end_, this);
+  return iterator(end_);
 }
 
 template<typename T>

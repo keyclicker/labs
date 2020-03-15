@@ -4,11 +4,13 @@
 #include "Container.hpp"
 
 #include <map>
+#include <list>
 #include <string>
 #include <memory>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -92,7 +94,7 @@ void print() {
   cons[name]->print();
 }
 
-void list() {
+void ls() {
   for (auto a : cons) {
     cout << a.first << " : " << a.second->size() << " elements" << endl;
   }
@@ -134,7 +136,59 @@ void help() {
 }
 
 void demo() {
+  cout << "Creating Array<int, 5> A initialized with {1, 2, 3, 4, 5}" << endl;
+  Array<int, 5> A = {1, 2, 3, 4, 5};
+  cout << "Creating Vector<int> V initialized with {1, 2, 3, 4, 5}" << endl;
+  Vector<int> V = {1, 2, 3, 4, 5};
+  cout << "Creating List<int> L initialized with {1, 2, 3, 4, 5}" << endl;
+  List<int> L = {1, 2, 3, 4, 5};
+  
+  cout << "\nA.front() = " << A.front() << ", A.back() = " << A.back() <<
+                                            "A.size() = " << A.size() << endl;
+  cout << "V.front() = " << V.front() << ", V.back() = " << V.back() <<
+                                            ", V.size() = " << V.size() << endl;
+  cout << "L.front() = " << L.front() << ", L.back() = " << L.back() <<
+                                            ", L.size() = " << L.size() << endl;
+  
+  cout << "\nPrinting A with cout: " << A << endl;
+  cout << "Printing V with cout: " << V << endl;
+  cout << "Printing L with cout: " << L << endl;
+  cout << "\nIncrementing all A, V, L ellements in for range loop" << endl;
+  for (auto &a : A) ++a;
+  for (auto &a : L) ++a;
+  for (auto &a : V) ++a;
 
+  cout << "\nPrinting A with cout: " << A << endl;
+  cout << "Printing V with cout: " << V << endl;
+  cout << "Printing L with cout: " << L << endl;
+
+  cout << "\nPushing back 9 to V and L" << endl;
+  V.push_back(9);
+  L.push_back(9);
+  cout << "V = " << V << endl;
+  cout << "L = " << L << endl;
+
+  cout << "\nPushing front 8 to V and L" << endl;
+  V.push_front(8);
+  L.push_front(8);
+  cout << "V = " << V << endl;
+  cout << "L = " << L << endl;
+
+  cout << "\nInserting 7 to V and L (pos = 2)" << endl;
+  V.insert(2, 7);
+  L.insert(2, 7);
+  cout << "V = " << V << endl;
+  cout << "L = " << L << endl;
+
+  cout << "\nErasing element with index 1 in V and L" << endl;
+  V.erase(1);
+  L.erase(1);
+  cout << "V = " << V << endl;
+  cout << "L = " << L << endl;
+
+  cout << "\nSorting V with std::sort()" << endl;
+  std::sort(V.begin(), V.end());
+  cout << "V = " << V << endl;
 }
 
 int main() {
@@ -146,7 +200,7 @@ int main() {
     cin >> cmd;
 
     if (cmd == "create") create();
-    else if (cmd == "ls") list();
+    else if (cmd == "ls") ls();
     else if (cmd == "del") del();
     else if (cmd == "append") append();
     else if (cmd == "insert") insert();
@@ -158,5 +212,4 @@ int main() {
     else if (cmd == "help") help();
     else if (cmd == "demo") demo();
   }
-
 }

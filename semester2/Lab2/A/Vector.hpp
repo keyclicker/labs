@@ -69,7 +69,9 @@ public:
 };
 
 template<typename T>
-class Vector<T>::iterator {
+class Vector<T>::iterator :
+        public std::iterator<std::random_access_iterator_tag, T> {
+
   const Vector<T> *vec;
   size_t index;
 public:
@@ -111,25 +113,24 @@ public:
   friend bool operator<(const iterator &it1, const iterator &it2) {
     return it1.index < it2.index;
   }
-
   friend bool operator>(const iterator &it1, const iterator &it2) {
     return it1.index > it2.index;
   }
-
   friend bool operator<=(const iterator &it1, const iterator &it2) {
     return it1.index <= it2.index;
   }
-
   friend bool operator>=(const iterator &it1, const iterator &it2) {
     return it1.index >= it2.index;
   }
-
   friend bool operator==(const iterator &it1, const iterator &it2) {
     return it1.index == it2.index;
   }
-
   friend bool operator!=(const iterator &it1, const iterator &it2) {
     return it1.index != it2.index;
+  }
+
+  std::ptrdiff_t operator-(const iterator & val) const {
+    return index - val.index;
   }
 
   iterator &operator+=(size_t val) {
