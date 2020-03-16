@@ -49,11 +49,13 @@ public:
 };
 
 template<typename T, size_t sz>
-class Array<T, sz>::iterator {
+class Array<T, sz>::iterator :
+        public std::iterator<std::bidirectional_iterator_tag, T>{
+
+public:
   Array<T, sz> *vec;
   size_t index;
 
-public:
   iterator() : index(0) {};
   explicit iterator(size_t index, Array<T, sz> *vec) : index(index), vec(vec) {};
 
@@ -100,6 +102,10 @@ public:
   }
   friend bool operator!=(const iterator& it1, const iterator& it2) {
     return it1.index != it2.index;
+  }
+
+  std::ptrdiff_t operator-(const iterator & val) const {
+    return index - val.index;
   }
 
   iterator& operator+=(size_t val) {

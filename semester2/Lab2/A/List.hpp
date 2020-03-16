@@ -48,8 +48,10 @@ public:
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
+  void pop_front() override;
+  void pop_back() override;
   void insert(size_t index, const T &val) override;
-  void assign() override {}
+  void insert(iterator pos, const T &val);
   void erase(size_t index) override;
   void clear() override;
 
@@ -75,9 +77,9 @@ template<typename T>
 class List<T>::iterator :
         public std::iterator<std::bidirectional_iterator_tag, T> {
 
+public:
   Node *node;
 
-public:
   iterator() : node(new Node()) {};
   explicit iterator(Node *node) : node(node) {};
 
@@ -226,6 +228,18 @@ void List<T>::insert(size_t index, const T &val) {
 }
 
 template<typename T>
+void List<T>::insert(List<T>::iterator pos, const T &val) {
+  ++sz;
+  if (pos.node == begin_) {
+    begin_ = new Node(val, nullptr, begin_);
+  }
+  else {
+    pos.node = new Node(val, pos.node->prev, pos.node);
+    pos.node->prev->next = pos.node;
+  }
+}
+
+template<typename T>
 size_t List<T>::size() const {
   return sz;
 }
@@ -297,6 +311,7 @@ void List<T>::print() const {
 
 template<typename T>
 void List<T>::erase(size_t index) {
+  --sz;
   auto i = begin_;
   if (index) {
     for (int j = 0; j < index; ++j) i = i->next;
@@ -307,4 +322,19 @@ void List<T>::erase(size_t index) {
   }
   i->next->prev = i->prev;
   delete i;
+}
+
+template<typename T>
+void List<T>::pop_front() {
+  --sz;
+  begin_ = begin_->next;
+  delete begin_->prev;
+}
+
+template<typename T>
+void List<T>::pop_back() {
+  --sz;
+  end_->prev = end_->prev->prev;
+  delete end_->prev->next;
+  end_->prev->next = end_;
 }

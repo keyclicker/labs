@@ -20,7 +20,9 @@ template<typename T> Vector;
 ### List, Vector
 
 - **push_front()** - inserts an element to the beginning
-- **push_back()** - adds an element to the end 
+- **push_back()** - adds an element to the end
+- **pop_front()** - removes the first element
+- **pop_back()** - removes the last element
 - **insert()** - inserts element
 - **erase()** - erases elements
 - **clear()** - clears the contents 

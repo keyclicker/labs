@@ -4,7 +4,6 @@
 #include "Container.hpp"
 
 #include <map>
-#include <list>
 #include <string>
 #include <memory>
 #include <iostream>
@@ -189,6 +188,15 @@ void demo() {
   cout << "\nSorting V with std::sort()" << endl;
   std::sort(V.begin(), V.end());
   cout << "V = " << V << endl;
+
+  cout << "\nPoping front and back in V and L" << endl;
+  V.pop_back();
+  V.pop_front();
+  L.pop_back();
+  L.pop_front();
+
+  cout << "V = " << V << endl;
+  cout << "L = " << L << endl;
 }
 
 int main() {

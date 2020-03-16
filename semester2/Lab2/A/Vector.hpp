@@ -42,8 +42,10 @@ public:
 
   void push_front(const T &val) override;
   void push_back(const T &val) override;
+  void pop_front() override;
+  void pop_back() override;
   void insert(size_t index, const T &val) override;
-  void assign() override {}
+  void insert(iterator pos, const T &val);
   void erase(size_t index) override;
   void clear() override;
 
@@ -72,9 +74,10 @@ template<typename T>
 class Vector<T>::iterator :
         public std::iterator<std::random_access_iterator_tag, T> {
 
+public:
   const Vector<T> *vec;
   size_t index;
-public:
+
   iterator() : index(0) {};
 
   explicit iterator(size_t index, const Vector<T> *vec) : index(index),
@@ -278,6 +281,11 @@ void Vector<T>::insert(size_t index, const T &val) { //todo optimization
 }
 
 template<typename T>
+void Vector<T>::insert(Vector<T>::iterator pos, const T &val) {
+  insert(pos.index, val);
+}
+
+template<typename T>
 void Vector<T>::clear() {
   delete[] ptr;
   sz = 0;
@@ -354,10 +362,23 @@ void Vector<T>::print() const {
 
 template<typename T>
 void Vector<T>::erase(size_t index) {
-  sz--;
+  --sz;
   for (int i = index; i < sz; ++i) {
     ptr[i] = ptr[i+1];
   }
+}
+
+template<typename T>
+void Vector<T>::pop_back() {
+  --sz;
+  for (int i = 0; i < sz; ++i) {
+    ptr[i] = ptr[i+1];
+  }
+}
+
+template<typename T>
+void Vector<T>::pop_front() {
+  --sz;
 }
 
 
