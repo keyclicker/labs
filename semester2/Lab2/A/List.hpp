@@ -28,6 +28,9 @@ public:
   List(const List &ls);
   List<T> &operator=(const List &ls);
 
+  List(List &&ls);
+  List<T> &operator=(List &&ls);
+
   List(std::initializer_list<T> list);
   explicit List(size_t size, const T &value = T());
 
@@ -337,4 +340,19 @@ void List<T>::pop_back() {
   end_->prev = end_->prev->prev;
   delete end_->prev->next;
   end_->prev->next = end_;
+}
+
+template<typename T>
+List<T>::List(List &&ls) : sz(ls.sz), end_(ls.end_), begin_(ls.begin_) {
+  ls.begin_ = ls.end_ = new Node();
+  ls.sz = 0;
+}
+
+template<typename T>
+List<T> &List<T>::operator=(List &&ls) {
+  begin_ = ls.begin_;
+  end_ = ls.end_;
+  sz = ls.sz_;
+  ls.begin_ = ls.end_ = new Node();
+  ls.sz = 0;
 }

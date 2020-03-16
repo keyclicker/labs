@@ -18,9 +18,10 @@ public:
   Array() = default;
   virtual ~Array() = default;
 
-  Array(const std::initializer_list<T> &ls);
   Array(const Array<T, sz> &val);
   Array<T, sz> &operator=(const Array<T, sz> &val);
+
+  Array(const std::initializer_list<T> &ls);
 
   T &front() override;
   T &back() override;
@@ -220,9 +221,3 @@ template<typename T, size_t sz>
 void Array<T, sz>::print() const {
   std::cout << *this << std::endl;
 }
-
-
-
-
-
-

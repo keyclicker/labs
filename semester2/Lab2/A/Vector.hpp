@@ -21,6 +21,9 @@ public:
   Vector(const Vector<T> &val);
   Vector<T> &operator=(const Vector<T> &val);
 
+  Vector(Vector<T> &&val);
+  Vector<T> &operator=(Vector<T> &&val);
+
   Vector() : ptr(new T[0]), sz(0), cap(0) {};
   explicit Vector(size_t size, const T &value = T());
   Vector(const std::initializer_list<T> &ls);
@@ -381,6 +384,22 @@ void Vector<T>::pop_front() {
   --sz;
 }
 
+template<typename T>
+Vector<T>::Vector(Vector<T> &&val) : sz(val.sz), cap(val.cap), ptr(val.ptr) {
+  val.ptr = new T[0];
+  val.sz = 0;
+  val.cap = 0;
+}
+
+template<typename T>
+Vector<T> &Vector<T>::operator=(Vector<T> &&val) {
+  ptr = val.ptr;
+  cap = val.cap;
+  sz = val.sz;
+  val.ptr = new T[0];
+  val.sz = 0;
+  val.cap = 0;
+}
 
 
 
