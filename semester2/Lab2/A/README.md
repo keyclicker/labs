@@ -74,15 +74,13 @@ del <name>                         Delete list
 len <name>                         Get size of list
 print <name>                       Print list
 ls                                 List lists
-append <name> <values>             Append values
-insert <name> <index> <values>     Insert values
-remove <name> <index>              Remove element by index
-get <name> <index>                 Get element by index
-set <name> <index> <value>         Set element by index
+append <name> <IPs>                Append IPs
+insert <name> <index> <IPs>        Insert IPs
+remove <name> <index>              Remove IP by index
+get <name> <index>                 Get IP by index
+set <name> <index> <IP>            Set IP by index
 help                               Run help
 demo                               Run demo
-
-create <name> -<type>              Create list, <type> = {-list, -vector}
 ```
 
 # Demo mode
