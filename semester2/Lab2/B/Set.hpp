@@ -4,6 +4,7 @@
 
 template <typename T>
 class Set {
+private:
   List<T> list;
 
 public:
