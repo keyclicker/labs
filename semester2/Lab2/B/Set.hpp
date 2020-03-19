@@ -23,22 +23,29 @@ public:
     return *this;
   }
 
-  void begin() {
+  auto begin() const{
     return list.begin();
   }
-  void end() {
+
+  auto end() const{
     return list.begin();
+  }
+
+  size_t size() {
+    return list.size();
   }
 
   void insert(const T &val) {
     list.push_back(val);
   }
+
   void erase(const T &val) {
     for (auto i = list.begin(); i != list.end(); ++i) {
       if (*i == val) list.erase(i);
     }
   }
-  bool contains(const T &val) {
+
+  bool contains(const T &val) const {
     for (auto i = list.begin(); i != list.end(); ++i) {
       if (*i == val) return true;
     }
@@ -58,18 +65,18 @@ public:
     return *this;
   }
 
-  Set operator+(const Set &val) {
+  Set operator+(const Set &val) const {
     Set set = *this;
     set += val;
     return set;
   }
-  Set operator-(const Set &val) {
+  Set operator-(const Set &val) const {
     Set set = *this;
     set -= val;
     return set;
   }
 
-  Set operator^(const Set &val) {
+  Set operator^(const Set &val) const {
     Set set;
     for (auto i = list.begin(); i != list.end(); ++i) {
       for (auto j = val.list.begin(); j != val.list.end(); ++j) {

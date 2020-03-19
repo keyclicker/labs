@@ -80,14 +80,21 @@ public:
     delete[] arr;
   }
 
-  T *begin() {
+  auto begin() {
     return std::begin(arr);
   }
-  T *end() {
+  auto end() {
     return std::end(arr);
   }
 
-  size_t size() {
+  auto begin() const {
+    return std::cbegin(arr);
+  }
+  auto end() const {
+    return std::cend(arr);
+  }
+
+  size_t size() const {
     return size_;
   }
 
@@ -97,6 +104,9 @@ public:
   }
 
   T &operator[](const T &indx) {
+    return arr[indx];
+  }
+  const T &operator[](const T &indx) const {
     return arr[indx];
   }
 
