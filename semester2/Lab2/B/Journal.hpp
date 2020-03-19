@@ -110,10 +110,17 @@ public:
     return arr[indx];
   }
 
+  void printLast(size_t k) const {
+    if (k > size_) k = size_;
+    for (int i = size_ - k; i < size_; ++i) {
+      std::cout << '[' << i << "] " << arr[i] << (i == index ? "  <-" : "") << std::endl;
+    }
+  }
+
   friend std::ostream& operator<<(std::ostream& out, const Journal &val) {
     out << "Size: " << val.size_ << "  Pos: " << val.index << std::endl;
     for (int i = 0; i < val.size_; ++i) {
-      out << val.arr[i] << (i == val.index ? "  <-" : "") << std::endl;
+      out  << '[' << i << "] " << val.arr[i] << (i == val.index ? "  <-" : "") << std::endl;
     }
     return out;
   }

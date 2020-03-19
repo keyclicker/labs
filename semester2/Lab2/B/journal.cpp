@@ -40,6 +40,13 @@ void print() {
   cout << cons[name];
 }
 
+void plast() {
+  string name; 
+  int k;
+  cin >> name >> k;
+  cons[name].printLast(k);
+}
+
 void ls() {
   for (auto a : cons) {
     cout << a.first << " : " << a.second.size() << " messages" << endl;
@@ -63,6 +70,8 @@ void help() {
        "len <name>" << "Get size of journal" << endl;
   cout << setw(w) << left <<
        "print <name>" << "Print journal" << endl;
+  cout << setw(w) << left <<
+       "plast <name> <count>" << "Print last <count> enements" << endl;
   cout << setw(w) << left <<
        "push <name> <message>" << "Push message to journal" << endl;
   cout << setw(w) << left <<
@@ -109,6 +118,7 @@ int main() {
     else if (cmd == "push") push();
     else if (cmd == "len") length();
     else if (cmd == "print") print();
+    else if (cmd == "plast") plast();
     else if (cmd == "help") help();
     else if (cmd == "demo") demo();
   }

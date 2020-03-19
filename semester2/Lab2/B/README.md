@@ -6,6 +6,7 @@ create <name> <size>     Create journal
 del <name>               Delete journal
 len <name>               Get size of journal
 print <name>             Print journal
+plast <name> <count>     Print last <count> enements
 push <name> <message>    Push message to journal
 ls                       List journals
 help                     Run help
