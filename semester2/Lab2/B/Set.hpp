@@ -36,7 +36,8 @@ public:
   }
 
   void insert(const T &val) {
-    list.push_back(val);
+    if (!contains(val))
+      list.push_back(val);
   }
 
   void erase(const T &val) {
@@ -54,10 +55,12 @@ public:
 
   Set &operator+=(const Set &val) {
     for (auto a : val.list) {
-      list.push_back(a);
+      if (!contains(a))
+        list.push_back(a);
     }
     return *this;
   }
+
   Set &operator-=(const Set &val) {
     for (auto i = val.list.begin(); i != val.list.end(); ++i) {
       erase(*i);
@@ -70,19 +73,26 @@ public:
     set += val;
     return set;
   }
+
   Set operator-(const Set &val) const {
     Set set = *this;
     set -= val;
     return set;
   }
 
-  Set operator^(const Set &val) const {
+  Set operator|(const Set &val) const {
     Set set;
     for (auto i = list.begin(); i != list.end(); ++i) {
       for (auto j = val.list.begin(); j != val.list.end(); ++j) {
         if (*i == *j) set.insert(*i);
       }
     }
+    return set;
+  }
+
+  Set operator^(const Set &val) const {
+    Set set;
+    set = (*this - val) + (val - *this);
     return set;
   }
 

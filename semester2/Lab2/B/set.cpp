@@ -69,10 +69,23 @@ void sub() {
   cons[c] = cons[a] - cons[b];
 }
 
-void intersection() {
+void XOR() {
   string a, b, c;
   cin >> c >> a >> b;
   cons[c] = cons[a] ^ cons[b];
+}
+
+void intersection() {
+  string a, b, c;
+  cin >> c >> a >> b;
+  cons[c] = cons[a] | cons[b];
+}
+
+void contains() {
+  string name;
+  int value;
+  cin >> name >> value;
+  cout << (cons[name].contains(value) ? "yes" : "no") << endl;
 }
 
 void help() {
@@ -89,11 +102,15 @@ void help() {
   cout << setw(w) << left <<
        "insert <name> <values>" << "Push message to set" << endl;
   cout << setw(w) << left <<
+       "contains <name> <value>" << "Check is value in set" << endl;
+  cout << setw(w) << left <<
        "add <c> <a> <b>" << "c = a + b" << endl;
   cout << setw(w) << left <<
        "sub <c> <a> <b>" << "c = a - b" << endl;
   cout << setw(w) << left <<
-       "int <c> <a> <b>" << "c = a ^ b (intersection)" << endl;
+       "int <c> <a> <b>" << "c = a | b (intersection)" << endl;
+  cout << setw(w) << left <<
+       "xor <c> <a> <b>" << "c = a ^ b (exclusive or)" << endl;
   cout << setw(w) << left <<
        "ls" << "List sets" << endl;
   cout << setw(w) << left <<
@@ -118,9 +135,11 @@ int main() {
     else if (cmd == "ls") ls();
     else if (cmd == "del") del();
     else if (cmd == "insert") insert();
+    else if (cmd == "contains") contains();
     else if (cmd == "add") add();
     else if (cmd == "sub") sub();
     else if (cmd == "int") intersection();
+    else if (cmd == "xor") XOR();
     else if (cmd == "len") length();
     else if (cmd == "print") print();
     else if (cmd == "help") help();
