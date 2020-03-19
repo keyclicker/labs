@@ -1,5 +1,5 @@
 # 16: Journal
-Choose target **16** in your idle to run interactive mode
+Choose target **16** in your IDLE to run interactive mode
 ### Interactive mode
 ```
 create <name> <size>     Create journal
@@ -16,7 +16,7 @@ demo                     Run demo
 - type **demo** in interactive mode to run demo
 
 # 20: Set
-Choose target **20** in your idle to run interactive mode
+Choose target **20** in your IDLE to run interactive mode
 ### Interactive mode
 ```
 create <name>            Create set
@@ -37,9 +37,9 @@ demo                     Run demo
 - type **demo** in interactive mode to run demo
 
 # 30: 1D Shooter
-1. Download and install SFML: https://www.sfml-dev.org/download.php
-2. If cmake can't find sfml with **find_package** automatically link SFML by hand
-3. Choose target **30** in your idle to run 1D Shooter
+1. Download and install **SFML**: https://www.sfml-dev.org/download.php
+2. If cmake can't find **SFML** with **find_package** automatically, link SFML by hand
+3. Choose target **30** in your IDLE to run 1D Shooter
 
 - **res** directory should be **../res** relative to executable
 
