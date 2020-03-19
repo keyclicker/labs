@@ -120,7 +120,36 @@ void help() {
 }
 
 void demo() {
+  cout << "Set<int> a = {1, 2, 3, 4, 5};" << endl;
+  Set<int> a = {1, 2, 3, 4, 5};
+  cout << "Set<int> b = {3, 4, 5, 6, 7};" << endl;
+  Set<int> b = {3, 4, 5, 6, 7};
+  cout << "Set<int> c;" << endl;
+  Set<int> c;
+  cout << "\nc = a + b;" << endl;
+  c = a + b;
+  cout << "c = " << c << endl;
 
+  cout << "c = a - b;" << endl;
+  c = a - b;
+  cout << "c = " << c << endl;
+
+  cout << "c = b - a;" << endl;
+  c = b - a;
+  cout << "c = " << c << endl;
+
+  cout << "c = a | b;" << endl;
+  c = a | b;
+  cout << "c = " << c << endl;
+
+  cout << "c = a ^ b;" << endl;
+  c = a ^ b;
+  cout << "c = " << c << endl;
+
+  cout << "\nc.contains(1) = " << c.contains(1) << endl;
+  cout << "c.contains(3) = " << c.contains(3) << endl;
+  cout << "c.contains(5) = " << c.contains(5) << endl;
+  cout << "c.contains(6) = " << c.contains(6) << endl;
 }
 
 int main() {
