@@ -42,12 +42,12 @@ void length() {
 void print() {
   string name;
   cin >> name;
-  cout << cons[name];
+  cout << cons[name] << endl;
 }
 
 void ls() {
   for (auto a : cons) {
-    cout << a.first << " : " << a.second.size() << " messages" << endl;
+    cout << a.first << " : " << a.second.size() << " elements" << endl;
   }
 }
 
