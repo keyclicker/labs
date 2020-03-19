@@ -41,3 +41,6 @@ demo                     Run demo
 3. Choose target **30** in your idle to run 1D Shooter
 
 - **res** directory should be **../res** relative to executable
+
+![screenshot](res/screenshot.png "screenshot")
+
