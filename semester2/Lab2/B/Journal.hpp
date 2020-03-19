@@ -27,23 +27,62 @@ public:
   }
 };
 
-template<typename T, size_t S>
+template<typename T>
 class Journal {
 private:
-  T arr[S];
-  size_t index = 0;
+  T *arr;
+  size_t index ;
+  size_t size_;
 
 public:
-  auto begin() {
+  explicit Journal(size_t size = 0) : size_(size), arr(new T[size]), index(0) {}
+
+  Journal (const Journal &rhs) :
+  size_(rhs.size_), index(rhs.index), arr(new T[rhs.size_]) {
+    for (int i = 0; i < size_; ++i) {
+      arr[i] = rhs.arr[i];
+    }
+  }
+  Journal &operator=(const Journal &rhs) {
+    size_ = rhs.size_, index = rhs.index, arr = new T[rhs.size_];
+    for (int i = 0; i < size_; ++i) {
+      arr[i] = rhs.arr[i];
+    }
+  }
+
+  Journal(Journal &&rhs) :
+        size_(rhs.size_), index(rhs.index), arr(rhs.arr) {
+    rhs.arr = nullptr;
+    rhs.size_ = 0;
+    rhs.index = 0;
+    return *this;
+  }
+  Journal &operator=(Journal &&rhs) {
+    size_ = rhs.size_, index = rhs.index, arr = rhs.arr;
+    rhs.arr = nullptr;
+    rhs.size_ = 0;
+    rhs.index = 0;
+    return *this;
+  }
+
+  ~Journal() {
+    delete[] arr;
+  }
+
+  T *begin() {
     return std::begin(arr);
   }
-  auto end() {
+  T *end() {
     return std::end(arr);
+  }
+
+  size_t size() {
+    return size_;
   }
 
   void push(const T &val) {
     arr[index] = val;
-    if (++index >= S) index = 0;
+    if (++index >= size_) index = 0;
   }
 
   T &operator[](const T &indx) {
@@ -51,8 +90,8 @@ public:
   }
 
   friend std::ostream& operator<<(std::ostream& out, const Journal &val) {
-    out << "Size: " << S << "  Pos: " << val.index << std::endl;
-    for (int i = 0; i < S; ++i) {
+    out << "Size: " << val.size_ << "  Pos: " << val.index << std::endl;
+    for (int i = 0; i < val.size_; ++i) {
       out << val.arr[i] << (i == val.index ? "  <-" : "") << std::endl;
     }
     return out;

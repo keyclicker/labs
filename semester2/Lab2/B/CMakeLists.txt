@@ -3,9 +3,8 @@ project(B)
 
 set(CMAKE_CXX_STANDARD 17)
 
-#add_executable(n16 Journal.hpp)
-#add_executable(n20 Set.hpp)
-
+add_executable(n16 Journal.hpp journal.cpp)
+add_executable(n20 Set.hpp set.cpp)
 
 add_executable(n30 shooter.cpp)
 
