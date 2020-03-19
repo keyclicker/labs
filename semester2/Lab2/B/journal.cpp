@@ -74,7 +74,25 @@ void help() {
 }
 
 void demo() {
+  cout << "Creating message journal sized 3" << endl;
+  Journal<Message> j(3);
 
+  cout << "Printing journal:" << endl;
+  cout << j << endl;
+
+  cout << "Pushing \"hello world\"" << endl;
+  j.push(Message("hello world"));
+  cout << j << endl;
+
+  cout << "Pushing \"foo\" and \"bar\"" << endl;
+  j.push(Message("foo"));
+  j.push(Message("bar"));
+  cout << j << endl;
+
+  cout << "Pushing \"lol\" and \"lel\"" << endl;
+  j.push(Message("lol"));
+  j.push(Message("lel"));
+  cout << j << endl;
 }
 
 int main() {

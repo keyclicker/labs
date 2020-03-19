@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <iomanip>
 
 using namespace std::chrono;
 
@@ -18,11 +19,21 @@ public:
           message(std::move(msg)), time(system_clock::now()) {}
 
   friend std::ostream& operator<<(std::ostream& out, const Message &val) {
-    time_t tt = system_clock::to_time_t(val.time);
-    auto t = std::localtime(&tt);
-    out  << t->tm_hour << ':' << t->tm_min << ':' << t->tm_sec << ' '
-         << t->tm_mday << '.' << t->tm_mon << '.' << 1900 + t->tm_year << " : ";
-    out << val.message;
+
+    if (val.message.empty()) {
+      out << "00:00:00 00.00.0000 : empty message";
+    }
+    else {
+      using namespace std;
+      time_t tt = system_clock::to_time_t(val.time);
+      auto t = std::localtime(&tt);
+      out  << setfill('0')
+           << setw(2) << t->tm_hour << ':' << setw(2) << t->tm_min << ':'
+           << setw(2) << t->tm_sec << ' ' << setw(2) << t->tm_mday << '.'
+           << setw(2) << t->tm_mon << '.' << 1900 + t->tm_year << " : ";
+      out << val.message;
+      out << setfill(' ');
+    }
     return out;
   }
 };
