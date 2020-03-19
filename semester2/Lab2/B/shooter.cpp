@@ -16,6 +16,13 @@ struct Object {
   int vel = rand()%2 * 2 -1;
 };
 
+struct Player {
+  uint16_t xp = 0;
+  int16_t pos = length/2;
+  int8_t dir = 1;
+  float hp = 100;
+};
+
 class Bullet {
 public:
   float pos;
@@ -24,7 +31,7 @@ public:
 };
 
 void reset(std::array<Object, length> &map,
-        std::vector<Bullet> &bullets, int16_t &pos, float &hp) {
+        std::vector<Bullet> &bullets, Player &pl) {
 
   map = std::array<Object, length>();
 
@@ -42,8 +49,14 @@ void reset(std::array<Object, length> &map,
   }
 
   bullets.clear();
-  pos = length / 2;
-  hp = 100;
+  pl.pos = length / 2;
+  pl.hp = 100;
+}
+
+void kill(std::array<Object, length> &map,
+           std::vector<Bullet> &bullets, Player &pl) {
+  reset(map, bullets, pl);
+  pl.xp = 0;
 }
 
 int main() {
@@ -60,6 +73,12 @@ int main() {
   hptext.setFillColor(sf::Color::White);
   hptext.setFont(font);
 
+  sf::Text xptext;
+  xptext.setPosition(900, 0);
+  xptext.setCharacterSize(120);
+  xptext.setFillColor(sf::Color::White);
+  xptext.setFont(font);
+
   sf::Text gameover;
   gameover.setPosition(60, 200);
   gameover.setCharacterSize(240);
@@ -71,14 +90,21 @@ int main() {
   sf::Texture tRevolver;
   tRevolver.loadFromFile("../res/revolver.png");
 
+  sf::Texture tEnemy;
+  tEnemy.loadFromFile("../res/enemy.png");
+
+  sf::Texture tMed;
+  tMed.loadFromFile("../res/med.png");
+
+  sf::Texture tSpikes;
+  tSpikes.loadFromFile("../res/spikes.png");
+
   //Map and player
   std::array<Object, length> map;
   std::vector<Bullet> bullets;
-  int16_t pos;
-  int8_t dir = 1;
-  float hp;
+  Player pl;
 
-  reset(map, bullets, pos, hp);
+  reset(map, bullets, pl);
 
 
   while (window.isOpen()) {
@@ -90,18 +116,18 @@ int main() {
           break;
         case sf::Event::KeyPressed:
           if (event.key.code == sf::Keyboard::Left) {
-            --pos;
-            dir = -1;
+            --pl.pos;
+            pl.dir = -1;
           }
           if (event.key.code == sf::Keyboard::Right) {
-            ++pos;
-            dir = 1;
+            ++pl.pos;
+            pl.dir = 1;
           }
           if (event.key.code == sf::Keyboard::Space) {
-            bullets.emplace_back(Bullet(pos, dir));
+            bullets.emplace_back(Bullet(pl.pos, pl.dir));
           }
-          if (event.key.code == sf::Keyboard::R || hp <= 0) {
-            reset(map, bullets, pos, hp);
+          if (event.key.code == sf::Keyboard::R || pl.hp <= 0) {
+            kill(map, bullets, pl);
           }
           break;
         default:
@@ -109,50 +135,69 @@ int main() {
       }
     }
 
-    hptext.setString(sf::String("HP  " + std::to_string((int)hp)));
+    //Lables
+    hptext.setString(sf::String("HP  " + std::to_string((int)pl.hp)));
+    xptext.setString(sf::String("XP  " + std::to_string((int)pl.xp)));
 
-    if (pos < 0) pos = length - 1;
-    else if (pos >= length) pos = 0;
+    //Map loop
+    if (pl.pos < 0) pl.pos = length - 1;
+    else if (pl.pos >= length) pl.pos = 0;
 
-    if (map[pos].type == Object::med) {
-      hp += 50;
-      map[pos].type = Object::space;
+    //Object interactions
+    if (map[pl.pos].type == Object::med) {
+      pl.hp += 50;
+      map[pl.pos].type = Object::space;
     }
-    if (map[pos].type == Object::trap) {
-      hp -= 1000 * timer.getElapsedTime().asSeconds();
+    if (map[pl.pos].type == Object::trap) {
+      pl.hp -= 1500 * timer.getElapsedTime().asSeconds();
     }
-    if (map[pos].type == Object::enemy) {
-      hp = 0;
+    if (map[pl.pos].type == Object::enemy) {
+      pl.hp = 0;
     }
 
+    //Win
     bool k = true;
     for (auto a : map) {
       if (a.type == Object::enemy) k = false;
     }
-    if (k) reset(map, bullets, pos, hp);
+    if (k) {
+      reset(map, bullets, pl);
+      ++pl.xp;
+    }
 
     window.clear();
 
-    if (hp <= 0) {
+    if (pl.hp <= 0) {
       window.draw(gameover);
     }
     else {
 
       //Draw boxes
       for (int i = 0; i < length; ++i) {
-        sf::RectangleShape shape(sf::Vector2f(width/length, width/length));
+        sf::RectangleShape shape(sf::Vector2f((float)width/length, (float)width/length));
 
         shape.setPosition(i * width / length, height/2);
 
-        if (map[i].type == Object::space) shape.setFillColor(sf::Color(30, 30, 30));
-        else if (map[i].type == Object::trap) shape.setFillColor(sf::Color(100, 100, 100));
-        else if (map[i].type == Object::med) shape.setFillColor(sf::Color::Magenta);
-        else if (map[i].type == Object::enemy) shape.setFillColor(sf::Color::Red);
+        if (i == pl.pos) {
+          shape.setFillColor(sf::Color::White);
 
-        if (i == pos) shape.setFillColor(sf::Color::White);
+          static sf::Clock dmgAnim;
+          static bool k = false;
+          if (dmgAnim.getElapsedTime().asSeconds() > 0.1) {
+            dmgAnim.restart();
+            k = !k;
+          }
+          if (map[pl.pos].type == Object::trap) {
+            if (k) shape.setFillColor(sf::Color::White);
+            else shape.setFillColor(sf::Color::Red);
+          }
+        }
+        else if (map[i].type == Object::space) shape.setFillColor(sf::Color(30, 30, 30));
+        else if (map[i].type == Object::trap) shape.setTexture(&tSpikes);
+        else if (map[i].type == Object::med) shape.setTexture(&tMed);
+        else if (map[i].type == Object::enemy) shape.setTexture(&tEnemy);
 
         window.draw(shape);
-
       }
 
       //Enemy moving
@@ -204,19 +249,19 @@ int main() {
         sf::Sprite sprite;
         sprite.setPosition(i * width / length, height/2);
 
-        if (i == pos)  {
+        if (i == pl.pos)  {
           sprite.setTexture(tRevolver);
           sprite.setScale(1.0/length, 1.0/length);
           sprite.move(-1200.0/length, 100.0/length);
-          if (dir > 0) {
+          if (pl.dir > 0) {
             sprite.scale(-1, 1);
             sprite.move(3600.0/length, 0);
           }
         }
         window.draw(sprite);
       }
-
       window.draw(hptext);
+      window.draw(xptext);
     }
     window.display();
     timer.restart();
