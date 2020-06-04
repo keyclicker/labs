@@ -1,8 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <iostream> //debug only
-
 namespace sorting {
 
   template <typename iterator>
@@ -19,8 +17,8 @@ namespace sorting {
   template <typename iterator>
   void quicksort(iterator beg, iterator end) {
     if (end > beg) {
-      auto pivot = *(beg + (end - beg) / 2);
-      iterator i = beg, j = end;
+      auto pivot = *(beg + (end - beg - 1) / 2);
+      iterator i = beg, j = end - 1;
 
       while (i <= j) {
         while (*i < pivot) ++i;
@@ -29,7 +27,7 @@ namespace sorting {
         if (i <= j) std::swap(*(i++), *(j--));
       };
 
-      quicksort(beg, j);
+      quicksort(beg, j + 1);
       quicksort(i, end);
     }
   }

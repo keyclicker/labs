@@ -71,17 +71,78 @@ std::ostream &operator<<(std::ostream &out, const vector<T> &v) {
 int main() {
   random_device rd;
   default_random_engine re(rd());
-  uniform_int_distribution<int> rand(0, 2000);
+  uniform_int_distribution<int> rand(-10, 10);
+  uniform_real_distribution<double> drand(-100, 100);
+
+  //------------------------- Work test ----------------------------------------
+
+  cout << "--------------- Work test ---------------" << endl;
+  cout << "100 sorting tests of random generated array (size = 1000):\n" << endl;
+
+  int s = 0, q = 0, c = 0, m = 0, stds = 0;
+
+  for (int j = 0; j < 100; ++j) {
+    std::vector<double> a;
+
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
+
+    sorting::selection(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) s++;
+
+    a.clear();
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
+
+    sorting::quicksort(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) q++;
+
+    a.clear();
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
+
+    sorting::merge(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) m++;
+
+    a.clear();
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
+
+    sorting::combined(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) c++;
+
+    a.clear();
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
+
+    sorting::std_sort(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) stds++;
+  }
+
+
+  cout << "Selection: " << setw(4) << s << "  tests passed" << endl;
+  cout << "Quicksort: " << setw(4) << q << "  tests passed" << endl;
+  cout << "    Merge: " << setw(4) << m << "  tests passed" << endl;
+  cout << " Combined: " << setw(4) << c << "  tests passed" << endl;
+  cout << "std::sort: " << setw(4) << stds << "  tests passed" << endl;
+
+
+
+  cout << endl;
+
+  //-------------------- Random array sorting demo ----------------------------------
 
   cout << fixed << setprecision(2);
 
-  std::vector<double> a;
+  cout << "------- Random array sorting demo --------" << endl;
+
+  std::vector<Point> a;
 
   for (int i = 0; i < 10; ++i) {
-    a.emplace_back(rand(re));
+    a.emplace_back(Point(rand(re), rand(re), rand(re)));
   }
 
-  cout << "A is random generated vector of points" << endl;
+  cout << "A is random generated vector of points\n" << endl;
   cout << "A = " << a;
   cout << endl;
 
@@ -119,21 +180,6 @@ int main() {
   cout << "sorting::std_sort(B);" << endl;
   cout << "B = " << b;
   cout << endl;
-
-
-  int c = 0;
-  for (int j = 0; j < 100; ++j) {
-    std::vector<double> a;
-
-    for (int i = 0; i < 100; ++i) {
-      a.emplace_back(rand(re));
-    }
-
-    sorting::merge(a.begin(), a.end());
-    if (std::is_sorted(a.begin(), a.end())) c++;
-  }
-  cout << c;
-
 
 
   return 0;
