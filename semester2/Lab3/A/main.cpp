@@ -129,7 +129,7 @@ int main() {
       a.emplace_back(rand(re));
     }
 
-    sorting::combined(a.begin(), a.end());
+    sorting::merge(a.begin(), a.end());
     if (std::is_sorted(a.begin(), a.end())) c++;
   }
   cout << c;

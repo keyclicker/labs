@@ -36,50 +36,23 @@ namespace sorting {
 
   template <typename iterator>
   void merge(iterator beg, iterator end) {
-    if (beg < end) {
-      iterator mid = beg + (end - beg - 1) / 2;
-
+    if (end - 1 > beg) {
+      auto mid = beg + (end - beg) / 2;
       merge(beg, mid);
-      merge(mid + 1, end);
+      merge(mid, end);
 
-      using T = typeof(*beg);
+      std::vector<typeof(*beg)> v;
+      v.reserve(end - beg);
 
-      int n1 = mid - beg + 1;
-      int n2 = end - mid - 1;
-
-      std::vector<T> L(n1), R(n2);
-
-      for (int i = 0; i < n1; i++)
-        L[i] = *(beg + i);
-      for (int j = 0; j < n2; j++)
-        R[j] = *(mid + j + 1);
-
-      int i = 0;
-      int j = 0;
-      iterator k = beg;
-      while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-          *k = L[i];
-          i++;
-        }
-        else {
-          *k = R[j];
-          j++;
-        }
-        k++;
+      iterator l = beg, r = mid;
+      while (l < mid && r < end) {
+        v.push_back((*l <= *r) ? *l++ : *r++);
       }
 
-      while (i < n1) {
-        *k = L[i];
-        i++;
-        k++;
-      }
+      v.insert(v.end(), l, mid);
+      v.insert(v.end(), r, end);
 
-      while (j < n2) {
-        *k = R[j];
-        j++;
-        k++;
-      }
+      std::move(v.begin(), v.end(), beg);
     }
   }
 
