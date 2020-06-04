@@ -119,14 +119,11 @@ int main() {
     if (std::is_sorted(a.begin(), a.end())) stds++;
   }
 
-
   cout << "Selection: " << setw(4) << s << "  tests passed" << endl;
   cout << "Quicksort: " << setw(4) << q << "  tests passed" << endl;
   cout << "    Merge: " << setw(4) << m << "  tests passed" << endl;
   cout << " Combined: " << setw(4) << c << "  tests passed" << endl;
   cout << "std::sort: " << setw(4) << stds << "  tests passed" << endl;
-
-
 
   cout << endl;
 
@@ -180,7 +177,6 @@ int main() {
   cout << "sorting::std_sort(B);" << endl;
   cout << "B = " << b;
   cout << endl;
-
 
   return 0;
 }

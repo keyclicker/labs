@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
+
 namespace sorting {
 
   template <typename iterator>
