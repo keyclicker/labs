@@ -99,7 +99,7 @@ void BaseDatabase<T>::addFromBinFile(const std::string &path) {
 template<typename T>
 void BaseDatabase<T>::print() const {
   for (size_t i = 0; i < dataList.size(); ++i) {
-    std::cout << "ID: " << i << std::endl;
+    std::cout << "№: " << i << std::endl;
     std::next(dataList.begin(), i)->print();
   }
 }

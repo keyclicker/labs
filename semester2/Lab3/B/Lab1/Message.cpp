@@ -29,6 +29,9 @@ void Message::loadFromTextFile(std::ifstream &in) {
 
   in.get();
   std::getline(in, text);
+
+  for (auto a : senderLogin)
+    senderID += a;
 }
 
 void Message::saveToBinFile(std::ofstream &out) const {
@@ -67,9 +70,13 @@ void Message::loadFromBinFile(std::ifstream &in) {
   in.read((char *) &len, sizeof(len));
   text.resize(len);
   in.read(text.data(), len);
+
+  for (auto a : senderLogin)
+    senderID += a;
 }
 
 void Message::print() const {
+  std::cout << "SenderID: " << senderID << endl;
   std::cout << senderLogin << " -> " << receiverLogin << std::endl;
   std::cout << int(time.hour) << ':' << int(time.min) << ':' <<
             int(time.sec) << ' ' << int(time.day) << '.' <<
@@ -129,7 +136,9 @@ Message Message:: Generate() {
     msg.text.append(Words[rand(0, Words.size()-1)] + " ");
   }
 
-  msg.senderID = rand(0, 1000);
+  msg.senderID = 0;
+  for (auto a : msg.senderLogin)
+    msg.senderID += a;
 
   return msg;
 }

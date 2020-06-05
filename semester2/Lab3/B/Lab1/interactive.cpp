@@ -2,6 +2,7 @@
 #include "Database.hpp"
 #include "Message.hpp"
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <ctime>
 #include <map>
@@ -31,6 +32,8 @@ void interactive() {
     else if (cmd == "del") del();
     else if (cmd == "gen") gen();
     else if (cmd == "search") search();
+    else if (cmd == "cprint") cprint();
+    else if (cmd == "sort") sort();
     else help();
   }
 }
@@ -81,9 +84,38 @@ void help () {
   cout << "  " << setw(10) << left << "demo" << "Run demo" << endl;
   cout << "  " << setw(10) << left << "exit" << "Exit from program" << endl;
 
+  cout << "\nNEW!:\n";
+  cout << "  " << setw(10) << left << "cprint" << "Compact print" << endl;
+  cout << "  " << setw(10) << left << "sort" << "Sort by" << endl;
+
+
   cout << "\ntype \"-command_name- help\" to get command info\n\n";
 
 }
+
+void cprint() {
+  string name;
+  cin >> name;
+  if (name == "help") {
+    cout << "cprint -database_name-" << endl;
+    return;
+  }
+  databases[name].printCompact();
+}
+
+void sort() {
+  string name, by;
+  cin >> name;
+  if (name == "help") {
+    cout << "sort -database_name- -by-\n by = {id, type}" << endl;
+    return;
+  }
+  cin >> by;
+  if (by == "id") databases[name].sortById();
+  else if (by == "type") databases[name].sortByType();
+}
+
+
 
 void send() {
   Message msg;

@@ -24,3 +24,8 @@ void del();
 void help();
 void demo();
 //exit();
+
+//NEW!!
+
+void cprint();
+void sort();
