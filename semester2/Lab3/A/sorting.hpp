@@ -52,7 +52,7 @@ namespace sorting {
       v.insert(v.end(), l, mid);
       v.insert(v.end(), r, end);
 
-      std::move(v.begin(), v.end(), beg);
+      move(v.begin(), v.end(), beg);
     }
   }
 

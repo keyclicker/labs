@@ -1,5 +1,7 @@
 #include "sorting.hpp"
-#include "Database.hpp"
+#include "Lab1/Database.hpp"
+#include "Lab1/Message.hpp"
+
 
 #include <algorithm>
 #include <iostream>
@@ -49,6 +51,13 @@ int main() {
     a.clear();
     for (int i = 0; i < 1000; ++i)
       a.emplace_back(drand(re));
+
+    sorting::std_stable_sort(a.begin(), a.end());
+    if (std::is_sorted(a.begin(), a.end())) s++;
+
+    a.clear();
+    for (int i = 0; i < 1000; ++i)
+      a.emplace_back(drand(re));
   }
 
   cout << "   Radix sort: " << setw(4) << r << "  tests passed" << endl;
@@ -57,18 +66,48 @@ int main() {
 
   cout << endl;
 
+  cout << "Creating message database DB1 with 10 random messages" << endl;
+  Database<Message> db1 = Database<Message>::Generate(10);
 
-  Database db;
-  db.generateRandom(10);
+  cout << "Printing DB1:" << endl;
+  db1.printCompact();
 
-  cout << db;
+  cout << "Sorting by ID with std::stable_sort ()" << endl;
+  db1.sortById();
 
-  db.sortById();
+  cout << "Printing DB:" << endl;
+  db1.printCompact();
 
-  cout << db;
+  cout << "Sorting by Type with Counting Sort" << endl;
+  db1.sortByType();
 
-  db.sortByType();
+  cout << "Printing DB:" << endl;
+  db1.printCompact();
 
-  cout << db;
+
+
+
+  cout << "Creating message database DB with 10 random messages" << endl;
+  Database<Message> db2 = Database<Message>::Generate(10);
+
+  cout << "Printing DB:" << endl;
+  db2.printCompact();
+
+  cout << "Sorting by ID with Radix Sort" << endl;
+  db2.sortById();
+
+  cout << "Printing DB:" << endl;
+  db2.printCompact();
+
+  cout << "Sorting by Type with Counting Sort" << endl;
+  db2.sortByType();
+
+  cout << "Printing DB:" << endl;
+  db2.printCompact();
+
+
+
+
+
 
 }

@@ -7,4 +7,4 @@ find_package(benchmark REQUIRED)
 add_executable(bench benchmark.cpp)
 target_link_libraries(bench benchmark::benchmark)
 
-add_executable(demo main.cpp)
+add_executable(demo main.cpp Lab1/interactive.cpp Lab1/Message.cpp Lab1/)
