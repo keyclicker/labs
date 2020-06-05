@@ -1,4 +1,5 @@
 #include "sorting.hpp"
+#include "Database.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -10,8 +11,8 @@ using namespace std;
 int main() {
   random_device rd;
   default_random_engine re(rd());
-  uniform_int_distribution<int> rand(1, 10);
-  uniform_int_distribution<int> drand(1, 1028);
+  uniform_int_distribution<int> rand(0, 10);
+  uniform_int_distribution<int> drand(0, 1028);
 
   //------------------------- Work test ----------------------------------------
 
@@ -55,4 +56,19 @@ int main() {
   cout << "    std::sort: " << setw(4) << s << "  tests passed" << endl;
 
   cout << endl;
+
+
+  Database db;
+  db.generateRandom(10);
+
+  cout << db;
+
+  db.sortById();
+
+  cout << db;
+
+  db.sortByType();
+
+  cout << db;
+
 }
