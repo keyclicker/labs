@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <array>
 #include <vector>
 #include <algorithm>
 #include <iostream> //debug only
@@ -20,38 +21,28 @@ namespace sorting {
     std::sort(beg, end);
   }
 
-  template <typename iterator>
-  void count_sort(iterator beg, iterator end, int exp) {
-    int output[end - beg]; // output array
-    int count[10] = {0};
-
-    // Store count of occurrences in count[]
-    for (iterator i = beg; i != end; ++i)
-      count[(*i / exp) % 10]++;
-
-    // Change count[i] so that count[i] now contains actual
-    //  position of this digit in output[]
-    for (int i = 1; i < 10; i++)
-      count[i] += count[i - 1];
-
-    // Build the output array
-    for (iterator i = end - 1; i >= beg; --i) {
-      output[count[ (*i/exp)%10 ] - 1] = *i;
-      count[ (*i/exp)%10 ]--;
-    }
-
-    // Copy the output array to arr[], so that arr[] now
-    // contains sorted numbers according to current digit
-    for (iterator i = beg; i != end; ++i)
-      *i = output[i - beg];
-  }
-
-  template <typename iterator>
+  template <typename iterator, typename T = typeof(*iterator())>
   void radix_sort(iterator beg, iterator end) {
-    int m = *max(beg, end);
+    T m = *max_element(beg, end);
 
-    for (int exp = 1; m/exp > 0; exp *= 10)
-      count_sort(beg, end, exp);
+    for (T exp = 1; m/exp > 0; exp *= 10) {
+      vector<T> output(end - beg);
+      array<size_t, 10> count = {0};
+
+      for (iterator i = beg; i != end; ++i)
+        count[(*i / exp) % 10]++;
+
+      for (int i = 1; i < 10; i++)
+        count[i] += count[i - 1];
+
+      for (iterator i = end - 1; i >= beg; --i) {
+        output[count[ (*i/exp)%10 ] - 1] = *i;
+        count[ (*i/exp)%10 ]--;
+      }
+
+      for (iterator i = beg; i != end; ++i)
+        *i = output[i - beg];
+    }
   }
 
   template <typename iterator, typename T = typeof(*iterator())>
