@@ -1,0 +1,70 @@
+2020-06-05 16:42:04
+Running /home/keyclicker/Documents/Repos/labs/semester2/Lab3/B/cmake-build-debug/bench
+Run on (8 X 3900 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 256 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.01, 0.86, 0.87
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+***WARNING*** Library was built as DEBUG. Timings may be affected.
+--------------------------------------------------------------
+Benchmark                    Time             CPU   Iterations
+--------------------------------------------------------------
+stdSort/2                0.613 us        0.614 us      1019278
+stdSort/4                0.708 us        0.709 us       992437
+stdSort/8                0.952 us        0.955 us       732346
+stdSort/16                1.63 us         1.63 us       429239
+stdSort/32                3.51 us         3.51 us       199108
+stdSort/64                7.43 us         7.43 us        94179
+stdSort/128               16.1 us         16.1 us        43017
+stdSort/256               35.0 us         35.0 us        19996
+stdSort/512               75.2 us         75.2 us         9313
+stdSort/1024               158 us          158 us         4416
+stdSort/2048               331 us          331 us         2119
+stdSort/4096               688 us          688 us         1018
+stdSort/8192              1454 us         1454 us          482
+stdSort/16384             3194 us         3194 us          226
+stdStableSort/2          0.736 us        0.737 us       874718
+stdStableSort/4          0.940 us        0.943 us       795940
+stdStableSort/8           1.15 us         1.16 us       597751
+stdStableSort/16          2.26 us         2.26 us       313400
+stdStableSort/32          4.41 us         4.42 us       157374
+stdStableSort/64          9.46 us         9.46 us        72566
+stdStableSort/128         19.1 us         19.1 us        36539
+stdStableSort/256         46.2 us         46.2 us        15826
+stdStableSort/512         96.0 us         96.0 us         7237
+stdStableSort/1024         217 us          217 us         3394
+stdStableSort/2048         427 us          427 us         1629
+stdStableSort/4096        1003 us         1003 us          698
+stdStableSort/8192        1950 us         1950 us          332
+stdStableSort/16384       4408 us         4408 us          170
+RadixSort/2               1.29 us         1.30 us       532156
+RadixSort/4               1.66 us         1.67 us       435969
+RadixSort/8               2.62 us         2.59 us       289704
+RadixSort/16              3.46 us         3.46 us       185933
+RadixSort/32              5.86 us         5.87 us       120530
+RadixSort/64              11.3 us         11.4 us        62186
+RadixSort/128             23.2 us         23.2 us        30152
+RadixSort/256             48.6 us         48.6 us        14435
+RadixSort/512             97.6 us         97.6 us         7134
+RadixSort/1024             194 us          194 us         3630
+RadixSort/2048             385 us          385 us         1811
+RadixSort/4096             775 us          775 us          911
+RadixSort/8192            1549 us         1549 us          450
+RadixSort/16384           3080 us         3080 us          227
+CountingSort/2            3.16 us         3.17 us       219459
+CountingSort/4            5.12 us         5.13 us       135972
+CountingSort/8            7.03 us         7.04 us        99265
+CountingSort/16           9.41 us         9.43 us        74034
+CountingSort/32           13.3 us         13.3 us        53475
+CountingSort/64           19.6 us         19.6 us        35281
+CountingSort/128          31.2 us         31.2 us        22300
+CountingSort/256          53.4 us         53.4 us        13136
+CountingSort/512          97.3 us         97.4 us         7231
+CountingSort/1024          187 us          187 us         3803
+CountingSort/2048          361 us          361 us         1945
+CountingSort/4096          718 us          718 us          978
+CountingSort/8192         1437 us         1437 us          488
+CountingSort/16384        2947 us         2947 us          239

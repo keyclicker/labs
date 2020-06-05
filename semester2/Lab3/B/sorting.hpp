@@ -21,6 +21,11 @@ namespace sorting {
     std::sort(beg, end);
   }
 
+  template <typename iterator>
+  void std_stable_sort(iterator beg, iterator end) {
+    std::stable_sort(beg, end);
+  }
+
   template <typename iterator, typename T = typeof(*iterator())>
   void radix_sort(iterator beg, iterator end) {
     T m = *max_element(beg, end);
