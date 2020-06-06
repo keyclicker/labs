@@ -1,0 +1,110 @@
+2020-06-06 22:59:17
+Running /home/keyclicker/Documents/Repos/labs/semester2/Lab3/С/cmake-build-debug/bench
+Run on (8 X 3900 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 256 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.22, 0.51, 0.81
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+***WARNING*** Library was built as DEBUG. Timings may be affected.
+---------------------------------------------------------------
+Benchmark                     Time             CPU   Iterations
+---------------------------------------------------------------
+AsyncQuickSort/2          0.794 us        0.795 us       909463
+AsyncQuickSort/4           1.04 us         1.04 us       694281
+AsyncQuickSort/8           1.69 us         1.67 us       427226
+AsyncQuickSort/16          3.07 us         3.07 us       215616
+AsyncQuickSort/32          6.28 us         6.27 us       112345
+AsyncQuickSort/64          13.1 us         13.1 us        53532
+AsyncQuickSort/128         27.7 us         27.7 us        25457
+AsyncQuickSort/256         57.7 us         57.5 us        11990
+AsyncQuickSort/512          120 us          120 us         5839
+AsyncQuickSort/1024         250 us          250 us         2785
+AsyncQuickSort/2048         522 us          521 us         1345
+AsyncQuickSort/4096        1458 us          162 us         3321
+AsyncQuickSort/8192        2959 us          206 us         3161
+AsyncQuickSort/16384       4485 us          342 us         1000
+AsyncQuickSort/32768       6067 us          574 us         1183
+AsyncQuickSort/65536       9188 us          881 us          792
+QuickSort/2               0.731 us        0.732 us       971355
+QuickSort/4                1.00 us         1.01 us       675427
+QuickSort/8                1.67 us         1.67 us       422491
+QuickSort/16               3.15 us         3.16 us       222778
+QuickSort/32               6.36 us         6.37 us       110321
+QuickSort/64               13.3 us         13.3 us        52693
+QuickSort/128              28.8 us         28.8 us        24295
+QuickSort/256              58.6 us         58.6 us        11921
+QuickSort/512               123 us          124 us         5555
+QuickSort/1024              259 us          259 us         2729
+QuickSort/2048              532 us          532 us         1296
+QuickSort/4096             1123 us         1123 us          628
+QuickSort/8192             2347 us         2347 us          299
+QuickSort/16384            4927 us         4927 us          143
+QuickSort/32768           10301 us        10301 us           68
+QuickSort/65536           21618 us        21618 us           33
+AsyncMergeSort/2          0.739 us        0.742 us       941352
+AsyncMergeSort/4           1.15 us         1.15 us       586428
+AsyncMergeSort/8           2.05 us         2.06 us       331241
+AsyncMergeSort/16          4.13 us         4.14 us       170892
+AsyncMergeSort/32          8.35 us         8.36 us        82882
+AsyncMergeSort/64          17.8 us         17.8 us        38319
+AsyncMergeSort/128         37.9 us         37.9 us        18097
+AsyncMergeSort/256         80.6 us         80.7 us         8431
+AsyncMergeSort/512          169 us          169 us         4019
+AsyncMergeSort/1024         361 us          361 us         1973
+AsyncMergeSort/2048         744 us          744 us          890
+AsyncMergeSort/4096        1608 us          219 us         3261
+AsyncMergeSort/8192        3057 us          332 us         1000
+AsyncMergeSort/16384       5461 us          536 us         1389
+AsyncMergeSort/32768       9749 us          902 us          747
+AsyncMergeSort/65536      18580 us         1571 us          558
+MergeSort/2               0.711 us        0.712 us       987719
+MergeSort/4                1.11 us         1.11 us       634465
+MergeSort/8                1.99 us         1.99 us       351302
+MergeSort/16               3.95 us         3.95 us       178798
+MergeSort/32               8.16 us         8.16 us        85981
+MergeSort/64               17.2 us         17.2 us        40764
+MergeSort/128              36.6 us         36.6 us        19144
+MergeSort/256              80.7 us         80.7 us         8997
+MergeSort/512               165 us          165 us         4253
+MergeSort/1024              347 us          347 us         2021
+MergeSort/2048              738 us          738 us          962
+MergeSort/4096             1509 us         1509 us          455
+MergeSort/8192             3159 us         3159 us          225
+MergeSort/16384            6483 us         6483 us          108
+MergeSort/32768           13456 us        13456 us           52
+MergeSort/65536           27671 us        27670 us           25
+TimSort/2                 0.601 us        0.602 us      1166199
+TimSort/4                 0.736 us        0.738 us       962484
+TimSort/8                  1.12 us         1.12 us       609424
+TimSort/16                 2.22 us         2.21 us       318024
+TimSort/32                 4.65 us         4.65 us       147260
+TimSort/64                 10.3 us         10.3 us        68961
+TimSort/128                24.1 us         23.7 us        27751
+TimSort/256                52.7 us         52.0 us        13881
+TimSort/512                 113 us          113 us         6372
+TimSort/1024                235 us          235 us         2901
+TimSort/2048                504 us          504 us         1367
+TimSort/4096               1031 us         1031 us          647
+TimSort/8192               2230 us         2230 us          319
+TimSort/16384              5044 us         5045 us          151
+TimSort/32768              9978 us         9979 us           66
+TimSort/65536             21091 us        21092 us           35
+stdSort/2                 0.634 us        0.635 us      1082714
+stdSort/4                 0.734 us        0.735 us       961425
+stdSort/8                 0.969 us        0.970 us       711128
+stdSort/16                 1.72 us         1.72 us       412788
+stdSort/32                 3.57 us         3.58 us       196611
+stdSort/64                 7.51 us         7.51 us        93882
+stdSort/128                16.2 us         16.2 us        43089
+stdSort/256                35.2 us         35.2 us        19754
+stdSort/512                75.7 us         75.7 us         9287
+stdSort/1024                160 us          160 us         4365
+stdSort/2048                334 us          334 us         2049
+stdSort/4096                718 us          718 us          977
+stdSort/8192               1457 us         1457 us          479
+stdSort/16384              3101 us         3101 us          225
+stdSort/32768              7496 us         7497 us           99
+stdSort/65536             15554 us        15555 us           45
