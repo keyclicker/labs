@@ -42,6 +42,6 @@ To run demo mode choose **demo** as executable in your IDLE
 
 ## Pre-done benchmarks
 - Random array sorting (2 - 1024)
-![RandomArray](Benchmarks/2-1024.png "2-1024")
+- ![RandomArray](Benchmarks/2-1024.png "2-1024")
 - Random array sorting (512 - 16384)
-![RandomArray](Benchmarks/512-16384.png "512-16384")
+- ![RandomArray](Benchmarks/512-16384.png "512-16384")

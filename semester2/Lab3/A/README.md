@@ -11,8 +11,8 @@ To run demo mode choose **demo** as executable in your IDLE
 
 ## Pre-done benchmarks
 - Random array sorting
-![RandomArray](Benchmarks/RandomArray.png "Random array sorting")
+- ![RandomArray](Benchmarks/RandomArray.png "Random array sorting")
 - Almost sorted array sorting
-![AlmostSorted](Benchmarks/AlmostSorted.png "Almost sorted array sorting")
+- ![AlmostSorted](Benchmarks/AlmostSorted.png "Almost sorted array sorting")
 - Almost reversed sorted array sorting
-![ReversedAlmostSorted](Benchmarks/ReversedAlmostSorted.png "Almost reversed sorted array sorting")
+- ![ReversedAlmostSorted](Benchmarks/ReversedAlmostSorted.png "Almost reversed sorted array sorting")
