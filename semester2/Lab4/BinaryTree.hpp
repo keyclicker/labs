@@ -82,7 +82,7 @@ public:
         std::cout << a;
       tree.insert(tree.end(), {right ? "│" : " ", " ", " ", " ", " ", " "});
 
-      std::cout << (left ? "├────" : "└────") << std::setw(2) << "<" << ':';
+      std::cout << (right ? "├────" : "└────") << std::setw(2) << "<" << ':';
       left->print();
 
       for (int i = 0; i < 6; ++i)

@@ -1,7 +1,9 @@
 #include <iostream>
 #include <list>
+
 #include "Tree.hpp"
 #include "BinaryTree.hpp"
+#include "FileSystem.hpp"
 
 int main()
 {
@@ -38,6 +40,10 @@ int main()
   bt.preorderPrint();
 
   bt.print();
+
+  FileObject fs;
+  fs.genRandom(10);
+  fs.print();
 
 
 }

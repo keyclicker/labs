@@ -117,7 +117,4 @@ public:
       children->back().genRandom(size - rs);
     }
   }
-
-
-
 };
