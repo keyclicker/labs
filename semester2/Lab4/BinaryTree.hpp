@@ -94,4 +94,14 @@ public:
       tree.pop_back();
     }
   }
+
+  void genRandom(size_t size) {
+    std::random_device rd;
+    std::default_random_engine re(rd());
+    std::uniform_int_distribution<int> randval(0, 100);
+
+    for (int i = 0; i < size; ++i) {
+      insertValue(randval(re));
+    }
+  }
 };

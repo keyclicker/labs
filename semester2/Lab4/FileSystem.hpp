@@ -1,7 +1,11 @@
 #pragma once
+#include <iostream>
+#include <iomanip>
+#include <random>
 #include <string>
 #include <vector>
 #include <memory>
+#include <list>
 
 struct Time {
   uint8_t day, month;
@@ -76,10 +80,10 @@ public:
   uint64_t getSize() const {
     return size;
   }
-  const string &getName() const {
+  const std::string &getName() const {
     return name;
   }
-  const vector<FileObject> &getDir() const {
+  const std::vector<FileObject> &getDir() const {
     return dir;
   }
 
@@ -132,7 +136,7 @@ public:
     else std::cout << " ";
 
     std::cout << std::setw(0) << name
-            << std::setw(7) << size << " byte  "
+            << std::setw(7) << size << " bytes  "
             << modified
               << std::endl;
 

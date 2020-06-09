@@ -9,7 +9,7 @@
 
 //Task 1
 template<typename T>
-struct Tree {
+class Tree {
 public:
   std::shared_ptr<T> value;
   std::shared_ptr<std::vector<Tree>> children;
