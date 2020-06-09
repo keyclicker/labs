@@ -49,8 +49,6 @@ public:
 
   //Task 8
   void print() const {
-    // i've got some encoding problem with
-    // '│' sign when i using char instead  string
     static std::list<std::string> tree;
 
     if (tree.empty()) std::cout << "Root: ";
@@ -64,24 +62,20 @@ public:
       for (auto a = children->begin(); a != --children->end(); ++a) {
         for (auto &a : tree)
           std::cout << a;
-        tree.insert(tree.end(), {"│", " ", " ", " ", " ", " "});
+        tree.emplace_back("│     ");
 
         std::cout << "├────" << std::setw(2) << a - children->begin() << ':';
         a->print();
-
-        for (int i = 0; i < 6; ++i)
-          tree.pop_back();
+        tree.pop_back();
       }
 
       for (auto &a : tree)
         std::cout << a;
-      tree.insert(tree.end(), {" ", " ", " ", " ", " ", " "});
+      tree.emplace_back("      ");
 
       std::cout << "└────" << std::setw(2) << children->size() - 1 << ':';
       children->back().print();
-
-      for (int i = 0; i < 6; ++i)
-        tree.pop_back();
+      tree.pop_back();
     }
   }
 

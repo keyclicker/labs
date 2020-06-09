@@ -123,8 +123,6 @@ public:
   }
 
   void print() {
-    // i've got some encoding problem with
-    // '│' sign when i using char instead  string
     static std::list<std::string> tree;
 
     if (tree.empty()) {
@@ -142,24 +140,20 @@ public:
       for (auto a = dir.begin(); a != --dir.end(); ++a) {
         for (auto &a : tree)
           std::cout << a;
-        tree.insert(tree.end(), {"│", " ", " ", " ", " ", " "});
+        tree.emplace_back("│     ");
 
         std::cout << "├────";
         a->print();
-
-        for (int i = 0; i < 6; ++i)
-          tree.pop_back();
+        tree.pop_back();
       }
 
       for (auto &a : tree)
         std::cout << a;
-      tree.insert(tree.end(), {" ", " ", " ", " ", " ", " "});
+      tree.emplace_back("      ");
 
       std::cout << "└────";
       dir.back().print();
-
-      for (int i = 0; i < 6; ++i)
-        tree.pop_back();
+      tree.pop_back();
     }
   }
 
