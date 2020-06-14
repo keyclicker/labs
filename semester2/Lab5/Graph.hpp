@@ -6,6 +6,7 @@
 #include <boost/multi_array.hpp>
 
 
+//--------------------- Task 2 ----------------------------------------------
 template<typename T = int>
 class Graph {
 public:
@@ -55,14 +56,20 @@ private:
   std::vector<std::set<Edge>> vertices;
 };
 
-
+//--------------------- Task 1 ----------------------------------------------
 template<typename T = int>
 class MatrixGraph {
 public:
   static constexpr auto MaxValue = std::numeric_limits<T>::max();
 
   explicit MatrixGraph(size_t size = 0) :
-          matrix((boost::extents[size][size])) {}
+          matrix((boost::extents[size][size])) {
+    std::fill(matrix.data(), matrix.data() +
+    matrix.num_elements(), MatrixGraph<T>::MaxValue);
+    for (int i = 0; i < size; ++i) {
+      matrix[i][i] = 0;
+    }
+  }
 
   void resize(size_t size) {
     matrix.resize((boost::extents[size][size]));
