@@ -1,4 +1,5 @@
-#include "sorting.hpp"
+#include "Graph.hpp"
+#include "Algo.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -7,88 +8,48 @@ using namespace std;
 
 #include <benchmark/benchmark.h>
 
-
-random_device rd;
-default_random_engine re(rd());
-uniform_real_distribution<double> drand(-100, 100);
-
-#define SORTBENCH(name, algo) \
-void name(benchmark::State& state) { \
-  std::vector<double> a;\
-  for (auto _ : state) { \
-    state.PauseTiming(); \
-      a.clear();\
-      for (int i = 0; i < state.range(); ++i)\
-        a.emplace_back(drand(re));\
-    state.ResumeTiming(); \
-    algo(a.begin(), a.end());\
-  }; \
-} \
-BENCHMARK(name) \
-->Unit(benchmark::TimeUnit::kMicrosecond) \
-->RangeMultiplier(2) \
-->Range(2, 256) \
+template<typename T>
+auto rand(T a, T b) {
+  random_device rd;
+  default_random_engine re(rd());
+  uniform_int_distribution<T> drand(-a, a);
+  return drand(re);
+}
 
 
-SORTBENCH(RandomSelectionSort, sorting::selection);
-SORTBENCH(RandomQuickSort, sorting::quicksort);
-SORTBENCH(RandomMergeSort, sorting::merge);
-SORTBENCH(RandomCombinedSort10, sorting::combined);
-SORTBENCH(RandomStdSort, sorting::std_sort);
+#define GRAPHBENCH(name, gr, algo) \
+void name(benchmark::State& state) {\
+  for (auto _ : state) {\
+    state.PauseTiming();\
+      gr<int> g(state.range());\
+      auto ecnt = (state.range() * state.range()) / 2;\
+      for (int i = 0; i < ecnt; ++i)\
+        g.addEdge(rand(long(0), state.range()), \
+                rand(long(0), state.range()), rand(1, 8));\
+    state.ResumeTiming();\
+    algo(g);\
+  };\
+}\
+BENCHMARK(name)\
+->Unit(benchmark::TimeUnit::kMicrosecond)\
+->RangeMultiplier(2)\
+->Range(128, 1024) \
+->Iterations()
 
+GRAPHBENCH(SetIsTree, Graph, Algorithms::isTree);
+GRAPHBENCH(MatrixIsTree, MatrixGraph, Algorithms::isTree);
+GRAPHBENCH(SetIsConnected, Graph, Algorithms::isConnected);
+GRAPHBENCH(MatrixIsConnected, MatrixGraph, Algorithms::isConnected);
 
-#define ALMOSTBENCH(name, algo) \
-void name(benchmark::State& state) { \
-  std::vector<double> a;\
-  for (auto _ : state) { \
-    state.PauseTiming(); \
-      a.clear();\
-      for (int i = 0; i < state.range(); ++i)\
-        a.emplace_back(drand(re));\
-      sorting::std_sort(a.begin(), a.end());\
-      a[rand() % state.range()] = drand(re); \
-    state.ResumeTiming(); \
-    algo(a.begin(), a.end());\
-  }; \
-} \
-BENCHMARK(name) \
-->Unit(benchmark::TimeUnit::kMicrosecond) \
-->RangeMultiplier(2) \
-->Range(2, 256) \
+GRAPHBENCH(SetKruskal, Graph, Algorithms::kruskal);
+GRAPHBENCH(MatrixKruskal, MatrixGraph, Algorithms::kruskal);
+GRAPHBENCH(SetSpanningTree, Graph, Algorithms::spanningTree);
+GRAPHBENCH(MatrixSpanningTree, MatrixGraph, Algorithms::spanningTree);
 
-ALMOSTBENCH(AlmostSortedSelectionSort, sorting::selection);
-ALMOSTBENCH(AlmostSortedQuickSort, sorting::quicksort);
-ALMOSTBENCH(AlmostSortedMergeSort, sorting::merge);
-ALMOSTBENCH(AlmostSortedCombinedSort10, sorting::combined);
-ALMOSTBENCH(AlmostSortedStdSort, sorting::std_sort);
-
-
-#define RALMOSTBENCH(name, algo) \
-void name(benchmark::State& state) { \
-  std::vector<double> a;\
-  for (auto _ : state) { \
-    state.PauseTiming(); \
-      a.clear();\
-      for (int i = 0; i < state.range(); ++i)\
-        a.emplace_back(drand(re));\
-      sorting::std_sort(a.begin(), a.end());\
-      reverse(a.begin(), a.end());\
-      a[rand() % state.range()] = drand(re); \
-    state.ResumeTiming(); \
-    algo(a.begin(), a.end());\
-  }; \
-} \
-BENCHMARK(name) \
-->Unit(benchmark::TimeUnit::kMicrosecond) \
-->RangeMultiplier(2) \
-->Range(2, 256) \
-
-
-RALMOSTBENCH(ReversedAlmostSortedSelectionSort, sorting::selection);
-RALMOSTBENCH(ReversedAlmostSortedQuickSort, sorting::quicksort);
-RALMOSTBENCH(ReversedAlmostSortedMergeSort, sorting::merge);
-RALMOSTBENCH(ReversedAlmostSortedCombinedSort10, sorting::combined);
-RALMOSTBENCH(ReversedAlmostSortedStdSort, sorting::std_sort);
+GRAPHBENCH(SetDijkstra, Graph, Algorithms::dijkstra);
+GRAPHBENCH(MatrixDijkstra, MatrixGraph, Algorithms::dijkstra);
+GRAPHBENCH(SetFloydWarshall, Graph, Algorithms::floydWarshall);
+GRAPHBENCH(MatrixFloydWarshall, MatrixGraph, Algorithms::floydWarshall);
 
 
 BENCHMARK_MAIN();
