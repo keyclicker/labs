@@ -401,14 +401,28 @@ namespace Algorithms {
   auto spanningTree(const Graph<T> &graph, size_t vertex = 0) {
     Graph<T> spanning(graph.size());
     utils::deepSortSpanning(graph, spanning, vertex);
-    return spanning;
+
+    int cost = 0;
+    for (const auto &a : spanning.getVertices())
+      for (auto b : a)
+        cost += b.weight;
+
+    struct Spanning {Graph<T> graph; T cost; };
+    return Spanning {spanning, cost};
   }
 
   template<typename T>
   auto spanningTree(const MatrixGraph<T> &graph, size_t vertex = 0) {
     Graph<T> spanning(graph.size());
     utils::deepSortSpanning(graph, spanning, vertex);
-    return spanning;
+
+    int cost = 0;
+    for (const auto &a : spanning.getVertices())
+      for (auto b : a)
+        cost += b.weight;
+
+    struct Spanning {Graph<T> graph; T cost; };
+    return Spanning {spanning, cost};
   }
 
   //--------------------- Task 21 ----------------------------------------------

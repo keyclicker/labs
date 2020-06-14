@@ -89,9 +89,13 @@ int main() {
   cout << "\n\n";
   cout << "========== Task 19 ==========" << endl;
   cout << "Deep Search spanning tree for S:" << endl;
-  printList(Algorithms::spanningTree(s).getVertices());
+  auto st = Algorithms::spanningTree(s);
+  printList(st.graph.getVertices());
+  cout << "Cost = " << st.cost << endl;
   cout << "\nDeep Search spanning tree for M:" << endl;
-  printList(Algorithms::spanningTree(m).getVertices());
+  auto st1 = Algorithms::spanningTree(m);
+  printList(st1.graph.getVertices());
+  cout << "Cost = " << st1.cost << endl;
 
 
   cout << "\n========== Task 21 ==========" << endl;
