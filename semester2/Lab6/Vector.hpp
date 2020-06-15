@@ -42,6 +42,9 @@ public:
   void resize(size_t size);
   void reserve(size_t new_cap);
 
+  iterator find(const T &val);
+  iterator find(const T &min, const T &max);
+
   void print() const;
 
   friend std::ostream &operator<<(std::ostream &out, const Vector &val) {
@@ -67,6 +70,9 @@ private:
   void realloc();
   size_t getSortedPos(const T &val, size_t begin, size_t end);
   void erase(size_t index);
+  iterator find(const T &val, size_t size, iterator begin, iterator end);
+  iterator find(const T &min, const T &max,
+                size_t size, iterator begin, iterator end);
 };
 
 template<typename T>
@@ -342,6 +348,7 @@ size_t Vector<T>::getSortedPos(const T &val, size_t beg, size_t end) {
     return getSortedPos(val, mid + 1, end);
 }
 
+
 template<typename T>
 T &Vector<T>::operator[](size_t index) {
   return ptr[index];
@@ -355,5 +362,6 @@ const T &Vector<T>::operator[](size_t index) const {
 template<typename T>
 void Vector<T>::remove(const T &val) {
 
-};
+}
+
 

@@ -31,6 +31,9 @@ public:
   void remove(const T &val) override;
   void clear() override;
 
+  iterator find(const T &val);
+  iterator find(const T &min, const T &max);
+
   iterator begin() const;
   iterator end() const;
 
@@ -65,7 +68,10 @@ private:
   Node *begin_ = end_;
 
   iterator getSortedPos(const T &val, size_t size, iterator begin, iterator end);
-  void erase(size_t index);
+  void erase(iterator pos);
+  iterator find(const T &val, size_t size, iterator begin, iterator end);
+  iterator find(const T &min, const T &max,
+                size_t size, iterator begin, iterator end);
 };
 
 template<typename T>
@@ -185,18 +191,11 @@ void List<T>::print() const {
 }
 
 template<typename T>
-void List<T>::erase(size_t index) {
+void List<T>::erase(iterator pos) {
   --sz;
-  auto i = begin_;
-  if (index) {
-    for (int j = 0; j < index; ++j) i = i->next;
-    i->prev->next = i->next;
-  }
-  else {
-    begin_ = begin_->next;
-  }
-  i->next->prev = i->prev;
-  delete i;
+  if (pos.node->prev) pos.node->prev->next = pos.node->next;
+  if (pos.node->prev) pos.node->next->prev = pos.node->prev;
+  delete pos.node;
 }
 
 template<typename T>
@@ -231,7 +230,55 @@ void List<T>::insert(const T &val) {
 
 template<typename T>
 void List<T>::remove(const T &val) {
+  iterator i;
+  while ((i = find(val)) != end())
+    erase(find(val));
+}
 
+template<typename T>
+typename List<T>::iterator List<T>::find(const T &val) {
+  return find(val, sz, begin(), end());
+}
+
+template<typename T>
+typename List<T>::iterator
+List<T>::find(const T &min, const T &max) {
+  return find(min, max, sz, begin(), end());
+}
+
+template<typename T>
+typename List<T>::iterator List<T>
+::find(const T &val, size_t size, List::iterator begin, List::iterator end) {
+  auto sz = size / 2;
+  iterator mid = begin;
+  for (int i = 0; i < sz; ++i) ++mid;
+
+  if (*mid == val)
+    return mid;
+  else if (size <= 0)
+    return this->end();
+  else if (val < *mid)
+    return find(val, sz, begin, ++mid);
+  else
+    return find(val, size - sz - 1, ++mid, end);
+}
+
+template<typename T>
+typename List<T>::iterator List<T>
+::find(const T &min, const T &max,
+        size_t size, List::iterator begin, List::iterator end) {
+  auto sz = size / 2;
+  iterator mid = begin;
+  for (int i = 0; i < sz; ++i) ++mid;
+
+  if (*mid >= min && *mid <= max)
+    return mid;
+  else if (size <= 0)
+    return this->end();
+  else if (max < *mid)
+    return find(min, max, sz, begin, ++mid);
+  else
+    return find(min, max,  size - sz - 1, ++mid, end);
 }
 
 template<typename T>
@@ -241,14 +288,10 @@ typename List<T>::iterator List<T>
   iterator mid = begin;
   for (int i = 0; i < sz; ++i) ++mid;
 
-  if (sz <= 0) {
-    if (mid == --this->end() && mid != this->begin())
-      return ++mid;
-    else
-      return mid;
-  }
+  if (size <= 0)
+    return mid;
   else if (val < *mid)
-    return getSortedPos(val, sz, begin, mid);
+    return getSortedPos(val, sz, begin, ++mid);
   else
     return getSortedPos(val, size - sz - 1, ++mid, end);
 }
