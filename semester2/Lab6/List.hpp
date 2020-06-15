@@ -232,7 +232,7 @@ template<typename T>
 void List<T>::remove(const T &val) {
   iterator i;
   while ((i = find(val)) != end())
-    erase(find(val));
+    erase(i);
 }
 
 template<typename T>

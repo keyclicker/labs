@@ -70,9 +70,8 @@ private:
   void realloc();
   size_t getSortedPos(const T &val, size_t begin, size_t end);
   void erase(size_t index);
-  iterator find(const T &val, size_t size, iterator begin, iterator end);
-  iterator find(const T &min, const T &max,
-                size_t size, iterator begin, iterator end);
+  iterator find(const T &val, size_t begin, size_t end);
+  iterator find(const T &min, const T &max, size_t begin, size_t end);
 };
 
 template<typename T>
@@ -181,6 +180,15 @@ void Vector<T>::copy(T *p1, T const *p2, size_t size) {
     p1[i] = p2[i];
 }
 
+template<typename T>
+T &Vector<T>::operator[](size_t index) {
+  return ptr[index];
+};
+
+template<typename T>
+const T &Vector<T>::operator[](size_t index) const {
+  return ptr[index];
+}
 
 template<typename T>
 Vector<T> &Vector<T>::operator=(const Vector<T> &val) {
@@ -348,20 +356,53 @@ size_t Vector<T>::getSortedPos(const T &val, size_t beg, size_t end) {
     return getSortedPos(val, mid + 1, end);
 }
 
-
 template<typename T>
-T &Vector<T>::operator[](size_t index) {
-  return ptr[index];
-};
-
-template<typename T>
-const T &Vector<T>::operator[](size_t index) const {
-  return ptr[index];
+void Vector<T>::remove(const T &val) {
+  iterator i;
+  while ((i = find(val)) != end())
+    erase(i.index);
 }
 
 template<typename T>
-void Vector<T>::remove(const T &val) {
+typename Vector<T>::iterator
+Vector<T>::find(const T &val, size_t beg, size_t end) {
+  auto mid = beg + (end - beg) / 2;
 
+  if (ptr[mid] == val)
+    return iterator(mid, this);
+  else if (end - beg <= 0)
+    return this->end();
+  else if (val < ptr[mid])
+    return find(val, beg, mid);
+  else
+    return find(val, mid + 1, end);
+}
+
+template<typename T>
+typename Vector<T>::iterator
+Vector<T>::find(const T &min, const T &max, size_t beg, size_t end) {
+  auto mid = beg + (end - beg) / 2;
+
+  if (ptr[mid] >= min && ptr[mid] <= max)
+    return iterator(mid, this);
+  else if (end - beg <= 0)
+    return iterator(sz, this);
+  else if (max < ptr[mid])
+    return find(min, max, beg, mid);
+  else
+    return find(min, max, mid + 1, end);
+}
+
+template<typename T>
+typename Vector<T>::iterator
+Vector<T>::find(const T &val) {
+  return find(val, 0, sz);
+}
+
+template<typename T>
+typename Vector<T>::iterator
+Vector<T>::find(const T &min, const T &max) {
+  return find(min, max, 0, sz);
 }
 
 

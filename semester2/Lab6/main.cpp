@@ -27,7 +27,10 @@ int main() {
     tree.insert(r);
   }
 
-  ls.remove(5);
+  ls.remove(6);
+  vec.remove(6);
 
   cout << ls << '\n' << vec << '\n' << tree << endl;
+
+  cout << *vec.find(4, 6) << endl;
 }
