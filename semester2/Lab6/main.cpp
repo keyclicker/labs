@@ -21,16 +21,22 @@ int main() {
   Tree<int> tree;
 
   for (int i = 0; i < 10; ++i) {
-    auto r = rand(0, 10);
+    auto r = rand(0, 50);
     ls.insert(r);
     vec.insert(r);
     tree.insert(r);
   }
 
-  ls.remove(6);
-  vec.remove(6);
+//  ls.remove(6);
+//  vec.remove(6);
 
   cout << ls << '\n' << vec << '\n' << tree << endl;
 
   cout << *vec.find(4, 6) << endl;
+
+
+  cout << tree.front() << ' ' << tree.back() << endl;
+
+  for (auto a = tree.begin(); a != tree.end(); ++a)
+    cout << *a << ' ';
 }
