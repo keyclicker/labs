@@ -22,13 +22,11 @@ public:
 
   virtual ~Vector();
 
-  T &front() override;
-  T &back() override;
   T &operator[](size_t index);
-
-  const T &front() const override;
-  const T &back() const override;
   const T &operator[](size_t index) const;
+
+  T front() const override;
+  T back() const override;
 
   [[nodiscard]] size_t size() const override;
   void clear() override;
@@ -227,22 +225,12 @@ typename Vector<T>::iterator Vector<T>::end() const {
 }
 
 template<typename T>
-T &Vector<T>::front() {
+T Vector<T>::front() const {
   return ptr[0];
 };
 
 template<typename T>
-T &Vector<T>::back() {
-  return ptr[sz - 1];
-};
-
-template<typename T>
-const T &Vector<T>::front() const {
-  return ptr[0];
-};
-
-template<typename T>
-const T &Vector<T>::back() const {
+T Vector<T>::back() const {
   return ptr[sz - 1];
 };
 

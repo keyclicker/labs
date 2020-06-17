@@ -9,11 +9,8 @@ public:
   SortedContainer() = default;
   virtual ~SortedContainer() = default;
 
-  virtual T &front() = 0;
-  virtual T &back() = 0;
-
-  virtual const T &front() const = 0;
-  virtual const T &back() const = 0;
+  virtual T front() const = 0;
+  virtual T back() const = 0;
 
   [[nodiscard]]
   virtual size_t size() const = 0;

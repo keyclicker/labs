@@ -20,11 +20,9 @@ public:
 
   virtual ~List();
 
-  T &front() override;
-  T &back() override;
+  T front() const override;
+  T back() const override;
 
-  const T &front() const override;
-  const T &back() const override;
   [[nodiscard]] size_t size() const override;
 
   void insert(const T &val) override;
@@ -117,22 +115,12 @@ public:
 };
 
 template<typename T>
-T &List<T>::front() {
+T List<T>::front() const {
   return begin_->value;
 }
 
 template<typename T>
-T &List<T>::back() {
-  return end_->prev->value;
-}
-
-template<typename T>
-const T &List<T>::front() const {
-  return begin_->value;
-}
-
-template<typename T>
-const T &List<T>::back() const {
+T List<T>::back() const {
   return end_->prev->value;
 }
 

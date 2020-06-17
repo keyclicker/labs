@@ -21,7 +21,7 @@ int main() {
   Tree<int> tree;
 
   for (int i = 0; i < 10; ++i) {
-    auto r = rand(0, 50);
+    auto r = rand(0, 10);
     ls.insert(r);
     vec.insert(r);
     tree.insert(r);
@@ -39,4 +39,17 @@ int main() {
 
   for (auto a = tree.begin(); a != tree.end(); ++a)
     cout << *a << ' ';
+
+  cout << endl;
+
+  cout << *tree.find(30, 35) << endl;
+
+  cout << tree << endl;
+
+  tree.remove(6);
+  tree.remove(6);
+  cout << tree << endl;
+
+  cout << tree << endl;
+
 }
