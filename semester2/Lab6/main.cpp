@@ -1,6 +1,7 @@
 #include "List.hpp"
 #include "Vector.hpp"
 #include "Tree.hpp"
+#include "AVL.hpp"
 
 #include <random>
 #include <iostream>
@@ -19,18 +20,20 @@ int main() {
   List<int> ls;
   Vector<int> vec;
   Tree<int> tree;
+  AvlTree<int> avl;
 
   for (int i = 0; i < 10; ++i) {
-    auto r = rand(0, 10);
+    auto r = rand(0, 2);
     ls.insert(r);
     vec.insert(r);
     tree.insert(r);
+    avl.insert(r);
   }
 
 //  ls.remove(6);
 //  vec.remove(6);
 
-  cout << ls << '\n' << vec << '\n' << tree << endl;
+  cout << ls << '\n' << vec << '\n' << tree  << '\n' << avl << endl;
 
   cout << *vec.find(4, 6) << endl;
 
@@ -44,12 +47,17 @@ int main() {
 
   cout << *tree.find(30, 35) << endl;
 
+  //cout << tree << endl;
+
+  //tree.remove(6);
+  //tree.remove(6);
   cout << tree << endl;
 
-  tree.remove(6);
-  tree.remove(6);
-  cout << tree << endl;
+  cout << avl << endl;
+  tree.remove(1);
+  avl.remove(1);
 
   cout << tree << endl;
+  cout << avl << endl;
 
 }

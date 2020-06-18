@@ -10,7 +10,6 @@
 #include <limits>
 #include <list>
 
-//Task 18.1
 template<typename T>
 class Tree: SortedContainer<T> {
 private:
