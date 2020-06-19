@@ -3,7 +3,6 @@
 #include "src/Tree.hpp"
 #include "src/AVL.hpp"
 
-#include <set>
 #include <random>
 #include <iostream>
 #include "string"
@@ -18,7 +17,6 @@ auto rand(T a, T b) {
 }
 
 int main() {
-
   List<string> ls;
   Vector<string> vec;
   Tree<string> tree;

@@ -125,7 +125,8 @@ void Tree<T>::remove(const T &val) {
 
 template<typename T>
 void Tree<T>::clear() {
-
+  root->left = nullptr;
+  sz = 0;
 }
 
 template<typename T>

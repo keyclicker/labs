@@ -3,7 +3,8 @@ project(Lab6)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Lab6 main.cpp)
+add_executable(demo main.cpp)
+add_executable(interactive interactive.cpp)
 
 find_package(benchmark REQUIRED)
 add_executable(bench benchmark.cpp)

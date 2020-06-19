@@ -186,7 +186,8 @@ void AvlTree<T>::remove(const T &val) {
 
 template<typename T>
 void AvlTree<T>::clear() {
-
+  root->left = nullptr;
+  sz = 0;
 }
 
 template<typename T>
