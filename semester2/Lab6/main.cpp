@@ -37,8 +37,6 @@ int main() {
   }
 
   cout << "Inserting 10 random values in containers:" << endl;
-//  ls.remove(6);
-//  vec.remove(6);
 
   cout
   << "List:    " << ls << " size = " << ls.size() << '\n'
@@ -87,7 +85,7 @@ int main() {
   } cout << endl;
 
   auto rm1 = vec[1], rm2 = vec[5];
-  cout << "\nRemoving \"" << fnd1 << "\" and \"" << fnd2 << "\":"<< endl;
+  cout << "\nRemoving \"" << rm1 << "\" and \"" << rm2 << "\":"<< endl;
 
   ls.remove(rm1);
   ls.remove(rm2);
@@ -109,7 +107,9 @@ int main() {
   for (auto &a : ls) a.append("++");
   for (auto &a : vec) a.append("++");
   for (auto &a : tree) a.append("++");
-  for (auto &a : avl) a.append("++");
+  for (auto &a : avl) {
+    a.append("++");
+  }
 
 
   cout

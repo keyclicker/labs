@@ -119,7 +119,8 @@ size_t Tree<T>::size() const {
 
 template<typename T>
 void Tree<T>::remove(const T &val) {
-  erase(find(val));
+  auto fnd = find(val);
+  if (fnd != end()) erase(fnd);
 }
 
 template<typename T>

@@ -180,7 +180,8 @@ size_t AvlTree<T>::size() const {
 
 template<typename T>
 void AvlTree<T>::remove(const T &val) {
-  erase(find(val));
+  auto fnd = find(val);
+  if (fnd != end()) erase(fnd);
 }
 
 template<typename T>
@@ -372,7 +373,7 @@ void AvlTree<T>::erase(iterator pos) {
 
   int balance = (int) height(pos.node->left) - height(pos.node->right);
 
-  std::shared_ptr<Node> n = pos.node;
+  std::shared_ptr<Node> n = pos.node->parent;
   auto val = pos.node->value;
 
   if (balance > 1 && val < pos.node->left->value)
@@ -381,14 +382,14 @@ void AvlTree<T>::erase(iterator pos) {
     pos.node = leftRotate(pos.node);
   else if (balance > 1 && val > pos.node->left->value) {
     pos.node->left = leftRotate(pos.node->left);
-    pos.node->left->parent = pos.node->left;
+    if (pos.node->left) pos.node->left->parent = pos.node;
     pos.node = rightRotate(pos.node);
   }
   else if (balance < -1 && val < pos.node->right->value) {
     pos.node->right = rightRotate(pos.node->right);
-    pos.node->right->parent = pos.node->right;
+    if (pos.node->right) pos.node->right->parent = pos.node;
     pos.node = leftRotate(pos.node);
   }
-  pos.node->parent = n;
+  if (pos.node) pos.node->parent = n;
 }
 

@@ -350,7 +350,8 @@ size_t Vector<T>::getSortedPos(const T &val, size_t beg, size_t end) {
 
 template<typename T>
 void Vector<T>::remove(const T &val) {
-  erase(find(val).index);
+  auto fnd = find(val);
+  if (fnd != end()) erase(fnd.index);
 }
 
 template<typename T>

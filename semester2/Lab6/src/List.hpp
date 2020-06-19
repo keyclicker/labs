@@ -220,7 +220,8 @@ void List<T>::insert(const T &val) {
 
 template<typename T>
 void List<T>::remove(const T &val) {
-  erase(find(val));
+  auto fnd = find(val);
+  if (fnd != end()) erase(fnd);
 }
 
 template<typename T>
