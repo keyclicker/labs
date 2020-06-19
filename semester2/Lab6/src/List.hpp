@@ -204,23 +204,23 @@ List<T> &List<T>::operator=(List &&ls) noexcept {
 template<typename T>
 void List<T>::insert(const T &val) {
   iterator pos = getSortedPos(val, size(), begin(), end());
-  ++sz;
-  if (pos.node == begin_) {
-    begin_ = new Node(val, nullptr, begin_);
-    begin_->next->prev = begin_;
-  }
-  else {
-    pos.node = new Node(val, pos.node->prev, pos.node);
-    pos.node->prev->next = pos.node;
-    pos.node->next->prev = pos.node;
+  if (pos.node) {
+    ++sz;
+    if (pos.node == begin_) {
+      begin_ = new Node(val, nullptr, begin_);
+      begin_->next->prev = begin_;
+    }
+    else {
+      pos.node = new Node(val, pos.node->prev, pos.node);
+      pos.node->prev->next = pos.node;
+      pos.node->next->prev = pos.node;
+    }
   }
 }
 
 template<typename T>
 void List<T>::remove(const T &val) {
-  iterator i;
-  while ((i = find(val)) != end())
-    erase(i);
+  erase(find(val));
 }
 
 template<typename T>
@@ -274,12 +274,13 @@ typename List<T>::iterator List<T>
 ::getSortedPos(const T &val, size_t size, iterator begin, iterator end) {
   auto sz = size / 2;
   iterator mid = begin;
+
   for (int i = 0; i < sz; ++i) ++mid;
 
   if (size <= 0)
     return mid;
-  else if (val < *mid)
+  else if (mid.node ? val < *mid : false)
     return getSortedPos(val, sz, begin, ++mid);
-  else
+  else if (mid.node ? val > *mid : false)
     return getSortedPos(val, size - sz - 1, ++mid, end);
 }

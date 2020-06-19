@@ -70,13 +70,15 @@ private:
 template<typename T>
 void Tree<T>::insert(const T &val,
         std::shared_ptr<Node> &node, std::shared_ptr<Node> parent) {
-  if (!node)
+  if (!node) {
+    ++sz;
     node = std::make_shared<Tree<T>::Node>(parent, val);
+  }
   else {
-    if (val <= node->value) {
+    if (val < node->value) {
       insert(val, node->left, node);
     }
-    else {
+    else if (val > node->value) {
       insert(val, node->right, node);
     }
   }
@@ -84,7 +86,6 @@ void Tree<T>::insert(const T &val,
 
 template<typename T>
 void Tree<T>::insert(const T &val) {
-  ++sz;
   insert(val, root->left, root);
 }
 
@@ -118,9 +119,7 @@ size_t Tree<T>::size() const {
 
 template<typename T>
 void Tree<T>::remove(const T &val) {
-  iterator rem;
-  while ((rem = find(val)) != end())
-    erase(rem);
+  erase(find(val));
 }
 
 template<typename T>

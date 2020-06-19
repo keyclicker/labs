@@ -76,14 +76,14 @@ auto AvlTree<T>::rightRotate(std::shared_ptr<Node> y) {
   std::shared_ptr<Node> x = y->left;
   std::shared_ptr<Node> T2 = x ? x->right : nullptr;
 
-  x->right = y;
-  if (y) y->parent = x->right;
+  if (x) x->right = y;
+  if (y) y->parent = x;
   y->left = T2;
-  if (T2) T2->parent = y->left;
+  if (T2) T2->parent = y;
 
   static auto height = [](std::shared_ptr<Node> &n) {return n ? n->height : 0;};
-  y->height = std::max(height(y->left), height(y->right)) + 1;
-  x->height = std::max(height(x->left), height(x->right)) + 1;
+  if (y) y->height = std::max(height(y->left), height(y->right)) + 1;
+  if (x) x->height = std::max(height(x->left), height(x->right)) + 1;
 
   return x;
 }
@@ -93,14 +93,14 @@ auto AvlTree<T>::leftRotate(std::shared_ptr<Node> x) {
   std::shared_ptr<Node> y = x->right;
   std::shared_ptr<Node> T2 = y ? y->left : nullptr;
 
-  y->left = x;
-  if (x) x->parent = y->left;
+  if (y) y->left = x;
+  if (x) x->parent = y;
   x->right = T2;
-  if (T2) T2->parent = x->right;
+  if (T2) T2->parent = x;
 
   static auto height = [](std::shared_ptr<Node> &n) {return n ? n->height : 0;};
-  x->height = std::max(height(x->left), height(x->right)) + 1;
-  y->height = std::max(height(y->left), height(y->right)) + 1;
+  if (x) x->height = std::max(height(x->left), height(x->right)) + 1;
+  if (y) y->height = std::max(height(y->left), height(y->right)) + 1;
 
   return y;
 }
@@ -108,13 +108,15 @@ auto AvlTree<T>::leftRotate(std::shared_ptr<Node> x) {
 template<typename T>
 void AvlTree<T>::insert(const T &val,
                      std::shared_ptr<Node> &node, std::shared_ptr<Node> parent) {
-  if (!node)
+  if (!node) {
+    ++sz;
     node = std::make_shared<AvlTree<T>::Node>(parent, val);
+  }
   else {
-    if (val <= node->value) {
+    if (val < node->value) {
       insert(val, node->left, node);
     }
-    else {
+    else if (val > node->value) {
       insert(val, node->right, node);
     }
   }
@@ -145,7 +147,6 @@ void AvlTree<T>::insert(const T &val,
 
 template<typename T>
 void AvlTree<T>::insert(const T &val) {
-  ++sz;
   insert(val, root->left, root);
 }
 
@@ -179,9 +180,7 @@ size_t AvlTree<T>::size() const {
 
 template<typename T>
 void AvlTree<T>::remove(const T &val) {
-  iterator rem;
-  while ((rem = find(val)) != end())
-    erase(rem);
+  erase(find(val));
 }
 
 template<typename T>
@@ -361,33 +360,35 @@ void AvlTree<T>::erase(iterator pos) {
     else if (pos.node->parent->right == pos.node)
       pos.node->parent->right = node;
   }
-//  pos.node->parent->height = std::max(pos.node->parent->left->height,
-//          pos.node->parent->right->height);
 
-//  static auto height = [](std::shared_ptr<Node> &n) {return n ? n->height : 0;};
-//
-//  pos.node->height = 1 + std::max(height(pos.node->left),
-//                              height(pos.node->right));
-//
-//  int balance = (int) height(pos.node->left) - height(pos.node->right);
-//
-//  std::shared_ptr<Node> n = pos.node;
-//  auto val = pos.node->value;
-//
-//  if (balance > 1 && val < pos.node->left->value)
-//    pos.node = rightRotate(pos.node);
-//  else if (balance < -1 && val > pos.node->right->value)
-//    pos.node = leftRotate(pos.node);
-//  else if (balance > 1 && val > pos.node->left->value) {
-//    pos.node->left = leftRotate(pos.node->left);
-//    pos.node->left->parent = pos.node->left;
-//    pos.node = rightRotate(pos.node);
-//  }
-//  else if (balance < -1 && val < pos.node->right->value) {
-//    pos.node->right = rightRotate(pos.node->right);
-//    pos.node->right->parent = pos.node->right;
-//    pos.node = leftRotate(pos.node);
-//  }
-//  pos.node->parent = n;
+
+  static auto height = [](std::shared_ptr<Node> &n) {return n ? n->height : 0;};
+
+  pos.node->parent->height = 1 + std::max(height(pos.node->parent->left),
+                                      height(pos.node->parent->right));
+
+  pos.node->height = 1 + std::max(height(pos.node->left),
+                              height(pos.node->right));
+
+  int balance = (int) height(pos.node->left) - height(pos.node->right);
+
+  std::shared_ptr<Node> n = pos.node;
+  auto val = pos.node->value;
+
+  if (balance > 1 && val < pos.node->left->value)
+    pos.node = rightRotate(pos.node);
+  else if (balance < -1 && val > pos.node->right->value)
+    pos.node = leftRotate(pos.node);
+  else if (balance > 1 && val > pos.node->left->value) {
+    pos.node->left = leftRotate(pos.node->left);
+    pos.node->left->parent = pos.node->left;
+    pos.node = rightRotate(pos.node);
+  }
+  else if (balance < -1 && val < pos.node->right->value) {
+    pos.node->right = rightRotate(pos.node->right);
+    pos.node->right->parent = pos.node->right;
+    pos.node = leftRotate(pos.node);
+  }
+  pos.node->parent = n;
 }
 

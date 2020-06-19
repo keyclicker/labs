@@ -1,10 +1,12 @@
-#include "List.hpp"
-#include "Vector.hpp"
-#include "Tree.hpp"
-#include "AVL.hpp"
+#include "src/List.hpp"
+#include "src/Vector.hpp"
+#include "src/Tree.hpp"
+#include "src/AVL.hpp"
 
+#include <set>
 #include <random>
 #include <iostream>
+#include "string"
 using namespace std;
 
 template<typename T>
@@ -17,47 +19,104 @@ auto rand(T a, T b) {
 
 int main() {
 
-  List<int> ls;
-  Vector<int> vec;
-  Tree<int> tree;
-  AvlTree<int> avl;
+  List<string> ls;
+  Vector<string> vec;
+  Tree<string> tree;
+  AvlTree<string> avl;
 
   for (int i = 0; i < 10; ++i) {
-    auto r = rand(0, 2);
-    ls.insert(r);
-    vec.insert(r);
-    tree.insert(r);
-    avl.insert(r);
+    string s;
+    for (int j = 0; j < rand(2, 4); ++j) {
+      s.push_back(rand('a','z'));
+    }
+
+    ls.insert(s);
+    vec.insert(s);
+    tree.insert(s);
+    avl.insert(s);
   }
 
+  cout << "Inserting 10 random values in containers:" << endl;
 //  ls.remove(6);
 //  vec.remove(6);
 
-  cout << ls << '\n' << vec << '\n' << tree  << '\n' << avl << endl;
+  cout
+  << "List:    " << ls << " size = " << ls.size() << '\n'
+  << "Vector:  " << vec << " size = " << vec.size() << '\n'
+  << "BSTree:  " << tree  << " size = " << tree.size() << '\n'
+  << "AVLTree: " << avl << " size = " << avl.size() << endl;
 
-  cout << *vec.find(4, 6) << endl;
+  auto fnd = vec[3];
+  cout << "\nFind \"" << fnd << "\":"<< endl;
+
+  cout << "List:    ";
+  for (auto i = ls.begin(); i != ls.end(); ++i) {
+    cout << left << setw(10) << (ls.find(fnd) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "Vector:  ";
+  for (auto i = vec.begin(); i != vec.end(); ++i) {
+    cout << left << setw(10) << (vec.find(fnd) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "BSTree:  ";
+  for (auto i = tree.begin(); i != tree.end(); ++i) {
+    cout << left << setw(10) << (tree.find(fnd) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "AVLTree: ";
+  for (auto i = avl.begin(); i != avl.end(); ++i) {
+    cout << left << setw(10) << (avl.find(fnd) == i ? "-> " : "") + *i;
+  } cout << endl;
+
+  auto fnd1 = vec[2], fnd2 = vec[4];
+  cout << "\nFind \"" << fnd1 << "\"-\"" << fnd2 << "\":"<< endl;
+
+  cout << "List:    ";
+  for (auto i = ls.begin(); i != ls.end(); ++i) {
+    cout << left << setw(10) << (ls.find(fnd1, fnd2) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "Vector:  ";
+  for (auto i = vec.begin(); i != vec.end(); ++i) {
+    cout << left << setw(10) << (vec.find(fnd1, fnd2) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "BSTree:  ";
+  for (auto i = tree.begin(); i != tree.end(); ++i) {
+    cout << left << setw(10) << (tree.find(fnd1, fnd2) == i ? "-> " : "") + *i;
+  } cout << endl;
+  cout << "AVLTree: ";
+  for (auto i = avl.begin(); i != avl.end(); ++i) {
+    cout << left << setw(10) << (avl.find(fnd1, fnd2) == i ? "-> " : "") + *i;
+  } cout << endl;
+
+  auto rm1 = vec[1], rm2 = vec[5];
+  cout << "\nRemoving \"" << fnd1 << "\" and \"" << fnd2 << "\":"<< endl;
+
+  ls.remove(rm1);
+  ls.remove(rm2);
+  vec.remove(rm1);
+  vec.remove(rm2);
+  tree.remove(rm1);
+  tree.remove(rm2);
+  avl.remove(rm1);
+  avl.remove(rm2);
+
+  cout
+  << "List:    " << ls << " size = " << ls.size() << '\n'
+  << "Vector:  " << vec << " size = " << vec.size() << '\n'
+  << "BSTree:  " << tree  << " size = " << tree.size() << '\n'
+  << "AVLTree: " << avl << " size = " << avl.size() << endl;
+
+  cout << "\nFor-range append \'++\':"<< endl;
+
+  for (auto &a : ls) a.append("++");
+  for (auto &a : vec) a.append("++");
+  for (auto &a : tree) a.append("++");
+  for (auto &a : avl) a.append("++");
 
 
-  cout << tree.front() << ' ' << tree.back() << endl;
+  cout
+  << "List:    " << ls << " size = " << ls.size() << '\n'
+  << "Vector:  " << vec << " size = " << vec.size() << '\n'
+  << "BSTree:  " << tree  << " size = " << tree.size() << '\n'
+  << "AVLTree: " << avl << " size = " << avl.size() << endl;
 
-  for (auto a = tree.begin(); a != tree.end(); ++a)
-    cout << *a << ' ';
-
-  cout << endl;
-
-  cout << *tree.find(30, 35) << endl;
-
-  //cout << tree << endl;
-
-  //tree.remove(6);
-  //tree.remove(6);
-  cout << tree << endl;
-
-  cout << avl << endl;
-  tree.remove(1);
-  avl.remove(1);
-
-  cout << tree << endl;
-  cout << avl << endl;
 
 }

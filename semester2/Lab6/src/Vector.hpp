@@ -327,9 +327,11 @@ void Vector<T>::insert(const T &val) {
   }
 
   auto pos = getSortedPos(val, 0, size());
-  std::copy_n(ptr + pos, sz - pos, ptr + pos + 1);
-  ptr[pos] = val;
-  ++sz;
+  if (pos != -1) {
+    for (int i = sz; i > pos; --i) ptr[i] = ptr[i-1];
+    ptr[pos] = val;
+    ++sz;
+  }
 }
 
 template<typename T>
@@ -340,15 +342,15 @@ size_t Vector<T>::getSortedPos(const T &val, size_t beg, size_t end) {
     return mid;
   else if (val < ptr[mid])
     return getSortedPos(val, beg, mid);
-  else
+  else if (val > ptr[mid])
     return getSortedPos(val, mid + 1, end);
+  else if (val == ptr[mid])
+    return -1;
 }
 
 template<typename T>
 void Vector<T>::remove(const T &val) {
-  iterator i;
-  while ((i = find(val)) != end())
-    erase(i.index);
+  erase(find(val).index);
 }
 
 template<typename T>
