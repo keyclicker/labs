@@ -1,0 +1,94 @@
+2020-06-19 17:51:20
+Running /home/keyclicker/Documents/Repos/labs/semester2/Lab6/cmake-build-debug/bench
+Run on (8 X 3900 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 256 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 0.76, 0.83, 0.85
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+***WARNING*** Library was built as DEBUG. Timings may be affected.
+----------------------------------------------------------------------------
+Benchmark                                  Time             CPU   Iterations
+----------------------------------------------------------------------------
+ListInsert/256/iterations:500           2.13 us         2.01 us          500
+ListInsert/512/iterations:500           3.26 us         3.06 us          500
+ListInsert/1024/iterations:500          4.83 us         4.67 us          500
+ListInsert/2048/iterations:500          9.48 us         9.25 us          500
+ListInsert/4096/iterations:500          19.8 us         19.0 us          500
+VectorInsert/256/iterations:500         1.48 us         1.47 us          500
+VectorInsert/512/iterations:500         1.72 us         1.70 us          500
+VectorInsert/1024/iterations:500        2.29 us         2.23 us          500
+VectorInsert/2048/iterations:500        3.38 us         3.23 us          500
+VectorInsert/4096/iterations:500        5.39 us         5.02 us          500
+TreeInsert/256/iterations:500           2.26 us         2.19 us          500
+TreeInsert/512/iterations:500           2.57 us         2.40 us          500
+TreeInsert/1024/iterations:500          2.64 us         2.48 us          500
+TreeInsert/2048/iterations:500          3.30 us         2.85 us          500
+TreeInsert/4096/iterations:500          2.98 us         2.72 us          500
+AvlTreeInsert/256/iterations:500        3.14 us         3.08 us          500
+AvlTreeInsert/512/iterations:500        3.45 us         3.31 us          500
+AvlTreeInsert/1024/iterations:500       3.57 us         3.40 us          500
+AvlTreeInsert/2048/iterations:500       3.97 us         3.70 us          500
+AvlTreeInsert/4096/iterations:500       4.28 us         3.88 us          500
+ListFind/256/iterations:500             1.42 us         1.42 us          500
+ListFind/512/iterations:500             2.23 us         2.20 us          500
+ListFind/1024/iterations:500            4.21 us         4.11 us          500
+ListFind/2048/iterations:500            8.94 us         8.76 us          500
+ListFind/4096/iterations:500            17.7 us         17.4 us          500
+VectorFind/256/iterations:500          0.598 us        0.588 us          500
+VectorFind/512/iterations:500          0.652 us        0.621 us          500
+VectorFind/1024/iterations:500         0.680 us        0.642 us          500
+VectorFind/2048/iterations:500         0.780 us        0.692 us          500
+VectorFind/4096/iterations:500         0.992 us        0.798 us          500
+TreeFind/256/iterations:500             1.53 us         1.49 us          500
+TreeFind/512/iterations:500             1.69 us         1.62 us          500
+TreeFind/1024/iterations:500            1.85 us         1.74 us          500
+TreeFind/2048/iterations:500            2.05 us         1.87 us          500
+TreeFind/4096/iterations:500            2.26 us         2.02 us          500
+AvlTreeFind/256/iterations:500          1.28 us         1.22 us          500
+AvlTreeFind/512/iterations:500          1.41 us         1.31 us          500
+AvlTreeFind/1024/iterations:500         1.58 us         1.42 us          500
+AvlTreeFind/2048/iterations:500         1.79 us         1.57 us          500
+AvlTreeFind/4096/iterations:500         1.99 us         1.70 us          500
+ListRemove/256/iterations:500           1.46 us         1.45 us          500
+ListRemove/512/iterations:500           2.40 us         2.34 us          500
+ListRemove/1024/iterations:500          4.37 us         4.23 us          500
+ListRemove/2048/iterations:500          9.36 us         9.02 us          500
+ListRemove/4096/iterations:500          18.1 us         17.7 us          500
+VectorRemove/256/iterations:500        0.938 us        0.921 us          500
+VectorRemove/512/iterations:500         1.30 us         1.25 us          500
+VectorRemove/1024/iterations:500        1.94 us         1.85 us          500
+VectorRemove/2048/iterations:500        3.25 us         3.08 us          500
+VectorRemove/4096/iterations:500        5.22 us         5.06 us          500
+TreeRemove/256/iterations:500           1.99 us         1.95 us          500
+TreeRemove/512/iterations:500           2.17 us         2.10 us          500
+TreeRemove/1024/iterations:500          2.40 us         2.27 us          500
+TreeRemove/2048/iterations:500          2.93 us         2.66 us          500
+TreeRemove/4096/iterations:500          3.21 us         2.90 us          500
+AvlTreeRemove/256/iterations:500        1.96 us         1.89 us          500
+AvlTreeRemove/512/iterations:500        2.13 us         2.02 us          500
+AvlTreeRemove/1024/iterations:500       2.59 us         2.28 us          500
+AvlTreeRemove/2048/iterations:500       2.70 us         2.46 us          500
+AvlTreeRemove/4096/iterations:500       2.93 us         2.65 us          500
+ListRange/256/iterations:500            1.81 us         1.80 us          500
+ListRange/512/iterations:500            3.11 us         3.08 us          500
+ListRange/1024/iterations:500           5.77 us         5.69 us          500
+ListRange/2048/iterations:500           11.1 us         10.9 us          500
+ListRange/4096/iterations:500           21.5 us         21.0 us          500
+VectorRange/256/iterations:500          2.20 us         2.19 us          500
+VectorRange/512/iterations:500          3.83 us         3.80 us          500
+VectorRange/1024/iterations:500         7.03 us         6.96 us          500
+VectorRange/2048/iterations:500         13.2 us         13.1 us          500
+VectorRange/4096/iterations:500         23.8 us         23.4 us          500
+TreeRange/256/iterations:500            37.3 us         37.2 us          500
+TreeRange/512/iterations:500            74.1 us         73.9 us          500
+TreeRange/1024/iterations:500            145 us          145 us          500
+TreeRange/2048/iterations:500            281 us          281 us          500
+TreeRange/4096/iterations:500            543 us          542 us          500
+AvlTreeRange/256/iterations:500         36.1 us         36.0 us          500
+AvlTreeRange/512/iterations:500         71.2 us         70.8 us          500
+AvlTreeRange/1024/iterations:500         140 us          140 us          500
+AvlTreeRange/2048/iterations:500         272 us          272 us          500
+AvlTreeRange/4096/iterations:500         524 us          523 us          500

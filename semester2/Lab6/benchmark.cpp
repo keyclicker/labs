@@ -4,9 +4,6 @@
 #include "src/AVL.hpp"
 #include <list>
 #include <vector>
-#include <array>
-
-#include <iostream>
 
 #include <benchmark/benchmark.h>
 using namespace std;
@@ -18,7 +15,6 @@ auto rand(T a, T b) {
   uniform_int_distribution<T> drand(a, b);
   return drand(re);
 }
-
 
 #define INSERTBENCH(name, container) \
 void name(benchmark::State& state) { \
@@ -36,13 +32,13 @@ void name(benchmark::State& state) { \
 BENCHMARK(name) \
 ->Unit(benchmark::TimeUnit::kMicrosecond) \
 ->RangeMultiplier(2) \
-->Range(512, 4096) \
-->Iterations(1000)
+->Range(256, 4096) \
+->Iterations(500)
 
-//INSERTBENCH(ListInsert, List);
-//INSERTBENCH(VectorInsert, Vector);
-//INSERTBENCH(TreeInsert, Tree);
-//INSERTBENCH(AvlTreeInsert, AvlTree);
+INSERTBENCH(ListInsert, List);
+INSERTBENCH(VectorInsert, Vector);
+INSERTBENCH(TreeInsert, Tree);
+INSERTBENCH(AvlTreeInsert, AvlTree);
 
 #define FINDBENCH(name, container) \
 void name(benchmark::State& state) { \
@@ -61,13 +57,13 @@ void name(benchmark::State& state) { \
 BENCHMARK(name) \
 ->Unit(benchmark::TimeUnit::kMicrosecond) \
 ->RangeMultiplier(2) \
-->Range(512, 4096) \
-->Iterations(10)
+->Range(256, 4096) \
+->Iterations(500)
 
-FINDBENCH(ListRemove, List);
-FINDBENCH(VectorRemove, Vector);
-FINDBENCH(TreeRemove, Tree);
-FINDBENCH(AvlTreeRemove, AvlTree);
+FINDBENCH(ListFind, List);
+FINDBENCH(VectorFind, Vector);
+FINDBENCH(TreeFind, Tree);
+FINDBENCH(AvlTreeFind, AvlTree);
 
 #define REMOVEBENCH(name, container) \
 void name(benchmark::State& state) { \
@@ -86,14 +82,13 @@ void name(benchmark::State& state) { \
 BENCHMARK(name) \
 ->Unit(benchmark::TimeUnit::kMicrosecond) \
 ->RangeMultiplier(2) \
-->Range(512, 4096) \
-->Iterations(1000)
+->Range(256, 4096) \
+->Iterations(500)
 
-//REMOVEBENCH(ListRemove, List);
-//REMOVEBENCH(VectorRemove, Vector);
-//REMOVEBENCH(TreeRemove, Tree);
-//REMOVEBENCH(AvlTreeRemove, AvlTree);
-
+REMOVEBENCH(ListRemove, List);
+REMOVEBENCH(VectorRemove, Vector);
+REMOVEBENCH(TreeRemove, Tree);
+REMOVEBENCH(AvlTreeRemove, AvlTree);
 
 
 #define RANGEBENCH(name, container) \
@@ -112,16 +107,13 @@ void name(benchmark::State& state) { \
 BENCHMARK(name) \
 ->Unit(benchmark::TimeUnit::kMicrosecond) \
 ->RangeMultiplier(2) \
-->Range(512, 4096) \
-->Iterations(10)
+->Range(256, 4096) \
+->Iterations(500)
 
 RANGEBENCH(ListRange, List);
 RANGEBENCH(VectorRange, Vector);
 RANGEBENCH(TreeRange, Tree);
 RANGEBENCH(AvlTreeRange, AvlTree);
-
-
-
 
 BENCHMARK_MAIN();
 
