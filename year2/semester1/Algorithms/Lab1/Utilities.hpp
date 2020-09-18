@@ -6,37 +6,39 @@
 #include <filesystem>
 using namespace std;
 
-void genData(const string &filename, int n) {
+template<typename T>
+void genData(const string &filename, size_t n) {
   ofstream file(filename, ios::out | ios::binary);
-  for (int i = 0; i < n; ++i) {
-    int wr = rand() % 100;
-    file.write((char*)&wr, sizeof(int));
+  for (size_t i = 0; i < n; ++i) {
+    T wr = rand() % 1000;
+    file.write((char*)&wr, sizeof(T));
   }
 }
 
-
+template<typename T>
 void printBinFile(const string &filename) {
   cout << "\nPrinting " + filename + ":" << endl;
 
   ifstream print(filename, ios::in | ios::binary);
-  for (int i = 1; !print.eof(); ++i) {
-    int wr;
-    print.read((char*)&wr, sizeof(int));
+  for (size_t i = 1; !print.eof(); ++i) {
+    T wr;
+    print.read((char*)&wr, sizeof(T));
     cout << wr << ' ';
     if (!(i % 20) && i) cout << endl;
   }
   cout << endl;
 }
 
+template<typename T>
 void binSize(const string &filename) {
   cout << "\nSize of " + filename + ": ";
 
   ifstream print(filename, ios::in | ios::binary);
 
-  int i;
-  for (i = 1; !print.eof(); ++i) {
-    int wr;
-    print.read((char*)&wr, sizeof(int));
+  size_t i;
+  for (i = 0; !print.eof(); ++i) {
+    T wr;
+    print.read((char*)&wr, sizeof(T));
   }
-  cout << i << endl;
+  cout << i - 1 << endl;
 }

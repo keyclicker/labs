@@ -5,18 +5,18 @@
 using namespace std;
 
 int main() {
-  genData("input.dat", FileSize);
-  printBinFile("input.dat");
+  genData<int>("input.dat", FileSize);
+  printBinFile<int>("input.dat");
 
-  externalMergeSort("input.dat");
+  externalMergeSort<int>("input.dat");
 
 //  for (int i = 0; i <= ChunkCount; ++i) {
 //    printBinFile("chunk" + to_string(i) + ".dat");
 //  }
 
-  printBinFile("res.dat");
+  printBinFile<int>("res.dat");
 
-  binSize("input.dat");
-  binSize("res.dat");
+  binSize<int>("input.dat");
+  binSize<int>("res.dat");
   return 0;
 }
