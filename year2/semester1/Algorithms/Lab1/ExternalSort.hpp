@@ -1,5 +1,4 @@
 #pragma once
-#include "Config.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -9,26 +8,29 @@
 using namespace std;
 
 template<typename T>
-void splitAndSort(const string &filename) {
+void splitAndSort(const string &filename, size_t chunkSize) {
   ifstream file(filename, ios::in | ios::binary);
 
   for (size_t i = 0; !file.eof(); ++i) {
-    vector<T> chunk(ChunkSize);
-    file.read((char*)chunk.data(), sizeof(T) * ChunkSize);
+    vector<T> chunk(chunkSize);
+    file.read((char*)chunk.data(), sizeof(T) * chunkSize);
     sort(chunk.begin(), chunk.end());
 
     ofstream chunkf("chunk" + to_string(i) + ".dat", ios::out | ios::binary);
-    chunkf.write((char*)chunk.data(), sizeof(T) * ChunkSize);
+    chunkf.write((char*)chunk.data(), sizeof(T) * chunkSize);
   }
   file.close();
 
 }
 
 template<typename T>
-void externalMergeSort(const string &filename) {
-  splitAndSort<T>(filename);
+void externalMergeSort(const string &inputFile, const string &outputFile,
+                          const size_t FileSize, const size_t ChunkSize) {
+  const std::size_t ChunkCount = FileSize / ChunkSize;
 
-  constexpr auto memChunckSize = ChunkSize / (ChunkCount + 1);
+  splitAndSort<T>(inputFile, ChunkSize);
+
+  const auto memChunckSize = ChunkSize / (ChunkCount + 1);
 
   //Chunks in memory
   vector<vector<T>> vec(ChunkCount, vector<T>(memChunckSize));
@@ -43,7 +45,7 @@ void externalMergeSort(const string &filename) {
   }
 
   //Result file
-  ofstream res("res.dat", ios::out | ios::binary);
+  ofstream res(outputFile, ios::out | ios::binary);
 
   for (size_t i = 0;; ++i) {
     size_t min = 0; //index of chunk with minimal element
@@ -60,15 +62,6 @@ void externalMergeSort(const string &filename) {
     }
 
     if (indices[min] < ChunkSize) {
-      //DEBUG
-      static T prev = 0;
-      if (vec[min][indices[min] % memChunckSize] < prev) {
-        cout << "Not sorted!!!" << endl;
-      }
-
-      prev = vec[min][indices[min] % memChunckSize];
-      //DEBUG-end
-
       //cout << vec[min][indices[min] % memChunckSize] << '\n'; //todo remove debug
       res.write((char*)&vec[min][indices[min] % memChunckSize], sizeof(T)); //todo remove debug
 
