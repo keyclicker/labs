@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -8,29 +9,43 @@
 using namespace std;
 
 template<typename T>
-void splitAndSort(const string &filename, size_t chunkSize) {
+void splitAndSort(const string &filename, const size_t FileSize,
+                  const size_t ChunkSize, const size_t ChunkCount) {
   ifstream file(filename, ios::in | ios::binary);
 
-  for (size_t i = 0; !file.eof(); ++i) {
-    vector<T> chunk(chunkSize);
-    file.read((char*)chunk.data(), sizeof(T) * chunkSize);
+  vector<T> chunk(ChunkSize);
+  for (size_t i = 0; i < ChunkCount - 1; ++i) {
+    file.read((char*)chunk.data(), sizeof(T) * ChunkSize);
     sort(chunk.begin(), chunk.end());
 
     ofstream chunkf("chunk" + to_string(i) + ".dat", ios::out | ios::binary);
-    chunkf.write((char*)chunk.data(), sizeof(T) * chunkSize);
+    chunkf.write((char*)chunk.data(), sizeof(T) * ChunkSize);
   }
+
+  const auto lsize = FileSize % ChunkSize ? FileSize % ChunkSize : ChunkSize;
+
+  vector<T> lchunk(lsize);
+  file.read((char*)lchunk.data(), sizeof(T) * (lsize));
+  sort(lchunk.begin(), lchunk.end());
+
+  ofstream chunkf("chunk" + to_string(ChunkCount - 1) + ".dat", ios::out | ios::binary);
+  chunkf.write((char*)lchunk.data(), sizeof(T) * (lsize));
+
   file.close();
 
 }
 
 template<typename T>
 void externalMergeSort(const string &inputFile, const string &outputFile,
-                          const size_t FileSize, const size_t ChunkSize) {
-  const std::size_t ChunkCount = FileSize / ChunkSize;
+                        const size_t FileSize, const size_t ChunkSize) {
+  const std::size_t ChunkCount = ceil((float) FileSize / ChunkSize);
+  const auto lChunkSize = FileSize % ChunkSize ? FileSize % ChunkSize : ChunkSize;
 
-  splitAndSort<T>(inputFile, ChunkSize);
 
-  const auto memChunckSize = ChunkSize / (ChunkCount + 1);
+  splitAndSort<T>(inputFile, FileSize, ChunkSize, ChunkCount);
+
+  auto memChunckSize = ChunkSize / (ChunkCount + 1);
+  if (!memChunckSize) memChunckSize = 1; //todo Remove Debug
 
   //Chunks in memory
   vector<vector<T>> vec(ChunkCount, vector<T>(memChunckSize));
