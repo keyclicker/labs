@@ -11,28 +11,22 @@ using namespace std;
 template<typename T>
 void splitAndSort(const string &filename, const size_t FileSize,
                   const size_t ChunkSize, const size_t ChunkCount) {
+  const auto lChunkSize = FileSize % ChunkSize ? FileSize % ChunkSize : ChunkSize;
+
   ifstream file(filename, ios::in | ios::binary);
 
   vector<T> chunk(ChunkSize);
-  for (size_t i = 0; i < ChunkCount - 1; ++i) {
-    file.read((char*)chunk.data(), sizeof(T) * ChunkSize);
+  for (size_t i = 0; i < ChunkCount; ++i) {
+    const auto S = ((i == ChunkCount - 1) ? lChunkSize : ChunkSize);
+
+    file.read((char*)chunk.data(), sizeof(T) * S);
     sort(chunk.begin(), chunk.end());
 
     ofstream chunkf("chunk" + to_string(i) + ".dat", ios::out | ios::binary);
-    chunkf.write((char*)chunk.data(), sizeof(T) * ChunkSize);
+    chunkf.write((char*)chunk.data(), sizeof(T) * S);
   }
 
-  const auto lsize = FileSize % ChunkSize ? FileSize % ChunkSize : ChunkSize;
-
-  vector<T> lchunk(lsize);
-  file.read((char*)lchunk.data(), sizeof(T) * (lsize));
-  sort(lchunk.begin(), lchunk.end());
-
-  ofstream chunkf("chunk" + to_string(ChunkCount - 1) + ".dat", ios::out | ios::binary);
-  chunkf.write((char*)lchunk.data(), sizeof(T) * (lsize));
-
   file.close();
-
 }
 
 template<typename T>
@@ -41,12 +35,15 @@ void externalMergeSort(const string &inputFile, const string &outputFile,
   const std::size_t ChunkCount = ceil((float) FileSize / ChunkSize);
   const auto lChunkSize = FileSize % ChunkSize ? FileSize % ChunkSize : ChunkSize;
 
-
-  splitAndSort<T>(inputFile, FileSize, ChunkSize, ChunkCount);
-
   auto memChunckSize = ChunkSize / (ChunkCount + 1);
   if (!memChunckSize) memChunckSize = 1; //todo Remove Debug
 
+  const auto bufSize = ChunkSize - memChunckSize * ChunkCount;
+
+  splitAndSort<T>(inputFile, FileSize, ChunkSize, ChunkCount);
+
+  //Buffer
+  vector<T> buf(bufSize);
   //Chunks in memory
   vector<vector<T>> vec(ChunkCount, vector<T>(memChunckSize));
   //Chunk indices
@@ -62,23 +59,29 @@ void externalMergeSort(const string &inputFile, const string &outputFile,
   //Result file
   ofstream res(outputFile, ios::out | ios::binary);
 
-  for (size_t i = 0;; ++i) {
+  for (size_t i = 0, bufIdx = 0;; ++i) {
     size_t min = 0; //index of chunk with minimal element
-    while (indices[min] >= ChunkSize) min++; //todo test
+    while (indices[min] >=
+            ((min == ChunkCount - 1) ? lChunkSize : ChunkSize)) min++; //todo test
+
     if (min >= ChunkCount) break; //breaking if every index greater than ChunkSize
 
     //Searching for min
     for (size_t j = 0; j < ChunkCount; ++j) {
       if (vec[min][indices[min] % memChunckSize] >
                 vec[j][indices[j] % memChunckSize] &&
-                               indices[j] < ChunkSize) {
+                   indices[j] < ((j == ChunkCount - 1) ? lChunkSize : ChunkSize)) {
         min = j;
       }
     }
 
-    if (indices[min] < ChunkSize) {
-      //cout << vec[min][indices[min] % memChunckSize] << '\n'; //todo remove debug
-      res.write((char*)&vec[min][indices[min] % memChunckSize], sizeof(T)); //todo remove debug
+    if (indices[min] < ((min == ChunkCount - 1) ? lChunkSize : ChunkSize)) {
+      buf[bufIdx] = vec[min][indices[min] % memChunckSize];
+      bufIdx++;
+      if (bufIdx == bufSize) {
+        bufIdx = 0;
+        res.write((char*)buf.data(), sizeof(T) * bufSize);
+      }
 
       ++indices[min];
 
