@@ -20,7 +20,7 @@ void splitAndSort(const string &filename, const size_t FileSize,
     const auto S = ((i == ChunkCount - 1) ? lChunkSize : ChunkSize);
 
     file.read((char*)chunk.data(), sizeof(T) * S);
-    sort(chunk.begin(), chunk.end());
+    sort(chunk.begin(), chunk.begin() + S);
 
     ofstream chunkf("chunk" + to_string(i) + ".dat", ios::out | ios::binary);
     chunkf.write((char*)chunk.data(), sizeof(T) * S);
@@ -38,7 +38,8 @@ void externalMergeSort(const string &inputFile, const string &outputFile,
   auto memChunckSize = ChunkSize / (ChunkCount + 1);
   if (!memChunckSize) memChunckSize = 1; //todo Remove Debug
 
-  const auto bufSize = ChunkSize - memChunckSize * ChunkCount;
+  auto bufSize = ChunkSize - memChunckSize * ChunkCount;
+  if (!bufSize) bufSize = 1;
 
   splitAndSort<T>(inputFile, FileSize, ChunkSize, ChunkCount);
 
@@ -59,7 +60,8 @@ void externalMergeSort(const string &inputFile, const string &outputFile,
   //Result file
   ofstream res(outputFile, ios::out | ios::binary);
 
-  for (size_t i = 0, bufIdx = 0;; ++i) {
+  size_t bufIdx = 0;
+  for (size_t i = 0;; ++i) {
     size_t min = 0; //index of chunk with minimal element
     while (indices[min] >=
             ((min == ChunkCount - 1) ? lChunkSize : ChunkSize)) min++; //todo test
@@ -90,6 +92,8 @@ void externalMergeSort(const string &inputFile, const string &outputFile,
       }
     }
   }
+  res.write((char*)buf.data(), sizeof(T) * bufIdx);
+
 
 
   //Deleting chunk files

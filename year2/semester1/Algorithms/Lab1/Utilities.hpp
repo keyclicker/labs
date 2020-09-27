@@ -28,7 +28,7 @@ void sortFile(const string &input, const string &output, size_t n) {
 }
 
 template<typename T>
-bool compFile(const string &aPath, const string &bPath, size_t n) {
+bool compFiles(const string &aPath, const string &bPath, size_t n) {
   vector<T> aVec(n), bVec(n);
   ifstream
     aFile(aPath, ios::in | ios::binary),
@@ -38,7 +38,8 @@ bool compFile(const string &aPath, const string &bPath, size_t n) {
   bFile.read((char*)bVec.data(), sizeof(T)*n);
 
   for (int i = 0; i < n; ++i) {
-    if (aVec[i] != bVec[i]) return false;
+    if (aVec[i] != bVec[i])
+      return false;
   }
   return true;
 }

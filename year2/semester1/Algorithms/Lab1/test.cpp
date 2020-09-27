@@ -3,8 +3,8 @@
 #include "Utilities.hpp"
 
 constexpr std::size_t
-FileSize = 900000,
-ChunkSize = 100000;
+FileSize = 1000000,
+ChunkSize = 10000;
 
 TEST(Sort, SizeTest) {
   genData<int>("inputTest", FileSize);
@@ -18,5 +18,5 @@ TEST(Sort, IsSorted) {
   externalMergeSort<int>("inputTest", "outputTest", FileSize, ChunkSize);
   sortFile<int>("inputTest", "memSortTest", FileSize);
 
-  EXPECT_TRUE(compFile<int>("outputTest", "memSortTest", FileSize));
+  EXPECT_TRUE(compFiles<int>("outputTest", "memSortTest", FileSize));
 }
