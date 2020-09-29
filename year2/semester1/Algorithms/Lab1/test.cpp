@@ -3,8 +3,8 @@
 #include "Utilities.hpp"
 
 constexpr std::size_t
-FileSize = 1000000,
-ChunkSize = 10000;
+FileSize = 100051,
+ChunkSize = 10015;
 
 TEST(Sort, SizeTest) {
   genData<int>("inputTest", FileSize);
