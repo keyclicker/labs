@@ -1,0 +1,142 @@
+\hypertarget{class_matrix_graph}{}\section{Matrix\+Graph$<$ T $>$ Class Template Reference}
+\label{class_matrix_graph}\index{Matrix\+Graph$<$ T $>$@{Matrix\+Graph$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Graph.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_matrix_graph_af29d807007dbccc14567f5ee60c6b4eb}\label{class_matrix_graph_af29d807007dbccc14567f5ee60c6b4eb}} 
+{\bfseries Matrix\+Graph} (size\+\_\+t \hyperlink{class_matrix_graph_acb1c06541182d4bb472c9813942a75b0}{size}=0)
+\item 
+void \hyperlink{class_matrix_graph_acc5d5c603987bc7a00fc11d37f1edd83}{resize} (size\+\_\+t \hyperlink{class_matrix_graph_acb1c06541182d4bb472c9813942a75b0}{size})
+\item 
+size\+\_\+t \hyperlink{class_matrix_graph_acb1c06541182d4bb472c9813942a75b0}{size} () const
+\item 
+const boost\+::multi\+\_\+array$<$ T, 2 $>$ \& \hyperlink{class_matrix_graph_ae6b799585fda6e65cb2fa6693cc8603e}{get\+Matrix} () const
+\item 
+boost\+::multi\+\_\+array$<$ T, 2 $>$ \& \hyperlink{class_matrix_graph_a4775ce045cd24d6ec81755fc571700ea}{get\+Vertices} ()
+\item 
+void \hyperlink{class_matrix_graph_af4d5e646d3bc3618b83c94610108e089}{add\+Edge} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
+\item 
+void \hyperlink{class_matrix_graph_a32ed83475da8b8d144bfc3335ae33df0}{connect} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
+\item 
+T \hyperlink{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}{get\+Edge} (size\+\_\+t av, size\+\_\+t bv)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_matrix_graph_ab6d0f5b70345a14bf8a00c293fc78c9d}\label{class_matrix_graph_ab6d0f5b70345a14bf8a00c293fc78c9d}} 
+static constexpr auto {\bfseries Max\+Value} = std\+::numeric\+\_\+limits$<$T$>$\+::max()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T = int$>$\newline
+class Matrix\+Graph$<$ T $>$}
+
+Adjacency matrix graph 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Weight type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_matrix_graph_af4d5e646d3bc3618b83c94610108e089}\label{class_matrix_graph_af4d5e646d3bc3618b83c94610108e089}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!add\+Edge@{add\+Edge}}
+\index{add\+Edge@{add\+Edge}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{add\+Edge()}{addEdge()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::add\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv,  }\item[{const T \&}]{weight = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds directed edge 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+{\em weight} & Weight of the edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_matrix_graph_a32ed83475da8b8d144bfc3335ae33df0}\label{class_matrix_graph_a32ed83475da8b8d144bfc3335ae33df0}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!connect@{connect}}
+\index{connect@{connect}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::connect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv,  }\item[{const T \&}]{weight = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds undirected edge 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+{\em weight} & Weight of the edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}\label{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!get\+Edge@{get\+Edge}}
+\index{get\+Edge@{get\+Edge}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{get\+Edge()}{getEdge()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+T \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::get\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns weight of the edge 
+\begin{DoxyParams}{Parameters}
+{\em av} & first vertex \\
+\hline
+{\em bv} & second vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Edge weight 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_graph_ae6b799585fda6e65cb2fa6693cc8603e}\label{class_matrix_graph_ae6b799585fda6e65cb2fa6693cc8603e}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!get\+Matrix@{get\+Matrix}}
+\index{get\+Matrix@{get\+Matrix}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{get\+Matrix()}{getMatrix()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+const boost\+::multi\+\_\+array$<$T, 2$>$\& \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::get\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Adjacency matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_graph_a4775ce045cd24d6ec81755fc571700ea}\label{class_matrix_graph_a4775ce045cd24d6ec81755fc571700ea}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!get\+Vertices@{get\+Vertices}}
+\index{get\+Vertices@{get\+Vertices}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{get\+Vertices()}{getVertices()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+boost\+::multi\+\_\+array$<$T, 2$>$\& \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::get\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Adjacency matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_graph_acc5d5c603987bc7a00fc11d37f1edd83}\label{class_matrix_graph_acc5d5c603987bc7a00fc11d37f1edd83}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!resize@{resize}}
+\index{resize@{resize}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Changes vertices count 
+\begin{DoxyParams}{Parameters}
+{\em size} & vertices count \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_matrix_graph_acb1c06541182d4bb472c9813942a75b0}\label{class_matrix_graph_acb1c06541182d4bb472c9813942a75b0}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!size@{size}}
+\index{size@{size}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+size\+\_\+t \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Vertices count 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Graph.\+hpp\end{DoxyCompactItemize}

@@ -11,6 +11,6 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 link_directories(${SFML_LIBRARY_DIRS})
 
-add_executable(test tests/graph_test.cpp tests/shape_test.cpp)
+add_executable(test tests/graph_test.cpp tests/shape_test.cpp src/Shape.cpp)
 
 target_link_libraries(test GTest::GTest GTest::Main)

@@ -1,0 +1,202 @@
+\hypertarget{class_shape}{}\section{Shape Class Reference}
+\label{class_shape}\index{Shape@{Shape}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_shape_a2274ccda8fc9c57d30e4613f5a4893a4}{Shape} (Fun\+Type upper=\mbox{[}$\,$\mbox{]}(auto x)\{return 0;\}, Fun\+Type lower=\mbox{[}$\,$\mbox{]}(auto x)\{return 0;\})
+\item 
+{\footnotesize template$<$typename Func $>$ }\\void \hyperlink{class_shape_a46823604a0bf2242340773d188151342}{set\+Upper} (Func \&\&upper)
+\item 
+{\footnotesize template$<$typename Func $>$ }\\void \hyperlink{class_shape_aef00fbc796cbac641d790791919f1bcb}{set\+Lower} (Func \&\&lower)
+\item 
+double \hyperlink{class_shape_a0ca8cbfa05bdff9702e17d070af0badc}{get\+Area} (double sp, double ep, double step=Default\+Step) const
+\item 
+double \hyperlink{class_shape_aed3f92132aa5c78f59946ef2b4aeac2b}{get\+Perimeter} (double sp, double ep, double step=Default\+Step) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_shape_ab78c805dcbe5ce07ec7407b55e90d8d5}{intersection\+Area} (\hyperlink{class_shape}{Shape} \&s1, \hyperlink{class_shape}{Shape} \&s2, double sp, double ep, double step=Shape\+::\+Default\+Step)
+\item 
+double \hyperlink{class_shape_acc80f4bfd96418973e2fa339a00511af}{union\+Area} (\hyperlink{class_shape}{Shape} \&s1, \hyperlink{class_shape}{Shape} \&s2, double sp, double ep, double step=Shape\+::\+Default\+Step)
+\item 
+double \hyperlink{class_shape_a7c2f955e17b14abbbff05e3adc2fc6a7}{intersection\+Perimeter} (\hyperlink{class_shape}{Shape} \&s1, \hyperlink{class_shape}{Shape} \&s2, double sp, double ep, double step=Shape\+::\+Default\+Step)
+\item 
+double \hyperlink{class_shape_a207dc66677f37ebecd053cb8ca974fae}{union\+Perimeter} (\hyperlink{class_shape}{Shape} \&s1, \hyperlink{class_shape}{Shape} \&s2, double sp, double ep, double step=Shape\+::\+Default\+Step)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_shape_a2274ccda8fc9c57d30e4613f5a4893a4}\label{class_shape_a2274ccda8fc9c57d30e4613f5a4893a4}} 
+\index{Shape@{Shape}!Shape@{Shape}}
+\index{Shape@{Shape}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{Shape()}{Shape()}}
+{\footnotesize\ttfamily Shape\+::\+Shape (\begin{DoxyParamCaption}\item[{Fun\+Type}]{upper = {\ttfamily \mbox{[}\mbox{]}(auto~x)\{return~0;\}},  }\item[{Fun\+Type}]{lower = {\ttfamily \mbox{[}\mbox{]}(auto~x)\{return~0;\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em upper} & Upper function \\
+\hline
+{\em lower} & Lower function \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_shape_a0ca8cbfa05bdff9702e17d070af0badc}\label{class_shape_a0ca8cbfa05bdff9702e17d070af0badc}} 
+\index{Shape@{Shape}!get\+Area@{get\+Area}}
+\index{get\+Area@{get\+Area}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{get\+Area()}{getArea()}}
+{\footnotesize\ttfamily double Shape\+::get\+Area (\begin{DoxyParamCaption}\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily DefaultStep} }\end{DoxyParamCaption}) const}
+
+Calculates area function 
+\begin{DoxyParams}{Parameters}
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated area 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_shape_aed3f92132aa5c78f59946ef2b4aeac2b}\label{class_shape_aed3f92132aa5c78f59946ef2b4aeac2b}} 
+\index{Shape@{Shape}!get\+Perimeter@{get\+Perimeter}}
+\index{get\+Perimeter@{get\+Perimeter}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{get\+Perimeter()}{getPerimeter()}}
+{\footnotesize\ttfamily double Shape\+::get\+Perimeter (\begin{DoxyParamCaption}\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily DefaultStep} }\end{DoxyParamCaption}) const}
+
+Calculates perimeter function 
+\begin{DoxyParams}{Parameters}
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated perimeter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_shape_aef00fbc796cbac641d790791919f1bcb}\label{class_shape_aef00fbc796cbac641d790791919f1bcb}} 
+\index{Shape@{Shape}!set\+Lower@{set\+Lower}}
+\index{set\+Lower@{set\+Lower}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{set\+Lower()}{setLower()}}
+{\footnotesize\ttfamily template$<$typename Func $>$ \\
+void Shape\+::set\+Lower (\begin{DoxyParamCaption}\item[{Func \&\&}]{lower }\end{DoxyParamCaption})}
+
+Lower function setter 
+\begin{DoxyParams}{Parameters}
+{\em lower} & Lower function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_shape_a46823604a0bf2242340773d188151342}\label{class_shape_a46823604a0bf2242340773d188151342}} 
+\index{Shape@{Shape}!set\+Upper@{set\+Upper}}
+\index{set\+Upper@{set\+Upper}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{set\+Upper()}{setUpper()}}
+{\footnotesize\ttfamily template$<$typename Func $>$ \\
+void Shape\+::set\+Upper (\begin{DoxyParamCaption}\item[{Func \&\&}]{upper }\end{DoxyParamCaption})}
+
+Upper function setter 
+\begin{DoxyParams}{Parameters}
+{\em upper} & Upper function \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_shape_ab78c805dcbe5ce07ec7407b55e90d8d5}\label{class_shape_ab78c805dcbe5ce07ec7407b55e90d8d5}} 
+\index{Shape@{Shape}!intersection\+Area@{intersection\+Area}}
+\index{intersection\+Area@{intersection\+Area}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{intersection\+Area}{intersectionArea}}
+{\footnotesize\ttfamily double intersection\+Area (\begin{DoxyParamCaption}\item[{\hyperlink{class_shape}{Shape} \&}]{s1,  }\item[{\hyperlink{class_shape}{Shape} \&}]{s2,  }\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily Shape\+:\+:DefaultStep} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Calculates intersection area 
+\begin{DoxyParams}{Parameters}
+{\em s1} & First shape \\
+\hline
+{\em s2} & Second shape \\
+\hline
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated intersection area 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_shape_a7c2f955e17b14abbbff05e3adc2fc6a7}\label{class_shape_a7c2f955e17b14abbbff05e3adc2fc6a7}} 
+\index{Shape@{Shape}!intersection\+Perimeter@{intersection\+Perimeter}}
+\index{intersection\+Perimeter@{intersection\+Perimeter}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{intersection\+Perimeter}{intersectionPerimeter}}
+{\footnotesize\ttfamily double intersection\+Perimeter (\begin{DoxyParamCaption}\item[{\hyperlink{class_shape}{Shape} \&}]{s1,  }\item[{\hyperlink{class_shape}{Shape} \&}]{s2,  }\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily Shape\+:\+:DefaultStep} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Calculates intersection perimeter 
+\begin{DoxyParams}{Parameters}
+{\em s1} & First shape \\
+\hline
+{\em s2} & Second shape \\
+\hline
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated intersection perimeter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_shape_acc80f4bfd96418973e2fa339a00511af}\label{class_shape_acc80f4bfd96418973e2fa339a00511af}} 
+\index{Shape@{Shape}!union\+Area@{union\+Area}}
+\index{union\+Area@{union\+Area}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{union\+Area}{unionArea}}
+{\footnotesize\ttfamily double union\+Area (\begin{DoxyParamCaption}\item[{\hyperlink{class_shape}{Shape} \&}]{s1,  }\item[{\hyperlink{class_shape}{Shape} \&}]{s2,  }\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily Shape\+:\+:DefaultStep} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Calculates union area 
+\begin{DoxyParams}{Parameters}
+{\em s1} & First shape \\
+\hline
+{\em s2} & Second shape \\
+\hline
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated union area 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_shape_a207dc66677f37ebecd053cb8ca974fae}\label{class_shape_a207dc66677f37ebecd053cb8ca974fae}} 
+\index{Shape@{Shape}!union\+Perimeter@{union\+Perimeter}}
+\index{union\+Perimeter@{union\+Perimeter}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{union\+Perimeter}{unionPerimeter}}
+{\footnotesize\ttfamily double union\+Perimeter (\begin{DoxyParamCaption}\item[{\hyperlink{class_shape}{Shape} \&}]{s1,  }\item[{\hyperlink{class_shape}{Shape} \&}]{s2,  }\item[{double}]{sp,  }\item[{double}]{ep,  }\item[{double}]{step = {\ttfamily Shape\+:\+:DefaultStep} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Calculates union perimeter 
+\begin{DoxyParams}{Parameters}
+{\em s1} & First shape \\
+\hline
+{\em s2} & Second shape \\
+\hline
+{\em sp} & Starting point \\
+\hline
+{\em ep} & Ending point \\
+\hline
+{\em step} & Step that sets precision of calculation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated union perimeter 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Shape.\+hpp\item 
+Shape.\+cpp\end{DoxyCompactItemize}

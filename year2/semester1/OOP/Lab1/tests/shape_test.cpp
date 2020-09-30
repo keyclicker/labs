@@ -60,3 +60,27 @@ TEST(Shape, UnionArea) {
 
   EXPECT_FLOAT_EQ(unionArea(s1, s2, -1, 1), 6);
 }
+
+TEST(Shape, IntersectionPerimeter) {
+  auto s1 = Shape(
+          [](auto x){return x + 1;},
+          [](auto x){return -x - 1;});
+
+  auto s2 = Shape(
+          [](auto x){return -x + 1;},
+          [](auto x){return x - 1;});
+
+  EXPECT_FLOAT_EQ(intersectionPerimeter(s1, s2, -1, 1), M_SQRT2 * 4);
+}
+
+TEST(Shape, UnionPerimeter) {
+  auto s1 = Shape(
+          [](auto x){return x + 1;},
+          [](auto x){return -x - 1;});
+
+  auto s2 = Shape(
+          [](auto x){return -x + 1;},
+          [](auto x){return x - 1;});
+
+  EXPECT_FLOAT_EQ(unionPerimeter(s1, s2, -1, 1), 8 + M_SQRT2 * 4);
+}

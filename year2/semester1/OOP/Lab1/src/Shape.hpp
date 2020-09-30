@@ -3,6 +3,7 @@
 #include <functional>
 #include <limits>
 #include <vector>
+#include <cmath>
 
 class Shape {
 private:
@@ -21,72 +22,119 @@ public:
   /// Upper function setter
   /// @param upper Upper function
   template<typename Func>
-  void setUpper(Func &&upper) {
-    Shape::upper = std::forward<Func>(upper);
-  }
+  void setUpper(Func &&upper);
 
   /// Lower function setter
   /// @param lower Lower function
   template<typename Func>
-  void setLower(Func &&lower) {
-    Shape::lower = std::forward<Func>(lower);
-  }
+  void setLower(Func &&lower);
 
-  /// Calculating area function
+  /// Calculates area function
   /// @param sp Starting point
   /// @param ep Ending point
   /// @param step Step that sets precision of calculation
   /// @return Calculated area
-  double getArea(double sp, double ep, double step = DefaultStep) const {
+  [[nodiscard]]
+  double getArea(double sp, double ep, double step = DefaultStep) const;
+
+  /// Calculates perimeter function
+  /// @param sp Starting point
+  /// @param ep Ending point
+  /// @param step Step that sets precision of calculation
+  /// @return Calculated perimeter
+  [[nodiscard]]
+  double getPerimeter(double sp, double ep, double step = DefaultStep) const;
+
+  /// Calculates intersection area
+  /// @param s1 First shape
+  /// @param s2 Second shape
+  /// @param sp Starting point
+  /// @param ep Ending point
+  /// @param step Step that sets precision of calculation
+  /// @return Calculated intersection area
+  friend double intersectionArea(Shape &s1, Shape &s2,
+                          double sp, double ep,
+                          double step = Shape::DefaultStep) {
     double area = 0;
     for (double i = sp; i < ep; i += step) {
-      area += (step * (upper(i) - lower(i) +
-                       upper(i + step) - lower(i+ step))) / 2.0;
+      area += (step * (std::min(s1.upper(i), s2.upper(i)) -
+                       std::max(s1.lower(i), s2.lower(i)) +
+                       std::min(s1.upper(i + step), s2.upper(i + step)) -
+                       std::max(s1.lower(i + step), s2.lower(i + step)))) / 2.0;
     }
     return area;
   }
 
-  /// Calculating perimeter function
+  /// Calculates union area
+  /// @param s1 First shape
+  /// @param s2 Second shape
   /// @param sp Starting point
   /// @param ep Ending point
   /// @param step Step that sets precision of calculation
-  /// @return Calculated precision
-  double getPerimeter(double sp, double ep, double step = DefaultStep) const {
-    double perim = abs(upper(sp) - lower(sp)) + abs(upper(ep) - lower(ep));
+  /// @return Calculated union area
+  friend double unionArea(Shape &s1, Shape &s2,
+                   double sp, double ep,
+                   double step = Shape::DefaultStep) {
+    double area = 0;
     for (double i = sp; i < ep; i += step) {
-      perim += hypot(upper(i + step) - upper(i), step) +
-               hypot(lower(i + step) - lower(i), step);
+      area += (step * (std::max(s1.upper(i), s2.upper(i)) -
+                       std::min(s1.lower(i), s2.lower(i)) +
+                       std::max(s1.upper(i + step), s2.upper(i + step)) -
+                       std::min(s1.lower(i + step), s2.lower(i + step)))) / 2.0;
+    }
+    return area;
+  }
+
+  /// Calculates intersection perimeter
+  /// @param s1 First shape
+  /// @param s2 Second shape
+  /// @param sp Starting point
+  /// @param ep Ending point
+  /// @param step Step that sets precision of calculation
+  /// @return Calculated intersection perimeter
+  friend double intersectionPerimeter(Shape &s1, Shape &s2,
+                               double sp, double ep,
+                               double step = Shape::DefaultStep) {
+    double perim = std::abs(std::min(s1.upper(sp), s2.upper(sp)) -
+                            std::max(s1.lower(sp), s2.lower(sp))) +
+                   std::abs(std::min(s1.upper(ep), s2.upper(ep)) -
+                            std::max(s1.lower(ep), s2.lower(ep)));
+
+    for (double i = sp; i < ep; i += step) {
+      perim += hypot(std::min(s1.upper(i + step), s2.upper(i + step)) -
+                     std::min(s1.upper(i), s2.upper(i)), step) +
+               hypot(std::max(s1.lower(i + step), s2.lower(i + step)) -
+                     std::max(s1.lower(i), s2.lower(i)), step);
     }
     return perim;
   }
 
-  friend double intersectionArea(Shape &s1, Shape &s2, double sp, double ep, double step);
-
-  friend double unionArea(Shape &s1, Shape &s2, double sp, double ep, double step);
-};
-
-double intersectionArea(Shape &s1, Shape &s2,
+  /// Calculates union perimeter
+  /// @param s1 First shape
+  /// @param s2 Second shape
+  /// @param sp Starting point
+  /// @param ep Ending point
+  /// @param step Step that sets precision of calculation
+  /// @return Calculated union perimeter
+  friend double unionPerimeter(Shape &s1, Shape &s2,
                         double sp, double ep,
                         double step = Shape::DefaultStep) {
-  double area = 0;
-  for (double i = sp; i < ep; i += step) {
-    area += (step * (std::min(s1.upper(i), s2.upper(i)) -
-                     std::max(s1.lower(i), s2.lower(i)) +
-                     std::min(s1.upper(i + step), s2.upper(i + step)) -
-                     std::max(s1.lower(i + step), s2.lower(i + step)))) / 2.0;
-  }
-  return area;
-}
+    double perim = std::abs(std::max(s1.upper(sp), s2.upper(sp)) -
+                            std::min(s1.lower(sp), s2.lower(sp))) +
+                   std::abs(std::max(s1.upper(ep), s2.upper(ep)) -
+                            std::min(s1.lower(ep), s2.lower(ep)));
 
-double unionArea(Shape &s1, Shape &s2,
-                 double sp, double ep,
-                 double step = Shape::DefaultStep) {
-  double area = 0;
-  for (double i = sp; i < ep; i += step) {
-    area += (step * (std::max(s1.upper(i), s2.upper(i)) -
-                     std::min(s1.lower(i), s2.lower(i)) +
-                     std::max(s1.upper(i + step), s2.upper(i + step)) -
-                     std::min(s1.lower(i + step), s2.lower(i + step)))) / 2.0;
+    for (double i = sp; i < ep; i += step) {
+      perim += hypot(std::max(s1.upper(i + step), s2.upper(i + step)) -
+                     std::max(s1.upper(i), s2.upper(i)), step) +
+               hypot(std::min(s1.lower(i + step), s2.lower(i + step)) -
+                     std::min(s1.lower(i), s2.lower(i)), step);
+    }
+    return perim;
   }
-  return area;
-}
+};
+
+
+
+
+
