@@ -6,8 +6,8 @@ using namespace std;
 
 
 constexpr std::size_t
-        FileSize = 1000,
-        ChunkSize = 10;
+        FileSize = 200,
+        ChunkSize = 1000;
 
 int main() {
   genData<int>("input.dat", FileSize);
