@@ -28,6 +28,14 @@ TEST(Graph, AddEdge) {
   EXPECT_EQ(gr.getEdge(3, 0), 42);
 }
 
+TEST(Graph, RemoveEdge) {
+  Graph gr(5);
+
+  gr.addEdge(0, 4, 10);
+  gr.removeEdge(0, 4);
+
+  EXPECT_EQ(gr.getEdge(0, 4), Graph<int>::MaxValue);
+}
 
 TEST(Graph, ConnectEdges) {
   Graph gr(5);
@@ -45,6 +53,14 @@ TEST(Graph, ConnectEdges) {
   EXPECT_EQ(gr.getEdge(0, 3), 42);
 }
 
+TEST(Graph, DisconnectEdges) {
+  Graph gr(5);
+
+  gr.addEdge(0, 4, 10);
+  gr.disconnect(0, 4);
+
+  EXPECT_EQ(gr.getEdge(0, 4), Graph<int>::MaxValue);
+}
 
 TEST(MatrixGraph, CreationTest) {
   MatrixGraph gr;
@@ -71,6 +87,14 @@ TEST(MatrixGraph, AddEdge) {
   EXPECT_EQ(gr.getEdge(3, 0), 42);
 }
 
+TEST(MatrixGraph, RemoveEdge) {
+  MatrixGraph gr(5);
+
+  gr.addEdge(0, 4, 10);
+  gr.removeEdge(0, 4);
+
+  EXPECT_EQ(gr.getEdge(0, 4), Graph<int>::MaxValue);
+}
 
 TEST(MatrixGraph, ConnectEdges) {
   MatrixGraph gr(5);
@@ -86,6 +110,15 @@ TEST(MatrixGraph, ConnectEdges) {
   EXPECT_EQ(gr.getEdge(4, 0), 10);
   EXPECT_EQ(gr.getEdge(4, 2), 15);
   EXPECT_EQ(gr.getEdge(0, 3), 42);
+}
+
+TEST(MatrixGraph, DisconnectEdges) {
+  MatrixGraph gr(5);
+
+  gr.addEdge(0, 4, 10);
+  gr.disconnect(0, 4);
+
+  EXPECT_EQ(gr.getEdge(0, 4), Graph<int>::MaxValue);
 }
 
 TEST(GraphAlgorithms, IsConnected) {

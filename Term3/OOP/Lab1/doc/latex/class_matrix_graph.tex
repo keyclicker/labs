@@ -20,7 +20,11 @@ boost\+::multi\+\_\+array$<$ T, 2 $>$ \& \hyperlink{class_matrix_graph_a4775ce04
 \item 
 void \hyperlink{class_matrix_graph_af4d5e646d3bc3618b83c94610108e089}{add\+Edge} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
 \item 
+void \hyperlink{class_matrix_graph_af100d2512c1a8328a792963acff74ef3}{remove\+Edge} (size\+\_\+t av, size\+\_\+t bv)
+\item 
 void \hyperlink{class_matrix_graph_a32ed83475da8b8d144bfc3335ae33df0}{connect} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
+\item 
+void \hyperlink{class_matrix_graph_ab04e62d1fa80a25d27594f87ded006ce}{disconnect} (size\+\_\+t av, size\+\_\+t bv)
 \item 
 T \hyperlink{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}{get\+Edge} (size\+\_\+t av, size\+\_\+t bv)
 \end{DoxyCompactItemize}
@@ -76,6 +80,20 @@ Adds undirected edge
 {\em weight} & Weight of the edge \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_matrix_graph_ab04e62d1fa80a25d27594f87ded006ce}\label{class_matrix_graph_ab04e62d1fa80a25d27594f87ded006ce}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::disconnect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes undirected edge 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}\label{class_matrix_graph_af1e22d0a92d5475011c0073e84c2c254}} 
 \index{Matrix\+Graph@{Matrix\+Graph}!get\+Edge@{get\+Edge}}
 \index{get\+Edge@{get\+Edge}!Matrix\+Graph@{Matrix\+Graph}}
@@ -113,6 +131,20 @@ boost\+::multi\+\_\+array$<$T, 2$>$\& \hyperlink{class_matrix_graph}{Matrix\+Gra
 \begin{DoxyReturn}{Returns}
 Adjacency matrix 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_graph_af100d2512c1a8328a792963acff74ef3}\label{class_matrix_graph_af100d2512c1a8328a792963acff74ef3}} 
+\index{Matrix\+Graph@{Matrix\+Graph}!remove\+Edge@{remove\+Edge}}
+\index{remove\+Edge@{remove\+Edge}!Matrix\+Graph@{Matrix\+Graph}}
+\subsubsection{\texorpdfstring{remove\+Edge()}{removeEdge()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_matrix_graph}{Matrix\+Graph}$<$ T $>$\+::remove\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes directed edge 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_matrix_graph_acc5d5c603987bc7a00fc11d37f1edd83}\label{class_matrix_graph_acc5d5c603987bc7a00fc11d37f1edd83}} 
 \index{Matrix\+Graph@{Matrix\+Graph}!resize@{resize}}
 \index{resize@{resize}!Matrix\+Graph@{Matrix\+Graph}}

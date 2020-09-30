@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['setlower',['setLower',['../class_shape.html#aef00fbc796cbac641d790791919f1bcb',1,'Shape']]],
-  ['setupper',['setUpper',['../class_shape.html#a46823604a0bf2242340773d188151342',1,'Shape']]],
-  ['shape',['Shape',['../class_shape.html#a2274ccda8fc9c57d30e4613f5a4893a4',1,'Shape']]],
-  ['size',['size',['../class_graph.html#a27cef878a072784aeca6dc1863b39ecb',1,'Graph::size()'],['../class_matrix_graph.html#acb1c06541182d4bb472c9813942a75b0',1,'MatrixGraph::size()']]]
+  ['removeedge',['removeEdge',['../class_graph.html#a6f4d3afb61d592c0d7be5a347e1cffbf',1,'Graph::removeEdge()'],['../class_matrix_graph.html#af100d2512c1a8328a792963acff74ef3',1,'MatrixGraph::removeEdge()']]],
+  ['resize',['resize',['../class_graph.html#a2097e3c0a42566a047e922c21ee1bb73',1,'Graph::resize()'],['../class_matrix_graph.html#acc5d5c603987bc7a00fc11d37f1edd83',1,'MatrixGraph::resize()']]]
 ];

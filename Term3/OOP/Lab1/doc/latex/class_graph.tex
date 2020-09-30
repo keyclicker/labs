@@ -24,7 +24,11 @@ std\+::vector$<$ std\+::set$<$ \hyperlink{struct_graph_1_1_edge}{Edge} $>$ $>$ \
 \item 
 void \hyperlink{class_graph_a8c2e51b9add82f2faa9979b24702832b}{add\+Edge} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
 \item 
+void \hyperlink{class_graph_a6f4d3afb61d592c0d7be5a347e1cffbf}{remove\+Edge} (size\+\_\+t av, size\+\_\+t bv)
+\item 
 void \hyperlink{class_graph_aa029e4ed309862a13ddd3245940c57dd}{connect} (size\+\_\+t av, size\+\_\+t bv, const T \&weight=1)
+\item 
+void \hyperlink{class_graph_a882821ef2e0e398961b776dcc1a107c2}{disconnect} (size\+\_\+t av, size\+\_\+t bv)
 \item 
 T \hyperlink{class_graph_a41082f5f83e15b045539d00408d03710}{get\+Edge} (size\+\_\+t av, size\+\_\+t bv)
 \end{DoxyCompactItemize}
@@ -95,6 +99,20 @@ Adds undirected edge
 {\em weight} & Weight of the edge \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a882821ef2e0e398961b776dcc1a107c2}\label{class_graph_a882821ef2e0e398961b776dcc1a107c2}} 
+\index{Graph@{Graph}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_graph}{Graph}$<$ T $>$\+::disconnect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes undirected edges 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_graph_a41082f5f83e15b045539d00408d03710}\label{class_graph_a41082f5f83e15b045539d00408d03710}} 
 \index{Graph@{Graph}!get\+Edge@{get\+Edge}}
 \index{get\+Edge@{get\+Edge}!Graph@{Graph}}
@@ -132,6 +150,20 @@ std\+::vector$<$std\+::set$<$\hyperlink{struct_graph_1_1_edge}{Edge}$>$ $>$\& \h
 \begin{DoxyReturn}{Returns}
 Adjacency list 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a6f4d3afb61d592c0d7be5a347e1cffbf}\label{class_graph_a6f4d3afb61d592c0d7be5a347e1cffbf}} 
+\index{Graph@{Graph}!remove\+Edge@{remove\+Edge}}
+\index{remove\+Edge@{remove\+Edge}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{remove\+Edge()}{removeEdge()}}
+{\footnotesize\ttfamily template$<$typename T = int$>$ \\
+void \hyperlink{class_graph}{Graph}$<$ T $>$\+::remove\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{av,  }\item[{size\+\_\+t}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes directed edges 
+\begin{DoxyParams}{Parameters}
+{\em av} & First vertex \\
+\hline
+{\em bv} & Second vertex \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_graph_a2097e3c0a42566a047e922c21ee1bb73}\label{class_graph_a2097e3c0a42566a047e922c21ee1bb73}} 
 \index{Graph@{Graph}!resize@{resize}}
 \index{resize@{resize}!Graph@{Graph}}

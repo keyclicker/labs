@@ -72,6 +72,15 @@ public:
   }
 
   /**
+   * Removes directed edges
+   * @param av First vertex
+   * @param bv Second vertex
+   */
+  void removeEdge(size_t av, size_t bv) {
+    vertices[av].erase(Edge(bv, 0));
+  }
+
+  /**
    * Adds undirected edge
    * @param av First vertex
    * @param bv Second vertex
@@ -83,13 +92,28 @@ public:
   }
 
   /**
+  * Removes undirected edges
+  * @param av First vertex
+  * @param bv Second vertex
+  */
+  void disconnect(size_t av, size_t bv) {
+    vertices[av].erase(Edge(bv, 0));
+    vertices[bv].erase(Edge(av, 0));
+  }
+
+
+  /**
    * Returns weight of the edge
    * @param av first vertex
    * @param bv second vertex
    * @return Edge weight
    */
   T getEdge(size_t av, size_t bv) {
-    return vertices[av].find(Edge(bv, 0))->weight;
+    auto ed = vertices[av].find(Edge(bv, 0));
+    if (ed == vertices[av].end())
+      return MaxValue;
+    else
+      return ed->weight;
   }
 
 private:
@@ -154,6 +178,15 @@ public:
   }
 
   /**
+   * Removes directed edge
+   * @param av First vertex
+   * @param bv Second vertex
+   */
+  void removeEdge(size_t av, size_t bv) {
+    matrix[av][bv] = MaxValue;
+  }
+
+  /**
   * Adds undirected edge
   * @param av First vertex
   * @param bv Second vertex
@@ -162,6 +195,16 @@ public:
   void connect(size_t av, size_t bv, const T &weight = 1) {
     matrix[av][bv] = weight;
     matrix[bv][av] = weight;
+  }
+
+  /**
+   * Removes undirected edge
+   * @param av First vertex
+   * @param bv Second vertex
+   */
+  void disconnect(size_t av, size_t bv) {
+    matrix[av][bv] = MaxValue;
+    matrix[bv][av] = MaxValue;
   }
 
   /**

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lab1: Graph&lt; T &gt; Class Template Reference</title>
+<title>O0OP Lab1: Graph&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Lab1
+   <div id="projectname">O0OP Lab1
    </div>
+   <div id="projectbrief">OOP implementation of graphs and shapes defined with two functions</div>
   </td>
  </tr>
  </tbody>
@@ -89,8 +90,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab7c3b45b65d2b72ced442ff01c81da60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c2e51b9add82f2faa9979b24702832b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8c2e51b9add82f2faa9979b24702832b">addEdge</a> (size_t av, size_t bv, const T &amp;weight=1)</td></tr>
 <tr class="separator:a8c2e51b9add82f2faa9979b24702832b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4d3afb61d592c0d7be5a347e1cffbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6f4d3afb61d592c0d7be5a347e1cffbf">removeEdge</a> (size_t av, size_t bv)</td></tr>
+<tr class="separator:a6f4d3afb61d592c0d7be5a347e1cffbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa029e4ed309862a13ddd3245940c57dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa029e4ed309862a13ddd3245940c57dd">connect</a> (size_t av, size_t bv, const T &amp;weight=1)</td></tr>
 <tr class="separator:aa029e4ed309862a13ddd3245940c57dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a882821ef2e0e398961b776dcc1a107c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a882821ef2e0e398961b776dcc1a107c2">disconnect</a> (size_t av, size_t bv)</td></tr>
+<tr class="separator:a882821ef2e0e398961b776dcc1a107c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41082f5f83e15b045539d00408d03710"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a41082f5f83e15b045539d00408d03710">getEdge</a> (size_t av, size_t bv)</td></tr>
 <tr class="separator:a41082f5f83e15b045539d00408d03710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -250,6 +255,51 @@ template&lt;typename T = int&gt; </div>
 
 </div>
 </div>
+<a id="a882821ef2e0e398961b776dcc1a107c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a882821ef2e0e398961b776dcc1a107c2">&#9670;&nbsp;</a></span>disconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::disconnect </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>av</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Removes undirected edges </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">av</td><td>First vertex </td></tr>
+    <tr><td class="paramname">bv</td><td>Second vertex </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a41082f5f83e15b045539d00408d03710"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41082f5f83e15b045539d00408d03710">&#9670;&nbsp;</a></span>getEdge()</h2>
 
@@ -349,6 +399,51 @@ template&lt;typename T = int&gt; </div>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Adjacency list </dd></dl>
+
+</div>
+</div>
+<a id="a6f4d3afb61d592c0d7be5a347e1cffbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4d3afb61d592c0d7be5a347e1cffbf">&#9670;&nbsp;</a></span>removeEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::removeEdge </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>av</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Removes directed edges </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">av</td><td>First vertex </td></tr>
+    <tr><td class="paramname">bv</td><td>Second vertex </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
