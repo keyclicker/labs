@@ -62,7 +62,7 @@ public:
   }
 
   /**
-   * Adding directed edge
+   * Adds directed edge
    * @param av First vertex
    * @param bv Second vertex
    * @param weight Weight of the edge
@@ -72,7 +72,7 @@ public:
   }
 
   /**
-   * add undirected edge
+   * Adds undirected edge
    * @param av First vertex
    * @param bv Second vertex
    * @param weight Weight of the edge
@@ -83,7 +83,7 @@ public:
   }
 
   /**
-   * Returning weight of the edge
+   * Returns weight of the edge
    * @param av first vertex
    * @param bv second vertex
    * @return Edge weight
@@ -144,7 +144,7 @@ public:
   }
 
   /**
-   * Adding directed edge
+   * Adds directed edge
    * @param av First vertex
    * @param bv Second vertex
    * @param weight Weight of the edge
@@ -154,7 +154,7 @@ public:
   }
 
   /**
-  * add undirected edge
+  * Adds undirected edge
   * @param av First vertex
   * @param bv Second vertex
   * @param weight Weight of the edge
@@ -165,7 +165,7 @@ public:
   }
 
   /**
-   * Returning weight of the edge
+   * Returns weight of the edge
    * @param av first vertex
    * @param bv second vertex
    * @return Edge weight

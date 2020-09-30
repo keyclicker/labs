@@ -36,3 +36,27 @@ TEST(Shape, CosPerimeter) {
 
   EXPECT_FLOAT_EQ(s.getPerimeter(-M_PI_2, M_PI_2), 7.6403966);
 }
+
+TEST(Shape, IntersectionArea) {
+  auto s1 = Shape(
+          [](auto x){return x + 1;},
+          [](auto x){return -x - 1;});
+
+  auto s2 = Shape(
+          [](auto x){return -x + 1;},
+          [](auto x){return x - 1;});
+
+  EXPECT_FLOAT_EQ(intersectionArea(s1, s2, -1, 1), 2);
+}
+
+TEST(Shape, UnionArea) {
+  auto s1 = Shape(
+          [](auto x){return x + 1;},
+          [](auto x){return -x - 1;});
+
+  auto s2 = Shape(
+          [](auto x){return -x + 1;},
+          [](auto x){return x - 1;});
+
+  EXPECT_FLOAT_EQ(unionArea(s1, s2, -1, 1), 6);
+}
