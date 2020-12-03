@@ -51,7 +51,7 @@ void insert_com(char *cs_name, char *username, char *text, float score) {
     cs->first_comment = pos;
   else {
     struct comment *c = get_com(cs, cs->comments_count - 1);
-    c->next
+    //c->next
   }
   cs->comments_count++;
 }
