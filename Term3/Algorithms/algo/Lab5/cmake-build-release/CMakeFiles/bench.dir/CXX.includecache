@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/Matrix.hpp
+iostream
+-
+iomanip
+-
+vector
+-
+
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/benchmark.cpp
+Matrix.hpp
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/Matrix.hpp
+benchmark/benchmark.h
+-
+

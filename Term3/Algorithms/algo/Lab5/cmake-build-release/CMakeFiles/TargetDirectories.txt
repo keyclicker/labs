@@ -1,0 +1,4 @@
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/cmake-build-release/CMakeFiles/edit_cache.dir
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/cmake-build-release/CMakeFiles/Lab5.dir
+/home/keyclicker/Documents/Labs/labs/Term3/Algorithms/Lab5/cmake-build-release/CMakeFiles/bench.dir
