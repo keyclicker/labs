@@ -6,7 +6,7 @@ Space billiard() {
   Space space;
 
   space.setEntropy(0);
-  space.setResistance(1);
+  space.setResistance(0.5);
   space.setSpeed(0.25);
 
   space.reserve(16);
@@ -39,9 +39,9 @@ Space billiard() {
 Space lonelyParticle() {
   Space space;
 
-  space.setEntropy(0.0001);
-  space.setResistance(0.95);
-  space.setSpeed(0.5);
+  space.setEntropy(10000);
+  space.setResistance(0.2);
+  space.setSpeed(1);
 
   space.push(5, 0, 0, 0, 0);
 
@@ -51,8 +51,8 @@ Space lonelyParticle() {
 Space genSpace(unsigned int count, double radius) {
   Space space;
 
-  space.setEntropy(0.1);
-  space.setResistance(0.98);
+  space.setEntropy(10000);
+  space.setResistance(0.2);
   space.setSpeed(1);
 
   space.reserve(count);

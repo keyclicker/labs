@@ -7,7 +7,7 @@ find_package(OpenGL REQUIRED)
 find_package(SFML COMPONENTS system window graphics network audio)
 find_package(GTest REQUIRED)
 
-add_executable(Lab1 src/main.cpp include/Particle.hpp src/Space.cpp include/Space.hpp include/Vector.hpp include/Config.hpp include/Demos.hpp src/Demos.cpp src/Random.cpp)
+add_executable(Lab1 src/main.cpp include/Particle.hpp src/Space.cpp include/Space.hpp include/Vector.hpp include/Config.hpp include/Demos.hpp src/Demos.cpp src/Random.cpp include/HSV.hpp)
 add_executable(test tests/test.cpp src/Space.cpp)
 
 target_link_libraries(Lab1 OpenGL::GL)

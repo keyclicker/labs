@@ -7,6 +7,7 @@
 #include "../include/Space.hpp"
 #include "../include/Config.hpp"
 #include "../include/Demos.hpp"
+#include "../include/HSV.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -18,10 +19,10 @@ int main() {
   sf::RenderWindow window(sf::VideoMode(w, h), "Lab1");
   sf::Clock clock;
 
-  float cx = 0, cy = 0; //camera x, y
-  float cz = 1; //camera zoom
+  double cx = 0, cy = 0; //camera x, y
+  double cz = 1; //camera zoom
 
-  Space space = billiard();
+  Space space = genSpace(50, 5);
 
   while (window.isOpen()) {
     sf::Event event;
@@ -30,33 +31,62 @@ int main() {
         window.close();
     }
 
-    window.clear();
+    if (doRedraw)
+      window.clear();
 
     double e = 0;
     for (auto &a : space.getPars()) {
       sf::CircleShape shape(100.f);
       shape.setFillColor(sf::Color::Green);
 
-      constexpr auto colorSpeed = 5000.0;
-      double k = colorSpeed / a.vel.len();
+
 
       if (isColored)
-        shape.setFillColor(sf::Color(min(k, 255.0), 0, max(colorSpeed-k, 0.0)));
+        shape.setFillColor(HSV(a.vel.len() + 220, 90, 90));
       else
-        shape.setFillColor(sf::Color(0, k * 0.80, k * 0.20));
+        shape.setFillColor(HSV(0, 0.75, 1));
 
-      shape.setPosition(a.pos.x + w / 2.0 - a.radius,
-                        -a.pos.y + h / 2.0 - a.radius);
+      shape.setPosition(a.pos.x / cz + w / 2.0 - a.radius - cx,
+                        -a.pos.y / cz + h / 2.0 - a.radius - cy);
 
-      shape.setRadius(a.radius);
+      shape.setRadius(a.radius / cz);
       window.draw(shape);
 
       e += a.vel.len() * a.vel.len();
     }
 
+
     window.display();
 
-    space.step(clock.restart().asSeconds());
+    auto t = clock.restart().asSeconds();
+    space.step(t);
+
+    auto ms = t * moveSpeed;
+    auto zs = pow(zoomSpeed, t);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+      ms *= 4;
+      zs = pow(zs, 4);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+      cx -= ms;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+      cx += ms;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+      cy += ms;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+      cy -= ms;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+      cz *= zs;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+      cz /= zs;
+    }
+
   }
 
   return 0;
