@@ -1,21 +1,13 @@
-#include "demos.hpp"
-#include "config.hpp"
-
-extern std::mt19937 rng;
-
-std::uniform_real_distribution
-        randDir(-1.0, 1.0);
-
-std::uniform_int_distribution
-        randW(-w/16,w/16),
-        randH(-h/16,h/16);
+#include "../include/Demos.hpp"
+#include "../include/Config.hpp"
+#include "../include/Random.hpp"
 
 Space billiard() {
   Space space;
 
-  space.setEntropy(0.00001);
-  space.setResistance(0.9995);
-  space.setSpeed(0.5);
+  space.setEntropy(0);
+  space.setResistance(1);
+  space.setSpeed(0.25);
 
   space.reserve(16);
 
@@ -39,13 +31,18 @@ Space billiard() {
   space.push(10, 72, 20);
   space.push(10, 72, 40);
 
-  space.push(10, -w/2.0, 0, 1, 0);
+  space.push(10, -w/2.0 + 20, 0, 3000, 0);
 
   return space;
 }
 
 Space lonelyParticle() {
   Space space;
+
+  space.setEntropy(0.0001);
+  space.setResistance(0.95);
+  space.setSpeed(0.5);
+
   space.push(5, 0, 0, 0, 0);
 
   return space;
@@ -54,19 +51,19 @@ Space lonelyParticle() {
 Space genSpace(unsigned int count, double radius) {
   Space space;
 
-  space.setEntropy(5000);
+  space.setEntropy(0.1);
   space.setResistance(0.98);
-  space.setSpeed(0.5);
+  space.setSpeed(1);
 
   space.reserve(count);
 
   for (int i = 0; i < count; ++i)
   {
-    double px = randW(rng);
-    double py = randH(rng);
+    double px = randX();
+    double py = randY();
 
-    double vx = 1000.0 * randDir(rng);
-    double vy = 1000.0 * randDir(rng);
+    double vx = 10.0 * randDir();
+    double vy = 10.0 * randDir();
 
     space.push(radius, px, py, vx, vy);
   }

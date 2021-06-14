@@ -6,8 +6,8 @@
 class Space
 {
 private:
-  double w = 2, h = 2;
-  double entropy = 5000;
+  bool sideCollision = true;
+  double entropy = 0;
   double speed = 1;
   double resistance = 1;
   std::vector<Particle> particles;
