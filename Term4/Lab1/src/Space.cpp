@@ -91,3 +91,7 @@ void Space::setSpeed(double speed) {
 void Space::setResistance(double resistance) {
   this->resistance = resistance;
 }
+
+void Space::setSideCollision(bool sideCollision) {
+  Space::sideCollision = sideCollision;
+}

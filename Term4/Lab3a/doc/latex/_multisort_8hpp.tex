@@ -1,0 +1,102 @@
+\hypertarget{_multisort_8hpp}{}\doxysection{Multisort.\+hpp File Reference}
+\label{_multisort_8hpp}\index{Multisort.hpp@{Multisort.hpp}}
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename iterator $>$ }\\void \mbox{\hyperlink{_multisort_8hpp_aaa547dafc3a97e3f029d93ebc6cf9f9d}{quicksort}} (iterator beg, iterator end)
+\item 
+{\footnotesize template$<$typename iterator $>$ }\\void \mbox{\hyperlink{_multisort_8hpp_a611d977e20eab748e8ae1369bff56729}{quicksort\+\_\+async}} (iterator beg, iterator end)
+\item 
+{\footnotesize template$<$typename iterator $>$ }\\void \mbox{\hyperlink{_multisort_8hpp_ad13e68b2dcd8cb1c756a9c69baaffc80}{merge}} (iterator beg, iterator end)
+\item 
+{\footnotesize template$<$typename iterator $>$ }\\void \mbox{\hyperlink{_multisort_8hpp_a053944706e8aba9648d0d382128888f0}{merge\+\_\+async}} (iterator beg, iterator end)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_multisort_8hpp_ad13e68b2dcd8cb1c756a9c69baaffc80}\label{_multisort_8hpp_ad13e68b2dcd8cb1c756a9c69baaffc80}} 
+\index{Multisort.hpp@{Multisort.hpp}!merge@{merge}}
+\index{merge@{merge}!Multisort.hpp@{Multisort.hpp}}
+\doxysubsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily template$<$typename iterator $>$ \\
+void merge (\begin{DoxyParamCaption}\item[{iterator}]{beg,  }\item[{iterator}]{end }\end{DoxyParamCaption})}
+
+Sorting array with mergesort algorithm
+
+works with stl-\/like containers 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em iterator} & Iterator type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em beg} & Begin iterator \\
+\hline
+{\em end} & End iterator \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_multisort_8hpp_a053944706e8aba9648d0d382128888f0}\label{_multisort_8hpp_a053944706e8aba9648d0d382128888f0}} 
+\index{Multisort.hpp@{Multisort.hpp}!merge\_async@{merge\_async}}
+\index{merge\_async@{merge\_async}!Multisort.hpp@{Multisort.hpp}}
+\doxysubsubsection{\texorpdfstring{merge\_async()}{merge\_async()}}
+{\footnotesize\ttfamily template$<$typename iterator $>$ \\
+void merge\+\_\+async (\begin{DoxyParamCaption}\item[{iterator}]{beg,  }\item[{iterator}]{end }\end{DoxyParamCaption})}
+
+Sorting array with async merge sort algorithm
+
+works with stl-\/like containers 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em iterator} & Iterator type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em beg} & Begin iterator \\
+\hline
+{\em end} & End iterator \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_multisort_8hpp_aaa547dafc3a97e3f029d93ebc6cf9f9d}\label{_multisort_8hpp_aaa547dafc3a97e3f029d93ebc6cf9f9d}} 
+\index{Multisort.hpp@{Multisort.hpp}!quicksort@{quicksort}}
+\index{quicksort@{quicksort}!Multisort.hpp@{Multisort.hpp}}
+\doxysubsubsection{\texorpdfstring{quicksort()}{quicksort()}}
+{\footnotesize\ttfamily template$<$typename iterator $>$ \\
+void quicksort (\begin{DoxyParamCaption}\item[{iterator}]{beg,  }\item[{iterator}]{end }\end{DoxyParamCaption})}
+
+Sorting array with quicksort algorithm
+
+works with stl-\/like containers 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em iterator} & Iterator type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em beg} & Begin iterator \\
+\hline
+{\em end} & End iterator \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_multisort_8hpp_a611d977e20eab748e8ae1369bff56729}\label{_multisort_8hpp_a611d977e20eab748e8ae1369bff56729}} 
+\index{Multisort.hpp@{Multisort.hpp}!quicksort\_async@{quicksort\_async}}
+\index{quicksort\_async@{quicksort\_async}!Multisort.hpp@{Multisort.hpp}}
+\doxysubsubsection{\texorpdfstring{quicksort\_async()}{quicksort\_async()}}
+{\footnotesize\ttfamily template$<$typename iterator $>$ \\
+void quicksort\+\_\+async (\begin{DoxyParamCaption}\item[{iterator}]{beg,  }\item[{iterator}]{end }\end{DoxyParamCaption})}
+
+Sorting array with async quicksort algorithm
+
+works with stl-\/like containers 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em iterator} & Iterator type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em beg} & Begin iterator \\
+\hline
+{\em end} & End iterator \\
+\hline
+\end{DoxyParams}

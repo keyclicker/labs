@@ -7,6 +7,10 @@ class Space
 {
 private:
   bool sideCollision = true;
+public:
+  void setSideCollision(bool sideCollision);
+
+private:
   double entropy = 0;
   double speed = 1;
   double resistance = 1;

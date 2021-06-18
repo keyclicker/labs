@@ -1,0 +1,139 @@
+\hypertarget{class_graph}{}\doxysection{Graph$<$ T $>$ Class Template Reference}
+\label{class_graph}\index{Graph$<$ T $>$@{Graph$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Graph.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph_ae4d33378f071400af20f374d03a2ae17}{Graph}} (size\+\_\+t size=0)
+\item 
+void \mbox{\hyperlink{class_graph_aad0507a58e97c6f758e65089a0418951}{add\+Dir\+Edge}} (size\+\_\+t a, size\+\_\+t b, T weight)
+\item 
+void \mbox{\hyperlink{class_graph_aa86b6aee43fb42a28bb4a3e557b24def}{add\+Undir\+Edge}} (size\+\_\+t a, size\+\_\+t b, T weight)
+\item 
+auto \mbox{\hyperlink{class_graph_a6789af3a2691658a3f397989901c0cab}{get\+Edge}} (size\+\_\+t a, size\+\_\+t b) const
+\item 
+auto \mbox{\hyperlink{class_graph_aa8a2f322bb112070bad7c4d31103b7b1}{get\+Matrix}} () const
+\item 
+auto \mbox{\hyperlink{class_graph_a8403744e9ce9ffd38464b60228c44b4f}{floyd\+Warshall}} () const
+\item 
+auto \mbox{\hyperlink{class_graph_aff73bb95a87dad59ac43668ff298eb16}{floyd\+Warshall\+Multi}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{class_graph_ae77f2c0621770d78a7acbda3d1726c1f}{Inf}} = std\+::numeric\+\_\+limits$<$T$>$\+::max()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graph_ae4d33378f071400af20f374d03a2ae17}\label{class_graph_ae4d33378f071400af20f374d03a2ae17}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+\mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::\mbox{\hyperlink{class_graph}{Graph}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_aad0507a58e97c6f758e65089a0418951}\label{class_graph_aad0507a58e97c6f758e65089a0418951}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addDirEdge@{addDirEdge}}
+\index{addDirEdge@{addDirEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addDirEdge()}{addDirEdge()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+void \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Dir\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{a,  }\item[{size\+\_\+t}]{b,  }\item[{T}]{weight }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adding directed edge to graph 
+\begin{DoxyParams}{Parameters}
+{\em a} & First vertex index \\
+\hline
+{\em b} & Second vertex index \\
+\hline
+{\em weight} & Weight of edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_aa86b6aee43fb42a28bb4a3e557b24def}\label{class_graph_aa86b6aee43fb42a28bb4a3e557b24def}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addUndirEdge@{addUndirEdge}}
+\index{addUndirEdge@{addUndirEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addUndirEdge()}{addUndirEdge()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+void \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Undir\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{a,  }\item[{size\+\_\+t}]{b,  }\item[{T}]{weight }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adding undirected edge to graph 
+\begin{DoxyParams}{Parameters}
+{\em a} & First vertex index \\
+\hline
+{\em b} & Second vertex index \\
+\hline
+{\em weight} & Weight of edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a8403744e9ce9ffd38464b60228c44b4f}\label{class_graph_a8403744e9ce9ffd38464b60228c44b4f}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!floydWarshall@{floydWarshall}}
+\index{floydWarshall@{floydWarshall}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{floydWarshall()}{floydWarshall()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+auto \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::floyd\+Warshall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Floyd Warshall
+
+finds minimal distances from each to each vertex \begin{DoxyReturn}{Returns}
+distance matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aff73bb95a87dad59ac43668ff298eb16}\label{class_graph_aff73bb95a87dad59ac43668ff298eb16}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!floydWarshallMulti@{floydWarshallMulti}}
+\index{floydWarshallMulti@{floydWarshallMulti}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{floydWarshallMulti()}{floydWarshallMulti()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+auto \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::floyd\+Warshall\+Multi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Multithreaded Floyd Warshall
+
+finds minimal distances from each to each vertex \begin{DoxyReturn}{Returns}
+distance matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a6789af3a2691658a3f397989901c0cab}\label{class_graph_a6789af3a2691658a3f397989901c0cab}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getEdge@{getEdge}}
+\index{getEdge@{getEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getEdge()}{getEdge()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+auto \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Edge (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{a,  }\item[{size\+\_\+t}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getting edge weight 
+\begin{DoxyParams}{Parameters}
+{\em a} & First vertex index \\
+\hline
+{\em b} & Second vertex index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Weight of edge 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aa8a2f322bb112070bad7c4d31103b7b1}\label{class_graph_aa8a2f322bb112070bad7c4d31103b7b1}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getMatrix@{getMatrix}}
+\index{getMatrix@{getMatrix}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getMatrix()}{getMatrix()}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+auto \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getting graph matrix \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_graph}{Graph}} matrix 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_graph_ae77f2c0621770d78a7acbda3d1726c1f}\label{class_graph_ae77f2c0621770d78a7acbda3d1726c1f}} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!Inf@{Inf}}
+\index{Inf@{Inf}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Inf}{Inf}}
+{\footnotesize\ttfamily template$<$typename T  = int$>$ \\
+constexpr auto \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::Inf = std\+::numeric\+\_\+limits$<$T$>$\+::max()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_graph_8hpp}{Graph.\+hpp}}\end{DoxyCompactItemize}

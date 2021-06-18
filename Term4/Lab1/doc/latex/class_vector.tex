@@ -1,0 +1,152 @@
+\hypertarget{class_vector}{}\doxysection{Vector Class Reference}
+\label{class_vector}\index{Vector@{Vector}}
+
+
+{\ttfamily \#include $<$Vector.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector_aa7cd5c26e95000b885a8ba842b3ca182}{Vector}} ()=default
+\item 
+\mbox{\hyperlink{class_vector_abee913690a337b49756f5743f662cd5d}{Vector}} (double \mbox{\hyperlink{class_vector_a133722e00601091cb2075219da5da6e4}{x}}, double \mbox{\hyperlink{class_vector_a09a21a140718f234eea348d5058cee0b}{y}})
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a00bbbdcaef08e053b1eaf2a05edeb75d}{operator+}} (const \mbox{\hyperlink{class_vector}{Vector}} \&val) const
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a78333dc3516fd4f944a380a295465cb5}{operator-\/}} (const \mbox{\hyperlink{class_vector}{Vector}} \&val) const
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_ace679b36a0c8c04d429d8a30ca5e3314}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector}} \&val) const
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a190fe84769b9564c36b0597a383a34d2}{operator/}} (const \mbox{\hyperlink{class_vector}{Vector}} \&val) const
+\item 
+double \mbox{\hyperlink{class_vector_a240b571ae1f1d4f7a48d4982872bd46a}{len}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_vector_a133722e00601091cb2075219da5da6e4}{x}}
+\item 
+double \mbox{\hyperlink{class_vector_a09a21a140718f234eea348d5058cee0b}{y}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_aa0472ef58ce86a085374194a9312b4bc}{operator$\ast$}} (double a, const \mbox{\hyperlink{class_vector}{Vector}} \&b)
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a09a9d8ac8b2d3fefb97f966f80087267}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector}} \&a, double b)
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a330bfc26eb7a34caf0c1d4f748f15072}{operator/}} (double a, const \mbox{\hyperlink{class_vector}{Vector}} \&b)
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_vector_a1746f0380d32add87acc8b40ee7f9f23}{operator/}} (const \mbox{\hyperlink{class_vector}{Vector}} \&a, double b)
+\item 
+bool \mbox{\hyperlink{class_vector_a3c0498fec3046f477a2399a21ab921ff}{operator==}} (const \mbox{\hyperlink{class_vector}{Vector}} \&a, const \mbox{\hyperlink{class_vector}{Vector}} \&b)
+\item 
+double \mbox{\hyperlink{class_vector_ab774d3c360ad4617786f3cc3c5d09a55}{dist}} (const \mbox{\hyperlink{class_vector}{Vector}} \&a, const \mbox{\hyperlink{class_vector}{Vector}} \&b)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vector_aa7cd5c26e95000b885a8ba842b3ca182}\label{class_vector_aa7cd5c26e95000b885a8ba842b3ca182}} 
+\index{Vector@{Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Vector\+::\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_vector_abee913690a337b49756f5743f662cd5d}\label{class_vector_abee913690a337b49756f5743f662cd5d}} 
+\index{Vector@{Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Vector\+::\+Vector (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vector_a240b571ae1f1d4f7a48d4982872bd46a}\label{class_vector_a240b571ae1f1d4f7a48d4982872bd46a}} 
+\index{Vector@{Vector}!len@{len}}
+\index{len@{len}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{len()}{len()}}
+{\footnotesize\ttfamily double Vector\+::len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_vector_ace679b36a0c8c04d429d8a30ca5e3314}\label{class_vector_ace679b36a0c8c04d429d8a30ca5e3314}} 
+\index{Vector@{Vector}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Vector\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_vector_a00bbbdcaef08e053b1eaf2a05edeb75d}\label{class_vector_a00bbbdcaef08e053b1eaf2a05edeb75d}} 
+\index{Vector@{Vector}!operator+@{operator+}}
+\index{operator+@{operator+}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Vector\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_vector_a78333dc3516fd4f944a380a295465cb5}\label{class_vector_a78333dc3516fd4f944a380a295465cb5}} 
+\index{Vector@{Vector}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Vector\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_vector_a190fe84769b9564c36b0597a383a34d2}\label{class_vector_a190fe84769b9564c36b0597a383a34d2}} 
+\index{Vector@{Vector}!operator/@{operator/}}
+\index{operator/@{operator/}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Vector\+::operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_vector_ab774d3c360ad4617786f3cc3c5d09a55}\label{class_vector_ab774d3c360ad4617786f3cc3c5d09a55}} 
+\index{Vector@{Vector}!dist@{dist}}
+\index{dist@{dist}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily double dist (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_vector_a09a9d8ac8b2d3fefb97f966f80087267}\label{class_vector_a09a9d8ac8b2d3fefb97f966f80087267}} 
+\index{Vector@{Vector}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$}{operator*}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{a,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_vector_aa0472ef58ce86a085374194a9312b4bc}\label{class_vector_aa0472ef58ce86a085374194a9312b4bc}} 
+\index{Vector@{Vector}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$}{operator*}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} operator$\ast$ (\begin{DoxyParamCaption}\item[{double}]{a,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_vector_a1746f0380d32add87acc8b40ee7f9f23}\label{class_vector_a1746f0380d32add87acc8b40ee7f9f23}} 
+\index{Vector@{Vector}!operator/@{operator/}}
+\index{operator/@{operator/}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator/}{operator/}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{a,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_vector_a330bfc26eb7a34caf0c1d4f748f15072}\label{class_vector_a330bfc26eb7a34caf0c1d4f748f15072}} 
+\index{Vector@{Vector}!operator/@{operator/}}
+\index{operator/@{operator/}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator/}{operator/}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} operator/ (\begin{DoxyParamCaption}\item[{double}]{a,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_vector_a3c0498fec3046f477a2399a21ab921ff}\label{class_vector_a3c0498fec3046f477a2399a21ab921ff}} 
+\index{Vector@{Vector}!operator==@{operator==}}
+\index{operator==@{operator==}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_vector_a133722e00601091cb2075219da5da6e4}\label{class_vector_a133722e00601091cb2075219da5da6e4}} 
+\index{Vector@{Vector}!x@{x}}
+\index{x@{x}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily double Vector\+::x}
+
+\mbox{\Hypertarget{class_vector_a09a21a140718f234eea348d5058cee0b}\label{class_vector_a09a21a140718f234eea348d5058cee0b}} 
+\index{Vector@{Vector}!y@{y}}
+\index{y@{y}!Vector@{Vector}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily double Vector\+::y}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_vector_8hpp}{Vector.\+hpp}}\end{DoxyCompactItemize}

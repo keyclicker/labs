@@ -1,6 +1,13 @@
 #include <thread>
 #include <future>
 
+/**
+ * Sorting array with quicksort algorithm
+ * @details works with stl-like containers
+ * @tparam iterator Iterator type
+ * @param beg Begin iterator
+ * @param end End iterator
+ */
 template <typename iterator>
 void quicksort(iterator beg, iterator end) {
   if (end > beg) {
@@ -19,6 +26,13 @@ void quicksort(iterator beg, iterator end) {
   }
 }
 
+/**
+ * Sorting array with async quicksort algorithm
+ * @details works with stl-like containers
+ * @tparam iterator Iterator type
+ * @param beg Begin iterator
+ * @param end End iterator
+ */
 template <typename iterator>
 void quicksort_async(iterator beg, iterator end) {
   if (end > beg) {
@@ -45,6 +59,13 @@ void quicksort_async(iterator beg, iterator end) {
   }
 }
 
+/**
+ * Sorting array with mergesort algorithm
+ * @details works with stl-like containers
+ * @tparam iterator Iterator type
+ * @param beg Begin iterator
+ * @param end End iterator
+ */
 template <typename iterator>
 void merge(iterator beg, iterator end) {
   if (end - 1 > beg) {
@@ -56,6 +77,13 @@ void merge(iterator beg, iterator end) {
   }
 }
 
+/**
+ * Sorting array with async merge sort algorithm
+ * @details works with stl-like containers
+ * @tparam iterator Iterator type
+ * @param beg Begin iterator
+ * @param end End iterator
+ */
 template <typename iterator>
 void merge_async(iterator beg, iterator end) {
   if (end - 1 > beg) {

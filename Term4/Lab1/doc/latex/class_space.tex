@@ -1,0 +1,125 @@
+\hypertarget{class_space}{}\doxysection{Space Class Reference}
+\label{class_space}\index{Space@{Space}}
+
+
+{\ttfamily \#include $<$Space.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_space_a9aeca70549d6263c6695aa1a26f4454d}{set\+Side\+Collision}} (bool side\+Collision)
+\item 
+\mbox{\hyperlink{class_space_a5645413385ba6b21dbbe699ab6200c90}{Space}} ()=default
+\item 
+\mbox{\hyperlink{class_space_a03da9345412db32b825363c858abee61}{Space}} (const \mbox{\hyperlink{class_space}{Space}} \&val)=delete
+\item 
+\mbox{\hyperlink{class_space}{Space}} \& \mbox{\hyperlink{class_space_af46b9a5a89025cff5a04ea307b318758}{operator=}} (const \mbox{\hyperlink{class_space}{Space}} \&val)=delete
+\item 
+\mbox{\hyperlink{class_space_a6420aa9e5dd68c92e541979f8b6c2f22}{Space}} (\mbox{\hyperlink{class_space}{Space}} \&\&val)=default
+\item 
+void \mbox{\hyperlink{class_space_a74bc8c50ffffd58bfe95c7147d0e662d}{push}} (const \mbox{\hyperlink{class_particle}{Particle}} \&val)
+\item 
+void \mbox{\hyperlink{class_space_a005246d5ff6727c6ef74cbb2b09e1dfe}{push}} (size\+\_\+t r, double px, double py, double vx=0.\+0, double vy=0.\+0)
+\item 
+void \mbox{\hyperlink{class_space_a28e2660b966d25101363412ebb822d83}{reserve}} (size\+\_\+t val)
+\item 
+void \mbox{\hyperlink{class_space_a3c8a78c2eb0ae0b7e9fd01bb239e2dd3}{step}} (double time=0.\+1)
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{class_particle}{Particle}} $>$ \& \mbox{\hyperlink{class_space_aa637a61d7729028a61bb33a76a3cac94}{get\+Pars}} ()
+\item 
+void \mbox{\hyperlink{class_space_a3b0519f564b5a063d6835c68082e8445}{set\+Entropy}} (double entropy)
+\item 
+void \mbox{\hyperlink{class_space_ac1105681dfd6d553c2ffdd6d522a77cc}{set\+Speed}} (double speed)
+\item 
+void \mbox{\hyperlink{class_space_a343f686464928b714b4d1f36b1c01ad8}{set\+Resistance}} (double resistance)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_space_a5645413385ba6b21dbbe699ab6200c90}\label{class_space_a5645413385ba6b21dbbe699ab6200c90}} 
+\index{Space@{Space}!Space@{Space}}
+\index{Space@{Space}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{Space()}{Space()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Space\+::\+Space (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_space_a03da9345412db32b825363c858abee61}\label{class_space_a03da9345412db32b825363c858abee61}} 
+\index{Space@{Space}!Space@{Space}}
+\index{Space@{Space}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{Space()}{Space()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Space\+::\+Space (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_space}{Space}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_space_a6420aa9e5dd68c92e541979f8b6c2f22}\label{class_space_a6420aa9e5dd68c92e541979f8b6c2f22}} 
+\index{Space@{Space}!Space@{Space}}
+\index{Space@{Space}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{Space()}{Space()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Space\+::\+Space (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space}{Space}} \&\&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_space_aa637a61d7729028a61bb33a76a3cac94}\label{class_space_aa637a61d7729028a61bb33a76a3cac94}} 
+\index{Space@{Space}!getPars@{getPars}}
+\index{getPars@{getPars}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{getPars()}{getPars()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{class_particle}{Particle}} $>$ \& Space\+::get\+Pars (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_af46b9a5a89025cff5a04ea307b318758}\label{class_space_af46b9a5a89025cff5a04ea307b318758}} 
+\index{Space@{Space}!operator=@{operator=}}
+\index{operator=@{operator=}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_space}{Space}}\& Space\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_space}{Space}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_space_a74bc8c50ffffd58bfe95c7147d0e662d}\label{class_space_a74bc8c50ffffd58bfe95c7147d0e662d}} 
+\index{Space@{Space}!push@{push}}
+\index{push@{push}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Space\+::push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_particle}{Particle}} \&}]{val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a005246d5ff6727c6ef74cbb2b09e1dfe}\label{class_space_a005246d5ff6727c6ef74cbb2b09e1dfe}} 
+\index{Space@{Space}!push@{push}}
+\index{push@{push}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Space\+::push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{r,  }\item[{double}]{px,  }\item[{double}]{py,  }\item[{double}]{vx = {\ttfamily 0.0},  }\item[{double}]{vy = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a28e2660b966d25101363412ebb822d83}\label{class_space_a28e2660b966d25101363412ebb822d83}} 
+\index{Space@{Space}!reserve@{reserve}}
+\index{reserve@{reserve}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily void Space\+::reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a3b0519f564b5a063d6835c68082e8445}\label{class_space_a3b0519f564b5a063d6835c68082e8445}} 
+\index{Space@{Space}!setEntropy@{setEntropy}}
+\index{setEntropy@{setEntropy}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{setEntropy()}{setEntropy()}}
+{\footnotesize\ttfamily void Space\+::set\+Entropy (\begin{DoxyParamCaption}\item[{double}]{entropy }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a343f686464928b714b4d1f36b1c01ad8}\label{class_space_a343f686464928b714b4d1f36b1c01ad8}} 
+\index{Space@{Space}!setResistance@{setResistance}}
+\index{setResistance@{setResistance}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{setResistance()}{setResistance()}}
+{\footnotesize\ttfamily void Space\+::set\+Resistance (\begin{DoxyParamCaption}\item[{double}]{resistance }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a9aeca70549d6263c6695aa1a26f4454d}\label{class_space_a9aeca70549d6263c6695aa1a26f4454d}} 
+\index{Space@{Space}!setSideCollision@{setSideCollision}}
+\index{setSideCollision@{setSideCollision}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{setSideCollision()}{setSideCollision()}}
+{\footnotesize\ttfamily void Space\+::set\+Side\+Collision (\begin{DoxyParamCaption}\item[{bool}]{side\+Collision }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_ac1105681dfd6d553c2ffdd6d522a77cc}\label{class_space_ac1105681dfd6d553c2ffdd6d522a77cc}} 
+\index{Space@{Space}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily void Space\+::set\+Speed (\begin{DoxyParamCaption}\item[{double}]{speed }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_space_a3c8a78c2eb0ae0b7e9fd01bb239e2dd3}\label{class_space_a3c8a78c2eb0ae0b7e9fd01bb239e2dd3}} 
+\index{Space@{Space}!step@{step}}
+\index{step@{step}!Space@{Space}}
+\doxysubsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily void Space\+::step (\begin{DoxyParamCaption}\item[{double}]{time = {\ttfamily 0.1} }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_space_8hpp}{Space.\+hpp}}\item 
+src/\mbox{\hyperlink{_space_8cpp}{Space.\+cpp}}\end{DoxyCompactItemize}

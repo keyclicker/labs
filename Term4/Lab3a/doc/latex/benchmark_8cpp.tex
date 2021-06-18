@@ -1,0 +1,149 @@
+\hypertarget{benchmark_8cpp}{}\doxysection{benchmark.\+cpp File Reference}
+\label{benchmark_8cpp}\index{benchmark.cpp@{benchmark.cpp}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$benchmark/benchmark.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Multisort.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Graph.\+hpp\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{benchmark_8cpp_a7eabd1df626caa8ba72f1c8e8bdaf820}{SORTBENCH}}(name,  algo)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{benchmark_8cpp_a0a4d1dc80337d0a0cd3672c8b946fc56}{Linier\+Floyd}} (benchmark\+::\+State \&state)
+\item 
+\mbox{\hyperlink{benchmark_8cpp_aea01100b225b70cdee9946c5461e126d}{Unit}} (benchmark\+::\+Time\+Unit\+::k\+Microsecond) -\/$>$ Range\+Multiplier(2) -\/$>$Range(2, 1024)
+\item 
+void \mbox{\hyperlink{benchmark_8cpp_a1b6e8163e69d77280a3e748e589bde7f}{Multi\+Floyd}} (benchmark\+::\+State \&state)
+\item 
+default\+\_\+random\+\_\+engine \mbox{\hyperlink{benchmark_8cpp_a20aed71b5f5b0905b514cdfb1e707218}{re}} (\mbox{\hyperlink{benchmark_8cpp_a5e7d225ba5a0794a0473ca8ddc08aaa3}{rd}}())
+\item 
+uniform\+\_\+int\+\_\+distribution$<$ int $>$ \mbox{\hyperlink{benchmark_8cpp_a007ba28a5e2896ac2b3bd5309f9da0a7}{drand}} (0, 100)
+\item 
+\mbox{\hyperlink{benchmark_8cpp_a6e0e2466a713d0f1a7db1e7a23ba6413}{SORTBENCH}} (Async\+Quick\+Sort, \mbox{\hyperlink{_multisort_8hpp_a611d977e20eab748e8ae1369bff56729}{quicksort\+\_\+async}})
+\item 
+\mbox{\hyperlink{benchmark_8cpp_a8082a27f34f12ec2a492301978c618e7}{SORTBENCH}} (Quick\+Sort, \mbox{\hyperlink{_multisort_8hpp_aaa547dafc3a97e3f029d93ebc6cf9f9d}{quicksort}})
+\item 
+\mbox{\hyperlink{benchmark_8cpp_aad6c1fda5cf33e1251513a419a74bcea}{SORTBENCH}} (Async\+Merge\+Sort, \mbox{\hyperlink{_multisort_8hpp_a053944706e8aba9648d0d382128888f0}{merge\+\_\+async}})
+\item 
+\mbox{\hyperlink{benchmark_8cpp_a8a3823ce9f27fd903ec973ea2ca8f1c2}{SORTBENCH}} (Merge\+Sort, \mbox{\hyperlink{_multisort_8hpp_ad13e68b2dcd8cb1c756a9c69baaffc80}{merge}})
+\item 
+\mbox{\hyperlink{benchmark_8cpp_aef8d921a19142f46f5070e6b2166b917}{SORTBENCH}} (std\+Sort, std\+::sort)
+\item 
+\mbox{\hyperlink{benchmark_8cpp_a5851750faa9cfec10f7cad1f3b89697e}{BENCHMARK\+\_\+\+MAIN}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+random\+\_\+device \mbox{\hyperlink{benchmark_8cpp_a5e7d225ba5a0794a0473ca8ddc08aaa3}{rd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{benchmark_8cpp_a7eabd1df626caa8ba72f1c8e8bdaf820}\label{benchmark_8cpp_a7eabd1df626caa8ba72f1c8e8bdaf820}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH}{SORTBENCH}}
+{\footnotesize\ttfamily \#define SORTBENCH(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{algo }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} name(benchmark::State\& state) \{ \(\backslash\)}
+\DoxyCodeLine{  std::vector<int> a;\(\backslash\)}
+\DoxyCodeLine{  for (\textcolor{keyword}{auto} \_ : state) \{ \(\backslash\)}
+\DoxyCodeLine{    state.PauseTiming(); \(\backslash\)}
+\DoxyCodeLine{      a.clear();\(\backslash\)}
+\DoxyCodeLine{      for (\textcolor{keywordtype}{int} i = 0; i < state.range(); ++i)\(\backslash\)}
+\DoxyCodeLine{        a.emplace\_back(\mbox{\hyperlink{benchmark_8cpp_a007ba28a5e2896ac2b3bd5309f9da0a7}{drand}}(\mbox{\hyperlink{benchmark_8cpp_a20aed71b5f5b0905b514cdfb1e707218}{re}}));\(\backslash\)}
+\DoxyCodeLine{    state.ResumeTiming(); \(\backslash\)}
+\DoxyCodeLine{    algo(a.begin(), a.end());\(\backslash\)}
+\DoxyCodeLine{  \}; \(\backslash\)}
+\DoxyCodeLine{\} \(\backslash\)}
+\DoxyCodeLine{BENCHMARK(name) \(\backslash\)}
+\DoxyCodeLine{-\/>Unit(benchmark::TimeUnit::kMicrosecond) \(\backslash\)}
+\DoxyCodeLine{-\/>RangeMultiplier(2) \(\backslash\)}
+\DoxyCodeLine{-\/>Range(2, 16384) \(\backslash\)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{benchmark_8cpp_a5851750faa9cfec10f7cad1f3b89697e}\label{benchmark_8cpp_a5851750faa9cfec10f7cad1f3b89697e}} 
+\index{benchmark.cpp@{benchmark.cpp}!BENCHMARK\_MAIN@{BENCHMARK\_MAIN}}
+\index{BENCHMARK\_MAIN@{BENCHMARK\_MAIN}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{BENCHMARK\_MAIN()}{BENCHMARK\_MAIN()}}
+{\footnotesize\ttfamily BENCHMARK\+\_\+\+MAIN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a007ba28a5e2896ac2b3bd5309f9da0a7}\label{benchmark_8cpp_a007ba28a5e2896ac2b3bd5309f9da0a7}} 
+\index{benchmark.cpp@{benchmark.cpp}!drand@{drand}}
+\index{drand@{drand}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{drand()}{drand()}}
+{\footnotesize\ttfamily uniform\+\_\+int\+\_\+distribution$<$int$>$ drand (\begin{DoxyParamCaption}\item[{0}]{,  }\item[{100}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a0a4d1dc80337d0a0cd3672c8b946fc56}\label{benchmark_8cpp_a0a4d1dc80337d0a0cd3672c8b946fc56}} 
+\index{benchmark.cpp@{benchmark.cpp}!LinierFloyd@{LinierFloyd}}
+\index{LinierFloyd@{LinierFloyd}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{LinierFloyd()}{LinierFloyd()}}
+{\footnotesize\ttfamily void Linier\+Floyd (\begin{DoxyParamCaption}\item[{benchmark\+::\+State \&}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a1b6e8163e69d77280a3e748e589bde7f}\label{benchmark_8cpp_a1b6e8163e69d77280a3e748e589bde7f}} 
+\index{benchmark.cpp@{benchmark.cpp}!MultiFloyd@{MultiFloyd}}
+\index{MultiFloyd@{MultiFloyd}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{MultiFloyd()}{MultiFloyd()}}
+{\footnotesize\ttfamily void Multi\+Floyd (\begin{DoxyParamCaption}\item[{benchmark\+::\+State \&}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a20aed71b5f5b0905b514cdfb1e707218}\label{benchmark_8cpp_a20aed71b5f5b0905b514cdfb1e707218}} 
+\index{benchmark.cpp@{benchmark.cpp}!re@{re}}
+\index{re@{re}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{re()}{re()}}
+{\footnotesize\ttfamily default\+\_\+random\+\_\+engine re (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{benchmark_8cpp_a5e7d225ba5a0794a0473ca8ddc08aaa3}{rd}}()}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_aad6c1fda5cf33e1251513a419a74bcea}\label{benchmark_8cpp_aad6c1fda5cf33e1251513a419a74bcea}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH()}{SORTBENCH()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily SORTBENCH (\begin{DoxyParamCaption}\item[{Async\+Merge\+Sort}]{,  }\item[{\mbox{\hyperlink{_multisort_8hpp_a053944706e8aba9648d0d382128888f0}{merge\+\_\+async}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a6e0e2466a713d0f1a7db1e7a23ba6413}\label{benchmark_8cpp_a6e0e2466a713d0f1a7db1e7a23ba6413}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH()}{SORTBENCH()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily SORTBENCH (\begin{DoxyParamCaption}\item[{Async\+Quick\+Sort}]{,  }\item[{\mbox{\hyperlink{_multisort_8hpp_a611d977e20eab748e8ae1369bff56729}{quicksort\+\_\+async}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a8a3823ce9f27fd903ec973ea2ca8f1c2}\label{benchmark_8cpp_a8a3823ce9f27fd903ec973ea2ca8f1c2}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH()}{SORTBENCH()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily SORTBENCH (\begin{DoxyParamCaption}\item[{Merge\+Sort}]{,  }\item[{\mbox{\hyperlink{_multisort_8hpp_ad13e68b2dcd8cb1c756a9c69baaffc80}{merge}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_a8082a27f34f12ec2a492301978c618e7}\label{benchmark_8cpp_a8082a27f34f12ec2a492301978c618e7}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH()}{SORTBENCH()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily SORTBENCH (\begin{DoxyParamCaption}\item[{Quick\+Sort}]{,  }\item[{\mbox{\hyperlink{_multisort_8hpp_aaa547dafc3a97e3f029d93ebc6cf9f9d}{quicksort}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_aef8d921a19142f46f5070e6b2166b917}\label{benchmark_8cpp_aef8d921a19142f46f5070e6b2166b917}} 
+\index{benchmark.cpp@{benchmark.cpp}!SORTBENCH@{SORTBENCH}}
+\index{SORTBENCH@{SORTBENCH}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{SORTBENCH()}{SORTBENCH()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily SORTBENCH (\begin{DoxyParamCaption}\item[{std\+Sort}]{,  }\item[{std\+::sort}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{benchmark_8cpp_aea01100b225b70cdee9946c5461e126d}\label{benchmark_8cpp_aea01100b225b70cdee9946c5461e126d}} 
+\index{benchmark.cpp@{benchmark.cpp}!Unit@{Unit}}
+\index{Unit@{Unit}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{Unit()}{Unit()}}
+{\footnotesize\ttfamily Unit (\begin{DoxyParamCaption}\item[{benchmark\+::\+Time\+Unit\+::k\+Microsecond}]{ }\end{DoxyParamCaption}) -\/$>$  Range\+Multiplier(2) -\/$>$Range(2, 1024)}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{benchmark_8cpp_a5e7d225ba5a0794a0473ca8ddc08aaa3}\label{benchmark_8cpp_a5e7d225ba5a0794a0473ca8ddc08aaa3}} 
+\index{benchmark.cpp@{benchmark.cpp}!rd@{rd}}
+\index{rd@{rd}!benchmark.cpp@{benchmark.cpp}}
+\doxysubsubsection{\texorpdfstring{rd}{rd}}
+{\footnotesize\ttfamily random\+\_\+device rd}
+

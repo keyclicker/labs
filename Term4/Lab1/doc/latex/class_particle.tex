@@ -1,0 +1,104 @@
+\hypertarget{class_particle}{}\doxysection{Particle Class Reference}
+\label{class_particle}\index{Particle@{Particle}}
+
+
+{\ttfamily \#include $<$Particle.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_particle_a611ed46b6f07319f0e2f7bd588192a30}{Particle}} ()=default
+\item 
+\mbox{\hyperlink{class_particle_a05b6f0a25aa0a593dce5cc7a4d9eb00d}{Particle}} (double \mbox{\hyperlink{class_particle_adc6912ad900f3d4724d7f310f8eae3d5}{radius}}, const \mbox{\hyperlink{class_vector}{Vector}} \&\mbox{\hyperlink{class_particle_a257abdde975b38a8c6f5be812f18443f}{pos}}, const \mbox{\hyperlink{class_vector}{Vector}} \&\mbox{\hyperlink{class_particle_a58a9efcf88bdac3488af09195f950423}{vel}}=\mbox{\hyperlink{class_vector}{Vector}}())
+\item 
+void \mbox{\hyperlink{class_particle_ad565010e057da6bd8f98f65d8d7d73a2}{move}} (const \mbox{\hyperlink{class_vector}{Vector}} \&d)
+\item 
+void \mbox{\hyperlink{class_particle_a2e81587d6bd8873faad0420d2387c9d6}{apply\+Force}} (const \mbox{\hyperlink{class_vector}{Vector}} \&force, double time)
+\item 
+void \mbox{\hyperlink{class_particle_a84e6c94bf4ec47f42373584d96e4cd5a}{step}} (double time)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_particle_adc6912ad900f3d4724d7f310f8eae3d5}{radius}}
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_particle_a257abdde975b38a8c6f5be812f18443f}{pos}}
+\item 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_particle_a58a9efcf88bdac3488af09195f950423}{vel}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_particle_a7759e7e6e228448c059bedd513045fe0}{dist}} (const \mbox{\hyperlink{class_particle}{Particle}} \&a, const \mbox{\hyperlink{class_particle}{Particle}} \&b)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_particle_a611ed46b6f07319f0e2f7bd588192a30}\label{class_particle_a611ed46b6f07319f0e2f7bd588192a30}} 
+\index{Particle@{Particle}!Particle@{Particle}}
+\index{Particle@{Particle}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{Particle()}{Particle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Particle\+::\+Particle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_particle_a05b6f0a25aa0a593dce5cc7a4d9eb00d}\label{class_particle_a05b6f0a25aa0a593dce5cc7a4d9eb00d}} 
+\index{Particle@{Particle}!Particle@{Particle}}
+\index{Particle@{Particle}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{Particle()}{Particle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Particle\+::\+Particle (\begin{DoxyParamCaption}\item[{double}]{radius,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{pos,  }\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{vel = {\ttfamily \mbox{\hyperlink{class_vector}{Vector}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_particle_a2e81587d6bd8873faad0420d2387c9d6}\label{class_particle_a2e81587d6bd8873faad0420d2387c9d6}} 
+\index{Particle@{Particle}!applyForce@{applyForce}}
+\index{applyForce@{applyForce}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{applyForce()}{applyForce()}}
+{\footnotesize\ttfamily void Particle\+::apply\+Force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{force,  }\item[{double}]{time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_particle_ad565010e057da6bd8f98f65d8d7d73a2}\label{class_particle_ad565010e057da6bd8f98f65d8d7d73a2}} 
+\index{Particle@{Particle}!move@{move}}
+\index{move@{move}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Particle\+::move (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}} \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_particle_a84e6c94bf4ec47f42373584d96e4cd5a}\label{class_particle_a84e6c94bf4ec47f42373584d96e4cd5a}} 
+\index{Particle@{Particle}!step@{step}}
+\index{step@{step}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily void Particle\+::step (\begin{DoxyParamCaption}\item[{double}]{time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_particle_a7759e7e6e228448c059bedd513045fe0}\label{class_particle_a7759e7e6e228448c059bedd513045fe0}} 
+\index{Particle@{Particle}!dist@{dist}}
+\index{dist@{dist}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily double dist (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_particle}{Particle}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_particle}{Particle}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_particle_a257abdde975b38a8c6f5be812f18443f}\label{class_particle_a257abdde975b38a8c6f5be812f18443f}} 
+\index{Particle@{Particle}!pos@{pos}}
+\index{pos@{pos}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Particle\+::pos}
+
+\mbox{\Hypertarget{class_particle_adc6912ad900f3d4724d7f310f8eae3d5}\label{class_particle_adc6912ad900f3d4724d7f310f8eae3d5}} 
+\index{Particle@{Particle}!radius@{radius}}
+\index{radius@{radius}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{radius}{radius}}
+{\footnotesize\ttfamily double Particle\+::radius}
+
+\mbox{\Hypertarget{class_particle_a58a9efcf88bdac3488af09195f950423}\label{class_particle_a58a9efcf88bdac3488af09195f950423}} 
+\index{Particle@{Particle}!vel@{vel}}
+\index{vel@{vel}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{vel}{vel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector}} Particle\+::vel}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_particle_8hpp}{Particle.\+hpp}}\end{DoxyCompactItemize}
