@@ -22,7 +22,7 @@ int main() {
   double cx = 0, cy = 0; //camera x, y
   double cz = 1; //camera zoom
 
-  Space space = genSpace(50, 5);
+  Space space = billiard();
 
   while (window.isOpen()) {
     sf::Event event;

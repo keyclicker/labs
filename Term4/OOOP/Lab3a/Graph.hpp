@@ -101,9 +101,8 @@ public:
         for (int i = 0; i < res.size(); ++i)
           for (int j = 0; j < res.size(); ++j)
             if (res[i][k] < Inf && res[k][j] < Inf) {
-              mm[i][j].lock();
+              std::lock_guard<std::mutex> lg(mm[i][j]);
               res[i][j] = std::min(res[i][j], res[i][k] + res[k][j]);
-              mm[i][j].unlock();
             }
       }
     };

@@ -5,7 +5,7 @@
 #include <random>
 
 
-#define G_SIZE 16
+#define G_SIZE 200
 
 TEST(Graph, FloydComp) {
   Graph<double> graph(G_SIZE);
@@ -33,9 +33,9 @@ TEST(Graph, FloydComp) {
     }
   }
 
-//  std::cout << onet << '\n' << multit << std::endl;
-//
-//  std::cout << dif << std::endl;
+  std::cout << onet << '\n' << multit << std::endl;
+
+  std::cout << dif << std::endl;
 
   EXPECT_EQ(onet, multit);
 }
