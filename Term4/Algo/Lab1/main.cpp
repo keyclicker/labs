@@ -7,19 +7,19 @@ using namespace std;
 #include "HashTable.hpp"
 
 int main() {
-  vector<pair<string, string>> vocabulary = {
-      {"Cow", "Korova"},
-      {"Bread", "Hlib"},
-      {"Cat", "Kit"},
-      {"Vocabulary", "Slovnyk"},
-      {"Table", "Tablycya"},
+  vector<pair<string, string>> albums = {
+      {"Cream", "Wheels of Fire"},
+      {"The Doors", "Morrison Hotel"},
+      {"Beatles", "Revolver"},
+      {"Love", "Forever Changes"},
+      {"Pink Floyd", "The Wall"},
   };
 
-  HashTable ht(vocabulary);
+  HashTable ht(albums);
 
   cout << ht << endl;
 
-  cout << "In Ukrainian \"Vocabulary\" is " << ht["Vocabulary"] << endl;
+  cout << "The record store has one The Doors album in stock - " << ht["The Doors"] << endl;
 
   return 0;
 }
