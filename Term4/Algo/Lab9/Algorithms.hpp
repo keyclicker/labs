@@ -22,10 +22,9 @@ namespace Algorithms {
         break;
       used.insert(v);
 
-      for (int k = 0; k < graph.size(); ++k) {
-        if (dist[v] +  graph.getMatrix()[v][k] < dist[k] &&
-            graph.getMatrix()[v][k] != Graph<T>::MaxValue) {
-          dist[k] = dist[v] + graph.getMatrix()[v][k];
+      for (auto &a : graph.getAdj()[v]) {
+        if (dist[v] + a.weight < dist[a.vertex]) {
+          dist[a.vertex] = dist[v] + a.weight;
         }
       }
     }
@@ -42,38 +41,40 @@ namespace Algorithms {
   }
 
   template<typename T>
-  auto bellmanFord(const Graph<T> &graph, size_t v1) {
+  auto bellmanFord(Graph<T> &graph, size_t v1) {
     std::vector<T> dist(graph.size(), Graph<T>::MaxValue);
     dist[v1] = 0;
 
-    for(int k = 0; k < graph.size(); k++) {
-      for (int i = 0; i < graph.size(); i++) {
-        for (int j = 0; j < graph.size(); j++) {
-          if (graph.get(i,j) + dist[i] < dist[j]) {
-            dist[j] = graph.get(i,j) + dist[i];
+    for(int k = 0; k < graph.getAdj().size(); k++) {
+      for (int i = 0; i < graph.getAdj().size(); i++) {
+        for (int j = 0; j < graph.getAdj()[i].size(); j++) {
+          if (graph.getAdj()[i][j].weight + dist[i] < dist[graph.getAdj()[i][j].vertex]
+          && dist[i] != Graph<T>::MaxValue) {
+            dist[graph.getAdj()[i][j].vertex] = graph.getAdj()[i][j].weight + dist[i];
           }
         }
       }
     }
 
+
     return dist;
   }
 
   template<typename T>
-  auto johnsonDistances(Graph<T> &graph, size_t v1) {
-    auto balances = bellmanFord(graph, graph.size() -1);
+  auto johnsonDistances(Graph<T> &graph) {
+    auto balances = bellmanFord(graph, graph.size() - 1);
 
-    for(int i = 0; i < graph.size(); i++){
-      for(int j = 0; j < graph.size(); j++){
-         graph.addEdge(i, j, graph.get(i, j) + balances[i] - balances[j]);
+    for(int i = 0; i < graph.getAdj().size(); i++){
+      for(int j = 0; j < graph.getAdj()[i].size(); j++){
+        graph.getAdj()[i][j].weight = graph.getAdj()[i][j].weight + balances[i] - balances[graph.getAdj()[i][j].vertex];
       }
     }
-
+    
     auto result = dijkstra(graph);
 
-    for(int i = 0; i < graph.size(); i++){
-      for(int j = 0; j < graph.size(); j++){
-        graph.addEdge(i, j, graph.get(i, j) - balances[i] + balances[j]);
+    for(int i = 0; i < graph.getAdj().size(); i++){
+      for(int j = 0; j < graph.getAdj()[i].size(); j++){
+        graph.getAdj()[i][j].weight = graph.getAdj()[i][j].weight - balances[i] + balances[graph.getAdj()[i][j].vertex];
       }
     }
 
