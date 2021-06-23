@@ -60,16 +60,20 @@ namespace Algorithms {
     return dist;
   }
 
+
+
   template<typename T>
   auto johnsonDistances(Graph<T> &graph) {
+    graph.expendGraph();
     auto balances = bellmanFord(graph, graph.size() - 1);
+    graph.shrinkGraph();
 
     for(int i = 0; i < graph.getAdj().size(); i++){
       for(int j = 0; j < graph.getAdj()[i].size(); j++){
         graph.getAdj()[i][j].weight = graph.getAdj()[i][j].weight + balances[i] - balances[graph.getAdj()[i][j].vertex];
       }
     }
-    
+
     auto result = dijkstra(graph);
 
     for(int i = 0; i < graph.getAdj().size(); i++){

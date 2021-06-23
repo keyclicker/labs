@@ -25,9 +25,9 @@ public:
     print(m_Root, 0, false);
   };
 
-private:
-  void print(Node* node, int level, bool left);
+  Node *getRoot();
 
+private:
   Node *getMinNode(Node *node) const;
   Node *getMaxNode(Node *node) const;
 

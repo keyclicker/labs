@@ -10,7 +10,7 @@ private:
     Node *parent;
     Node *leftBrother;
     Node *rightBrother;
-    int degree{};
+    int degree;
     bool mark;
 
     bool visited;

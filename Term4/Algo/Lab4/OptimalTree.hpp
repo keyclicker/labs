@@ -26,21 +26,6 @@ private:
     left(nullptr), right(nullptr), parent(nullptr) { }
 
     ~Node() = default;
-
-    void print(std::ostream &out, Node *node, int space) const {
-      if (node == nullptr)
-        return;
-
-      space += 10;
-      print(out, node->right, space);
-      cout << endl;
-
-      for (int i = 10; i < space; i++)
-        cout << " ";
-
-      cout << node->value << ":" << node->probability << "\n";
-      print(out, node->left, space);
-    }
   };
 
   Node *root;
@@ -69,7 +54,7 @@ private:
     for (int k = 1; k < keys.size(); k++) {
       for (int i = 1; i < keys.size() - k + 1; i++) {
         int j = i + k - 1;
-        expectedValue[i][j] = 1000;
+        expectedValue[i][j] = INT16_MAX;
         weights[i][j] = weights[i][j - 1] + keys[j] + fictitiousKeys[j];
 
         for (int r = i; r <= j; r++) {
@@ -105,6 +90,7 @@ private:
         cout << expectedValue[i][j] << '\t';
       cout << endl;
     }
+    cout << endl;
   }
 
   Node *generateTree(int i, int j, Node *parent) {
@@ -121,11 +107,6 @@ private:
     return node;
   }
 
-  void print(std::ostream &out) const {
-    cout << "\nTree:\n";
-    root->print(out, root, 0);
-  }
-
 public:
   OptimalTree(std::vector<double> keys, std::vector<double> fictitiousKeys):
   expectedValue(Matrix<double>(this->keys.size() + 1, std::vector<double>(this->keys.size()))),
@@ -138,8 +119,7 @@ public:
     root = generateTree(1, this->keys.size() - 1, nullptr);
   }
 
-  friend ostream& operator<<(ostream& os, const OptimalTree& ot){
-    ot.print(os);
-    return os;
+  Node *getRoot() {
+    return root;
   }
 };

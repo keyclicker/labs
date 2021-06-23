@@ -41,6 +41,19 @@ public:
     return adj;
   }
 
+  void expendGraph() {
+    adj.emplace_back(std::vector<Edge>());
+    adj.back().reserve(adj.size());
+
+    for (int i = 0; i < adj.size(); ++i) {
+      adj.back().emplace_back(Edge(i, 0));
+    }
+  }
+
+  void shrinkGraph() {
+    adj.pop_back();
+  }
+
 
   //add directed edge
   void addEdge(size_t av, size_t bv, const T &weight = 1) {

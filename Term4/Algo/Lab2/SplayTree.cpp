@@ -1,3 +1,4 @@
+#pragma once
 
 #include <cmath>
 #include "SplayTree.hpp"
@@ -123,27 +124,8 @@ typename SplayTree<Key, Value>::Node *SplayTree<Key, Value>::getNode(const Key &
 }
 
 template<typename Key, typename Value>
-void SplayTree<Key, Value>::print(SplayTree::Node *node, int level, bool left) {
-  if(node == nullptr)
-    return;
-
-  if(node == m_Root) {
-    std::cout << node->pair.first << std::endl;
-  }
-  else {
-    for(int i = 0; i < level; i++){
-      std::cout<<"|\t";
-    }
-    if(left)
-      std::cout << "LEFT ";
-    else
-      std::cout << "RIGHT ";
-    std::cout << node->pair.first;
-    std::cout << " parent " <<  node->parent->pair.first << "\n";
-  }
-
-  print(node->left, level + 1, true);
-  print(node->right, level + 1, false);
+typename SplayTree<Key, Value>::Node *SplayTree<Key, Value>::getRoot() {
+  return m_Root;
 }
 
 template<typename Key, typename Value>
