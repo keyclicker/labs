@@ -42,6 +42,7 @@ public:
   void decreaseKey(T toDecrease, T decreased);
   void erase(T value);
   void print();
+  Node *getRoot();
 };
 
 #include "FibonacciHeap.cpp"

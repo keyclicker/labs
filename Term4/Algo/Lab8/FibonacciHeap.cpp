@@ -280,4 +280,9 @@ void FibonacciHeap<T>::print() {
   print(head, 0);
 }
 
+template<typename T>
+typename FibonacciHeap<T>::Node *FibonacciHeap<T>::getRoot() {
+  return head;
+}
+
 

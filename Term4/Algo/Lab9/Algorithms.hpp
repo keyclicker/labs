@@ -18,8 +18,10 @@ namespace Algorithms {
       for (int j = 0; j < graph.size(); ++j)
         if (used.find(j) == used.end() && (v == -1 || dist[j] < dist[v]))
           v = j;
+
       if (dist[v] == Graph<T>::MaxValue)
         break;
+
       used.insert(v);
 
       for (auto &a : graph.getAdj()[v]) {
@@ -55,7 +57,6 @@ namespace Algorithms {
         }
       }
     }
-
 
     return dist;
   }
