@@ -37,15 +37,9 @@ public class Main {
 
     @Override
     public void run() {
-      slider.setValue(position);
-
-      try {
-        Thread.sleep(3000);
-      } catch (InterruptedException ex) {
-        ex.printStackTrace();
+      while (!Thread.currentThread().isInterrupted()) {
+        slider.setValue(position);
       }
-
-      unlock();
     }
   }
 
@@ -103,7 +97,7 @@ public class Main {
       public void actionPerformed(ActionEvent e) {
         if (lockedBy != 1) {
           unlock();
-          thread1.stop();
+          thread2.stop();
         }
         else {
           showError();
