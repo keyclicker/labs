@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveTask;
 
 
 class FistPath {
-    private Random rand = new Random(System.currentTimeMillis());
+    private static final Random rand = new Random(System.currentTimeMillis());
     private final ArrayList<Monk> monks = new ArrayList<>();
 
     class Monk {
@@ -31,7 +31,7 @@ class FistPath {
 
         @Override
         public String toString() {
-            return  "Name: " + name + "Power: " + power;
+            return  "Name: '" + name + "', Power: " + power;
         }
     }
 
@@ -51,29 +51,34 @@ class FistPath {
             end = e;
         }
 
-        private Monk fight(Monk m1, Monk m2) {
+        private static Monk fight(Monk m1, Monk m2) {
+            if (m1 == m2) return m1;
+
+            Monk winner;
             if (m1.getPower() > m2.getPower()) {
-                return m1;
+                winner = m1;
             } else if (m1.getPower() < m2.getPower()) {
-                return m2;
+                winner = m2;
             } else {
                 if (rand.nextInt(2) == 0)
-                    return m1;
+                    winner = m1;
                 else
-                    return m2;
+                    winner = m2;
             }
+
+            System.out.println("Fight: <" + m1 + "> vs <" +
+                m2 + "> Winner: "  + winner);
+
+            return winner;
         }
 
         @Override
         protected Monk compute() {
-            if (end - beg == 0) {
-              return new Monk();
-            } else if (end - beg == 1) {
-                return monks.get(beg);
-            } else if (end - beg == 2) {
+            if (end - beg == 2) {
                 return fight(monks.get(beg), monks.get(end - 1));
-            } else {
-                var mid = monks.size() / 2;
+            }
+            else {
+                var mid = (beg + end) / 2;
 
                 var r1 = new Round(monks, beg, mid + 1);
                 r1.fork();
@@ -92,17 +97,18 @@ class FistPath {
             monks.add(m);
             System.out.println(i + ": " + m);
         }
+        System.out.println();
     }
 
     public void start() {
         var finalRound = new Round(monks);
-        System.out.println("Winner: " + finalRound.compute());
+        System.out.println("\nFist Path Winner:\n" + finalRound.compute());
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        var fp = new FistPath(10);
+        var fp = new FistPath(500);
         fp.start();
     }
 }

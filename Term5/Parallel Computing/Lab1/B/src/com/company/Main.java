@@ -85,7 +85,7 @@ public class Main {
       public void actionPerformed(ActionEvent e) {
         if (lockedBy != 2) {
           unlock();
-          thread1.stop();
+          thread1.interrupt();
         }
         else {
           showError();
@@ -97,7 +97,7 @@ public class Main {
       public void actionPerformed(ActionEvent e) {
         if (lockedBy != 1) {
           unlock();
-          thread2.stop();
+          thread2.interrupt();
         }
         else {
           showError();
