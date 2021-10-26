@@ -15,42 +15,60 @@ type Forest struct {
 	Bear Position
 	Bees []Position
 	Size uint
-	isFinished bool
+	briefcase chan uint
 }
 
-func (f *Forest) StartBeeWorker(bee *Position, brc *Briefcase) {
-	task, finish := brc.GetTask()
-	for !finish {
-		for i := uint(0); i < f.Size; i++ {
-			bee.X = task
-			bee.Y = i
+// NewForest
+// Forest constructor
+func NewForest(fs uint, bc uint) Forest {
+	f := Forest{Size: fs}
+	f.Bees = make([]Position, bc)
 
-			time.Sleep(750 * time.Millisecond)
+	// Creating briefcase chan
+	f.briefcase = make(chan uint)
 
-			if bee.X  == f.Bear.X && bee.Y == f.Bear.Y {
-				f.isFinished = true;
-			}
-		}
-		task, finish = brc.GetTask()
-	}
-}
-
-func (f *Forest) CreateBees(n uint) {
-	f.Bees = make([]Position, n)
-}
-
-func (f *Forest) Start() {
-	brc := Briefcase{Forest: f}
-
+	// Positioning bear at random point
 	rand.Seed(time.Now().UnixNano())
 	f.Bear.X = uint(rand.Intn(int(f.Size)))
 	f.Bear.Y = uint(rand.Intn(int(f.Size)))
 
-	for i := range f.Bees {
-		go f.StartBeeWorker(&f.Bees[i], &brc)
+	return f
+}
+
+// StartBee
+// Bee Coroutine that scans one line of forest
+func (f *Forest) StartBee(bee *Position) {
+	for task := range f.briefcase {
+		bee.X = task
+		for i := uint(0); i < f.Size; i++ {
+			bee.Y = i
+			time.Sleep(750 * time.Millisecond)
+
+			if bee.X  == f.Bear.X && bee.Y == f.Bear.Y {
+				close(f.briefcase)
+			}
+		}
 	}
 }
 
+// Start
+// Starts bees and filling the briefcaes with tasks
+func (f *Forest) Start() {
+	go func () {
+		// Sarting bee worders
+		for i := range f.Bees {
+			go f.StartBee(&f.Bees[i])
+		}
+
+		// Creating tasks; Task - row to scan
+		for i := uint(0); i < f.Size; i++ {
+			f.briefcase <- i
+		}
+	} ()
+}
+
+// DisplayForest 
+// Displays forest state
 func (f *Forest) DisplayForest() {
 	const (
 		EmptyArea = 0
@@ -61,7 +79,7 @@ func (f *Forest) DisplayForest() {
 
 	screen.Clear()
 
-	for !f.isFinished {
+	for {
 		screen.MoveTopLeft()
 
 		forest := make([][]uint8, f.Size)

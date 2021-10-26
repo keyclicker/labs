@@ -108,7 +108,7 @@ class FistPath {
 
 public class Main {
     public static void main(String[] args) {
-        var fp = new FistPath(500);
+        var fp = new FistPath(10);
         fp.start();
     }
 }

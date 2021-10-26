@@ -23,12 +23,12 @@ public class Main {
   static class Mutex {
     private boolean mutex = false;
 
-    public void lock() {
+    public synchronized void lock() {
       while (mutex);
       mutex = true;
     }
 
-    public void unlock() {
+    public synchronized void unlock() {
       mutex = false;
     }
   }

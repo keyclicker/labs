@@ -46,7 +46,7 @@ class MilitaryUnit {
 
     private ArrayList<Good> storage = new ArrayList<>();
     private BlockingQueue<Good> street = new BlockingQueue<>();
-    private ArrayList<Good> truck = new ArrayList<>();
+    private BlockingQueue<Good> truck = new BlockingQueue<>();
 
     private final Object nothingToCount = new Object();
 

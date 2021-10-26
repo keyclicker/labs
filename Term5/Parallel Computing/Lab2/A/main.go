@@ -2,23 +2,19 @@ package main
 
 import (
 	"A/forest"
-	"fmt"
 	"github.com/inancgumus/screen"
 )
 
 func main() {
 	screen.Clear()
 
-	var fs, bc uint
-	fmt.Print("Choose forest size: ")
-	fmt.Scan(&fs)
-	fmt.Print("Choose bee count: ")
-	fmt.Scan(&bc)
+	const (
+		ForestSize = 10
+		BeeCount = 5
+	)
 
-	f := forest.Forest{Size: fs}
-	f.CreateBees(bc)
+	f := forest.NewForest(ForestSize, BeeCount)
 
-	f.Start()
+	go f.Start()
 	f.DisplayForest()
-	fmt.Scan(&fs)
 }
