@@ -1,6 +1,7 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include <thread>
 
 namespace asio = boost::asio;
 using tcp = asio::ip::tcp;
@@ -18,24 +19,14 @@ public:
 
   template<typename T>
   void write(const T &value) {
-    try {
-      socket.write_some(asio::buffer(&value, sizeof(T)));
-    }
-    catch (std::exception &e) {
-      std::cout << e.what() << std::endl;
-    }
+    socket.write_some(asio::buffer(&value, sizeof(T)));
   }
 
   template<typename T>
   T read() {
-    try {
-      T value;
-      socket.read_some(asio::buffer(&value, sizeof(T)));
-      return value;
-    }
-    catch (std::exception &e) {
-      std::cout << e.what() << std::endl;
-    }
+    T value;
+    socket.read_some(asio::buffer(&value, sizeof(T)));
+    return value;
   }
 };
 
@@ -65,7 +56,7 @@ public:
   explicit Server(uint16_t port) : ClientServerBase(),
     acceptor(context, tcp::endpoint(tcp::v4(), port)) {
 
-    acceptor.accept(socket);
+    new std::thread([&](){acceptor.accept(socket);});
   }
 
   Server() = delete;

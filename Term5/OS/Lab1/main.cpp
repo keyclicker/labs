@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
   if (argc == 1) {
-    runManager<Config::ValueType>(argv[0]);
+    Manager<Config::ValueType> manager(argv[0]);
   }
   else if (strcmp(argv[1], "-f") == 0) {
     functionF<Config::ValueType>();

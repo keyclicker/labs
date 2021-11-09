@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <variant>
 
 #include "ClientServer.hpp"
 #include "Config.hpp"
@@ -17,8 +18,18 @@ template<typename T,typename F>
   for (;;) {
     T x = client.read<T>();
 
-    auto res = func(x);
-    client.write(res);
+    cf::comp_result<T> res;
+
+    int attempt = 0;
+    do {
+      res = func(x);
+    } while (std::holds_alternative<cf::soft_fail>(res)
+      && attempt < Config::MaxAttemptsCount);
+
+    if (std::holds_alternative<cf::soft_fail>(res))
+      client.write(cf::hard_fail());
+    else
+      client.write(res);
   }
 }
 
