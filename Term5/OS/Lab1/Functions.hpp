@@ -23,6 +23,7 @@ template<typename T,typename F>
     int attempt = 0;
     do {
       res = func(x);
+      attempt++;
     } while (std::holds_alternative<cf::soft_fail>(res)
       && attempt < Config::MaxAttemptsCount);
 
@@ -35,12 +36,14 @@ template<typename T,typename F>
 
 template<typename T>
 void functionF() {
-  runFunction<T>(trialFunc<T>, Config::PortF);
+//  runFunction<T>(trialFunc<T>, Config::PortF);
+  runFunction<T>(cf::trial_f<cf::INT_SUM>, Config::PortF);
 }
 
 template<typename T>
 void functionG() {
-  runFunction<T>(trialFunc<T>, Config::PortG);
+//  runFunction<T>(trialFunc<T>, Config::PortG);
+  runFunction<T>(cf::trial_g<cf::INT_SUM>, Config::PortG);
 }
 
 //cf::trial_g<cf::INT_SUM>
