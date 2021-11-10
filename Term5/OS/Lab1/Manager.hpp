@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <wait.h>
 
-#include <SFML/Window.hpp>
 #include <boost/process.hpp>
 
 #include "ClientServer.hpp"
