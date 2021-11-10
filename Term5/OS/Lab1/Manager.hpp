@@ -5,6 +5,7 @@
 #include <future>
 #include <mutex>
 #include <string>
+#include <utility>
 #include <variant>
 #include <chrono>
 #include <condition_variable>
@@ -27,6 +28,7 @@ class Manager {
   using Result = cf::comp_result<T>;
 
   void prompt();
+  void reset();
   void killChildren();
   static Result binaryOperation(Result a, Result b);
   void monitorFunc(T x, std::promise<Result> &promise,
@@ -47,65 +49,70 @@ private:
 
   bool stopped = false;
   bool isCompleted = false; // is computation completed
+
+  std::string path;
 };
 
 
 template<typename T>
-Manager<T>::Manager(std::string path) {
+Manager<T>::Manager(std::string path): path(std::move(path)){
+  reset();
   while (!stopped) {
-    nested_continue:
-    serverF.reset();
-    serverG.reset();
+    std::cout << "Input x:" << std::endl;
 
-    serverF = std::make_unique<Server>(Config::PortF);
-    serverG = std::make_unique<Server>(Config::PortG);
+    T x;
+    std::cin >> x;
 
-    childF = std::make_unique<bp::child>(path, "-f");
-    childG = std::make_unique<bp::child>(path, "-g");
+    new std::thread([this]() { this->prompt(); });
 
-    while (!stopped) {
-      std::cout << "Input x:" << std::endl;
+    std::promise<Result> promiseF;
+    std::promise<Result> promiseG;
 
-      T x;
-      std::cin >> x;
+    new std::thread([&]() { this->monitorFunc(x, promiseF, serverF, "f(x)"); });
+    new std::thread([&]() { this->monitorFunc(x, promiseG, serverG, "g(x)"); });
 
-      new std::thread([this]() { this->prompt(); });
+    auto resF = promiseF.get_future().get();
+    auto resG = promiseG.get_future().get();
 
-      std::promise<Result> promiseF;
-      std::promise<Result> promiseG;
+    isCompleted = true;
 
-      new std::thread([&]() { this->monitorFunc(x, promiseF, serverF, "f(x)"); });
-      new std::thread([&]() { this->monitorFunc(x, promiseG, serverG, "g(x)"); });
+    //waiting for prompt user response
+    std::lock_guard ul(promptLock);
 
-      auto resF = promiseF.get_future().get();
-      auto resG = promiseG.get_future().get();
+    bool isCanceledF = std::holds_alternative<cf::soft_fail>(resF);
+    bool isCanceledG = std::holds_alternative<cf::soft_fail>(resG);
 
-      isCompleted = true;
+    if (isCanceledF)
+      std::cout << "\nf(" << x << ")" << " has been canceled" << std::endl;
+    else
+      std::cout << "\nf(" << x << ") = " << resF << std::endl;
 
-      //waiting for prompt user response
-      std::lock_guard ul(promptLock);
+    if (isCanceledG)
+      std::cout << "g(" << x << ")" << " has been canceled" << "\n\n";
+    else
+      std::cout << "g(" << x << ") = " << resG << "\n\n";
 
-      bool isCanceledF = std::holds_alternative<cf::soft_fail>(resF);
-      bool isCanceledG = std::holds_alternative<cf::soft_fail>(resG);
-
-      if (isCanceledF)
-        std::cout << "\nf(" << x << ")" << " has been canceled" << std::endl;
-      else
-        std::cout << "\nf(" << x << ") = " << resF << std::endl;
-
-      if (isCanceledG)
-        std::cout << "g(" << x << ")" << " has been canceled" << "\n\n";
-      else
-        std::cout << "g(" << x << ") = " << resG << "\n\n";
-
-      if (isCanceledF || isCanceledG) {
-        goto nested_continue;
-      }
-
-      std::cout << "f(" << x << ") * g(" << x << ") = "
-                << binaryOperation(resF, resG) << "\n\n";
+    if (isCanceledF || isCanceledG) {
+      reset();
+      continue;
     }
+
+    std::cout << "f(" << x << ") * g(" << x << ") = "
+              << binaryOperation(resF, resG) << "\n\n";
   }
+}
+
+
+template<typename T>
+void Manager<T>::reset() {
+  serverF.reset();
+  serverG.reset();
+
+  serverF = std::make_unique<Server>(Config::PortF);
+  serverG = std::make_unique<Server>(Config::PortG);
+
+  childF = std::make_unique<bp::child>(path, "-f");
+  childG = std::make_unique<bp::child>(path, "-g");
 }
 
 
@@ -142,31 +149,15 @@ void Manager<T>::prompt() {
 
 
 template<typename T>
-typename Manager<T>::Result Manager<T>::
-binaryOperation(Result a, Result b) {
-  if (std::holds_alternative<cf::hard_fail>(a) ||
-      std::holds_alternative<cf::hard_fail>(b)) {
-    return cf::hard_fail();
-  } else {
-    auto av = std::get<T>(a);
-    auto bv = std::get<T>(b);
-    return (av + bv) + av * bv;
-  }
-}
-
-
-template<typename T>
 void Manager<T>::monitorFunc(T x, std::promise<Result> &promise,
                              std::unique_ptr<Server> &server,
                              const std::string &displayedName) {
-  bool error = false;
   Result res;
   try {
     server->write(x);
     res = server->read<Result>();
   }
   catch (std::exception &e) {
-    error = true;
     res = cf::soft_fail();
   }
 
@@ -183,7 +174,23 @@ void Manager<T>::killChildren() {
   waitpid(childG->id(), &status, 0);
 }
 
+
+template<typename T>
+typename Manager<T>::Result Manager<T>::
+binaryOperation(Result a, Result b) {
+  if (std::holds_alternative<cf::hard_fail>(a) ||
+      std::holds_alternative<cf::hard_fail>(b)) {
+    return cf::hard_fail();
+  } else {
+    auto av = std::get<T>(a);
+    auto bv = std::get<T>(b);
+    return av * bv;
+  }
+}
+
+
 template<typename T>
 void Manager<T>::stop() {
   stopped = true;
 }
+
