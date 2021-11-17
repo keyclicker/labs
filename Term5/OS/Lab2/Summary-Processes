@@ -1,123 +1,125 @@
-Process: 0 registered... (1931 100 0 0)
-Process: 0 I/O blocked... (1931 100 100 100)
-Process: 1 registered... (1931 500 0 0)
-Process: 1 I/O blocked... (1931 500 500 500)
-Process: 0 registered... (1931 100 100 100)
-Process: 0 I/O blocked... (1931 100 200 200)
-Process: 1 registered... (1931 500 500 500)
-Process: 1 I/O blocked... (1931 500 1000 1000)
-Process: 0 registered... (1931 100 200 200)
-Process: 0 I/O blocked... (1931 100 300 300)
-Process: 1 registered... (1931 500 1000 1000)
-Process: 1 I/O blocked... (1931 500 1500 1500)
-Process: 0 registered... (1931 100 300 300)
-Process: 0 I/O blocked... (1931 100 400 400)
-Process: 1 registered... (1931 500 1500 1500)
-Process: 1 completed... (1931 500 1931 1931)
-Process: 0 registered... (1931 100 400 400)
-Process: 0 I/O blocked... (1931 100 500 500)
-Process: 2 registered... (1931 30 0 0)
-Process: 2 I/O blocked... (1931 30 30 30)
-Process: 0 registered... (1931 100 500 500)
-Process: 0 I/O blocked... (1931 100 600 600)
-Process: 2 registered... (1931 30 30 30)
-Process: 2 I/O blocked... (1931 30 60 60)
-Process: 0 registered... (1931 100 600 600)
-Process: 0 I/O blocked... (1931 100 700 700)
-Process: 2 registered... (1931 30 60 60)
-Process: 2 I/O blocked... (1931 30 90 90)
-Process: 0 registered... (1931 100 700 700)
-Process: 0 I/O blocked... (1931 100 800 800)
-Process: 2 registered... (1931 30 90 90)
-Process: 2 I/O blocked... (1931 30 120 120)
-Process: 0 registered... (1931 100 800 800)
-Process: 0 I/O blocked... (1931 100 900 900)
-Process: 2 registered... (1931 30 120 120)
-Process: 2 I/O blocked... (1931 30 150 150)
-Process: 0 registered... (1931 100 900 900)
-Process: 0 I/O blocked... (1931 100 1000 1000)
-Process: 2 registered... (1931 30 150 150)
-Process: 2 I/O blocked... (1931 30 180 180)
-Process: 0 registered... (1931 100 1000 1000)
-Process: 0 I/O blocked... (1931 100 1100 1100)
-Process: 2 registered... (1931 30 180 180)
-Process: 2 I/O blocked... (1931 30 210 210)
-Process: 0 registered... (1931 100 1100 1100)
-Process: 0 I/O blocked... (1931 100 1200 1200)
-Process: 2 registered... (1931 30 210 210)
-Process: 2 I/O blocked... (1931 30 240 240)
-Process: 0 registered... (1931 100 1200 1200)
-Process: 0 I/O blocked... (1931 100 1300 1300)
-Process: 2 registered... (1931 30 240 240)
-Process: 2 I/O blocked... (1931 30 270 270)
-Process: 0 registered... (1931 100 1300 1300)
-Process: 0 I/O blocked... (1931 100 1400 1400)
-Process: 2 registered... (1931 30 270 270)
-Process: 2 I/O blocked... (1931 30 300 300)
-Process: 0 registered... (1931 100 1400 1400)
-Process: 0 I/O blocked... (1931 100 1500 1500)
-Process: 2 registered... (1931 30 300 300)
-Process: 2 I/O blocked... (1931 30 330 330)
-Process: 0 registered... (1931 100 1500 1500)
-Process: 0 I/O blocked... (1931 100 1600 1600)
-Process: 2 registered... (1931 30 330 330)
-Process: 2 I/O blocked... (1931 30 360 360)
-Process: 0 registered... (1931 100 1600 1600)
-Process: 0 I/O blocked... (1931 100 1700 1700)
-Process: 2 registered... (1931 30 360 360)
-Process: 2 I/O blocked... (1931 30 390 390)
-Process: 0 registered... (1931 100 1700 1700)
-Process: 0 I/O blocked... (1931 100 1800 1800)
-Process: 2 registered... (1931 30 390 390)
-Process: 2 I/O blocked... (1931 30 420 420)
-Process: 0 registered... (1931 100 1800 1800)
-Process: 0 I/O blocked... (1931 100 1900 1900)
-Process: 2 registered... (1931 30 420 420)
-Process: 2 I/O blocked... (1931 30 450 450)
-Process: 0 registered... (1931 100 1900 1900)
-Process: 0 completed... (1931 100 1931 1931)
-Process: 2 registered... (1931 30 450 450)
-Process: 2 I/O blocked... (1931 30 480 480)
-Process: 2 registered... (1931 30 480 480)
-Process: 2 I/O blocked... (1931 30 510 510)
-Process: 2 registered... (1931 30 510 510)
-Process: 2 I/O blocked... (1931 30 540 540)
-Process: 2 registered... (1931 30 540 540)
-Process: 2 I/O blocked... (1931 30 570 570)
-Process: 2 registered... (1931 30 570 570)
-Process: 2 I/O blocked... (1931 30 600 600)
-Process: 2 registered... (1931 30 600 600)
-Process: 2 I/O blocked... (1931 30 630 630)
-Process: 2 registered... (1931 30 630 630)
-Process: 2 I/O blocked... (1931 30 660 660)
-Process: 2 registered... (1931 30 660 660)
-Process: 2 I/O blocked... (1931 30 690 690)
-Process: 2 registered... (1931 30 690 690)
-Process: 2 I/O blocked... (1931 30 720 720)
-Process: 2 registered... (1931 30 720 720)
-Process: 2 I/O blocked... (1931 30 750 750)
-Process: 2 registered... (1931 30 750 750)
-Process: 2 I/O blocked... (1931 30 780 780)
-Process: 2 registered... (1931 30 780 780)
-Process: 2 I/O blocked... (1931 30 810 810)
-Process: 2 registered... (1931 30 810 810)
-Process: 2 I/O blocked... (1931 30 840 840)
-Process: 2 registered... (1931 30 840 840)
-Process: 2 I/O blocked... (1931 30 870 870)
-Process: 2 registered... (1931 30 870 870)
-Process: 2 I/O blocked... (1931 30 900 900)
-Process: 2 registered... (1931 30 900 900)
-Process: 2 I/O blocked... (1931 30 930 930)
-Process: 2 registered... (1931 30 930 930)
-Process: 2 I/O blocked... (1931 30 960 960)
-Process: 2 registered... (1931 30 960 960)
-Process: 2 I/O blocked... (1931 30 990 990)
-Process: 2 registered... (1931 30 990 990)
-Process: 2 I/O blocked... (1931 30 1020 1020)
-Process: 2 registered... (1931 30 1020 1020)
-Process: 2 I/O blocked... (1931 30 1050 1050)
-Process: 2 registered... (1931 30 1050 1050)
-Process: 2 I/O blocked... (1931 30 1080 1080)
-Process: 2 registered... (1931 30 1080 1080)
-Process: 2 I/O blocked... (1931 30 1110 1110)
-Process: 2 registered... (1931 30 1110 1110)
+Process #             Event    CPU Time    IO Blocking    CPU Completed    CPU Blocked
+        0     registered...      911 ms         100 ms             0 ms        0 times
+        0    I/O blocked...      911 ms         100 ms           100 ms        0 times
+        1     registered...     1468 ms         500 ms             0 ms        0 times
+        1    I/O blocked...     1468 ms         500 ms           500 ms        0 times
+        0     registered...      911 ms         100 ms           100 ms        1 times
+        0    I/O blocked...      911 ms         100 ms           200 ms        1 times
+        1     registered...     1468 ms         500 ms           500 ms        1 times
+        1    I/O blocked...     1468 ms         500 ms          1000 ms        1 times
+        0     registered...      911 ms         100 ms           200 ms        2 times
+        0    I/O blocked...      911 ms         100 ms           300 ms        2 times
+        1     registered...     1468 ms         500 ms          1000 ms        2 times
+        1      completed...     1468 ms         500 ms          1468 ms        2 times
+        0     registered...      911 ms         100 ms           300 ms        3 times
+        0    I/O blocked...      911 ms         100 ms           400 ms        3 times
+        2     registered...     1468 ms          30 ms             0 ms        0 times
+        2    I/O blocked...     1468 ms          30 ms            30 ms        0 times
+        0     registered...      911 ms         100 ms           400 ms        4 times
+        0    I/O blocked...      911 ms         100 ms           500 ms        4 times
+        2     registered...     1468 ms          30 ms            30 ms        1 times
+        2    I/O blocked...     1468 ms          30 ms            60 ms        1 times
+        0     registered...      911 ms         100 ms           500 ms        5 times
+        0    I/O blocked...      911 ms         100 ms           600 ms        5 times
+        2     registered...     1468 ms          30 ms            60 ms        2 times
+        2    I/O blocked...     1468 ms          30 ms            90 ms        2 times
+        0     registered...      911 ms         100 ms           600 ms        6 times
+        0    I/O blocked...      911 ms         100 ms           700 ms        6 times
+        2     registered...     1468 ms          30 ms            90 ms        3 times
+        2    I/O blocked...     1468 ms          30 ms           120 ms        3 times
+        0     registered...      911 ms         100 ms           700 ms        7 times
+        0    I/O blocked...      911 ms         100 ms           800 ms        7 times
+        2     registered...     1468 ms          30 ms           120 ms        4 times
+        2    I/O blocked...     1468 ms          30 ms           150 ms        4 times
+        0     registered...      911 ms         100 ms           800 ms        8 times
+        0    I/O blocked...      911 ms         100 ms           900 ms        8 times
+        2     registered...     1468 ms          30 ms           150 ms        5 times
+        2    I/O blocked...     1468 ms          30 ms           180 ms        5 times
+        0     registered...      911 ms         100 ms           900 ms        9 times
+        0      completed...      911 ms         100 ms           911 ms        9 times
+        2     registered...     1468 ms          30 ms           180 ms        6 times
+        2    I/O blocked...     1468 ms          30 ms           210 ms        6 times
+        2     registered...     1468 ms          30 ms           210 ms        7 times
+        2    I/O blocked...     1468 ms          30 ms           240 ms        7 times
+        2     registered...     1468 ms          30 ms           240 ms        8 times
+        2    I/O blocked...     1468 ms          30 ms           270 ms        8 times
+        2     registered...     1468 ms          30 ms           270 ms        9 times
+        2    I/O blocked...     1468 ms          30 ms           300 ms        9 times
+        2     registered...     1468 ms          30 ms           300 ms       10 times
+        2    I/O blocked...     1468 ms          30 ms           330 ms       10 times
+        2     registered...     1468 ms          30 ms           330 ms       11 times
+        2    I/O blocked...     1468 ms          30 ms           360 ms       11 times
+        2     registered...     1468 ms          30 ms           360 ms       12 times
+        2    I/O blocked...     1468 ms          30 ms           390 ms       12 times
+        2     registered...     1468 ms          30 ms           390 ms       13 times
+        2    I/O blocked...     1468 ms          30 ms           420 ms       13 times
+        2     registered...     1468 ms          30 ms           420 ms       14 times
+        2    I/O blocked...     1468 ms          30 ms           450 ms       14 times
+        2     registered...     1468 ms          30 ms           450 ms       15 times
+        2    I/O blocked...     1468 ms          30 ms           480 ms       15 times
+        2     registered...     1468 ms          30 ms           480 ms       16 times
+        2    I/O blocked...     1468 ms          30 ms           510 ms       16 times
+        2     registered...     1468 ms          30 ms           510 ms       17 times
+        2    I/O blocked...     1468 ms          30 ms           540 ms       17 times
+        2     registered...     1468 ms          30 ms           540 ms       18 times
+        2    I/O blocked...     1468 ms          30 ms           570 ms       18 times
+        2     registered...     1468 ms          30 ms           570 ms       19 times
+        2    I/O blocked...     1468 ms          30 ms           600 ms       19 times
+        2     registered...     1468 ms          30 ms           600 ms       20 times
+        2    I/O blocked...     1468 ms          30 ms           630 ms       20 times
+        2     registered...     1468 ms          30 ms           630 ms       21 times
+        2    I/O blocked...     1468 ms          30 ms           660 ms       21 times
+        2     registered...     1468 ms          30 ms           660 ms       22 times
+        2    I/O blocked...     1468 ms          30 ms           690 ms       22 times
+        2     registered...     1468 ms          30 ms           690 ms       23 times
+        2    I/O blocked...     1468 ms          30 ms           720 ms       23 times
+        2     registered...     1468 ms          30 ms           720 ms       24 times
+        2    I/O blocked...     1468 ms          30 ms           750 ms       24 times
+        2     registered...     1468 ms          30 ms           750 ms       25 times
+        2    I/O blocked...     1468 ms          30 ms           780 ms       25 times
+        2     registered...     1468 ms          30 ms           780 ms       26 times
+        2    I/O blocked...     1468 ms          30 ms           810 ms       26 times
+        2     registered...     1468 ms          30 ms           810 ms       27 times
+        2    I/O blocked...     1468 ms          30 ms           840 ms       27 times
+        2     registered...     1468 ms          30 ms           840 ms       28 times
+        2    I/O blocked...     1468 ms          30 ms           870 ms       28 times
+        2     registered...     1468 ms          30 ms           870 ms       29 times
+        2    I/O blocked...     1468 ms          30 ms           900 ms       29 times
+        2     registered...     1468 ms          30 ms           900 ms       30 times
+        2    I/O blocked...     1468 ms          30 ms           930 ms       30 times
+        2     registered...     1468 ms          30 ms           930 ms       31 times
+        2    I/O blocked...     1468 ms          30 ms           960 ms       31 times
+        2     registered...     1468 ms          30 ms           960 ms       32 times
+        2    I/O blocked...     1468 ms          30 ms           990 ms       32 times
+        2     registered...     1468 ms          30 ms           990 ms       33 times
+        2    I/O blocked...     1468 ms          30 ms          1020 ms       33 times
+        2     registered...     1468 ms          30 ms          1020 ms       34 times
+        2    I/O blocked...     1468 ms          30 ms          1050 ms       34 times
+        2     registered...     1468 ms          30 ms          1050 ms       35 times
+        2    I/O blocked...     1468 ms          30 ms          1080 ms       35 times
+        2     registered...     1468 ms          30 ms          1080 ms       36 times
+        2    I/O blocked...     1468 ms          30 ms          1110 ms       36 times
+        2     registered...     1468 ms          30 ms          1110 ms       37 times
+        2    I/O blocked...     1468 ms          30 ms          1140 ms       37 times
+        2     registered...     1468 ms          30 ms          1140 ms       38 times
+        2    I/O blocked...     1468 ms          30 ms          1170 ms       38 times
+        2     registered...     1468 ms          30 ms          1170 ms       39 times
+        2    I/O blocked...     1468 ms          30 ms          1200 ms       39 times
+        2     registered...     1468 ms          30 ms          1200 ms       40 times
+        2    I/O blocked...     1468 ms          30 ms          1230 ms       40 times
+        2     registered...     1468 ms          30 ms          1230 ms       41 times
+        2    I/O blocked...     1468 ms          30 ms          1260 ms       41 times
+        2     registered...     1468 ms          30 ms          1260 ms       42 times
+        2    I/O blocked...     1468 ms          30 ms          1290 ms       42 times
+        2     registered...     1468 ms          30 ms          1290 ms       43 times
+        2    I/O blocked...     1468 ms          30 ms          1320 ms       43 times
+        2     registered...     1468 ms          30 ms          1320 ms       44 times
+        2    I/O blocked...     1468 ms          30 ms          1350 ms       44 times
+        2     registered...     1468 ms          30 ms          1350 ms       45 times
+        2    I/O blocked...     1468 ms          30 ms          1380 ms       45 times
+        2     registered...     1468 ms          30 ms          1380 ms       46 times
+        2    I/O blocked...     1468 ms          30 ms          1410 ms       46 times
+        2     registered...     1468 ms          30 ms          1410 ms       47 times
+        2    I/O blocked...     1468 ms          30 ms          1440 ms       47 times
+        2     registered...     1468 ms          30 ms          1440 ms       48 times
+        2      completed...     1468 ms          30 ms          1468 ms       48 times

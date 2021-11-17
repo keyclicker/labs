@@ -11,5 +11,14 @@ public class sProcess {
     this.cpudone = cpudone;
     this.ionext = ionext;
     this.numblocked = numblocked;
-  } 	
+  }
+
+  public String toString() {
+    return "(" + cputime + " " + ioblocking + " " + cpudone + " " + numblocked + ")";
+  }
+  public String format(String format) {
+    return String.format(format,
+            cputime + " ms", ioblocking + " ms",
+            cpudone + " ms", numblocked + " times");
+  }
 }
