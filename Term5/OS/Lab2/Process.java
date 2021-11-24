@@ -1,15 +1,23 @@
-public class Process {
-  public int cputime;
-  public int ioblocking;
-  public int cpudone;
-  public int ionext;
-  public int numblocked;
+public class Process implements Comparable<Process> {
+  private static int next_id = 0;
+  public int id, cputime, ioblocking,
+      cpudone, ionext, numblocked;
 
-  public Process(int cputime, int ioblocking, int cpudone, int ionext, int numblocked) {
+  public Process(int cputime, int ioblocking) {
+    this.id = next_id++;
     this.cputime = cputime;
     this.ioblocking = ioblocking;
-    this.cpudone = cpudone;
-    this.ionext = ionext;
-    this.numblocked = numblocked;
-  } 	
+  }
+
+  @Override
+  public int compareTo(Process process) {
+    return this.cputime - process.cputime;
+  }
+
+  public String format(String format) {
+    return String.format(format,
+        id, cputime + " ms", ioblocking + " ms",
+        cpudone + " ms", numblocked + " times");
+  }
+
 }
