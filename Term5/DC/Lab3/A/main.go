@@ -9,44 +9,51 @@ import (
 
 const maxCount = 10
 
-var (
-	pot        int
-	pm         sync.Mutex
-	full       = make(chan bool)
-	beeCounter int
-)
+type Pot struct {
+	honey int
+	mutex sync.Mutex
+	full  *sync.Cond
+}
 
-func bee() {
-	id := beeCounter
-	beeCounter++
+func NewPot() *Pot {
+	pot := new(Pot)
+	pot.honey = 0
+	pot.full = sync.NewCond(&pot.mutex)
+	return pot
+}
+
+func (pot *Pot) bee(id int) {
 	for {
 		time.Sleep(time.Duration(rand.Float32()*5.0) * time.Second)
-		pm.Lock()
-		if pot < maxCount {
-			pot++
-			fmt.Printf("[%v] <- Bee %v\n", pot, id)
-			if pot == maxCount {
-				full <- true
+		pot.mutex.Lock()
+		if pot.honey < maxCount {
+			pot.honey++
+			fmt.Printf("[%v] <- Bee %v\n", pot.honey, id)
+			if pot.honey == maxCount {
+				pot.full.Signal()
 			}
 		}
-		pm.Unlock()
+		pot.mutex.Unlock()
 	}
 }
 
-func bear() {
-	for range full {
+func (pot *Pot) bear() {
+	for {
+		pot.mutex.Lock()
+		pot.full.Wait()
 		time.Sleep(time.Duration(rand.Float32()*2.0) * time.Second)
-		pm.Lock()
-		pot = 0
-		pm.Unlock()
-		fmt.Printf("[%v] -> Bear ate all honey!\n", pot)
+		pot.honey = 0
+		fmt.Printf("[%v] -> Bear ate all honey!\n", pot.honey)
+		pot.mutex.Unlock()
 	}
 }
 
 func main() {
-	go bear()
+	pot := NewPot()
+
+	go pot.bear()
 	for i := 0; i < 10; i++ {
-		go bee()
+		go pot.bee(i)
 	}
 	<-make(chan int)
 }
