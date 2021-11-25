@@ -1,4 +1,4 @@
-package forest
+package main
 
 import (
 	"fmt"
@@ -12,10 +12,11 @@ type Position struct {
 }
 
 type Forest struct {
-	Bear Position
-	Bees []Position
-	Size uint
+	Bear      Position
+	Bees      []Position
+	Size      uint
 	briefcase chan uint
+	finished  bool
 }
 
 // NewForest
@@ -44,18 +45,18 @@ func (f *Forest) StartBee(bee *Position) {
 			bee.Y = i
 			time.Sleep(750 * time.Millisecond)
 
-			if bee.X  == f.Bear.X && bee.Y == f.Bear.Y {
-				close(f.briefcase)
+			if bee.X == f.Bear.X && bee.Y == f.Bear.Y {
+				f.finished = true
 			}
 		}
 	}
 }
 
 // Start
-// Starts bees and filling the briefcaes with tasks
+// Starts bees and filling the briefcase with tasks
 func (f *Forest) Start() {
-	go func () {
-		// Sarting bee worders
+	go func() {
+		// Starting bee workers
 		for i := range f.Bees {
 			go f.StartBee(&f.Bees[i])
 		}
@@ -64,22 +65,22 @@ func (f *Forest) Start() {
 		for i := uint(0); i < f.Size; i++ {
 			f.briefcase <- i
 		}
-	} ()
+	}()
 }
 
-// DisplayForest 
+// DisplayForest
 // Displays forest state
 func (f *Forest) DisplayForest() {
 	const (
 		EmptyArea = 0
-		BearArea = 1
-		BeeArea = 2
+		BearArea  = 1
+		BeeArea   = 2
 		FoundArea = 3
 	)
 
 	screen.Clear()
 
-	for {
+	for !f.finished {
 		screen.MoveTopLeft()
 
 		forest := make([][]uint8, f.Size)
@@ -91,7 +92,7 @@ func (f *Forest) DisplayForest() {
 
 		for _, b := range f.Bees {
 			forest[b.X][b.Y] = BeeArea
-			if  b.X  == f.Bear.X && b.Y == f.Bear.Y {
+			if b.X == f.Bear.X && b.Y == f.Bear.Y {
 				forest[b.X][b.Y] = FoundArea
 			}
 		}
