@@ -44,6 +44,9 @@ class Army {
         if (i.makeDecision()) decision = true;
       }
 
+      if (!decision)
+        threadsFinished.incrementAndGet();
+
       try {
         barrier.await();
       } catch (Exception e) {e.printStackTrace();}
@@ -51,9 +54,6 @@ class Army {
       for (var i = begin; i != end; i = i.right) {
         i.performDecision();
       }
-
-      if (!decision)
-        threadsFinished.incrementAndGet();
     }
   }
 
