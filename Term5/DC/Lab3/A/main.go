@@ -40,7 +40,10 @@ func (pot *Pot) bee(id int) {
 func (pot *Pot) bear() {
 	for {
 		pot.mutex.Lock()
-		pot.full.Wait()
+		for pot.honey < maxCount {
+			pot.full.Wait()
+		}
+
 		time.Sleep(time.Duration(rand.Float32()*2.0) * time.Second)
 		pot.honey = 0
 		fmt.Printf("[%v] -> Bear ate all honey!\n", pot.honey)
