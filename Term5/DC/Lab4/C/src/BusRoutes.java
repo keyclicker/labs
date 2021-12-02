@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Routes {
+public class BusRoutes {
   static class City {
     String name;
     City(String name) {
@@ -24,7 +24,7 @@ public class Routes {
 
   private final HashMap<City, HashMap<City, Route>> routes;
 
-  Routes() {
+  BusRoutes() {
     routes = new HashMap<>();
   }
 

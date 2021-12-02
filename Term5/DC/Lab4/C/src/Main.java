@@ -25,7 +25,7 @@ public class Main {
       var newPrice = rand.nextFloat() * 1000;
 
       System.out.println("edit: " + a + " -> " + b + ": " + prevPrice + " -> " + newPrice);
-      rotes.addRoute(a, b, new Routes.Route(newPrice));
+      rotes.addRoute(a, b, new BusRoutes.Route(newPrice));
 
       lock.writeUnlock();
       try { Thread.sleep(sleep); }
@@ -47,7 +47,7 @@ public class Main {
         System.out.println("remr: " + a + " -> " + b);
       } else {
         var price =  rand.nextFloat() * 1000;
-        rotes.addRoute(a, b, new Routes.Route(price));
+        rotes.addRoute(a, b, new BusRoutes.Route(price));
         System.out.println("addr: " + a + " -> " + b + ": " + price);
       }
 
@@ -69,7 +69,7 @@ public class Main {
         System.out.println("remc: " + city);
       } else {
         var name = genName();
-        rotes.addCity(new Routes.City(name));
+        rotes.addCity(new BusRoutes.City(name));
         System.out.println("addc: " + name);
       }
 
@@ -95,16 +95,16 @@ public class Main {
   }
 
 
-  static Routes rotes = new Routes();
+  static BusRoutes rotes = new BusRoutes();
   static RWLock lock = new RWLock();
 
   public static void main(String[] args) {
     for (int i = 0; i < 5; i++) {
-      rotes.addCity(new Routes.City(genName()));
+      rotes.addCity(new BusRoutes.City(genName()));
     }
     for (int i = 0; i < 10; i++) {
       rotes.addRoute(rotes.getRandomCity(), rotes.getRandomCity(),
-          new Routes.Route(rand.nextFloat()*1000));
+          new BusRoutes.Route(rand.nextFloat()*1000));
     }
 
     new Thread(Main::priceChanger).start();
