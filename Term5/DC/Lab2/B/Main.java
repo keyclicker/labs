@@ -78,8 +78,8 @@ class MilitaryUnit {
     private final String format = "│%8s │%8s │%8s  ║  %20s │%10s │%15s │%n";
 
     private final ArrayList<Good> storage = new ArrayList<>();
-    private final BlockingQueue<Good> street = new BlockingQueue<>();
-    private final BlockingQueue<Good> truck = new BlockingQueue<>();
+    private final BQueue<Good> street = new BQueue<>();
+    private final BQueue<Good> truck = new BQueue<>();
     private final int goodsCount;
 
     private int totalPrice = 0;
