@@ -1,36 +1,32 @@
 package com.company;
 
-import java.util.Queue;
-import java.util.Random;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.Semaphore;
 
 class BarberShop {
   private LinkedBlockingQueue<Customer> queue = new LinkedBlockingQueue<>();
 
   static class Customer {
-    public int id;
+    Semaphore trimmingFinished = new Semaphore(0);
+    public final int id;
 
     Customer(int id) {
       this.id = id;
+      System.out.println("Customer " + id + " arrived");
       new Thread(this::run).start();
     }
 
-    synchronized private void run(){
+    private void run(){
       try {
-        System.out.println("Customer " + id + " arrived and sleeping");
-        wait();
+        trimmingFinished.acquire();
         System.out.println("Customer " + id + " leaves");
       } catch (InterruptedException e) {}
     }
 
-    synchronized public void trim() throws InterruptedException {
+    public void trim() throws InterruptedException {
       System.out.println("Barber is trimming " + id);
       Thread.sleep(5000);
-      notify();
+      trimmingFinished.release();
       System.out.println("Barber finished trimming " + id);
     }
   }
