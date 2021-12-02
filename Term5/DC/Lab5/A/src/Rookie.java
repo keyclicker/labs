@@ -1,6 +1,6 @@
 import java.util.concurrent.ThreadLocalRandom;
 
-class Rookie {
+public class Rookie {
   public enum Dir {
     Left, Right
   }

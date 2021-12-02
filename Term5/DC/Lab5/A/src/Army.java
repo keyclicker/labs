@@ -1,7 +1,7 @@
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class Army {
+public class Army {
   static final int ThreadCount = 4;
 
   private final int size;

@@ -1,10 +1,10 @@
-public class Barier {
+public class Barrier {
   private final int parties;
   private final Runnable barrierAction;
   private int counter;
 
 
-  Barier(int parties, Runnable barrierAction) {
+  Barrier(int parties, Runnable barrierAction) {
     this.parties = parties;
     this.counter = parties;
     this.barrierAction = barrierAction;

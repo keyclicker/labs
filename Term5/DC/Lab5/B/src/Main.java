@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ThreadLocalRandom;
 
 class StrChanger {
@@ -19,11 +18,11 @@ class StrChanger {
   }
 
   private boolean stopped = false;
-  private Barier barier;
+  private Barrier barrier;
   private ArrayList<String> strings;
 
   StrChanger(int strSize) {
-    barier = new Barier(strCount, this::checker);
+    barrier = new Barrier(strCount, this::checker);
     strings = new ArrayList<>();
 
     for (int i = 0; i < strCount; i++)
@@ -75,7 +74,7 @@ class StrChanger {
 
       try {
         Thread.sleep(500);
-        barier.await();
+        barrier.await();
       } catch (Exception e) {e.printStackTrace();}
     }
   }
