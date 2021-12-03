@@ -9,6 +9,5 @@ public class Main {
     System.out.println(Multiply.sequential(a, b));
     System.out.println(Multiply.tape(a, b));
 
-
   }
 }

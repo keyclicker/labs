@@ -72,4 +72,30 @@ public class Multiply {
 
     return c;
   }
+
+  static public Matrix fox(Matrix a, Matrix b) throws Exception {
+    if (a.width() != b.height())
+      throw new Exception();
+
+    var c = new Matrix(a.height(), b.width());
+    var threads = new ArrayList<Thread>(THREAD_COUNT);
+
+    for (int tn = 0; tn < THREAD_COUNT; tn++) {
+      var in = getInterval(a.height(), tn);
+
+      var thr = new Thread(() -> {
+        for (int i = in.begin; i < in.end; i++) {
+          c.setRow(i, calcRow(a, b, i));
+        }
+      });
+
+      thr.start();
+      threads.add(thr);
+    }
+
+    for (var thr: threads)
+      thr.join();
+
+    return c;
+  }
 }

@@ -65,12 +65,11 @@ class StrChanger {
       else if (ch == 'B') ch = 'D';
       else if (ch == 'D') ch = 'B';
 
-      String oldStr = new String(str);
       strings.set(strIndex,
           str.substring(0,pos) + ch + str.substring(pos + 1));
 
       System.out.println(Thread.currentThread().getName() +
-          ": " + oldStr + " -> " + str);
+          ": " + str + " -> " + strings.get(strIndex));
 
       try {
         Thread.sleep(500);
