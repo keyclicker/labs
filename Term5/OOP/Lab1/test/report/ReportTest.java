@@ -10,7 +10,7 @@ class ReportTest {
   Report report;
 
   ReportTest() throws FileNotFoundException {
-    report = new Report("taxes.txt");
+    report = new Report("res/taxes.txt");
   }
 
   @Test

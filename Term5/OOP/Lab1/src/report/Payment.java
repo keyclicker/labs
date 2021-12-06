@@ -51,9 +51,9 @@ public class Payment implements Comparable<Payment> {
   public String toString() {
     return String.format(Report.FORMAT,
         String.format("%.1f", getTax()),
-        String.format("%.1f", amount),
-        String.format("%.1f", type.rate),
-        type.toString().toLowerCase(), name);
+        String.format("%.1f", getAmount()),
+        String.format("%.1f", getType().rate),
+        type.toString().toLowerCase(), getName());
   }
 
   public static Payment parse(String str) {
