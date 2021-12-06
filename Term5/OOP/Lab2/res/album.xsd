@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="album">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="postcard" type="Postcard"
+                            minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Postcard">
+        <xs:all>
+            <xs:element name="theme" type="Theme"/>
+            <xs:element name="type" type="Type"/>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="value" type="Value"/>
+            <xs:element name="year" type="xs:integer"/>
+            <xs:element name="author" type="xs:string"/>
+        </xs:all>
+        <xs:attribute name="id" type="xs:int"/>
+        <xs:attribute name="sent" type="xs:boolean"/>
+    </xs:complexType>
+
+    <xs:simpleType name="Theme">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CITY"/>
+            <xs:enumeration value="LANDSCAPE"/>
+            <xs:enumeration value="PEOPLE"/>
+            <xs:enumeration value="RELIGION"/>
+            <xs:enumeration value="SPORT"/>
+            <xs:enumeration value="ARCHITECTURE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CONGRATS"/>
+            <xs:enumeration value="COMMERCIAL"/>
+            <xs:enumeration value="COMMON"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Value">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="HISTORICAL"/>
+            <xs:enumeration value="COLLECTIBLE"/>
+            <xs:enumeration value="THEMATIC"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
