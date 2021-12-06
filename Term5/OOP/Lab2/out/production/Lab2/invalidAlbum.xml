@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<album>
+    <postcard id="282" sent="false">
+        <theme>CITY</theme>
+        <type>INVALID TYPE!!!!!!!!!</type>
+        <value>HISTORICAL</value>
+        <country>Ukraine</country>
+        <author>Bob Dylan</author>
+        <year>1965</year>
+    </postcard>
+
+    <postcard id="228" sent="true">
+        <theme>PEOPLE</theme>
+        <type>CONGRATS</type>
+        <value>THEMATIC</value>
+        <country>United States</country>
+        <author>Jimi Hendrix</author>
+        <year>1967</year>
+    </postcard>
+
+    <postcard id="404" sent="true">
+        <theme>SPORT</theme>
+        <type>COMMON</type>
+        <value>COLLECTIBLE</value>
+        <country>Poland</country>
+        <author>Geralt of Rivia</author>
+        <year>1405</year>
+    </postcard>
+</album>

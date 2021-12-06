@@ -1,11 +1,12 @@
-package parsers;
-
+import parsers.DOM;
+import parsers.SAX;
+import parsers.StAX;
 import poscard.Album;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class Parsers {
+public class Tests {
   Album albumDOM = DOM.parse("res/album.xml", "res/album.xsd");
   Album albumSAX = SAX.parse("res/album.xml", "res/album.xsd");
   Album albumStAX = StAX.parse("res/album.xml", "res/album.xsd");
