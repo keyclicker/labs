@@ -1,0 +1,14 @@
+// <type> <amount ot money> <description>
+// types: income, royalty, sale, gift, abroad, benefit
+
+income 50000 main.Main job
+income 30000 Secondary job
+royalty 5000 Effective Java
+royalty 25000 More Effective Java
+royalty 50000 Even More Effective Java: 400 tips how to make Java faster than Assembly
+sale 250000 House in Como
+gift 10000 Stream Donates
+abroad 500000 United States Department of State
+abroad 300000 Kremlin
+benefit 5000 Benefits for Child
+
