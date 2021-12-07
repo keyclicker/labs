@@ -45,7 +45,7 @@ def model_d(m1, m2, m3, c1, c2, c3, c4, y):
 
     return np.array([c3d, m1d, m3d]).T
 
-# Runge-Kutta for model
+# runge-kutta for model
 def rk_model(m1, m2, m3, c1, c2, c3, c4, data):
     y = np.zeros_like(data)
     y[0] = data[0].copy()
@@ -55,16 +55,14 @@ def rk_model(m1, m2, m3, c1, c2, c3, c4, data):
         k2 = DT * s_matrix(m1, m2, m3, c1, c2, c3, c4) @ (y[i - 1] + k1 / 2)
         k3 = DT * s_matrix(m1, m2, m3, c1, c2, c3, c4) @ (y[i - 1] + k2 / 2)
         k4 = DT * s_matrix(m1, m2, m3, c1, c2, c3, c4) @ (y[i - 1] + k3)
-
         y[i] = y[i - 1] + (k1 + 2 * k2 + 2 * k3 + k4) / 6
 
     return y
 
 
-# Runge-Kutta for sensitivity function
+# runge-kutta for sensitivity function
 def rk_sfun(m1, m2, m3, c1, c2, c3, c4, y, data_size):
     u = np.zeros([data_size, 6, 3])
-
     a = s_matrix(m1, m2, m3, c1, c2, c3, c4)
     beta_derivative = model_d(m1, m2, m3, c1, c2, c3, c4, y.T)
 
@@ -73,13 +71,12 @@ def rk_sfun(m1, m2, m3, c1, c2, c3, c4, y, data_size):
         k2 = DT * (a @ (u[i - 1] + k1 / 2) + beta_derivative[i - 1])
         k3 = DT * (a @ (u[i - 1] + k2 / 2) + beta_derivative[i - 1])
         k4 = DT * (a @ (u[i - 1] + k3) + beta_derivative[i - 1])
-
         u[i] = u[i - 1] + (k1 + 2 * k2 + 2 * k3 + k4) / 6
-
+        
     return u
 
 
-def calc_delta(y, u, data):
+def find_delta(y, u, data):
     lhs = []
     rhs = []
 
@@ -93,7 +90,7 @@ def calc_delta(y, u, data):
     return lhs @ rhs
 
 
-def calc_beta(b, m2, c1, c2, c4, data):
+def find_beta(b, m2, c1, c2, c4, data):
     data_size = len(data)
     
     c3 = b[0]
@@ -104,7 +101,7 @@ def calc_beta(b, m2, c1, c2, c4, data):
         y = rk_model(m1, m2, m3, c1, c2, c3, c4, data)
         u = rk_sfun(m1, m2, m3, c1, c2, c3, c4, y, data_size)
 
-        delta = calc_delta(y, u, data)
+        delta = find_delta(y, u, data)
         
         c3 += delta[0]
         m1 += delta[1]
@@ -130,5 +127,5 @@ with open('y1.txt') as file:
 
 data = np.array(data, float).T
 
-print(calc_beta(b0, m2, c1, c2, c4, data))
+print(find_beta(b0, m2, c1, c2, c4, data))
 
