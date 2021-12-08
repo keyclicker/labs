@@ -2,7 +2,7 @@ package com.game;
 
 import java.util.Random;
 
-public class BrickGenerator {
+public class Generator {
   static int[][][] bricks = {{
       {1}
   },{

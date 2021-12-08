@@ -6,7 +6,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 class Game extends View {
-  static final int GRID_S = 28;
+  static final int FINGER_OFFSET = 150;
+  static final int GRID_S = 10;
   static final int BAR_S = 3;
 
   Grid grid = new Grid(GRID_S);
@@ -34,14 +35,17 @@ class Game extends View {
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    if (event.getAction() == MotionEvent.ACTION_DOWN &&
-        event.getY() > this.getWidth() + Drawer.TOP_MARGIN) {
-      selIndex = (int) (event.getX() / this.getWidth() * BAR_S);
-      selBrick = bar.get(selIndex);
-      p.set(event.getX(), event.getY());
+    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+      if (event.getY() > this.getWidth() + Drawer.TOP_MARGIN) {
+        selIndex = (int) (event.getX() / this.getWidth() * BAR_S);
+        selBrick = bar.get(selIndex);
+        p.set(event.getX(), event.getY());
+      } else if (event.getY() < Drawer.TOP_MARGIN) {
+        restart();
+      }
     }
     else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-      p.set(event.getX(), event.getY());
+      p.set(event.getX(), event.getY() - FINGER_OFFSET);
     }
     else if (event.getAction() == MotionEvent.ACTION_UP && selBrick != null) {
       Vect pa = p.plusY(- Drawer.TOP_MARGIN).mult((float) GRID_S / getWidth()).
@@ -54,5 +58,10 @@ class Game extends View {
       selIndex = -1;
     }
     return true;
+  }
+
+  public void restart() {
+    grid.restart();
+    bar.restart();
   }
 }

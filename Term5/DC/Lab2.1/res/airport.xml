@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Airport>
+    <Airline id="1" name="Wizz Air" city="Budapest">
+        <Flight id="1" from="Dubai" to="Budapest"/>
+        <Flight id="2" from="Budapest" to="Lviv"/>
+        <Flight id="3" from="Dubai" to="London"/>
+        <Flight id="4" from="Vienna" to="Liverpool"/>
+    </Airline>
+    <Airline id="2" name="Ryanair" city="Dublin">
+        <Flight id="5" from="Dublin" to="Budapest"/>
+        <Flight id="6" from="Kyiv" to="Prague"/>
+        <Flight id="7" from="Dubai" to="Dublin"/>
+        <Flight id="8" from="Istanbul" to="Dubai"/>
+    </Airline>
+    <Airline id="3" name="Turkish Airlines" city="Istanbul">
+        <Flight id="9" from="Dubai" to="Istanbul"/>
+        <Flight id="10" from="Budapest" to="Istanbul"/>
+        <Flight id="11" from="Istanbul" to="Dublin"/>
+        <Flight id="12" from="Istanbul" to="Kyiv"/>
+    </Airline>
+</Airport>

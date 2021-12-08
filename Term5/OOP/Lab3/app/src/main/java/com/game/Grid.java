@@ -5,18 +5,13 @@ import java.util.Random;
 public class Grid {
   private static final Random rand = new Random(System.currentTimeMillis());
 
-  int size;
   int[][] grid;
+  int size;
+  int score = 0;
 
   Grid(int size) {
     this.size = size;
-    grid = new int[size][size];
-    for (int i = 0; i < size; i++) {
-      grid[i] = new int[size];
-      for (int j = 0; j < size; j++)
-        grid[i][j] = 0; //rand.nextInt(2);
-    }
-//    grid[0][0] = 50;
+    restart();
   }
 
   private void step() {
@@ -26,8 +21,14 @@ public class Grid {
         if (grid[i][j] != 1) v = false;
         if (grid[j][i] != 1) h = false;
       }
-      if (v) for (int j = 0; j < size; j++) grid[i][j] = 0;
-      if (h) for (int j = 0; j < size; j++) grid[j][i] = 0;
+      if (v)  {
+        for (int j = 0; j < size; j++) grid[i][j] = 0;
+        score += size;
+      }
+      if (h) {
+        for (int j = 0; j < size; j++) grid[j][i] = 0;
+        score += size;
+      }
     }
   }
 
@@ -50,6 +51,7 @@ public class Grid {
 
       for (int i = 0; i < dx; i++) {
         for (int j = 0; j < dy; j++) {
+          score += brick[i][j];
           grid[x + i][y + j] += brick[i][j];
         }
       }
@@ -59,5 +61,25 @@ public class Grid {
     return false;
   }
 
+  public void gen() {
+    for (int i = 0; i < 5;) {
+      if (put(Generator.generate(),
+          rand.nextInt(size), rand.nextInt(size))) {
+        i++;
+      };
+    }
+//    grid[rand.nextInt(size)][rand.nextInt(size)] = 2;
+//    grid[rand.nextInt(size)][rand.nextInt(size)] = 2;
+  }
 
+  public void restart() {
+    grid = new int[size][size];
+    for (int i = 0; i < size; i++) {
+      grid[i] = new int[size];
+      for (int j = 0; j < size; j++)
+        grid[i][j] = 0; //rand.nextInt(2);
+    }
+    gen();
+    score = 0;
+  }
 }

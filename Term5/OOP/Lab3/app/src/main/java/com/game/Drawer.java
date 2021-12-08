@@ -8,13 +8,15 @@ import android.graphics.Paint;
 public class Drawer {
   static final int TOP_MARGIN = 250;
   static final float BFS = 50; // bomb font size
+  static final float SFS = 150; // score font size
 
   static class Assets {
     Paint tileP;
     Paint brickP;
     Paint brickPaint;
     Paint bombTextP;
-    
+    Paint scoreTextP;
+
     static Paint getPaint(int c, Paint.Style s) {
       Paint p = new Paint();
       p.setColor(c);
@@ -29,6 +31,8 @@ public class Drawer {
       brickPaint = getPaint(Color.RED, Paint.Style.FILL);
       bombTextP = getPaint(Color.BLACK, Paint.Style.FILL);
       bombTextP.setTextSize(BFS);
+      scoreTextP = getPaint(Color.GRAY, Paint.Style.FILL);
+      scoreTextP.setTextSize(SFS);
     }
   }
 
@@ -50,7 +54,12 @@ public class Drawer {
         assets.bombTextP);
   }
 
-  static public void drawBrick(Canvas canvas, int[][] brick, Vect p, float scale) {
+  static public void drawScore(Canvas canvas, int score) {
+    canvas.drawText("Score: " + score,100, TOP_MARGIN-50, assets.scoreTextP);
+  }
+
+  static public void drawBrick(Canvas canvas,
+                               int[][] brick, Vect p, float scale, boolean isGrid) {
     float size = canvas.getWidth() * scale;
     float tSize = size / Game.GRID_S;
 
@@ -60,10 +69,10 @@ public class Drawer {
 
         if (brick[i][j] == 1)
           Drawer.drawBrickTile(canvas, np, tSize);
-        else if (brick[i][j] >= 2)
+        else if (brick[i][j] >= 2 && isGrid)
           Drawer.drawBomb(canvas, np, tSize, 8 - brick[i][j]);
 
-        if (scale == 1)
+        if (isGrid || brick[i][j] > 0)
           Drawer.drawTile(canvas, np, tSize);
       }
     }
@@ -74,12 +83,13 @@ public class Drawer {
     float tileS = w / Game.GRID_S * scale;
 
     Vect d = new Vect(brick.length, brick[0].length).mult(- tileS / 2);
-    drawBrick(canvas, brick, p.plus(d), scale);
+    drawBrick(canvas, brick, p.plus(d), scale, false);
   }
 
 
   static public void drawGrid(Canvas canvas, Grid grid) {
-    drawBrick(canvas, grid.grid, new Vect(0, TOP_MARGIN), 1f);
+    drawBrick(canvas, grid.grid, new Vect(0, TOP_MARGIN), 1f, true);
+    drawScore(canvas, grid.score);
   }
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="Airport" type="Airport"/>
+
+    <xs:complexType name="Airport">
+        <xs:sequence>
+            <xs:element name="Airline" type="Airline" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Airline">
+        <xs:sequence>
+            <xs:element name="Flight" type="Flight" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="city" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Flight">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:string" use="required"/>
+                <xs:attribute name="from" type="xs:string" use="required"/>
+                <xs:attribute name="to" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>
