@@ -24,5 +24,13 @@ public class Main {
 
     System.out.println(a);
     a.saveToFile("res/saved.xml");
+
+
+    var newA = new Airport();
+    newA.addAirline(404, "NEW AIRLINE!!", "NO CITY!!!");
+    newA.addFlight(206, "Kyiv", "San Francisco", 404);
+    newA.editAirline(404, "EDITED!", "CITY");
+    newA.editFlight(206, "EDITED!", "EDITED TOO");
+    newA.saveToFile("res/new.xml");
   }
 }

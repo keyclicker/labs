@@ -1,6 +1,6 @@
 import socket
 
-import db
+from database import Database
 from message import *
 
 host = socket.gethostname()
@@ -8,6 +8,8 @@ port = 3600
 
 s = socket.socket()
 s.bind((host, port))
+
+db = Database()
 
 print("Waiting for client")
 while True:

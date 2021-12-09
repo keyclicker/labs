@@ -18,6 +18,8 @@ import java.io.File;
 import java.util.HashMap;
 
 public class Airport {
+  DocumentBuilderFactory factory =  DocumentBuilderFactory.newInstance();
+
   HashMap<Integer, Airline> airlines = new HashMap<>();
   HashMap<Integer, Flight> flights = new HashMap<>();
 
@@ -25,16 +27,17 @@ public class Airport {
   protected Document document;
   protected Element root;
 
-  Airport() throws Exception {
-    this.document = builder.newDocument();
-    this.root = document.createElement("Airport");
+  public Airport() throws Exception {
+    builder = factory.newDocumentBuilder();
+    document = builder.newDocument();
+    root = document.createElement("Airport");
+    document.appendChild(root);
   }
   public Airport(String path, String xsdPath) throws Exception {
     loadFromFile(path, xsdPath);
   }
 
   public void loadFromFile(String path, String xsdPath) throws Exception {
-    var factory =  DocumentBuilderFactory.newInstance();
     SchemaFactory sf =
         SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema s = sf.newSchema(new File(xsdPath));
@@ -43,8 +46,8 @@ public class Airport {
     builder = factory.newDocumentBuilder();
     builder.setErrorHandler(new ParsingErrorHandler());
 
-    this.document = builder.parse(new File(path));
-    this.root = (Element) document.getElementsByTagName("Airport").item(0);
+    document = builder.parse(new File(path));
+    root = (Element) document.getElementsByTagName("Airport").item(0);
 
     var airlineNodes = document.getElementsByTagName("Airline");
     for (int i = 0; i < airlineNodes.getLength(); i++) {
