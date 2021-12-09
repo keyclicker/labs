@@ -37,5 +37,3 @@ eal("remf", 98)
 print()
 eal("lsa")
 eal("lsf")
-
-

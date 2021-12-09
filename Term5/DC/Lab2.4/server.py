@@ -1,46 +1,98 @@
-import socket
+import mysql.connector
+import Pyro4
 
-import db
-from message import *
 
-host = socket.gethostname()
-port = 3600
+def print_airline(row):
+    print("%d: name=\"%s\" city=\"%s\"" % row)
 
-s = socket.socket()
-s.bind((host, port))
 
-print("Waiting for client")
-while True:
-    s.listen()
-    c, addr = s.accept()
-    print(addr, " Connected")
+def print_flight(row):
+    print("%d: airline=\"%s\" from=\"%s\" city=\"%s\"" % row)
 
-    try:
-        while True:
-            data = c.recv(256)
-            msg = Message.unpack(data)
 
-            r = "Success"
-            try:
-                if msg.cmd == "adda": db.add_airline(*msg.args)
-                elif msg.cmd == "rema": db.remove_airline(*msg.args)
-                elif msg.cmd == "upda": db.update_airline(*msg.args)
-                elif msg.cmd == "addf": db.add_flight(*msg.args)
-                elif msg.cmd == "remf": db.remove_flight(*msg.args)
-                elif msg.cmd == "updf": db.update_flight(*msg.args)
+def print_airlines(airlines):
+    for row in airlines:
+        print_airline(row)
 
-                elif msg.cmd == "geta": r = db.get_airline(*msg.args)
-                elif msg.cmd == "getf": r = db.get_flight(*msg.args)
-                elif msg.cmd == "lsa": r = db.get_airlines()
-                elif msg.cmd == "lsf": r = db.get_flights()
-            except Exception as e:
-                r = str(e)
 
-            print(msg, ":", r)
-            c.send(pickle.dumps(r))
+def print_flights(flights):
+    for row in flights:
+        print_flight(row)
 
-    except EOFError:
-        print(addr, " Disconnected")
-    except:
-        print("Some Error")
 
+@Pyro4.expose
+class Database:
+    def __init__(self):
+        self.db = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="password",
+            database="airport"
+        )
+
+        self.cursor = self.db.cursor(buffered=True)
+        self.cursor.execute("SHOW DATABASES")
+
+    def fetch(self, query):
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+    def commit(self, query):
+        try:
+            self.cursor.execute(query)
+            self.db.commit()
+        except Exception as e:
+            self.db.rollback()
+            raise e
+
+    def get_airlines(self):
+        return self.fetch("select * from airlines")
+
+    def get_flights(self):
+        return self.fetch("select * from flights")
+
+    def get_airline_flights(self, id_a):
+        return self.fetch("select * from flights where id_a = %d" % id_a)
+
+    def get_airline(self, id_a):
+        res = self.fetch("select * from airlines where id_a = %d" % id_a)
+        return res[0] if len(res) == 1 else None
+
+    def get_flight(self, id_f):
+        res = self.fetch("select * from flights where id_f = %d" % id_f)
+        return res[0] if len(res) == 1 else None
+
+    def add_airline(self, id_a, name, city):
+        self.commit("insert into airlines "
+                    "values (%d, '%s', '%s')" % (id_a, name, city))
+
+    def add_flight(self, id_f, id_a, _from, to):
+        self.commit("insert into flights "
+                    "values (%s, '%s', '%s', '%s')" %
+                    (str(id_f), id_a, _from, to))
+
+    def update_airline(self, id_a, name, city):
+        self. commit("update airlines "
+                     "set name = '%s', city = '%s' "
+                     "where  id_a = %d" % (name, city, id_a))
+
+    def update_flight(self, id_f, _from, to):
+        self.commit("update flights "
+                    "set `from` = '%s', `to` = '%s' "
+                    "where id_f = %d" % (_from, to, id_f))
+
+    def remove_airline(self, id_a):
+        self.commit("delete from airlines "
+                    "where id_a = %d" % id_a)
+
+    def remove_flight(self, id_f):
+        self.commit("delete from flights "
+                    "where id_f = %d" % id_f)
+
+
+daemon = Pyro4.Daemon()
+uri = daemon.register(Database)
+ns = Pyro4.locateNS()
+ns.register("db", uri)
+
+daemon.requestLoop()
