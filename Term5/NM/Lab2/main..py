@@ -45,26 +45,9 @@ def jacobi(a):
     return x, i
 
 
-def det(a):
-    n = a.shape[0]
-
-    if a.shape == (n, n):
-        return a[0, 0] * a[1, 1] - a[1, 0] * a[0, 1]
-
-    res = 0
-    for i in range(n):
-        res += (-1)**(i+1) * det()
-
-    return res
-
-
 np.set_printoptions(precision=2)
 
-# a = np.array([
-#     [3, -1, 1, 1],
-#     [-1, 2, 0.5, 1.75],
-#     [1, 0.5, 3, 2.5],
-# ], dtype=float)
+
 a = np.array([
     [30, -1, 1, 1, 5],
     [-1, 20, 0.5, 1.75, 60],
@@ -76,7 +59,6 @@ print("matrix:")
 print(a)
 print("det:")
 print(np.linalg.det(a[:,:4]))
-print(det(a[:,:4]))
 print("gauss:")
 print(gauss(a))
 print(jacobi(a))
