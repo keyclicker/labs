@@ -48,7 +48,7 @@ constexpr uint8_t kd[] = {
 
 Data permutation(const Data &block, 
      const uint8_t *permutation, uint8_t size) {
-  Data result(size);
+  auto result = Data::Bits(size);
   for (int i = 0; i < size; i++) {
     result.setBit(i, block.getBit(ip[i] - 1));
   }
@@ -59,7 +59,7 @@ Data F(const Data &block, const Data &key) {
   auto edBlock = permutation(block, ed, 48);
 
 
-  auto result = Data(32);
+  auto result = Data::Bits(32);
   return result;
 }
 
@@ -76,8 +76,6 @@ Data desEncryptBlock(const Data &block, const Data &key) {
   std::cout << "left: " << left.toHexString() << std::endl;
   std::cout << "right: " << right.toHexString() << std::endl;
 
-
-
-  return Data("keyclick");
+  return Data::fromString("keyclick");
 }
 

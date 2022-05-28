@@ -6,119 +6,98 @@
 #include <strstream>
 #include <iomanip>
 
-#include <openssl/sha.h>
-#include <openssl/md5.h>
-
 class Data {
-  std::size_t size; //bitsize
+  std::size_t bitSize; //bitsize
   std::vector<uint8_t> data;
- 
-  public:
-    Data(std::size_t size) : size(size), data(size / 8) {}
-    
-    Data(std::vector<uint8_t> data) : 
-    size(data.size() * 8), data(std::move(data)) {}
-    
-    Data(const std::string &data) : 
-    size(data.size() * 8), data(data.begin(), data.end()) {}
 
-    static Data fromHexString(const std::string &hexString) {
-      std::size_t size = hexString.size() / 2;
-      std::vector<uint8_t> data(size);
-      for (std::size_t i = 0; i < size; i++) {
-        std::string byteString = hexString.substr(i * 2, 2);
-        data[i] = (uint8_t)strtol(byteString.c_str(), nullptr, 16);
-      }
-      return Data(data);
-    }
+  Data(): bitSize(0), data() {}
 
-    std::size_t getSize() const {
-      return size;
-    }
+  explicit Data(std::size_t bitSize):
+  bitSize(bitSize), 
+  data(bitSize / 8 + (bitSize % 8 != 0)) {};
 
-    uint8_t getByte(std::size_t index) const {
-      return data[index];
-    }
+  explicit Data(std::vector<uint8_t> data):
+  bitSize(data.size() * 8),
+  data(std::move(data)) {};
 
-    void setByte(std::size_t index, uint8_t value) {
-      data[index] = value;
-    }
+  explicit Data(const std::string &data) :
+  bitSize(data.size() * 8), 
+  data(data.begin(), data.end()) {}
 
-    bool getBit(std::size_t index) const {
-      return bool(data[index / 8] & (1 << (7 - index % 8)));
-    }
+public:
+  static Data Bytes(std::size_t size);
+  static Data Bits(std::size_t size);
 
-    void setBit(std::size_t index, bool value) {
-      std::size_t byteIndex = index / 8;
-      std::size_t bitIndex = 7 - index % 8;
+  static Data fromBytesVector(std::vector<uint8_t> data);
+  static Data fromBitsVector(const std::vector<uint8_t> &data);
 
-      if (value) {
-        data[byteIndex] |= (1 << bitIndex);
-      } else {
-        data[byteIndex] &= ~(1 << bitIndex);
-      }
-    }
+  static Data fromHexString(const std::string &binStr);
+  static Data fromString(const std::string &str);
+  static Data fromBinaryString(std::string hexStr);
 
-    Data sha256() {
-      SHA256_CTX ctx;
-      SHA256_Init(&ctx);
-      SHA256_Update(&ctx, (uint8_t*) data.data(), data.size());
-      std::vector<uint8_t> hash(32);
-      SHA256_Final(hash.data(), &ctx);
-      return Data(std::move(hash));
-    }
+  template<typename T>
+  static Data fromObject(const T &obj);
 
-    Data md5() {
-      MD5_CTX ctx;
-      MD5_Init(&ctx);
-      MD5_Update(&ctx, (uint8_t*) data.data(), data.size());
-      std::vector<uint8_t> hash(16);
-      MD5_Final(hash.data(), &ctx);
-      return Data(std::move(hash));
-    }
+  [[nodiscard]] std::size_t getBitSize() const;
+  [[nodiscard]] std::size_t getByteSize() const;
 
-    std::string toString() const {
-      return std::string((char*) data.data(), data.size());
-    }
+  void resizeBytes(std::size_t size);
+  void resizeBits(std::size_t size);
 
-    std::vector<uint8_t> &toVector() {
-      return data;
-    }
+  [[nodiscard]] uint8_t getByte(std::size_t index) const;
+  void setByte(std::size_t index, uint8_t value);
+  [[nodiscard]] bool getBit(std::size_t index) const;
+  void setBit(std::size_t index, bool value);
 
-    std::string toHexString() const {
-      std::strstream ss;
-      for (uint8_t byte : data) {
-        ss << std::hex << std::setw(2) << std::setfill('0') << (int) byte;
-      }
-      return ss.str();
-    }
+  [[nodiscard]] Data sliceBytes(std::size_t start, std::size_t end) const;
 
-    std::string toBinString() {
-      std::strstream ss;
-      for (uint8_t byte : data) {
-        for (int i = 7; i >= 0; i--) {
-          ss << ((byte >> i) & 1);
-        }
-      }
-      return ss.str();
-    }
+  Data operator+(const Data &rhs) const;
+  Data &operator+=(const Data &rhs);
 
-    Data sliceBytes(std::size_t start, std::size_t end) const {
-      std::vector<uint8_t> slicedData(end - start);
-      for (std::size_t i = start; i < end; i++) {
-        slicedData[i - start] |= data[i];
-      }
-      return Data(std::move(slicedData));
-    }
+  Data operator^(const Data &rhs) const;
+  Data operator&(const Data &rhs) const;
+  Data operator|(const Data &rhs) const;
 
-    Data operator^(const Data &other) const {
-      if (size != other.size) {
-        throw std::runtime_error("Data::operator^: size mismatch");
-      }
-      Data result(size);
-      for (std::size_t i = 0; i < data.size(); i++) {
-        result.setByte(i, data[i] ^ other.data[i]);
-      }
-      return result;
-    }
+  // Data operator<<(std::size_t shift) const;
+  // Data operator>>(std::size_t shift) const;
+
+  Data &operator^=(const Data &rhs);
+  Data &operator&=(const Data &rhs);
+  Data &operator|=(const Data &rhs);
+
+  // Data &operator<<=(std::size_t shift);
+  // Data &operator>>=(std::size_t shift);
+
+  Data operator~() const;
+
+  [[nodiscard]] Data md5() const;
+  [[nodiscard]] Data sha256() const;
+  [[nodiscard]] Data sha512() const;
+
+
+  [[nodiscard]] std::vector<uint8_t> toVector() const;
+  [[nodiscard]] std::string toString() const;
+  [[nodiscard]] std::string toHexString() const;
+  [[nodiscard]] std::string toBinString() const;
+
+  template<typename T> 
+  [[nodiscard]] T toObject() const;
+};
+
+
+template<typename T>
+Data Data::fromObject(const T &obj) {
+  Data res(sizeof(obj) * 8);
+  for (std::size_t i = 0; i < sizeof(obj); ++i) {
+    res.setByte(i, ((uint8_t*)&obj)[i]);
+  }
+}
+
+template<typename T> 
+T Data::toObject() const {
+  T res;
+  for (std::size_t i = 0; i < sizeof(res); ++i) {
+    ((uint8_t*)&res)[i] = getByte(i);
+  }
+  return res;
 };
