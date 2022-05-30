@@ -1,4 +1,4 @@
-#include "../Data.hpp"
+#include "../Data.cpp"
 #include <gtest/gtest.h>
 
 TEST(DataTest, Bits) {
@@ -48,11 +48,11 @@ TEST(DataTest, FromHexString) {
 }
 
 TEST(DataTest, FromBinString) {
-  std::string str = "0000 0101";
+  std::string str = "0000 0101 0";
   Data data = Data::fromBinaryString(str);
   EXPECT_EQ(str, data.toBinString());
-  EXPECT_EQ(1, data.getByteSize());
-  EXPECT_EQ(8, data.getBitSize());
+  EXPECT_EQ(2, data.getByteSize());
+  EXPECT_EQ(9, data.getBitSize());
   EXPECT_EQ(5, data.getByte(0));
 }
 
@@ -92,6 +92,19 @@ TEST(DataTest, SliceBytes) {
   EXPECT_EQ(1, slice1.getByte(0));
   EXPECT_EQ(2, slice2.getByte(0));
   EXPECT_EQ(3, slice2.getByte(1));
+}
+
+TEST(DataTest, SliceBits) {
+  auto data = Data::fromBinaryString("0010 0101 011");
+
+  Data slice1 = data.sliceBits(0, 5);
+  Data slice2 = data.sliceBits(5, 11);
+
+  EXPECT_EQ(5, slice1.getBitSize());
+  EXPECT_EQ(6, slice2.getBitSize());
+  
+  EXPECT_EQ("0010 0", slice1.toBinString());
+  EXPECT_EQ("1010 11", slice2.toBinString());
 }
 
 TEST(DataTest, OperatorPlus) {
@@ -190,4 +203,15 @@ TEST(DataTest, Sha512) {
   auto data = Data::fromString("password");
   auto hash = data.sha512();
   EXPECT_EQ("b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86", hash.toHexString());
+}
+
+TEST(DataTest, RotateBits) {
+  auto data = Data::fromBinaryString("0101 0101 0111 0101");
+  EXPECT_EQ("0101 0101 0111 0101", data.rotatedBits(0).toBinString());
+  EXPECT_EQ("0101 0101 0111 0101", data.rotatedBits(16).toBinString());
+  EXPECT_EQ("0111 0101 0101 0101", data.rotatedBits(8).toBinString());
+  EXPECT_EQ("0111 0101 0101 0101", data.rotatedBits(-8).toBinString());
+  EXPECT_EQ("1010 1010 1110 1010", data.rotatedBits(1).toBinString());
+  EXPECT_EQ("1010 1011 1010 1010", data.rotatedBits(3).toBinString());
+  EXPECT_EQ("1010 1010 1011 1010", data.rotatedBits(-1).toBinString());
 }

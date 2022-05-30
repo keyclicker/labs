@@ -49,7 +49,11 @@ public:
   [[nodiscard]] bool getBit(std::size_t index) const;
   void setBit(std::size_t index, bool value);
 
+  // << left shift
+  Data rotatedBits(int64_t count) const;
+
   [[nodiscard]] Data sliceBytes(std::size_t start, std::size_t end) const;
+  [[nodiscard]] Data sliceBits(std::size_t start, std::size_t end) const;
 
   Data operator+(const Data &rhs) const;
   Data &operator+=(const Data &rhs);

@@ -54,7 +54,7 @@ std::size_t Data::getBitSize() const {
 }
 
 std::size_t Data::getByteSize() const {
-  return bitSize / 8;
+  return data.size();
 }
 
 void Data::resizeBytes(std::size_t size) {
@@ -87,6 +87,20 @@ void Data::setBit(std::size_t index, bool value) {
   } else {
     data[byteIndex] &= ~(1 << bitIndex);
   }
+}
+
+int64_t mod(int64_t a, int64_t b) { return (a % b + b) % b; }
+
+Data Data::rotatedBits(int64_t shift) const {
+  if (shift % bitSize == 0) return *this;
+
+  auto rotated = Bits(bitSize);
+  for (std::size_t i = 0; i < bitSize; ++i) {
+    uint8_t val = getBit(mod((i + shift), bitSize));
+    rotated.setBit(i, val);
+  }
+
+  return Data(rotated);
 }
 
 Data Data::sha256() const {
@@ -126,7 +140,14 @@ std::vector<uint8_t> Data::toVector() const {
 
 std::string Data::toHexString() const {
   std::stringstream ss;
-  for (uint8_t byte : data) {
+  // probably not the most efficient way to do this
+  auto shifted = Bits(bitSize);
+  for (std::size_t i = 0; i < getByteSize() * 8; ++i) {
+    uint8_t val = getBit(mod((i - (bitSize % 8)), getByteSize() * 8));
+    shifted.setBit(i, val);
+  }
+
+  for (uint8_t byte : shifted.data) {
     ss << std::hex << std::setw(2) << std::setfill('0') << (int) byte;
   }
   return ss.str();
@@ -134,24 +155,37 @@ std::string Data::toHexString() const {
 
 std::string Data::toBinString() const {
   std::stringstream ss;
-  for (std::size_t i = 0; i < data.size(); ++i) {
-    for (int8_t j = 7; j >= 0; j--) {
-      if (j == 3) ss << " ";
-      ss << bool((data[i] >> j) & 1);
-    }
-    if (i != data.size() - 1) ss << " ";
+  for (std::size_t i = 0; i < bitSize; ++i) {
+    ss << (getBit(i) ? '1' : '0');
+    if ((i + 1) % 4 == 0 && i != bitSize - 1) ss << ' ';
   }
   return ss.str();
 }
 
-Data Data::sliceBytes(std::size_t start, std::size_t end) const {
-  std::vector<uint8_t> slicedData(end - start);
-  for (std::size_t i = start; i < end; i++) {
-    slicedData[i - start] |= data[i];
+Data Data::sliceBytes(std::size_t begin, std::size_t end) const {
+  std::vector<uint8_t> slicedData(end - begin);
+  for (std::size_t i = begin; i < end; i++) {
+    slicedData[i - begin] |= data[i];
   }
   return Data(std::move(slicedData));
 }
 
+Data Data::sliceBits(std::size_t begin, std::size_t end) const {
+  auto slicedData = Bits(end - begin);
+  // can be optimized for begin % 8 == 0 && and % 8 != 0
+  if (begin % 8 || end % 8) {
+    for (std::size_t i = begin; i < end; ++i) {
+      slicedData.setBit(i - begin, getBit(i));
+    }
+  } else {
+    auto byteBegin = begin / 8;
+    auto byteEnd = end / 8 + (end % 8 != 0);
+    for (std::size_t i = byteBegin; i < byteEnd; ++i) {
+      slicedData.setByte(i - byteBegin, getByte(i));
+    }
+  }
+  return slicedData;
+}
 
 Data Data::operator+(const Data &rhs) const {
   Data result{};
