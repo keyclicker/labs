@@ -63,4 +63,21 @@ public class User {
         ResultSet rs = Database.Request(s);
         return rs.next();
     }
+
+    static public User getUser(String value) throws SQLException {
+        // language=SQL
+        String s = "SELECT users.username, name, type FROM users " +
+                "JOIN sessions ON sessions.username = users.username " +
+                "WHERE value = '" + value + "'";
+
+        var rs = Database.Request(s);
+        if (rs.next()) {
+            var username = rs.getString("username");
+            var name = rs.getString("name");
+            var type = rs.getInt("type");
+            return new User(username, name, type);
+        }
+
+        return null;
+    }
 }

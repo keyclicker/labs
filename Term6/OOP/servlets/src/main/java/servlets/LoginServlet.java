@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Session;
 import model.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
@@ -20,8 +22,29 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=UTF-8");
+
+        var cookies = req.getCookies();
+
+        String sessionId = null;
+        for (var cookie : cookies) {
+            if (cookie.getName().equals("session_id")) {
+                sessionId = cookie.getValue();
+            }
+        }
+
         PrintWriter out = resp.getWriter();
-        out.write("{\"status\":\"ok\"}");
+        if (sessionId == null) {
+            out.write("{\"user\":null}");
+        } else {
+            try {
+                var user = User.getUser(sessionId);
+                var json = new JSONObject();
+                json.put("user", new JSONObject(user));
+                out.write(json.toString());
+            } catch (SQLException e) {
+                out.write(e.toString());
+            }
+        }
     }
 
     // Signup
