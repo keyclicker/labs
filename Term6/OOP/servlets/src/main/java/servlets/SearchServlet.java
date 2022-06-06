@@ -24,11 +24,9 @@ public class SearchServlet extends HttpServlet {
 
         try {
             var cs = Course.search(query);
-
             var json = new JSONArray(cs);
 
             resp.setContentType("application/json; charset=UTF-8");
-            resp.setHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = resp.getWriter();
             out.write(json.toString());
 

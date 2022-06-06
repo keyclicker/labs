@@ -23,6 +23,7 @@ function App() {
     console.log(courses);
   }
 
+  console.log(courses);
   const state = {
     query, setQuery,
     user, setUser,
@@ -36,8 +37,8 @@ function App() {
         <Row className="mt-3 ">
             <Col>
             {
-              Array(10).fill(0).map((_, i) => (
-                <CourseCard state={state}/>
+              courses.map((c, i) => (
+                <CourseCard key = {c.id} state={state} course={c}/>
               ))
             }
             </Col>

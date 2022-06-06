@@ -8,20 +8,19 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image'
 
 export default
-function CourseCard(props) {
+function CourseCard({state, course}) {
   return (
     <Card className="mb-3">
       <Card.Header as="h5">
         <Row className="align-items-center justify-content-between me-0 ms-0">
-          Шкільняк Оксана Степанівна
+          {course.professor.name}
           <Button variant="primary" style={{width: 100}}>Enroll</Button>  
         </Row>
       </Card.Header>
       <Card.Body>
-        <Card.Title>Алгоритми та складність</Card.Title>
+        <Card.Title>{course.name}</Card.Title>
         <Card.Text>
-          Мета дисципліни - вивчення основних структур даних і алгоритмів, що використовуються
-          в програмуванні та аналіз їх ефективності
+          {course.description}
         </Card.Text>
         
       </Card.Body>

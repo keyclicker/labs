@@ -28,14 +28,14 @@ public class Course {
     }
 
     static public ArrayList<Course> search(String query) throws SQLException {
+        query = "'%" + query + "%'";
         // language=SQL
-        query = query.toLowerCase();
         String s = "SELECT course_id, username, name, type, course_name, description " +
                 "FROM courses JOIN users " +
                 "ON courses.professor_username = users.username " +
-                "WHERE LOWER(course_name) LIKE '%" + query + "%' " +
-                "OR LOWER(description) LIKE '%" + query + "%'" +
-                "OR LOWER(name) LIKE '%" + query + "%'";
+                "WHERE course_name ILIKE " + query  +
+                " OR description ILIKE " + query +
+                " OR name ILIKE " + query;
 
         ResultSet rs = Database.Request(s);
 
