@@ -2,9 +2,11 @@ package servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Session;
 import model.User;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -13,6 +15,7 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+    // Check if the user is logged in
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -21,6 +24,7 @@ public class LoginServlet extends HttpServlet {
         out.write("{\"status\":\"ok\"}");
     }
 
+    // Signup
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -36,6 +40,11 @@ public class LoginServlet extends HttpServlet {
 
             user.signup();
 
+            var session = new Session(user.getUsername());
+            session.save();
+
+            resp.addCookie(new Cookie("session_id", session.getValue()));
+
             var out = resp.getWriter();
             out.write("{\"status\":\"ok\"}");
         }
@@ -46,6 +55,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    // Login
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -58,6 +68,11 @@ public class LoginServlet extends HttpServlet {
                     body.getString("password"));
 
             if (user.signin()) {
+                var session = new Session(user.getUsername());
+                session.save();
+
+                resp.addCookie(new Cookie("session_id", session.getValue()));
+
                 var out = resp.getWriter();
                 out.write("{\"status\":\"ok\"}");
             }
