@@ -6,24 +6,44 @@ import CourseCard from './components/CourseCard';
 import FiltersCard from './components/FiltersCard';
 import Header from './components/Header';
 
+import { useState } from 'react';
+import { client } from './api/api';
 
 function App() {
+  const [query, setQuery] = useState('');
+  const [user, setUser] = useState(null);
+  const [courses, setCourses] = useState([]);
+
+  const handleQueryChange = (query) => {
+    client.get(`/search?q=${query}`).then((response) => {
+      setCourses(response.data);
+    })
+
+    setQuery(query);
+    console.log(courses);
+  }
+
+  const state = {
+    query, setQuery,
+    user, setUser,
+    handleQueryChange,
+  }
+
   return (
     <>
       <Header/>
-
       <Container fluid="xl">
         <Row className="mt-3 ">
             <Col>
             {
               Array(10).fill(0).map((_, i) => (
-                <CourseCard/>
+                <CourseCard state={state}/>
               ))
             }
             </Col>
             <Col xs={{span: 12, order: "first"}} 
                  lg={{span: 3, order: "last"}}>
-              <FiltersCard/>
+              <FiltersCard state={state}/>
             </Col>
         </Row>
       </Container>
@@ -31,7 +51,5 @@ function App() {
     </>
   );
 }
-
-
 
 export default App;

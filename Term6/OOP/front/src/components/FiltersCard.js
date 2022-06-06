@@ -5,7 +5,9 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
 export default
-function FiltersCard() {
+function FiltersCard({state}) {
+
+
   return (
     <Card className="position-fixed-lg mb-3">
       <Card.Header>Filters</Card.Header>
@@ -15,6 +17,8 @@ function FiltersCard() {
             placeholder="Search"
             aria-label="Search"
             aria-describedby="Search"
+            value={state.query}
+            onChange={e => state.handleQueryChange(e.target.value)}
           />
           <Button variant="outline-secondary" id="button-addon2">
             <i class="bi bi-search"></i>

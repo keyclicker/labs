@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/opt/openssl@3/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/main.dir/main.cpp.o -c /Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/main.cpp",
+  "file": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/main.cpp"
+},
+{
+  "directory": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/opt/openssl@3/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/main.dir/des.cpp.o -c /Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/des.cpp",
+  "file": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/des.cpp"
+},
+{
+  "directory": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/opt/openssl@3/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/main.dir/data.cpp.o -c /Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/data.cpp",
+  "file": "/Users/keyclicker/Programming/labs/Term6/Cryptology/Lab1/data.cpp"
+}
+]
