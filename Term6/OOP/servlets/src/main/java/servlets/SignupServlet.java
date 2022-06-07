@@ -8,12 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Session;
 import model.User;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/signup"})
+public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -23,26 +22,19 @@ public class LoginServlet extends HttpServlet {
 
             var user = new User(
                     body.getString("username"),
+                    body.getString("name"),
+                    body.getInt("type"),
                     body.getString("password"));
 
-            if (user.signin()) {
-                var session = Session.createNew(user.getUsername());
-                session.insert();
+            user.signup();
 
-                resp.addCookie(new Cookie("value", session.getValue()));
+            var session = Session.createNew(user.getUsername());
+            session.insert();
 
-                user = User.getUser(user.getUsername());
+            resp.addCookie(new Cookie("value", session.getValue()));
 
-                var out = resp.getWriter();
-                var json = new JSONObject();
-                json.put("user", new JSONObject(user));
-                out.write(json.toString());
-            }
-            else {
-                resp.setStatus(403);
-                var out = resp.getWriter();
-                out.write("{\"user\":\"null\"}");
-            }
+            var out = resp.getWriter();
+            out.write("{\"status\":\"ok\"}");
         }
         catch (Exception e) {
             resp.setStatus(400);

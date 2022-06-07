@@ -1,14 +1,13 @@
 export async function client(endpoint, { body, ...customConfig } = {}) {
-  const headers = { 'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'}
+  const headers = { 'Content-Type': 'application/json'}
 
   const config = {
-    method: body ? 'POST' : 'GET',
     ...customConfig,
     headers: {
       ...headers,
       ...customConfig.headers,
     },
+    credentials: 'include',
   }
 
   if (body) {
@@ -34,12 +33,20 @@ export async function client(endpoint, { body, ...customConfig } = {}) {
   }
 }
 
-const prefix = 'http://localhost:8000'
+const prefix = ''
 
 client.get = function (endpoint, customConfig = {}) {
   return client(prefix + endpoint, { ...customConfig, method: 'GET' })
 }
 
 client.post = function (endpoint, body, customConfig = {}) {
-  return client(prefix + endpoint, { ...customConfig, body })
+  return client(prefix + endpoint, { ...customConfig, body, method: 'POST' })
+}
+
+client.put = function (endpoint, body, customConfig = {}) {
+  return client(prefix + endpoint, { ...customConfig, body, method: 'PUT' })
+}
+
+client.delete = function (endpoint, body, customConfig = {}) {
+  return client(prefix + endpoint, { ...customConfig, body, method: 'DELETE' })
 }

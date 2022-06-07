@@ -1,5 +1,6 @@
 package model;
 
+import jakarta.servlet.http.Cookie;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -20,6 +21,13 @@ public class User {
 
     @Getter @Setter
     private String pwdHash;
+    @Getter @Setter
+    private String value; // cookie value
+
+    @Getter @Setter
+    private int mark;
+
+    public User() {}
 
     public User(String username, String name, int type, String password) {
         this.username = username;
@@ -64,7 +72,7 @@ public class User {
         return rs.next();
     }
 
-    static public User getUser(String value) throws SQLException {
+    static public User fromCookie(String value) throws SQLException {
         // language=SQL
         String s = "SELECT users.username, name, type FROM users " +
                 "JOIN sessions ON sessions.username = users.username " +
@@ -72,12 +80,42 @@ public class User {
 
         var rs = Database.Request(s);
         if (rs.next()) {
-            var username = rs.getString("username");
+            var user = new User();
+            user.username = rs.getString("username");
+            user.name = rs.getString("name");
+            user.type = rs.getInt("type");
+            user.value = value;
+            return user;
+        }
+
+        return null;
+    }
+
+    static public User getUser(String username) throws SQLException {
+        // language=SQL
+        String s = "SELECT * FROM users WHERE username = '" + username + "'";
+
+        var rs = Database.Request(s);
+        if (rs.next()) {
             var name = rs.getString("name");
             var type = rs.getInt("type");
             return new User(username, name, type);
         }
 
         return null;
+    }
+
+    static public User fromCookies(Cookie[] cookies) throws SQLException {
+        String value = null;
+        if (cookies != null) {
+            for (var cookie : cookies) {
+                if (cookie.getName().equals("value")) {
+                    value = cookie.getValue();
+                }
+            }
+        }
+
+        if (value == null) return null;
+        return User.fromCookie(value);
     }
 }

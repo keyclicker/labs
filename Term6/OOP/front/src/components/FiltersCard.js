@@ -6,8 +6,6 @@ import Form from 'react-bootstrap/Form';
 
 export default
 function FiltersCard({state}) {
-
-
   return (
     <Card className="position-fixed-lg mb-3">
       <Card.Header>Filters</Card.Header>
@@ -18,17 +16,20 @@ function FiltersCard({state}) {
             aria-label="Search"
             aria-describedby="Search"
             value={state.query}
-            onChange={e => state.handleQueryChange(e.target.value)}
+            onChange={e => state.setQuery(e.target.value)}
           />
           <Button variant="outline-secondary" id="button-addon2">
-            <i class="bi bi-search"></i>
+            <i className="bi bi-search"></i>
           </Button>
         </InputGroup>
 
-        <Form.Select aria-label="Default select example">
-          <option value="1">All courses</option>
-          <option value="2">Enrolled</option>
-        </Form.Select>
+        {state.user &&
+          <Form.Select aria-label="Select filter">
+          <option value={false}>All courses</option>
+          <option value={true}>My courses</option>
+          </Form.Select>
+        }
+
       </Card.Body>
     </Card>
   )
