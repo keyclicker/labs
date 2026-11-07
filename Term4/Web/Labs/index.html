@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="scripts.js"></script>
+</head>
+<body>
+<div class="container-fluid p-3 bg-light text-dark">
+  <div class="container-lg">
+    <div class="row justify-content-md-between justify-content-around">
+      <div class="col-auto align-self-center">
+        <div class="row align-items-center justify-content-around">
+          <img class="logo col-auto" src="https://i.pinimg.com/originals/80/ea/64/80ea641f1af7137a5fb41197c07de9a7.png" alt="Logo">
+          <div class="col-auto p-0">
+            <div class="name text-sm-left text-center">
+              Film Cameras
+            </div>
+            <div class="tag">
+              It's easier to call than to borrow from someone
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto text-right">
+        <div class="number">+8 (800) 555-35-35</div>
+        <div class="number">+8 (800) 555-35-35</div>
+        <div class="feedback" id="openModalButton">Feedback</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feedback-modal" id="feedbackModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+        <button type="button" class="close" id="closeFeedbackButton">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body px-4">
+        <form>
+          <div class="form-group">
+            <label for="inputName">Full Name</label>
+            <input type="name" class="form-control" id="inputName" aria-describedby="emailHelp" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="inputPhone">Phone number</label>
+            <input type="phone" class="form-control" id="inputPhone" aria-describedby="emailHelp" placeholder="Enter phone">
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="formControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="formControlTextarea1" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid p-2  bg-dark text-white">
+  <div class="container-lg">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link text-white active" href="#">Main Page</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" id="routToCatalog">Catalog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" id="routToDeliveryAndPayment">Delivery and Payment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Price List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" id="routToContacts">Contacts</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="container-lg">
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade"
+       data-interval="4000" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://i.ibb.co/yqnjdML/sliderimg.png"
+             class="d-block w-100 carousel-image" alt="Photo1">
+      </div>
+      <div class="carousel-item">
+        <img src="https://pbs.twimg.com/media/EBPdF-GU0AAvv-7.jpg"
+             class="d-block w-100 carousel-image" alt="Photo2">
+      </div>
+      <div class="carousel-item">
+        <img src="https://onset.shotonwhat.com/p/pix/m/m1053/2015010500001623.jpg"
+             class="d-block w-100 carousel-image" alt="Photo3">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div id="catalog">
+  
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Main</a></li>
+        <li class="breadcrumb-item"><a href="#">Catalog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Film Cameras</li>
+      </ol>
+    </nav>
+  
+    <div class="row">
+      <div class="col-sm-3 col-lg-2">
+        <ul class="list-unstyled">
+          <li><a class="nav-link text-dark p-0" href="#">Celluloid Film</a></li>
+          <li><a class="nav-link text-dark p-0" href="#">Film Cameras</a>
+            <ul>
+              <li><a class="nav-link text-dark p-0" href="#">Arri</a></li>
+              <li><a class="nav-link text-dark p-0" href="#">Panavision</a></li>
+              <li><a class="nav-link text-dark p-0" href="#">Aaton</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link text-dark p-0" href="#">Lenses</a></li>
+          <li><a class="nav-link text-dark p-0" href="#">Studio Light</a></li>
+        </ul>
+  
+        <div class="price-list">
+          <img height="50" src="https://static.wikia.nocookie.net/windows/images/6/60/Xcel.png/revision/latest?cb=20201002101639&amp;path-prefix=ru" alt="Exel Logo">
+          <div class="price-list-label">Price List</div>
+        </div>
+      </div>
+      <div class="col-sm-9 col-lg-10">
+        <div class="row justify-content-lg-start justify-content-around">
+          <div class="card mr-4 mb-4" style="width: 18rem;">
+            <img src="https://i.ibb.co/yfvVFPk/unnamed-1.jpg"
+                 class="card-img-top px-3" alt="...">
+            <div class="card-body pt-3">
+              <h5 class="card-title">Arriflex 435</h5>
+              <p class="card-text">The Arriflex 435 is a movie camera product line created by Arri in 1995 to replace the Arriflex 35III line.</p>
+            </div>
+            <div class="card-footer">
+              <div class="row mx-0 justify-content-between align-items-center">
+                <small class="text-muted">$35,000</small>
+                <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="card mr-4 mb-4" style="width: 18rem;">
+            <img src="https://i.ibb.co/yfvVFPk/unnamed-1.jpg"
+                 class="card-img-top px-3" alt="...">
+            <div class="card-body pt-3">
+              <h5 class="card-title">Arriflex 435</h5>
+              <p class="card-text">The Arriflex 435 is a movie camera product line created by Arri in 1995 to replace the Arriflex 35III line.</p>
+            </div>
+            <div class="card-footer">
+              <div class="row mx-0 justify-content-between align-items-center">
+                <small class="text-muted">$35,000</small>
+                <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="card mr-4 mb-4" style="width: 18rem;">
+            <img src="https://i.ibb.co/yfvVFPk/unnamed-1.jpg"
+                 class="card-img-top px-3" alt="...">
+            <div class="card-body pt-3">
+              <h5 class="card-title">Arriflex 435</h5>
+              <p class="card-text">The Arriflex 435 is a movie camera product line created by Arri in 1995 to replace the Arriflex 35III line.</p>
+            </div>
+            <div class="card-footer">
+              <div class="row mx-0 justify-content-between align-items-center">
+                <small class="text-muted">$35,000</small>
+                <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="card mr-4 mb-4" style="width: 18rem;">
+            <img src="https://i.ibb.co/yfvVFPk/unnamed-1.jpg"
+                 class="card-img-top px-3" alt="...">
+            <div class="card-body pt-3">
+              <h5 class="card-title">Arriflex 435</h5>
+              <p class="card-text">The Arriflex 435 is a movie camera product line created by Arri in 1995 to replace the Arriflex 35III line.</p>
+            </div>
+            <div class="card-footer">
+              <div class="row mx-0 justify-content-between align-items-center">
+                <small class="text-muted">$35,000</small>
+                <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="card mr-4 mb-4" style="width: 18rem;">
+            <img src="https://i.ibb.co/yfvVFPk/unnamed-1.jpg"
+                 class="card-img-top px-3" alt="...">
+            <div class="card-body pt-3">
+              <h5 class="card-title">Arriflex 435</h5>
+              <p class="card-text">The Arriflex 435 is a movie camera product line created by Arri in 1995 to replace the Arriflex 35III line.</p>
+            </div>
+            <div class="card-footer">
+              <div class="row mx-0 justify-content-between align-items-center">
+                <small class="text-muted">$35,000</small>
+                <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <ul class="pagination pagination-sm mb-4">
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">3</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+          </ul>
+        </div>
+  
+        <div class="row border-top pt-3">
+          <div class="col-md-6">
+            <p>Arri was founded in Munich, Germany on 12 September 1917 by August Arnold and Robert Richter as Arnold & Richter Cine Technik. The abbreviation Arri was derived from the initial two letters of the founders' surnames, Arnold and Richter. In 1924, Arnold and Richter developed their first film camera, the small and portable Kinarri 35. In 1937, Arri introduced the world's first reflex mirror shutter in the Arriflex 35 camera, an invention of longtime engineer Erich Kästner.</p>
+          </div>
+          <div class="col-md-6">
+            <p>This technology employs a rotating mirror that allows a continuous motor to operate the camera while providing parallax-free reflex viewing to the operator,[13] and the ability to focus the image by eye through the viewfinder, much like an SLR camera for still photography. The reflex design was subsequently used in almost every professional motion picture film camera and is still used in the Arri Alexa Studio digital camera. The first Hollywood film to employ an Arriflex was the 1947 Humphrey Bogart and Lauren Bacall film Dark Passage in 1947. Over the years, more than 17,000 Arriflex 35s were built.[14] The design was recognized with two Scientific and Technical Academy Awards in 1966 and 1982.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="deliveryAndPayment">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Main</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delivery and Payment</li>
+      </ol>
+    </nav>
+  
+    <div class="contacts-wrapper">
+      <h1>Delivery and payment methods</h1>
+      <p>
+        You can choose whether your products are delivered to a post office or to your door, and now Posti’s parcel points are also available as an option. If you would like delivery to your door, please provide your telephone number with your order so that Posti can arrange a delivery time. If you wish your products to be delivered to a parcel point, please remember to give your mobile phone number so that you can receive a delivery alert by text message.
+      </p>
+  
+      <h1>Payment options</h1>
+  
+      <ul class="c-ul">
+        <li>Visa</li>
+        <li>Visa Electron</li>
+        <li>MasterCard</li>
+        <li>Business Eurocard</li>
+      </ul>
+  
+    </div>
+  </div>
+  
+  <div id="contacts">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Main</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Contacts</li>
+      </ol>
+    </nav>
+  
+    <h1>Contacts</h1>
+  
+    <p class="mb-0">You can contact us with provided phone numbers:</p>
+  
+    <h3>+8 (800) 555-35-35</h3>
+    <h3 class="mb-3">+8 (800) 555-35-35</h3>
+  
+    <p>The Film Cameras Call Center is open daily from 08:00 until 21:00.</p>
+    <p>write us with email:</p>
+  
+    <h3>info@filmcameras.com</h3>
+  
+    <p>Our managers will answer all your questions and help to solve any problem.</p>
+  </div>
+
+</div>
+
+
+
+
+
+<div class="container-fluid p-4 mt-5 bg-dark text-white">
+  <div class="container-lg">
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <p class="m-0">© 1999-2021 Film Cameras Corp.</p>
+        <p class="m-0">info@filmcameras.com</p>
+      </div>
+      <div class="col-auto">
+        <nav class="nav flex-column">
+          <a class="nav-link text-white p-0">Main Page</a>
+          <a class="nav-link text-white p-0" id="catalogFooter">Catalog</a>
+          <a class="nav-link text-white p-0" id="deliveryAndPaymentFooter">Delivery and Payment</a>
+          <a class="nav-link text-white p-0">Price List</a>
+          <a class="nav-link text-white p-0" id="contactsFooter">Contacts</a>
+        </nav>
+      </div>
+      <div class="col-auto">
+        <p class="m-0">Developed by -</p>
+        <p class="m-0">Udex Plus</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="changes" class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+  <div class="toast">
+    <div class="toast-header">
+      <strong class="mr-auto">JS елементи в цій лабораторній</strong>
+      <button type="button" class="ml-2 mb-1 close" id="closeToast">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      <ul>
+        <li>Відкриття/закриття форми</li>
+        <li>Перемикання між сторінками без перезагрузки (типу SPA, але не зовсім)</li>
+        <li>Це вікно*</li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

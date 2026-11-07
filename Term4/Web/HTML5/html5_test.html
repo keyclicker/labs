@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTML - Формы</title>
+  </head>
+  <body>
+    <table width="600" align="center"><tr><td>
+      <big><big><big><big>
+        <b>Форма заявки на роботу в зоопарке</b>
+      </big></big></big></big><br>
+      <i>Пожалуйста, заполните формую. Обязательные поля позначены <font color="red">*</font></i>
+      <br><br>
+
+      <form>
+        <fieldset>
+          <legend>Контактная информация</legend>
+          <table cellspacing="10">
+            <tr>
+              <td width="100" ><label for="name">Имя <font color="red">*</font></label></td>
+              <td><input type="text" id="name" size="30"></td>
+            </tr>
+
+            <tr>
+              <td><label for="phone">Телефон</label></td>
+              <td><input type="phone" id="phone" size="30"></td>
+            </tr>
+
+            <tr>
+              <td><label for="email">Email <font color="red">*</font></label></td>
+              <td><input type="email" id="email"size="30"></td>
+            </tr>
+          </table>
+
+        </fieldset><br>
+
+        <fieldset>
+          <legend>Персональная информация</legend>
+
+          <table cellspacing="10">
+            <tr>
+              <td><label for="age">Возраст <font color="red">*</font></label></td>
+              <td><input type="text" id="age" size="30"></td>
+            </tr>
+
+            <tr>
+              <td><label for="sex">Пол</label></td>
+              <td>
+                <select width="500" style="width:218px;"> <!--Пробачте, альтернативи стилям не знайшов-->
+                    <option>Женщина</option>
+                    <option>Мужчина</option>
+                    <option>Не уточнять</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td valign="top" width="100"><label for="qualities">Перечислите личные качества</label></td>
+              <td><textarea name="name" rows="6" cols="25"></textarea></td>
+            </tr>
+          </table>
+        </fieldset><br>
+
+
+
+        <fieldset>
+          <legend>Выберите ваших любимых животных</legend>
+
+          <table width="500"cellspacing="10">
+            <tr>
+              <td><input type="checkbox" id="zebra"><label for="zebra">Зебра</label></td>
+              <td><input type="checkbox" id="cat"><label for="cat">Кошак</label></td>
+              <td><input type="checkbox" id="anaconda"><label for="anaconda">Анаконда</label></td>
+              <td><input type="checkbox" id="person"><label for="person">Человек</label></td>
+            </tr>
+
+            <tr>
+              <td><input type="checkbox" id="elephant"><label for="elephant">Слон</label></td>
+              <td><input type="checkbox" id="antelope"><label for="antelope">Антилопа</label></td>
+              <td><input type="checkbox" id="pigeon"><label for="pigeon">Голубь</label></td>
+              <td><input type="checkbox" id="crab"><label for="crab">Краб</label></td>
+            </tr>
+
+          </table>
+        </fieldset><br>
+
+        <input type="button" value="Отправить ирформацию" style="height:40px;"> <!-- Не знайшов як поміняти висоту без css, пробачте-->
+
+      </form>
+    </td></tr></table>
+
+  </body>
+</html>

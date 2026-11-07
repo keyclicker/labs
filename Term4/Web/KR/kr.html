@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style media="screen">
+      body {
+        font-family: sans-serif;
+      }
+
+      .calc {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin: 16px;
+      }
+
+      .calc-row {
+        display: flex;
+        margin-bottom: 8px;
+      }
+
+      .calc-input {
+        border: 1px solid #ebebeb;
+        border-radius: 8px;
+        height: 32px;
+        margin-bottom: 16px;
+        text-align: end;
+        font-size: 30px;
+        padding: 40px 16px 16px;
+      }
+
+      .calc-input:focus {
+        outline: 0;
+        border-color: #4285f4;
+      }
+
+      .number-button, .oper-button, .eq-button {
+        background-color: #f1f3f4;
+        height: 36px;
+        flex: 1 1;
+        border-radius: 8px;
+        border: none;
+        transition-duration: 100ms;
+        cursor: pointer;
+      }
+
+      .number-button:hover {
+        background-color: #dadce0;
+        transition-duration: 200ms;
+      }
+
+      .number-button:active {
+        background-color: #f1f3f4;
+        transition-duration: 100ms;
+      }
+
+      .oper-button {
+        background-color: #dadce0;
+        transition-duration: 100ms;
+      }
+
+      .oper-button:hover {
+        background-color: #f1f3f4;
+        transition-duration: 200ms;
+      }
+
+      .oper-button:active {
+        background-color: #dadce0;
+        transition-duration: 100ms;
+      }
+
+      .oper-button:not(:last-child),
+      .number-button:not(:last-child) {
+        margin-right: 8px;
+      }
+
+      .eq-button {
+        background-color: #4285f4;
+        color: white;
+        margin: 0 8px;
+      }
+
+      h2 {
+        cursor: pointer;
+        width: fit-content;
+      }
+
+      .hint {
+        pointer-events: none;
+        position: fixed;
+        width: 128px;
+        height: 64px;
+        border-radius: 8px;
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        padding: 8px;
+        display: none;
+        background-color: white;
+        z-index: 100;
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        let inp = document.getElementById("input");
+
+        const sqrt = Math.sqrt;
+
+        document.getElementById("n0").onclick = () => { inp.value += '0' };
+        document.getElementById("n1").onclick = () => { inp.value += '1' };
+        document.getElementById("n2").onclick = () => { inp.value += '2' };
+        document.getElementById("n3").onclick = () => { inp.value += '3' };
+        document.getElementById("n4").onclick = () => { inp.value += '4' };
+        document.getElementById("n5").onclick = () => { inp.value += '5' };
+        document.getElementById("n6").onclick = () => { inp.value += '6' };
+        document.getElementById("n7").onclick = () => { inp.value += '7' };
+        document.getElementById("n8").onclick = () => { inp.value += '8' };
+        document.getElementById("n9").onclick = () => { inp.value += '9' };
+
+        document.getElementById("plus").onclick = () => { inp.value += '+' };
+        document.getElementById("minus").onclick = () => { inp.value += '-' };
+        document.getElementById("mult").onclick = () => { inp.value += '*' };
+        document.getElementById("div").onclick = () => { inp.value += '/' };
+        document.getElementById("mod").onclick = () => { inp.value += '%' };
+
+        document.getElementById("ac").onclick = () => { inp.value = '' };
+        document.getElementById("eq").onclick = () => { inp.value = eval(inp.value) };
+        document.getElementById("dot").onclick = () => { inp.value += '.' };
+
+        document.getElementById("br-open").onclick = () => { inp.value += '(' };
+        document.getElementById("br-close").onclick = () => { inp.value += ')' };
+
+        document.getElementById("pow").onclick = () => { inp.value += '**' };
+        document.getElementById("sqrt").onclick = () => { inp.value += 'sqrt(' };
+
+        const showHint = (crect, hint) => {
+          hint.style.display = "block";
+          hint.style.top = (crect.top - 72) + "px";
+          hint.style.left = event.clientX + "px";
+        }
+
+        const hideHint = (hint) => {
+          hint.style.display = "none";
+        }
+
+        var elements = Array.prototype.slice.call(document.getElementsByClassName("show-hint"))
+        console.log(elements);
+
+        elements.forEach(e => {
+          e.onmouseover = () => {showHint(e.getBoundingClientRect(), document.getElementById(e.getAttribute("hintId")))}
+          e.onmouseout = () => {hideHint(document.getElementById(e.getAttribute("hintId")))}
+        });
+      }
+
+
+    </script>
+  </head>
+  <body>
+    <div class="calc">
+      <input type="text" id="input" class="calc-input">
+
+      <div class="calc-row">
+        <button class="oper-button" id="br-open">(</button>
+        <button class="oper-button" id="br-close">)</button>
+        <button class="oper-button" id="mod">%</button>
+        <button class="oper-button" id="ac">AC</button>
+      </div>
+
+      <div class="calc-row">
+        <button class="number-button" id="n7">7</button>
+        <button class="number-button" id="n8">8</button>
+        <button class="number-button" id="n9">9</button>
+        <button class="oper-button" id="div">/</button>
+      </div>
+      <div class="calc-row">
+        <button class="number-button" id="n4">4</button>
+        <button class="number-button" id="n5">5</button>
+        <button class="number-button" id="n6">6</button>
+        <button class="oper-button" id="mult">*</button>
+      </div>
+      <div class="calc-row">
+        <button class="number-button" id="n1">1</button>
+        <button class="number-button" id="n2">2</button>
+        <button class="number-button" id="n3">3</button>
+        <button class="oper-button" id="minus">-</button>
+      </div>
+
+      <div class="calc-row">
+        <button class="number-button" id="n0">0</button>
+        <button class="number-button" id="dot">.</button>
+        <button class="eq-button" id="eq">=</button>
+        <button class="oper-button" id="plus">+</button>
+      </div>
+
+      <div class="calc-row">
+        <button class="oper-button" id="pow">^</button>
+        <button class="oper-button" id="sqrt">√</button>
+      </div>
+    </div>
+
+
+    <div class="hint" id="hint1">Hint 1</div>
+    <div class="hint" id="hint2">Hint 2</div>
+    <div class="hint" id="hint3">Hint 3</div>
+
+    <h2 class="show-hint" hintId="hint1">Hint 1</h2>
+    <h2 class="show-hint" hintId="hint2">Hint 2</h2>
+    <h2 class="show-hint" hintId="hint3">Hint 3</h2>
+  </body>
+</html>
